@@ -34,12 +34,12 @@ cd draft-vision-ai
 2. Create and activate a virtual environment:
 ```bash
 # For Windows
-python -m venv venv
-venv\Scripts\activate
+python -m venv draftvision_env
+draftvision_env\Scripts\activate
 
 # For macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv draftvision_env
+source draftvision_env/bin/activate
 ```
 
 3. Install required Python packages:
@@ -86,7 +86,7 @@ black .
 - Joshua Moorehead - moorehj@email.sc.edu
 - Tyler Super - tsuper@email.sc.edu
 - Ryan Karbowniczak - rkarbow@email.sc.edu
-- Zak Elguindi - zakg@email.sc.edu
+- Zak Elguindi - zakelgui@email.sc.edu
 - Lucas Aust - laust@email.sc.edu
 
 ## Notes for Developers
@@ -94,8 +94,14 @@ black .
 - Make sure to pull the latest changes before starting work
 - Create a new branch for each feature
 - Run tests before submitting pull requests
-- The project uses SQLite as the database, which will be changed to PostgreSQL
-- Always activate the virtual environment before running the project
+- The project uses SQLite for now as the database, which requires no additional configuration
+- Always activate the virtual environment before running the project using:
+  ```bash
+  # Windows
+  draftvision_env\Scripts\activate
+  # macOS/Linux
+  source draftvision_env/bin/activate
+  ```
 - Don't forget to update requirements.txt if you add new packages:
   ```bash
   pip freeze > requirements.txt
