@@ -8,6 +8,7 @@ class NFLPlayer(models.Model):
     broad_jump = models.FloatField()       # Broad jump in inches
     bench = models.IntegerField()          # Bench in reps of 225
     weight = models.FloatField()           # Weight in pounds
+    three_cone = models.FloatField()       # 3-cone time in seconds
 
     def __str__(self):
         return self.name
