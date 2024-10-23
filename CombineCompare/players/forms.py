@@ -6,4 +6,5 @@ class PlayerStatsForm(forms.Form):
     broad_jump = forms.FloatField(label='Broad Jump (inches)')
     bench = forms.IntegerField(label='Bench (reps of 225lbs)')
     weight = forms.FloatField(label='Weight (pounds)')
+    three_cone = forms.FloatField(label='3 Cone Time (seconds)')
 
