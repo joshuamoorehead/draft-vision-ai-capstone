@@ -18,9 +18,9 @@ class Command(BaseCommand):
                     'forty_yard_dash': float(row['40yd']) if row['40yd'] else None,
                     'vertical_jump': float(row['Vertical']) if row['Vertical'] else None,
                     'broad_jump': float(row['Broad Jump']) if row['Broad Jump'] else None,
-                    'bench': int(row['Bench']) if row['Bench'] else None,
+                    'bench': float(row['Bench']) if row['Bench'] else None,
                     'weight': float(row['Wt']) if row['Wt'] else None,
-                    'three_cone': float(row['3Cone']) if row['3Cone'] else None,
+                    'three_cone': float(row['3Cone']) if row['3Cone'] else None
                 })
 
         # Save to the database, filling in missing values
@@ -34,7 +34,7 @@ class Command(BaseCommand):
                     broad_jump=stat['broad_jump'] if stat['broad_jump'] is not None else 100,
                     bench=stat['bench'] if stat['bench'] is not None else 5,
                     weight=stat['weight'] if stat['weight'] is not None else 200,
-                    three_cone=stat['three_cone'] if stat['three_cone'] is not None else 7,
+                    three_cone=stat['three_cone'] if stat['three_cone'] is not None else 7.5
                 )
 
         self.stdout.write(self.style.SUCCESS('Successfully imported combine stats'))
