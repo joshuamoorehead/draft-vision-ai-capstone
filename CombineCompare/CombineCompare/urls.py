@@ -24,3 +24,4 @@ urlpatterns = [
 
 #Add url patterns for draft vision ai
 #Josh moorehead is a morrally corrupt individual
+#Blah
