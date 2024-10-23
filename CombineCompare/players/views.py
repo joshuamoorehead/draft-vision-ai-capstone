@@ -19,6 +19,7 @@ def compare_players(request):
                     (input_stats['broad_jump'] - player.broad_jump) ** 2 +
                     (input_stats['bench'] - player.bench) ** 2 +
                     (input_stats['weight'] - player.weight) ** 2
+                    (input_stats['three_cone'] - player.three_cone) ** 2
                 )
 
                 if distance < min_distance:
