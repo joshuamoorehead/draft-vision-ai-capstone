@@ -86,7 +86,7 @@ black .
 - Joshua Moorehead - moorehj@email.sc.edu
 - Tyler Super - tsuper@email.sc.edu
 - Ryan Karbowniczak - rkarbow@email.sc.edu
-- Zak Elguindi - zakelgui@email.sc.edu
+- Zak Elguindi - elguindi@email.sc.edu
 - Lucas Aust - laust@email.sc.edu
 
 ## Notes for Developers
