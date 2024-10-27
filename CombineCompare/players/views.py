@@ -10,16 +10,19 @@ def compare_players(request):
             input_stats = form.cleaned_data
             closest_player = None
             min_distance = float('inf')
-
             for player in NFLPlayer.objects.all():
                 # Calculate Euclidean distance between user input and player stats
+                try:
+                    three_cone_value = float(player.three_cone) if player.three_cone is not None else 0.0
+                except ValueError:
+                    three_cone_value = 0.0 
                 distance = sqrt(
                     (input_stats['forty_yard_dash'] - player.forty_yard_dash) ** 2 +
                     (input_stats['vertical_jump'] - player.vertical_jump) ** 2 +
                     (input_stats['broad_jump'] - player.broad_jump) ** 2 +
                     (input_stats['bench'] - player.bench) ** 2 +
-                    (input_stats['weight'] - player.weight) ** 2
-                    (input_stats['three_cone'] - player.three_cone) ** 2
+                    (input_stats['weight'] - player.weight) ** 2 +
+                    (input_stats['three_cone'] - three_cone_value) ** 2
                 )
 
                 if distance < min_distance:

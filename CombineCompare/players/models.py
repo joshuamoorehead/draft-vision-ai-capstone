@@ -6,7 +6,7 @@ class NFLPlayer(models.Model):
     forty_yard_dash = models.FloatField()  # 40-yard dash time in seconds
     vertical_jump = models.FloatField()    # Vertical jump in inches
     broad_jump = models.FloatField()       # Broad jump in inches
-    bench = models.IntegerField()          # Bench in reps of 225
+    bench = models.FloatField()          # Bench in reps of 225
     weight = models.FloatField()           # Weight in pounds
     three_cone = models.FloatField()       # 3-cone time in seconds
 

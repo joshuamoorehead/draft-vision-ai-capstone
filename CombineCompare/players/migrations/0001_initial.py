@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('forty_yard_dash', models.FloatField()),
                 ('vertical_jump', models.FloatField()),
                 ('broad_jump', models.FloatField()),
-                ('bench', models.IntegerField()),
+                ('bench', models.FloatField()),
                 ('weight', models.FloatField()),
                 ('three_cone', models.FloatField()),
             ],
