@@ -131,7 +131,7 @@ def QB_getNN(name, school, year, position='QB'):
             res['talent'] = m['_talent']
     with open(f'./data/{name}.json', 'w') as file:
         json.dump(res, file, indent=4)
-    return res 
+    return res  
 
 def findYearsNCAA(name, position, year, school, id):
     years = [] 
