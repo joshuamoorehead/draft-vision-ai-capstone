@@ -1,32 +1,28 @@
 from rest_framework import viewsets, filters
-from .models import *
-from .serializers import *
+from .models import Player
+from .serializers import PlayerSerializer
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
-class PlayerViewSet(viewsets.ModelViewSet):
-    queryset = Player.objects.all()
+class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Player.objects.all().select_related('details')
     serializer_class = PlayerSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'college', 'position']
     
     def get_queryset(self):
         queryset = Player.objects.all()
-        position = self.request.query_params.get('position', None)
-        college = self.request.query_params.get('college', None)
+        # Filters matching your UI
         year = self.request.query_params.get('year', None)
+        position = self.request.query_params.get('position', None)
+        conference = self.request.query_params.get('conference', None)
+        team = self.request.query_params.get('team', None)
         
+        if year:
+            queryset = queryset.filter(year=year)
         if position:
             queryset = queryset.filter(position=position)
-        if college:
-            queryset = queryset.filter(college=college)
-        if year:
-            queryset = queryset.filter(college_stats__year=year)
+        if conference:
+            queryset = queryset.filter(college__conference=conference)
+        if team:
+            queryset = queryset.filter(college=team)
             
-        return queryset.distinct()
-
-class MockDraftViewSet(viewsets.ModelViewSet):
-    queryset = MockDraft.objects.all()
-    serializer_class = MockDraftSerializer
-
-class NFLTeamViewSet(viewsets.ModelViewSet):
-    queryset = NFLTeam.objects.all()
-    serializer_class = NFLTeamSerializer
+        return queryset.order_by('-player_rating')
