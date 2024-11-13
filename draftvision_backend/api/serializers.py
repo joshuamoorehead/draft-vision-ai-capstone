@@ -1,38 +1,14 @@
 from rest_framework import serializers
-from .models import *
+from .models import Player, PlayerDetail
+
+class PlayerDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlayerDetail
+        fields = ['biography', 'stats_json', 'rankings_json', 'scheme_fit', 'best_performance']
 
 class PlayerSerializer(serializers.ModelSerializer):
+    details = PlayerDetailSerializer(read_only=True)
+    
     class Meta:
         model = Player
-        fields = '__all__'
-
-class CollegeStatsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CollegeStats
-        fields = '__all__'
-
-class NFLTeamSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = NFLTeam
-        fields = '__all__'
-
-class MockDraftPickSerializer(serializers.ModelSerializer):
-    player_details = PlayerSerializer(source='player', read_only=True)
-    team_details = NFLTeamSerializer(source='team', read_only=True)
-    
-    class Meta:
-        model = MockDraftPick
-        fields = ['id', 'pick_number', 'player', 'team', 'ai_analysis', 
-                 'player_details', 'team_details']
-
-class MockDraftSerializer(serializers.ModelSerializer):
-    picks = MockDraftPickSerializer(many=True, read_only=True)
-    
-    class Meta:
-        model = MockDraft
-        fields = ['id', 'user_team', 'created_at', 'completed', 'grade', 'picks']
-
-class DraftPredictionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DraftPrediction
-        fields = '__all__'
+        fields = ['id', 'name', 'college', 'position', 'player_rating', 'image_url', 'year', 'details']
