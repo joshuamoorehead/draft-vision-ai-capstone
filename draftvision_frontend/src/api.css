@@ -1,0 +1,8 @@
+body {
+  background: var(--Color, #5A6BB0);
+}
+.container {
+  width: 1440px;
+  height: 1024px;
+  margin: 0 auto;
+}
