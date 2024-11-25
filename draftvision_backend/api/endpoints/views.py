@@ -1,5 +1,6 @@
 from rest_framework import viewsets, filters
 from rest_framework import status
+#TODO says .models and .serializers cant be found, something to do with folder structure?
 from .models import Player
 from .serializers import PlayerSerializer
 from rest_framework.decorators import action
@@ -49,13 +50,35 @@ class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
         try:
             #Trying to get set of players based on if string is contained in the name
             name = request.GET.get('name', '').strip()
-            players = Player.objects.filter(name=name) #TODO dont know if this is case insensitive or not
+            #TODO dont know if this is case insensitive or not
+            players = Player.objects.filter(name__icontains=name)
             if players.exists():
                 serializer = PlayerSerializer(players, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
-                return Response({"message": "No players found"}, status=status.HTTP404_NOT_FOUND)
+                return Response({"message": "No players found"}, status=status.HTTP_404_NOT_FOUND)
             #Exceptions
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    #Search for player based on position
+    def get_player_position(request):
+        try:
+            #Current scope for the positions were documenting
+            poss_positions = ['QB', 'WR', 'RB']
+            position_query = request.GET.get('position', '').strip().upper()
+
+            if position_query not in poss_positions:
+                return Response({"error": "Invalid position"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            players = Player.objects.filter(position=position_query)
+            if players.exists():
+                serializer = PlayerSerializer(players, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response({"message": "No players found"}, status=status.HTTP_404_NOT_FOUND)
+            
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
     
