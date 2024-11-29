@@ -25,6 +25,7 @@ class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(year=filter_year)
         if filter_position:
             queryset = queryset.filter(position=filter_position)
+        #TODO dont see anywhere in models.py or serializers.py where we have a conference attribute
         if filter_conference:
             queryset = queryset.filter(college__conference=filter_conference)
         if filter_team:
@@ -62,7 +63,7 @@ class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
     #Search for player based on position
-    def get_player_position(request):
+    def get_player_by_position(request):
         try:
             #Current scope for the positions were documenting
             poss_positions = ['QB', 'WR', 'RB']
@@ -80,5 +81,21 @@ class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
             
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    #Search for players based on their college team
+    def get_player_by_college(request):
+        try:
+            college = request.GET.get('team', '').strip()
+            players = Player.objects.filter(college__icontains = college)
+            if players.exists():
+                serializer = PlayerSerializer(players, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response({"message": "No players found"}, status=status.HTTP_404_NOT_FOUND)
+            
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
         
     

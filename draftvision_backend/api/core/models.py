@@ -1,6 +1,7 @@
 from django.db import models
 
 class Player(models.Model):
+    #TODO do we want a conference attribute to use for the get_queryset class in views.py?
     name = models.CharField(max_length=100)
     college = models.CharField(max_length=100)
     position = models.CharField(max_length=10)
