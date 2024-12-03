@@ -1,131 +1,112 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
+
+
+class Team(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class TeamYear(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="years")
+    year = models.IntegerField()
+    sos = models.FloatField(help_text="Strength of Schedule")
+
+    class Meta:
+        unique_together = ('team', 'year')  # Prevent duplicate records
+
+    def __str__(self):
+        return f"{self.team.name} ({self.year})"
+
 
 class Player(models.Model):
-    #TODO do we want a conference attribute to use for the get_queryset class in views.py?
     name = models.CharField(max_length=100)
-    college = models.CharField(max_length=100)
-    position = models.CharField(max_length=10)
-    player_rating = models.FloatField(default=0.0, help_text="AI-generated rating (0-100)")
-    image_url = models.URLField(null=True, blank=True)
-    year = models.IntegerField(default=2025)
-    
+    position = models.CharField(max_length=10)  # e.g., QB, RB, WR
+    school = models.CharField(max_length=100, null=True, blank=True)
+    height = models.IntegerField(null=True, blank=True)  # Height in inches
+    weight = models.IntegerField(null=True, blank=True)  # Weight in pounds
+    years_ncaa = models.JSONField(default=list, help_text="Years the player played in NCAA")
+
+    def __str__(self):
+        return self.name
+
+
+class DraftInfo(models.Model):
+    player = models.ForeignKey(
+        Player, 
+        on_delete=models.CASCADE, 
+        related_name="draft_info"  # Add this line
+    )
+    draft_av = models.FloatField(null=True, blank=True)
+    draft_round = models.IntegerField(null=True, blank=True)
+    draft_pick = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.player.name} - Draft Info"
+
+
+class PassingStats(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="passing_stats")
+    team_year = models.ForeignKey(TeamYear, on_delete=models.CASCADE, related_name="passing_stats", default=1)
+    year = models.IntegerField()  # Optional if team_year.year is sufficient
+    completions = models.IntegerField(default=0)
+    attempts = models.IntegerField(default=0)
+    yards = models.IntegerField(default=0)
+    touchdowns = models.IntegerField(default=0)
+    interceptions = models.IntegerField(default=0)
+    completion_pct = models.FloatField(null=True, blank=True, help_text="Completion percentage")
+    yards_per_attempt = models.FloatField(null=True, blank=True, help_text="Yards per attempt")
+    rating = models.FloatField(null=True, blank=True, help_text="Passer rating")
+    interception_pct=models.FloatField(null=True,blank=True,help_text="IntPCT")
+    touchdown_pct=models.FloatField(null=True,blank=True,help_text="TDPCT")
+    awards=models.TextField(null=True,blank=True,help_text="awards")
+
     class Meta:
-        ordering = ['-player_rating']
-    
-    def __str__(self):
-        return f"{self.name} - {self.position}"
+        unique_together = ('player', 'team_year', 'year')  # Modify if `year` is removed
 
-class PlayerDetail(models.Model):
-    player = models.OneToOneField(Player, on_delete=models.CASCADE, related_name='details')
-    biography = models.TextField(blank=True)
-    stats_json = models.JSONField(default=dict, help_text="Position-specific statistics")
-    rankings_json = models.JSONField(default=dict, help_text="Various ranking information")
-    scheme_fit = models.TextField(blank=True)
-    best_performance = models.TextField(blank=True)
+    def save(self, *args, **kwargs):
+        if not self.year and self.team_year:
+            self.year = self.team_year.year  # Auto-populate year if missing
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.player.name} - Details"
+        return f"{self.player.name} ({self.team_year.team.name}, {self.year}) - Passing Stats"
 
 
-class PlayerProfile(models.Model):
-    name = models.CharField(max_length=100)
-    position = models.CharField(max_length=10)
-    college = models.CharField(max_length=30)
-    years_ncaa = ArrayField(models.IntegerField(), size=10, blank=True, default=list)
-    year_drafted = models.IntegerField(null=True, blank=True, default=None)
-    draft_round = models.IntegerField(null=True, default=None, blank=True)
-    draft_pick = models.IntegerField(null=True, blank=True, default=None)
-    draft_team = models.CharField(null=True, blank=True, max_length=30, default=None)
-    career_av = models.FloatField(null=True, blank=True, default=0.0)
-    draft_av = models.FloatField(null=True, blank=True, default=0.0)
-
-# class ConferenceData(models.Model):
-#     conference = models.CharField(max_length=20)
-
-
-class NCAA_Teams(models.Model):
-    team_name = models.CharField(max_length=100)
-    # conference = models.ForeignKey(ConferenceData)
-
-class NCAAYearlyTeamData(models.model):
-    team = models.ForeignKey(NCAA_Teams, on_delete=models.CASCADE)
+class RushingStats(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="rushing_stats")
+    team_year = models.ForeignKey(TeamYear, on_delete=models.CASCADE, related_name="rushing_stats", default=1)
     year = models.IntegerField()
-    AP_finish = models.IntegerField(null=True, blank=True)
-    wins = models.IntegerField()
-    losses = models.IntegerField()
-    OSRS = models.FloatField()
-    DSRS = models.FloatField()
-    SRS = models.FloatField()
-    PPG = models.FloatField()
-    Opp_PPG = models.FloatField()
-    pass_yds_att = models.FloatField()
-    opp_pass_yds_att = models.FloatField()
-    rush_yd_att = models.FloatField()
-    opp_rush_yd_att = models.FloatField()
-    tot_yds_att = models.FloatField()
-    opp_tot_yds_att = models.FloatField()
+    attempts = models.IntegerField(default=0)
+    yards = models.IntegerField(default=0)
+    yards_per_attempt = models.FloatField(default=0.0)
+    touchdowns = models.IntegerField(default=0)
+    yards_per_game = models.FloatField(default=0.0)
+    awards = models.TextField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('player', 'team_year', 'year')
+
+    def __str__(self):
+        return f"{self.player.name} ({self.year}) - Rushing Stats"
 
 
-class PassingLeaders(models.Model):
-    player = models.ForeignKey(PlayerProfile, on_delete=models.CASCADE)
+
+class ReceivingStats(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name="receiving_stats")
+    team_year = models.ForeignKey(TeamYear, on_delete=models.CASCADE, related_name="receiving_stats", default=1)
     year = models.IntegerField()
-    team = models.ForeignKey(NCAA_Teams, on_delete=models.CASCADE)
-    # conference- add later 
-    games = models.IntegerField(default=0)
-    cmp = models.IntegerField(default=0)
-    att = models.IntegerField(default=0)
-    cmp_pct = models.FloatField(default = 0.0)
-    yds = models.IntegerField(default=0)
-    TD = models.IntegerField(default=0)
-    TD_pct = models.FloatField(default=0.0)
-    int = models.IntegerField(default=0)
-    int_pct = models.FloatField(default=0.0)
-    yards_att = models.FloatField(default=0.0)
-    adj_yds_att = models.FloatField(default=0.0)
-    yds_cmp = models.FloatField(default=0.0)
-    yds_game = models.FloatField(default=0.0)
-    rating = models.FloatField(default=0.0)
-    awards = ArrayField(models.CharField(max_length=50, size=10, default=list, blank=True))
+    receptions = models.IntegerField(default=0)
+    yards = models.IntegerField(default=0)
+    yards_per_reception = models.FloatField(default=0.0)
+    touchdowns = models.IntegerField(default=0)
+    games_played = models.IntegerField(default=0)
+    yards_per_game = models.FloatField(default=0.0)
+    awards = models.TextField(null=True, blank=True)
 
-class RushingLeaders(models.Model):
-    player = models.ForeignKey(PlayerProfile, on_delete=models.CASCADE)
-    year = models.IntegerField()
-    team = models.ForeignKey(NCAA_Teams, on_delete=models.CASCADE)
-    # conference- add later 
-    games = models.IntegerField()
-    att = models.IntegerField()
-    yds = models.IntegerField()
-    yds_att = models.FloatField()
-    td = models.IntegerField()
-    yds_g = models.FloatField()
-    rec = models.IntegerField()
-    rec_yds = models.IntegerField()
-    rec_yds_g = models.FloatField()
-    plays = models.IntegerField()
-    tot_yds = models.IntegerField()
-    tot_avg = models.FloatField()
-    tot_td = models.IntegerField()
-    awards = ArrayField(models.CharField(max_length=50, size=10, default=list, blank=True))
+    class Meta:
+        unique_together = ('player', 'team_year', 'year')
 
-
-
-class RecLeaders(models.Model): 
-    player = models.ForeignKey(PlayerProfile, on_delete=models.CASCADE)
-    year = models.IntegerField()
-    team = models.ForeignKey(NCAA_Teams, on_delete=models.CASCADE)
-    # add conference later 
-    games = models.IntegerField()
-    rec = models.IntegerField()
-    yds = models.IntegerField()
-    yds_rec = models.FloatField()
-    td = models.IntegerField()
-    yds_g = models.FloatField()
-    rush_att = models.IntegerField()
-    rush_yds = models.IntegerField()
-    rush_td = models.IntegerField()
-    player = models.IntegerField()
-    tot_yds = models.IntegerField()
-    tot_avg = models.FloatField()
-    tot_td = models.IntegerField()
-    awards = ArrayField(models.CharField(max_length=50, size=10, default=list, blank=True))
+    def __str__(self):
+        return f"{self.player.name} ({self.year}) - Receiving Stats"

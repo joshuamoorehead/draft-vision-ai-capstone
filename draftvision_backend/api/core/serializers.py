@@ -1,14 +1,27 @@
 from rest_framework import serializers
-from .models import Player, PlayerDetail
+from .models import Team, Player, PassingStats, RushingStats, ReceivingStats
 
-class PlayerDetailSerializer(serializers.ModelSerializer):
+class TeamSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PlayerDetail
-        fields = ['biography', 'stats_json', 'rankings_json', 'scheme_fit', 'best_performance']
+        model = Team
+        fields = '__all__'
 
 class PlayerSerializer(serializers.ModelSerializer):
-    details = PlayerDetailSerializer(read_only=True)
-    
     class Meta:
         model = Player
-        fields = ['id', 'name', 'college', 'position', 'player_rating', 'image_url', 'year', 'details']
+        fields = '__all__'
+
+class PassingStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PassingStats
+        fields = '__all__'
+
+class RushingStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RushingStats
+        fields = '__all__'
+
+class ReceivingStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReceivingStats
+        fields = '__all__'
