@@ -1,5 +1,6 @@
 from rest_framework import viewsets, filters
 from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 #TODO says .models and .serializers cant be found, something to do with folder structure?
 from rest_framework.decorators import action
@@ -43,5 +44,33 @@ def home(request):
         'receiving_stats': receiving_stats,
     }
     return render(request, 'home.html', context)
-            
+class TeamListView(APIView):
+    def get(self, request):
+        teams = Team.objects.all()
+        serializer = TeamSerializer(teams, many=True)
+        return Response(serializer.data)
+
+class PlayerListView(APIView):
+    def get(self, request):
+        players = Player.objects.all()
+        serializer = PlayerSerializer(players, many=True)
+        return Response(serializer.data)
+
+class PassingStatsListView(APIView):
+    def get(self, request):
+        passing_stats = PassingStats.objects.all()
+        serializer = PassingStatsSerializer(passing_stats, many=True)
+        return Response(serializer.data)
+
+class RushingStatsListView(APIView):
+    def get(self, request):
+        rushing_stats = RushingStats.objects.all()
+        serializer = RushingStatsSerializer(rushing_stats, many=True)
+        return Response(serializer.data)
+
+class ReceivingStatsListView(APIView):
+    def get(self, request):
+        receiving_stats = ReceivingStats.objects.all()
+        serializer = ReceivingStatsSerializer(receiving_stats, many=True)
+        return Response(serializer.data)
         
