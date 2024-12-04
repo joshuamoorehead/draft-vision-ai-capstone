@@ -105,7 +105,7 @@ class Command(BaseCommand):
 
                                 if draft_av == "":
                                     self.stdout.write(f"Warning: Missing 'draft_av' for player {name} in file {file}")
-                                    draft_av = NONE  # Set to None if missing
+                                    draft_av = None  # Set to None if missing
 
                                 player, _ = Player.objects.get_or_create(
                                     name=name,
