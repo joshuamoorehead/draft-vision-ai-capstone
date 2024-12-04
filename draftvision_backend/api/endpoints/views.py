@@ -73,4 +73,12 @@ class ReceivingStatsListView(APIView):
         receiving_stats = ReceivingStats.objects.all()
         serializer = ReceivingStatsSerializer(receiving_stats, many=True)
         return Response(serializer.data)
-        
+class ApiRootView(APIView):
+    def get(self, request, *args, **kwargs):
+        return Response({
+            "teams": "/api/teams/",
+            "players": "/api/players/",
+            "passing_stats": "/api/passing-stats/",
+            "rushing_stats": "/api/rushing-stats/",
+            "receiving_stats": "/api/receiving-stats/",
+        })
