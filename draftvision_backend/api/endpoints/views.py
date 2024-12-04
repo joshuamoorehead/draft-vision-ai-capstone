@@ -29,6 +29,19 @@ class ReceivingStatsViewSet(ModelViewSet):
     queryset = ReceivingStats.objects.all()
     serializer_class = ReceivingStatsSerializer
 
-
+def home(request):
+    teams = Team.objects.all()
+    players = Player.objects.all()
+    passing_stats = PassingStats.objects.all()
+    rushing_stats = RushingStats.objects.all()
+    receiving_stats = ReceivingStats.objects.all()
+    context = {
+        'teams': teams,
+        'players': players,
+        'passing_stats': passing_stats,
+        'rushing_stats': rushing_stats,
+        'receiving_stats': receiving_stats,
+    }
+    return render(request, 'home.html', context)
             
         
