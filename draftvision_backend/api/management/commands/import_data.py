@@ -38,7 +38,7 @@ class Command(BaseCommand):
                             "school": player.get("school", None),
                             "height": player.get("height", None),
                             "weight": player.get("weight", None),
-                            "years_ncaa": player.get("years", []),
+                            "years_ncaa": player.get("years_ncaa", []),
                         }
                     )
                 except Exception as e:
@@ -105,7 +105,7 @@ class Command(BaseCommand):
 
                                 if draft_av == "":
                                     self.stdout.write(f"Warning: Missing 'draft_av' for player {name} in file {file}")
-                                    draft_av = NONE  # Set to None if missing
+                                    draft_av = None  # Set to None if missing
 
                                 player, _ = Player.objects.get_or_create(
                                     name=name,
