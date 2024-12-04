@@ -85,14 +85,12 @@ WSGI_APPLICATION = 'draftvision_backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dvai_db',          # Replace with your database name
-        'USER': 'dvai_db_user',               # Replace with your username
-        'PASSWORD': 'sn3FMCO3xlJUQKPD1J1t85M9hT4mjPkv',           # Replace with your password
-        'HOST': 'dpg-ct80ujl6l47c73cd3cg0-a.oregon-postgres.render.com',   # Replace with your Render database host
-        'PORT': '5432',                   # Default PostgreSQL port
-    }
+    'default': dj_database_url.config(
+        default = 'postgresql://dvai_database_user:xt6KaIXFdRJnm7f9U8CEIVIMglH8qB2O@dpg-ct8ctb9opnds739u5gs0-a.oregon-postgres.render.com/dvai_database',
+        conn_max_age=600,
+        ssl_require=True
+    )
+        
 }
 
 
