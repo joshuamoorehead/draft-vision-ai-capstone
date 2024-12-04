@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import home
 from rest_framework.routers import DefaultRouter
-from .views import TeamViewSet, PlayerViewSet, PassingStatsViewSet, RushingStatsViewSet, ReceivingStatsViewSet, ApiRootView
+from .views import TeamViewSet,TeamYearViewSet,DraftInfoViewSet, PlayerViewSet, PassingStatsViewSet, RushingStatsViewSet, ReceivingStatsViewSet, ApiRootView
 from .views import (
     TeamViewSet,
     PlayerViewSet,
@@ -13,10 +13,14 @@ from .views import (
     PassingStatsListView,
     RushingStatsListView,
     ReceivingStatsListView,
+    TeamYearListView,
+    DraftInfoListView,
 )
 router = DefaultRouter()
 router.register(r'teams', TeamViewSet)
 router.register(r'players', PlayerViewSet)
+router.register(r'team-years', TeamYearViewSet, basename='teamyear')
+router.register(r'draft-info', DraftInfoViewSet, basename='draftinfo')
 router.register(r'passing-stats', PassingStatsViewSet)
 router.register(r'rushing-stats', RushingStatsViewSet)
 router.register(r'receiving-stats', ReceivingStatsViewSet)
@@ -28,5 +32,7 @@ urlpatterns = [
     path('passing-stats/', PassingStatsListView.as_view(), name='passing-stats-list'),
     path('rushing-stats/', RushingStatsListView.as_view(), name='rushing-stats-list'),
     path('receiving-stats/', ReceivingStatsListView.as_view(), name='receiving-stats-list'),
+    path('draft-info/',DraftInfoListView.as_view(),name="draft-info-list"),
+    path('team-year/',TeamYearListView.as_view(),name="team-year-list"),
     # Other URL patterns
 ]
