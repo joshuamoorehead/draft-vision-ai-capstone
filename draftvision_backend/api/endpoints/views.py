@@ -1,47 +1,42 @@
-from rest_framework import viewsets, filters
-from rest_framework import status
-from rest_framework.viewsets import ModelViewSet
-#TODO says .models and .serializers cant be found, something to do with folder structure?
-from rest_framework.decorators import action
-from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.shortcuts import render
-from ..core.models import Team, Player, PassingStats, RushingStats, ReceivingStats
-from ..core.serializers import TeamSerializer, PlayerSerializer, PassingStatsSerializer, RushingStatsSerializer, ReceivingStatsSerializer
-     
-class TeamViewSet(ModelViewSet):
-    queryset = Team.objects.all()
-    serializer_class = TeamSerializer
+from .models import Team, Player, PassingStats, RushingStats, ReceivingStats
+from .serializers import (
+    TeamSerializer,
+    PlayerSerializer,
+    PassingStatsSerializer,
+    RushingStatsSerializer,
+    ReceivingStatsSerializer,
+)
 
-class PlayerViewSet(ModelViewSet):
-    queryset = Player.objects.all()
-    serializer_class = PlayerSerializer
+class TeamListView(APIView):
+    def get(self, request):
+        teams = Team.objects.all()
+        serializer = TeamSerializer(teams, many=True)
+        return Response(serializer.data)
 
-class PassingStatsViewSet(ModelViewSet):
-    queryset = PassingStats.objects.all()
-    serializer_class = PassingStatsSerializer
+class PlayerListView(APIView):
+    def get(self, request):
+        players = Player.objects.all()
+        serializer = PlayerSerializer(players, many=True)
+        return Response(serializer.data)
 
-class RushingStatsViewSet(ModelViewSet):
-    queryset = RushingStats.objects.all()
-    serializer_class = RushingStatsSerializer
+class PassingStatsListView(APIView):
+    def get(self, request):
+        passing_stats = PassingStats.objects.all()
+        serializer = PassingStatsSerializer(passing_stats, many=True)
+        return Response(serializer.data)
 
-class ReceivingStatsViewSet(ModelViewSet):
-    queryset = ReceivingStats.objects.all()
-    serializer_class = ReceivingStatsSerializer
+class RushingStatsListView(APIView):
+    def get(self, request):
+        rushing_stats = RushingStats.objects.all()
+        serializer = RushingStatsSerializer(rushing_stats, many=True)
+        return Response(serializer.data)
 
-def home(request):
-    teams = Team.objects.all()
-    players = Player.objects.all()
-    passing_stats = PassingStats.objects.all()
-    rushing_stats = RushingStats.objects.all()
-    receiving_stats = ReceivingStats.objects.all()
-    context = {
-        'teams': teams,
-        'players': players,
-        'passing_stats': passing_stats,
-        'rushing_stats': rushing_stats,
-        'receiving_stats': receiving_stats,
-    }
-    return render(request, 'home.html', context)
-            
+class ReceivingStatsListView(APIView):
+    def get(self, request):
+        receiving_stats = ReceivingStats.objects.all()
+        serializer = ReceivingStatsSerializer(receiving_stats, many=True)
+        return Response(serializer.data)
+
         

@@ -18,5 +18,10 @@ router.register(r'receiving-stats', ReceivingStatsViewSet)
 
 urlpatterns = [
     path('', home, name='home'),
+    path('teams/', TeamListView.as_view(), name='team-list'),
+    path('players/', PlayerListView.as_view(), name='player-list'),
+    path('passing-stats/', PassingStatsListView.as_view(), name='passing-stats-list'),
+    path('rushing-stats/', RushingStatsListView.as_view(), name='rushing-stats-list'),
+    path('receiving-stats/', ReceivingStatsListView.as_view(), name='receiving-stats-list'),
     # Other URL patterns
 ]
