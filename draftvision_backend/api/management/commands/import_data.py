@@ -303,4 +303,4 @@ class Command(BaseCommand):
                             continue
                 except Exception as e:
                     print(f"Error processing file {file_path}: {e}")
-        print("Rushing stats import completed successfully.")
+        print("Rushing stats import completed successfully!")
