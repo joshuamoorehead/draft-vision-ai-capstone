@@ -19,7 +19,7 @@ from .views import (
 router = DefaultRouter()
 router.register(r'teams', TeamViewSet)
 router.register(r'players', PlayerViewSet)
-router.register(r'team-years', TeamYearViewSet, basename='teamyear')
+router.register(r'team-year', TeamYearViewSet, basename='teamyear')
 router.register(r'draft-info', DraftInfoViewSet, basename='draftinfo')
 router.register(r'passing-stats', PassingStatsViewSet)
 router.register(r'rushing-stats', RushingStatsViewSet)

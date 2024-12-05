@@ -38,7 +38,7 @@ class Command(BaseCommand):
                             "school": player.get("school", None),
                             "height": player.get("height", None),
                             "weight": player.get("weight", None),
-                            "years_ncaa": player.get("years", []),
+                            "years_ncaa": player.get("years_ncaa", []),
                         }
                     )
                 except Exception as e:
