@@ -1,22 +1,27 @@
 from rest_framework import viewsets, filters
 from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 #TODO says .models and .serializers cant be found, something to do with folder structure?
 from rest_framework.decorators import action
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import render
-from ..core.models import Team, Player, PassingStats, RushingStats, ReceivingStats
-from ..core.serializers import TeamSerializer, PlayerSerializer, PassingStatsSerializer, RushingStatsSerializer, ReceivingStatsSerializer
+from ..core.models import Team,TeamYear,DraftInfo, Player, PassingStats, RushingStats, ReceivingStats
+from ..core.serializers import TeamSerializer, TeamYearSerializer, DraftInfoSerializer, PlayerSerializer, PassingStatsSerializer, RushingStatsSerializer, ReceivingStatsSerializer
      
 class TeamViewSet(ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
-
+class TeamYearViewSet(viewsets.ModelViewSet):
+    queryset = TeamYear.objects.all()
+    serializer_class = TeamYearSerializer
 class PlayerViewSet(ModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
-
+class DraftInfoViewSet(viewsets.ModelViewSet):
+    queryset = DraftInfo.objects.all()
+    serializer_class = DraftInfoSerializer
 class PassingStatsViewSet(ModelViewSet):
     queryset = PassingStats.objects.all()
     serializer_class = PassingStatsSerializer
@@ -43,5 +48,52 @@ def home(request):
         'receiving_stats': receiving_stats,
     }
     return render(request, 'home.html', context)
-            
-        
+class TeamListView(APIView):
+    def get(self, request):
+        teams = Team.objects.all()
+        serializer = TeamSerializer(teams, many=True)
+        return Response(serializer.data)
+
+class PlayerListView(APIView):
+    def get(self, request):
+        players = Player.objects.all()
+        serializer = PlayerSerializer(players, many=True)
+        return Response(serializer.data)
+
+class PassingStatsListView(APIView):
+    def get(self, request):
+        passing_stats = PassingStats.objects.all()
+        serializer = PassingStatsSerializer(passing_stats, many=True)
+        return Response(serializer.data)
+
+class RushingStatsListView(APIView):
+    def get(self, request):
+        rushing_stats = RushingStats.objects.all()
+        serializer = RushingStatsSerializer(rushing_stats, many=True)
+        return Response(serializer.data)
+class DraftInfoListView(APIView):
+    def get(self, request):
+        draft_info = DraftInfo.objects.all()
+        serializer = DraftInfoSerializer(draft_info, many=True)
+        return Response(serializer.data)
+class TeamYearListView(APIView):
+    def get(self, request):
+        team_year = TeamYear.objects.all()
+        serializer = TeamYearSerializer(team_year, many=True)
+        return Response(serializer.data)
+class ReceivingStatsListView(APIView):
+    def get(self, request):
+        receiving_stats = ReceivingStats.objects.all()
+        serializer = ReceivingStatsSerializer(receiving_stats, many=True)
+        return Response(serializer.data)
+class ApiRootView(APIView):
+    def get(self, request, *args, **kwargs):
+        return Response({
+            "teams": "/api/teams/",
+            "players": "/api/players/",
+            "team_years": "/api/team-years/",  # Add TeamYear endpoint
+            "draft_info": "/api/draft-info/",  # Add DraftInfo endpoint
+            "passing_stats": "/api/passing-stats/",
+            "rushing_stats": "/api/rushing-stats/",
+            "receiving_stats": "/api/receiving-stats/",
+        })
