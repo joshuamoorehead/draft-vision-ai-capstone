@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-sb!%mr3!4w3-ym8!dhqb83@p@bl*3w!c7&=3k1ol@8&_hy@t0$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['draft-vision-ai-7.onrender.com','127.0.0.1']
+ALLOWED_HOSTS = ['draft-vision-ai-7.onrender.com/','127.0.0.1']
 
 
 # Application definition
@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'draftvision_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dvai_database',          # Replace with your database name
-        'USER': 'dvai_database_user',               # Replace with your username
-        'PASSWORD': 'xt6KaIXFdRJnm7f9U8CEIVIMglH8qB2O',           # Replace with your password
-        'HOST': 'dpg-ct8ctb9opnds739u5gs0-a.oregon-postgres.render.com',   # Replace with your Render database host
+        'NAME': 'postgres',          # Replace with your database name
+        'USER': 'dvai',               # Replace with your username
+        'PASSWORD': 'password123',           # Replace with your password
+        'HOST': 'dvai-db.c740geqccwvp.us-east-2.rds.amazonaws.com',   # Replace with your Render database host
         'PORT': '5432',                   # Default PostgreSQL port
     }
 }
