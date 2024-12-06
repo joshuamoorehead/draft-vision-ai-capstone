@@ -8,6 +8,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 import numpy as np 
 import matplotlib.pyplot as plt 
+from joblib import dump 
 
 SUPABASE_URL = 'https://pvuzvnemuhutrdmpchmi.supabase.co'
 SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY'
@@ -55,6 +56,11 @@ def show_results_table(y_test, y_pred):
     # print(results_df.head())
     results_df.to_csv('./data/predicted_vs_actual.csv')
 
+# use "from joblib import load" to load model again. 
+def save_model(randomforest):
+    dump(randomforest, 'random_forest_model.joblib')
+    print('saved model!')
+
 if __name__ == '__main__':
     data = load_data()
     relevant_cols = ['school', 'conference', 'draft_round', 'draft_pick', 'career_av', 'games', 'cmp', 'att', 'comp_pct', 'yds', 'td', 'int', 'int_pct', 'adj_yds', 'adj_yds_att', 'yds_carr', 'yds_g', 'ratings']
@@ -83,4 +89,10 @@ if __name__ == '__main__':
     print(f'MSE: {mse}')
 
     # plot(y_test, y_pred)
-    show_results_table(y_test, y_pred)
+    # show_results_table(y_test, y_pred)
+
+    save_model(randomforest)
+
+
+
+
