@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { fetchPlayers } from '../../services/api';
+import Papa from 'papaparse';
 import dvailogo from '../dvailogo.png';
 
 const LargeList = () => {
   const [position, setPosition] = useState(''); // Selected position
   const [allPlayers, setAllPlayers] = useState([]); // All players data
   const [players, setPlayers] = useState([]); // Filtered players
+  const [predictions, setPredictions] = useState([]); // Predicted results from CSV
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -56,6 +58,7 @@ const LargeList = () => {
   ];
 
   useEffect(() => {
+    // Load players
     const loadPlayers = async () => {
       try {
         const data = await fetchPlayers();
@@ -73,7 +76,20 @@ const LargeList = () => {
       }
     };
 
+    // Load predictions from CSV
+    const loadPredictions = async () => {
+      try {
+        const response = await fetch('/2024pred.csv');
+        const csvText = await response.text();
+        const parsed = Papa.parse(csvText, { header: true });
+        setPredictions(parsed.data);
+      } catch (err) {
+        console.error('Failed to load predictions:', err.message);
+      }
+    };
+
     loadPlayers();
+    loadPredictions();
   }, []);
 
   // Filter players based on selected position
@@ -126,95 +142,79 @@ const LargeList = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 mt-8">
-        {/* Title */}
-        <div className="text-center mb-8">
-          <h2 className="text-4xl font-medium bg-gray-100 inline-block px-8 py-2 rounded-xl border-2 border-black">
-            2025 Draft Large List
-          </h2>
+        {/* Predictions Table */}
+        <div className="mb-8">
+          <h3 className="text-2xl text-center mb-4">2024 QB Predicted Career AV</h3>
+          <table className="w-full border-collapse border border-black">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-black px-4 py-2">Rank</th>
+                <th className="border border-black px-4 py-2">Name</th>
+                <th className="border border-black px-4 py-2">Prediction</th>
+              </tr>
+            </thead>
+            <tbody>
+              {predictions.map((pred, index) => (
+                <tr key={index} style={{ backgroundColor: '#E5E7EB' }}>
+                  <td className="border border-black px-4 py-2">{index + 1}</td>
+                  <td className="border border-black px-4 py-2">{pred.name}</td>
+                  <td className="border border-black px-4 py-2">{pred.prediction_2024}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        {/* Player List */}
-        <div className="flex gap-4">
-          {/* Filters Panel */}
-          <div className="w-60 h-[624px] bg-gray-100 border-2 border-black p-4">
-            <h3 className="text-center text-xl mb-4">Filters</h3>
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Position</label>
-                <select
-                  value={position}
-                  onChange={(e) => setPosition(e.target.value)}
-                  className="w-full p-2 border-2 border-black rounded bg-white"
-                >
-                  <option value="">All Positions</option>
-                  <option value="QB">Quarterback (QB)</option>
-                  <option value="RB">Running Back (RB)</option>
-                  <option value="WR">Wide Receiver (WR)</option>
-                  <option value="TE">Tight End (TE)</option>
-                </select>
+        {/* Full Player List */}
+        <div className="mb-8">
+          <h3 className="text-2xl text-center mb-4">Full Player List</h3>
+          <div className="flex gap-4">
+            {/* Filters Panel */}
+            <div className="w-60 h-[624px] bg-gray-100 border-2 border-black p-4">
+              <h3 className="text-center text-xl mb-4">Filters</h3>
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Position</label>
+                  <select
+                    value={position}
+                    onChange={(e) => setPosition(e.target.value)}
+                    className="w-full p-2 border-2 border-black rounded bg-white"
+                  >
+                    <option value="">All Positions</option>
+                    <option value="QB">Quarterback (QB)</option>
+                    <option value="RB">Running Back (RB)</option>
+                    <option value="WR">Wide Receiver (WR)</option>
+                    <option value="TE">Tight End (TE)</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Players List */}
-          <div className="flex-1 space-y-4">
-            {players.map((player, index) => (
-              <div
-                key={player.id}
-                className="w-full bg-gray-100 border-2 border-black p-4 flex items-center cursor-pointer"
-                onClick={() => handlePlayerSelect(player.id)}
-              >
-                <div className="w-16 text-center text-xl font-semibold">{index + 1}</div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-medium">{player.name}</h3>
-                  <p className="text-lg">{player.school}</p>
-                  <p className="text-lg">{player.position}</p>
+            {/* Players List */}
+            <div className="flex-1 space-y-4">
+              {players.map((player, index) => (
+                <div
+                  key={player.id}
+                  className="w-full bg-gray-100 border-2 border-black p-4 flex items-center cursor-pointer"
+                  onClick={() => handlePlayerSelect(player.id)}
+                >
+                  <div className="w-16 text-center text-xl font-semibold">{index + 1}</div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-medium">{player.name}</h3>
+                    <p className="text-lg">{player.school}</p>
+                    <p className="text-lg">{player.position}</p>
+                  </div>
+                  <div className="text-right mr-8">
+                    <p className="text-lg">Player Rating (Career AV):</p>
+                    <p className="text-3xl font-medium">{player.career_av}</p>
+                  </div>
+                  <button className="w-12 h-12 border-4 border-black rounded">→</button>
                 </div>
-                <div className="text-right mr-8">
-                  <p className="text-lg">Player Rating (Career AV):</p>
-                  <p className="text-3xl font-medium">{player.career_av}</p>
-                </div>
-                <button className="w-12 h-12 border-4 border-black rounded">→</button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Player Card Modal */}
-      {selectedPlayer && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl p-6 max-w-4xl w-full relative">
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-              onClick={() => setSelectedPlayer(null)}
-            >
-              ✕
-            </button>
-            <div className="flex gap-6 mb-6">
-              <div>
-                <h2 className="text-3xl font-bold">{selectedPlayer.name}</h2>
-                <p className="text-xl text-gray-600">{selectedPlayer.school}</p>
-                <p className="text-lg">{selectedPlayer.position}</p>
-                <div className="text-sm text-gray-600 mt-4">
-                  <p>
-                    <strong>Player Rating (Career AV):</strong>{' '}
-                    {selectedPlayer.career_av || 'N/A'}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="mt-6 text-right">
-              <button
-                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                onClick={() => setSelectedPlayer(null)}
-              >
-                Return to Large List
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
