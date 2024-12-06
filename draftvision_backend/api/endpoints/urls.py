@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import home
+from .views import home, prospect_rankings
 from rest_framework.routers import DefaultRouter
 from .views import TeamViewSet,TeamYearViewSet,DraftInfoViewSet, PlayerViewSet, PassingStatsViewSet, RushingStatsViewSet, ReceivingStatsViewSet, ApiRootView
 from .views import (
@@ -34,5 +34,5 @@ urlpatterns = [
     path('receiving-stats/', ReceivingStatsListView.as_view(), name='receiving-stats-list'),
     path('draft-info/',DraftInfoListView.as_view(),name="draft-info-list"),
     path('team-year/',TeamYearListView.as_view(),name="team-year-list"),
-    # Other URL patterns
+    path('prospect-rankings/', prospect_rankings, name='prospect-rankings'),
 ]
