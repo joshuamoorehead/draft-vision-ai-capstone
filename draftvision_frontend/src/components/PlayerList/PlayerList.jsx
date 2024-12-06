@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getRankings } from '../../services/api';
 import PlayerCard from './PlayerCard';
 import React from 'react';
+import ResultsList from './ResultsList'
 
 const PlayerList = () => {
   const [players, setPlayers] = useState([]);
