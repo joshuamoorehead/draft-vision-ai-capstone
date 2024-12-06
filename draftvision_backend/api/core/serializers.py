@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Team, TeamYear, DraftInfo, Player, PassingStats, RushingStats, ReceivingStats
+from .models import Team,TeamYear,DraftInfo, Player, PassingStats, RushingStats, ReceivingStats
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
@@ -67,4 +68,17 @@ class ReceivingStatsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ReceivingStats
+        fields = '__all__'
+
+class TeamYearSerializer(serializers.ModelSerializer):
+    team_name = serializers.CharField(source='team.name', read_only=True)
+
+    class Meta:
+        model = TeamYear
+        fields = '__all__'
+class DraftInfoSerializer(serializers.ModelSerializer):
+    player_name = serializers.CharField(source='player.name', read_only=True)
+
+    class Meta:
+        model = DraftInfo
         fields = '__all__'

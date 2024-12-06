@@ -1,45 +1,71 @@
 // src/components/PlayerList/PlayerList.jsx
-
+import { useState, useEffect } from 'react';
+import { getRankings } from '../../services/api';
+import PlayerCard from './PlayerCard';
 import React from 'react';
+import ResultsList from './ResultsList'
 
-const PlayerList = ({ players, onSelectPlayer }) => {
+const PlayerList = () => {
+  const [players, setPlayers] = useState([]);
+  const [selectedPosition, setSelectedPosition] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Function to load rankings
+  const loadRankings = async (position = null) => {
+      try {
+          setLoading(true);
+          const rankings = await getRankings(position);
+          setPlayers(rankings);
+          setError(null);
+      } catch (err) {
+          setError('Failed to load rankings');
+          console.error(err);
+      } finally {
+          setLoading(false);
+      }
+  };
+
+  // Load rankings when component mounts or position changes
+  useEffect(() => {
+      loadRankings(selectedPosition);
+  }, [selectedPosition]);
+
+  if (loading) return <div>Loading rankings...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    <div className="space-y-4">
-      {players.map((player, index) => (
-        <div 
-          key={player.id}
-          className="w-full bg-gray-100 border-2 border-black p-4 flex items-center cursor-pointer"
-          onClick={() => onSelectPlayer(player.id)}
-        >
-          <div className="w-16 text-center text-xl font-semibold">
-            {index + 1}
+      <div className="p-4">
+          {/* Position filters */}
+          <div className="mb-4 flex gap-2">
+              <button 
+                  onClick={() => setSelectedPosition(null)}
+                  className={`px-4 py-2 rounded ${!selectedPosition ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              >
+                  All
+              </button>
+              {['QB', 'WR', 'RB'].map(pos => (
+                  <button
+                      key={pos}
+                      onClick={() => setSelectedPosition(pos)}
+                      className={`px-4 py-2 rounded ${selectedPosition === pos ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                  >
+                      {pos}
+                  </button>
+              ))}
           </div>
-          
-          <div className="w-24 h-24 rounded-full overflow-hidden mx-4">
-            <img 
-              src="/api/placeholder/96/96"
-              alt={player.name}
-              className="w-full h-full object-cover" 
-            />
+
+          {/* Rankings list */}
+          <div className="space-y-4">
+              {players.map((player, index) => (
+                  <PlayerCard 
+                      key={index}
+                      rank={index + 1}
+                      {...player}
+                  />
+              ))}
           </div>
-          
-          <div className="flex-1">
-            <h3 className="text-xl font-medium">{player.name}</h3>
-            <p className="text-lg">{player.school}</p>
-            <p className="text-lg">{player.position}</p>
-          </div>
-          
-          <div className="text-right mr-8">
-            <p className="text-lg">Player Rating:</p>
-            <p className="text-3xl font-medium">{player.rating}</p>
-          </div>
-          
-          <button className="w-12 h-12 border-4 border-black rounded">
-            →
-          </button>
-        </div>
-      ))}
-    </div>
+      </div>
   );
 };
 
