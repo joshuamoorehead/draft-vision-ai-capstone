@@ -14,8 +14,8 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 #prints all table headers. plug in <table_name> with one of the 4 tables in the comments above. 
 def get_table_headers():
-    # current table names: db_ncaateams, db_passingleaders, db_player_profile, db_yearlyncaateamdata
-    table_name = 'db_yearlyncaateamdata'
+    # current table names: db_ncaateams, db_passingleaders, db_playerprofile, db_yearlyncaateamdata
+    table_name = 'db_playerprofile'
     response = supabase.table(table_name).select('*').limit(1).execute()
 
     if response.data:
@@ -38,9 +38,9 @@ def sample_query():
     # print_data(response.data)
 
     # example 2- pulls all quarterbacks drafted in 2017
-    response = supabase.table('db_playerprofile').select("*").eq("year_drafted", 2017).eq('position', 'QB').execute()
-    print_data(response.data)
-    print('-------------------------------')
+    # response = supabase.table('db_playerprofile').select("*").eq("year_drafted", 2017).eq('position', 'QB').execute()
+    # print_data(response.data)
+    # print('-------------------------------')
 
     # select()- which columns you show
     # eq(column, value)- which columns you query by
@@ -62,5 +62,5 @@ def sample_query():
 
 
 
-# get_table_headers()
-sample_query()
+get_table_headers()
+# sample_query()
