@@ -57,8 +57,9 @@ def show_results_table(y_test, y_pred):
     results_df.to_csv('./data/predicted_vs_actual.csv')
 
 # use "from joblib import load" to load model again. 
-def save_model(randomforest):
-    dump(randomforest, 'random_forest_model.joblib')
+def save_model(randomforest, X_train):
+    dump(randomforest, './model/random_forest_model.joblib')
+    dump(X_train.columns, './model/training_cols.joblib')
     print('saved model!')
 
 if __name__ == '__main__':
@@ -91,7 +92,7 @@ if __name__ == '__main__':
     # plot(y_test, y_pred)
     # show_results_table(y_test, y_pred)
 
-    # save_model(randomforest)
+    save_model(randomforest, X_train)
 
 
 
