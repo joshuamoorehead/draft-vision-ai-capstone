@@ -91,7 +91,7 @@ if __name__ == '__main__':
     # plot(y_test, y_pred)
     # show_results_table(y_test, y_pred)
 
-    save_model(randomforest)
+    # save_model(randomforest)
 
 
 
