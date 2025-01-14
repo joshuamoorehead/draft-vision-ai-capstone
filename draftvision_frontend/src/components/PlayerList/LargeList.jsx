@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { fetchPlayers } from '../../services/api';
 import Papa from 'papaparse';
 import dvailogo from '../dvailogo.png';
+import PlayerCard from "./PlayerCard";
 
-const LargeList = () => {
+const LargeList = ({ players }) => {
   const [position, setPosition] = useState(''); // Selected position
   const [allPlayers, setAllPlayers] = useState([]); // All players data
   const [players, setPlayers] = useState([]); // Filtered players
@@ -109,6 +110,9 @@ const LargeList = () => {
       console.error('Player not found:', playerId);
     }
   };
+  const handleCloseCard = () => {
+    setSelectedPlayer(null); // Close the card
+  };
 
   if (loading) {
     return (
@@ -211,6 +215,9 @@ const LargeList = () => {
                   <button className="w-12 h-12 border-4 border-black rounded">→</button>
                 </div>
               ))}
+              {selectedPlayer && (
+                <PlayerCard player={selectedPlayer} onClose={handleCloseCard} />
+              )}
             </div>
           </div>
         </div>
