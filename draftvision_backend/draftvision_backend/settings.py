@@ -13,12 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-sb!%mr3!4w3-ym8!dhqb83@p@bl*3w!c7&=3k1ol@8&_hy@t0$'
@@ -26,11 +23,9 @@ SECRET_KEY = 'django-insecure-sb!%mr3!4w3-ym8!dhqb83@p@bl*3w!c7&=3k1ol@8&_hy@t0$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['draft-vision-ai-7.onrender.com/','127.0.0.1','localhost','dvai-db.c740geqccwvp.us-east-2.rds.amazonaws.com','https://pvuzvnemuhutrdmpchmi.supabase.co']
-
+ALLOWED_HOSTS = ['draft-vision-ai-7.onrender.com','127.0.0.1', 'localhost']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,31 +35,32 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api.core',
     'rest_framework',
-    'api', 
-    'corsheaders',
+    'api'
 ]
-CORS_ALLOWED_ORIGINS = [
-    "https://draftvision-ai-cfd79.web.app",
-]
-CORS_ALLOW_ALL_ORIGINS = True
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
-    ],
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # whitenoise middleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
+
+# Database configuration
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dvai_db',
+        'USER': 'dvai',
+        'PASSWORD': 'password123',
+        'HOST': 'dpg-ct80ujl6l47c73cd3cg0-a.oregon-postgres.render.com',
+        'PORT': '5432',
+    }
+}
+
 
 ROOT_URLCONF = 'draftvision_backend.urls'
 
@@ -85,21 +81,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'draftvision_backend.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',          # Replace with your database name
-        'USER': 'dvai',               # Replace with your username
-        'PASSWORD': 'password123',           # Replace with your password
-        'HOST': 'dvai-db.c740geqccwvp.us-east-2.rds.amazonaws.com',   # Replace with your Render database host
-        'PORT': '5432',                   # Default PostgreSQL port
-    }
-}
 
 
 # Password validation

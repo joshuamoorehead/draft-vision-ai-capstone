@@ -16,3 +16,16 @@ body {
 .font-roboto-condensed {
   font-family: 'Roboto Condensed', sans-serif;
 }
+.custom-checkbox {
+  appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid black !important;
+  background-color: white !important;
+  cursor: pointer !important;
+}
+
+.custom-checkbox:checked {
+  background-color: #5A6BB0 !important;
+  border-color: black !important;
+}
