@@ -309,7 +309,7 @@ const DraftRoom = () => {
       setTimeout(() => {
         setCurrentPickIndex((prevIndex) => prevIndex + 1);
         if (callback) callback(); // Trigger the callback after the pick
-      }, 1);
+      }, 500);
     }
   };
 
