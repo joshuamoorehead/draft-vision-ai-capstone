@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/main.css';
+
 
 const PlayerComparison = () => {
     const [players, setPlayers] = useState([]);
@@ -16,6 +18,20 @@ const PlayerComparison = () => {
     }, []);
 
     return (
+        <div>
+        {/* Header */}
+              <div className="w-full h-32 bg-black">
+                <div className="container mx-auto px-4 h-full flex items-center">
+                  <img src={dvailogo} alt="Draft Vision AI Logo" className="h-32 w-32" />
+                  <div className="flex space-x-8 text-white ml-12">
+                    <Link to="/" className="text-2xl font-roboto-condensed opacity-50">Player List</Link>
+                    <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">About Us</Link>
+                    <Link to="/mockdraft" className="text-2xl font-roboto-condensed underline">Mock Draft</Link>
+                    <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">Large List</Link>
+                    <Link to="/PlayerCompare" className="text-2xl font-roboto-condensed opacity-50">Player Comparison</Link>
+                  </div>
+                </div>
+              </div>
         <div>
             <h1>Player Comparison</h1>
             <div>
@@ -63,6 +79,7 @@ const PlayerComparison = () => {
                     </table>
                 </div>
             )}
+        </div>
         </div>
     );
 };
