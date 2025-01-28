@@ -18,8 +18,6 @@ from .views import (
 )
 router = DefaultRouter()
 router.register(r'teams', TeamViewSet)
-router.register(r'draft-info', DraftInfoViewSet, basename='draftinfo')
-router.register(r'team-years', TeamYearViewSet, basename='teamyear')
 router.register(r'players', PlayerViewSet)
 #router.register(r'team-year', TeamYearViewSet, basename='teamyear') #Double team year view set?
 #router.register(r'draft-info', DraftInfoViewSet, basename='draftinfo') #Double draft info view set?

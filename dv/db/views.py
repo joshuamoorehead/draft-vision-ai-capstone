@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import PlayerProfile, NCAATeams, YearlyNCAATeamData, PassingLeaders
-from .serializers import PlayerProfileSerializer, NCAATeamsSerializer, YearlyNCAATeamDataSerializer, PassingLeadersSerializer
+from .models import PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders
+from .serializers import PlayerProfileSerializer, NCAATeamsSerializer, TeamSuccessSerializer, PassingLeadersSerializer
 
 class PlayerList(APIView):
     def get(self, request):
@@ -30,11 +30,11 @@ class NCAATeamsList(APIView):
 
 class YearlyNCAATeamDataList(APIView):
     def get(self, request):
-        data = YearlyNCAATeamData.objects.all()
-        serializer = YearlyNCAATeamDataSerializer(data, many=True)
+        data = TeamSuccess.objects.all()
+        serializer = TeamSuccessSerializer(data, many=True)
         return Response(serializer.data)
     def post(self, request):
-        serializer = YearlyNCAATeamDataSerializer(data=request.data)
+        serializer = TeamSuccessSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=200)

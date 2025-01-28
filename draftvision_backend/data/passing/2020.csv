@@ -55,7 +55,7 @@ Rk,Player,Team,Conf,G,Cmp,Att,Cmp%,Yds,TD,TD%,Int,Int%,Y/A,AY/A,Y/C,Y/G,Rate,Awa
 54,Jeff Sims,Georgia Tech,ACC,10,141,257,54.9,1881,13,5.1,13,5.1,7.3,6.05,13.3,188.1,122.9,,jeff-sims-1
 55,Logan Bonner,Arkansas State,Sun Belt,11,156,262,59.5,1863,18,6.9,6,2.3,7.1,7.45,11.9,169.4,137.4,,logan-bonner-1
 56,Michael Pratt*,Tulane,American,10,140,254,55.1,1806,20,7.9,8,3.1,7.1,7.27,12.9,180.6,134.5,,michael-pratt-1
-57,Max Duggan,Texas Christian,Big 12,10,146,240,60.8,1795,10,4.2,4,1.7,7.5,7.56,12.3,179.5,134.1,,max-duggan-1
+57,Max Duggan,TCU,Big 12,10,146,240,60.8,1795,10,4.2,4,1.7,7.5,7.56,12.3,179.5,134.1,,max-duggan-1
 58,Peyton Ramsey*,Northwestern,Big Ten,9,172,282,61.0,1733,12,4.3,8,2.8,6.1,5.72,10.1,192.6,121.0,,peyton-ramsey-1
 59,Kaleb Eleby,Western Michigan,MAC,6,99,153,64.7,1715,18,11.8,2,1.3,11.2,12.97,17.3,285.8,195.1,,kaleb-eleby-1
 60,Preston Hutchinson,Eastern Michigan,MAC,6,126,198,63.6,1657,12,6.1,6,3.0,8.4,8.22,13.2,276.2,147.9,,preston-hutchinson-1
@@ -207,7 +207,7 @@ Rk,Player,Team,Conf,G,Cmp,Att,Cmp%,Yds,TD,TD%,Int,Int%,Y/A,AY/A,Y/C,Y/G,Rate,Awa
 206,Shawn Robinson,Missouri,SEC,5,20,29,69.0,185,1,3.4,0,0.0,6.4,7.07,9.3,37.0,133.9,,shawn-robinson-2
 207,Lucas Johnson,San Diego State,MWC,3,14,24,58.3,184,1,4.2,0,0.0,7.7,8.50,13.1,61.3,136.5,,lucas-johnson-2
 208,Cade Fennegan,Boise State,MWC,3,15,28,53.6,182,2,7.1,1,3.6,6.5,6.32,12.1,60.7,124.6,,cade-fennegan-1
-209,Matthew Downing,Texas Christian,Big 12,4,17,30,56.7,168,1,3.3,1,3.3,5.6,4.77,9.9,42.0,108.0,,matthew-downing-1
+209,Matthew Downing,TCU,Big 12,4,17,30,56.7,168,1,3.3,1,3.3,5.6,4.77,9.9,42.0,108.0,,matthew-downing-1
 210,Will Koch,Massachusetts,Ind,3,24,40,60.0,166,1,2.5,1,2.5,4.2,3.53,6.9,55.3,98.1,,will-koch-1
 211,Anthony Brown*,Oregon,Pac-12,2,15,23,65.2,164,2,8.7,0,0.0,7.1,8.87,10.9,82.0,153.8,,anthony-brown-11
 212,Austin Kendall*,West Virginia,Big 12,2,11,23,47.8,164,2,8.7,0,0.0,7.1,8.87,14.9,82.0,136.4,,austin-kendall-1
@@ -407,7 +407,7 @@ Rk,Player,Team,Conf,G,Cmp,Att,Cmp%,Yds,TD,TD%,Int,Int%,Y/A,AY/A,Y/C,Y/G,Rate,Awa
 406,Isaiah Bravo,UTEP,CUSA,1,0,2,0.0,0,0,0.0,0,0.0,0.0,0.00,,0.0,0.0,,isaiah-bravo-1
 407,Jack Colletto,Oregon State,Pac-12,7,0,1,0.0,0,0,0.0,0,0.0,0.0,0.00,,0.0,0.0,,jack-colletto-1
 408,Jalon Calhoun,Duke,ACC,11,0,1,0.0,0,0,0.0,1,100.0,0.0,-45.00,,0.0,-200.0,,jalon-calhoun-1
-409,JD Spielman,Texas Christian,Big 12,3,1,1,100.0,0,0,0.0,0,0.0,0.0,0.00,0.0,0.0,100.0,,jd-spielman-1
+409,JD Spielman,TCU,Big 12,3,1,1,100.0,0,0,0.0,0,0.0,0.0,0.00,0.0,0.0,100.0,,jd-spielman-1
 410,J.J. Pegues*,Auburn,SEC,11,1,1,100.0,0,0,0.0,0,0.0,0.0,0.00,0.0,0.0,100.0,,jj-pegues-1
 411,Johnny Ford,South Florida,American,7,0,1,0.0,0,0,0.0,0,0.0,0.0,0.00,,0.0,0.0,,johnny-ford-1
 412,Josh Ali*,Kentucky,SEC,11,0,1,0.0,0,0,0.0,0,0.0,0.0,0.00,,0.0,0.0,,josh-ali-1
