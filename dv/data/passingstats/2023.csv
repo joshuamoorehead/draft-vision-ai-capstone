@@ -69,7 +69,7 @@ Rk,Player,Team,Conf,G,Cmp,Att,Cmp%,Yds,TD,TD%,Int,Int%,Y/A,AY/A,Y/C,Y/G,Rate,Awa
 68,Ashton Daniels,Stanford,Pac-12,12,191,325,58.8,2247,11,3.4,8,2.5,6.9,6.48,11.8,187.3,123.1,,ashton-daniels-1
 69,Emory Jones,Cincinnati,Big 12,12,197,322,61.2,2219,18,5.6,10,3.1,6.9,6.61,11.3,184.9,131.3,,emory-jones-1
 70,Kurtis Rourke*,Ohio,MAC,11,195,307,63.5,2207,11,3.6,5,1.6,7.2,7.17,11.3,200.6,132.5,,kurtis-rourke-1
-71,Josh Hoover,Texas Christian,Big 12,10,185,298,62.1,2206,15,5.0,9,3.0,7.4,7.05,11.9,220.6,134.8,,josh-hoover-1
+71,Josh Hoover,TCU,Big 12,10,185,298,62.1,2206,15,5.0,9,3.0,7.4,7.05,11.9,220.6,134.8,,josh-hoover-1
 72,Blake Shapen,Baylor,Big 12,8,184,298,61.7,2188,13,4.4,3,1.0,7.3,7.76,11.9,273.5,135.8,,blake-shapen-1
 73,Cam Fancher*,Marshall,Sun Belt,10,202,309,65.4,2162,11,3.6,11,3.6,7.0,6.11,10.7,216.2,128.8,,cam-fancher-1
 74,Grant Wilson*,Old Dominion,Sun Belt,12,178,312,57.1,2149,17,5.4,8,2.6,6.9,6.82,12.1,179.1,127.8,,grant-wilson-1
@@ -109,7 +109,7 @@ Rk,Player,Team,Conf,G,Cmp,Att,Cmp%,Yds,TD,TD%,Int,Int%,Y/A,AY/A,Y/C,Y/G,Rate,Awa
 108,Bryson Barnes*,Utah,Pac-12,11,142,242,58.7,1572,12,5.0,11,4.5,6.5,5.44,11.1,142.9,120.5,,bryson-barnes-1
 109,Alex Flinn,East Carolina,American,12,159,290,54.8,1558,6,2.1,12,4.1,5.4,3.92,9.8,129.8,98.5,,alex-flinn-1
 110,Mitch Griffis,Wake Forest,ACC,9,124,207,59.9,1553,9,4.3,7,3.4,7.5,6.85,12.5,172.6,130.5,,mitch-griffis-1
-111,Chandler Morris,Texas Christian,Big 12,7,133,203,65.5,1532,12,5.9,5,2.5,7.5,7.62,11.5,218.9,143.5,,chandler-morris-1
+111,Chandler Morris,TCU,Big 12,7,133,203,65.5,1532,12,5.9,5,2.5,7.5,7.62,11.5,218.9,143.5,,chandler-morris-1
 112,Taisun Phommachanh,Massachusetts,Ind,9,139,227,61.2,1507,6,2.6,6,2.6,6.6,5.98,10.8,167.4,120.4,,taisun-phommachanh-1
 113,Hayden Wolff,Western Michigan,MAC,8,148,226,65.5,1505,8,3.5,5,2.2,6.7,6.37,10.2,188.1,128.7,,hayden-wolff-1
 114,Trenton Bourguet,Arizona State,Pac-12,8,151,248,60.9,1486,1,0.4,4,1.6,6.0,5.35,9.8,185.8,109.3,,trenton-bourguet-1
@@ -435,7 +435,7 @@ Rk,Player,Team,Conf,G,Cmp,Att,Cmp%,Yds,TD,TD%,Int,Int%,Y/A,AY/A,Y/C,Y/G,Rate,Awa
 434,Beau Nelson,Stanford,Pac-12,1,1,5,20.0,8,0,0.0,0,0.0,1.6,1.60,8.0,8.0,33.4,,beau-nelson-1
 435,Broc Lowry,Indiana,Big Ten,4,1,1,100.0,8,0,0.0,0,0.0,8.0,8.00,8.0,2.0,167.2,,broc-lowry-1
 436,Eric Singleton Jr.*,Georgia Tech,ACC,12,1,1,100.0,8,0,0.0,0,0.0,8.0,8.00,8.0,0.7,167.2,,eric-singleton-jr-1
-437,Grant Tisdale,Texas Christian,Big 12,1,1,1,100.0,8,0,0.0,0,0.0,8.0,8.00,8.0,8.0,167.2,,grant-tisdale-2
+437,Grant Tisdale,TCU,Big 12,1,1,1,100.0,8,0,0.0,0,0.0,8.0,8.00,8.0,8.0,167.2,,grant-tisdale-2
 438,Logan Lupo,Florida Atlantic,American,12,1,1,100.0,8,0,0.0,0,0.0,8.0,8.00,8.0,0.7,167.2,,logan-lupo-1
 439,TJ Mcmahon*,Marshall,Sun Belt,2,1,1,100.0,8,0,0.0,0,0.0,8.0,8.00,8.0,4.0,167.2,,tj-mcmahon-1
 440,Treshaun Ward*,Kansas State,Big 12,11,1,1,100.0,8,1,100.0,0,0.0,8.0,28.00,8.0,0.7,497.2,,treshaun-ward-1
@@ -493,7 +493,7 @@ Rk,Player,Team,Conf,G,Cmp,Att,Cmp%,Yds,TD,TD%,Int,Int%,Y/A,AY/A,Y/C,Y/G,Rate,Awa
 492,Jared Rayman,Virginia,ACC,12,0,1,0.0,0,0,0.0,0,0.0,0.0,0.00,,0.0,0.0,,jared-rayman-1
 493,Jaylin Lane*,Virginia Tech,ACC,12,0,1,0.0,0,0,0.0,0,0.0,0.0,0.00,,0.0,0.0,,jaylin-lane-1
 494,Jermaine Brown Jr.,UAB,American,12,0,1,0.0,0,0,0.0,0,0.0,0.0,0.00,,0.0,0.0,,jermaine-brown-jr-1
-495,John Paul Richardson,Texas Christian,Big 12,12,0,1,0.0,0,0,0.0,1,100.0,0.0,-45.00,,0.0,-200.0,,john-paul-richardson-1
+495,John Paul Richardson,TCU,Big 12,12,0,1,0.0,0,0,0.0,1,100.0,0.0,-45.00,,0.0,-200.0,,john-paul-richardson-1
 496,Joshua Cephus*,UTSA,American,13,0,1,0.0,0,0,0.0,1,100.0,0.0,-45.00,,0.0,-200.0,,joshua-cephus-1
 497,Justin Ibieta*,Tulane,American,3,0,2,0.0,0,0,0.0,0,0.0,0.0,0.00,,0.0,0.0,,justin-ibieta-1
 498,Kahleil Jackson,Florida,SEC,11,0,1,0.0,0,0,0.0,1,100.0,0.0,-45.00,,0.0,-200.0,,kahleil-jackson-1

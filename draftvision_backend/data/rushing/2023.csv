@@ -18,7 +18,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 17,Kyle Monangai*,Rutgers,Big Ten,13,242,1262,5.2,8,97.1,8,78,9.8,0,6.0,250,1340,5.4,8,,kyle-monangai-1
 18,Blake Corum*,Michigan,Big Ten,15,258,1245,4.8,27,83.0,16,117,7.3,1,7.8,274,1362,5.0,28,H-9,blake-corum-1
 19,DJ Giddens*,Kansas State,Big 12,13,223,1226,5.5,10,94.3,29,323,11.1,3,24.8,252,1549,6.1,13,,dj-giddens-1
-20,Emani Bailey,Texas Christian,Big 12,12,223,1209,5.4,8,100.8,25,184,7.4,1,15.3,248,1393,5.6,9,,emani-bailey-1
+20,Emani Bailey,TCU,Big 12,12,223,1209,5.4,8,100.8,25,184,7.4,1,15.3,248,1393,5.6,9,,emani-bailey-1
 21,Dillon Johnson*,Washington,Pac-12,14,233,1195,5.1,16,85.4,24,190,7.9,0,13.6,257,1385,5.4,16,,dillon-johnson-1
 22,Kairee Robinson*,San Jose State,MWC,12,170,1194,7.0,18,99.5,17,198,11.6,2,16.5,187,1392,7.4,20,,kairee-robinson-1
 23,Jacory Croskey-Merritt,New Mexico,MWC,12,189,1190,6.3,17,99.2,7,72,10.3,1,6.0,196,1262,6.4,18,,jacory-croskey-merritt-1
@@ -353,7 +353,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 352,James Jointer*,Liberty,CUSA,9,43,251,5.8,2,27.9,1,7,7.0,0,0.8,44,258,5.9,2,,james-jointer-1
 353,Michael Allen*,North Carolina State,ACC,10,52,251,4.8,1,25.1,11,66,6.0,0,6.6,63,317,5.0,1,,michael-allen-3
 354,Kenny Tracy*,Miami (OH),MAC,11,46,250,5.4,2,22.7,10,126,12.6,1,11.5,56,376,6.7,3,,kenny-tracy-1
-355,Chandler Morris,Texas Christian,Big 12,7,45,249,5.5,3,35.6,0,0,,0,0.0,45,249,5.5,3,,chandler-morris-1
+355,Chandler Morris,TCU,Big 12,7,45,249,5.5,3,35.6,0,0,,0,0.0,45,249,5.5,3,,chandler-morris-1
 356,Isaiah Jacobs,UAB,American,5,55,249,4.5,3,49.8,17,63,3.7,0,12.6,72,312,4.3,3,,isaiah-jacobs-1
 357,Jacqez Barksdale,Buffalo,MAC,11,52,248,4.8,2,22.5,6,8,1.3,0,0.7,58,256,4.4,2,,jacqez-barksdale-1
 358,Obie Sanni*,Old Dominion,Sun Belt,8,57,248,4.4,1,31.0,6,56,9.3,0,7.0,63,304,4.8,1,,obie-sanni-1
@@ -443,7 +443,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 442,Aiden Calvert*,Air Force,MWC,13,23,177,7.7,0,13.6,0,0,,0,0.0,23,177,7.7,0,,aiden-calvert-1
 443,Jahmyl Jeter*,Texas State,Sun Belt,13,42,176,4.2,9,13.5,1,9,9.0,0,0.7,43,185,4.3,9,,jahmyl-jeter-1
 444,Jordan Travis*,Florida State,ACC,11,73,176,2.4,7,16.0,0,0,,0,0.0,73,176,2.4,7,H-5,jordan-travis-1
-445,Trey Sanders,Texas Christian,Big 12,12,48,176,3.7,6,14.7,5,20,4.0,0,1.7,53,196,3.7,6,,trey-sanders-2
+445,Trey Sanders,TCU,Big 12,12,48,176,3.7,6,14.7,5,20,4.0,0,1.7,53,196,3.7,6,,trey-sanders-2
 446,Braylon Braxton,Tulsa,American,6,40,174,4.4,0,29.0,1,7,7.0,0,1.2,41,181,4.4,0,,braylon-braxton-1
 447,Henry Rutledge,Charlotte,American,10,15,174,11.6,0,17.4,4,19,4.8,0,1.9,19,193,10.2,0,,henry-rutledge-1
 448,Braxton Woodson,Navy,American,4,53,173,3.3,1,43.3,0,0,,0,0.0,53,173,3.3,1,,braxton-woodson-1
@@ -696,7 +696,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 695,Demarkcus Bowman*,UCF,Big 12,3,10,62,6.2,1,20.7,2,7,3.5,0,2.3,12,69,5.8,1,,demarkcus-bowman-1
 696,Keshawn King,Western Michigan,MAC,4,14,62,4.4,1,15.5,2,27,13.5,0,6.8,16,89,5.6,1,,keshawn-king-1
 697,Ricky Pearsall,Florida,SEC,12,3,62,20.7,2,5.2,65,965,14.8,4,80.4,68,1027,15.1,6,,ricky-pearsall-1
-698,Savion Williams,Texas Christian,Big 12,11,11,62,5.6,0,5.6,41,573,14.0,4,52.1,52,635,12.2,4,,savion-williams-2
+698,Savion Williams,TCU,Big 12,11,11,62,5.6,0,5.6,41,573,14.0,4,52.1,52,635,12.2,4,,savion-williams-2
 699,Sevion Morrison*,Kansas,Big 12,5,10,62,6.2,1,12.4,2,17,8.5,0,3.4,12,79,6.6,1,,sevion-morrison-1
 700,Zuberi Mobley,Florida Atlantic,American,3,22,62,2.8,0,20.7,1,7,7.0,0,2.3,23,69,3.0,0,,zuberi-mobley-1
 701,Jake Strong*,Texas Tech,Big 12,3,6,61,10.2,0,20.3,0,0,,0,0.0,6,61,10.2,0,,jake-strong-1
@@ -711,7 +711,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 710,Alton McCaskill,Colorado,Pac-12,4,14,59,4.2,0,14.8,2,19,9.5,0,4.8,16,78,4.9,0,,alton-mccaskill-1
 711,Gage Larvadain*,Miami (OH),MAC,10,5,59,11.8,0,5.9,42,679,16.2,6,67.9,47,738,15.7,6,,gage-larvadain-1
 712,Sam Jackson*,California,Pac-12,5,26,59,2.3,1,11.8,0,0,,0,0.0,26,59,2.3,1,,sam-jackson-3
-713,Cam Cook,Texas Christian,Big 12,9,16,58,3.6,0,6.4,0,0,,0,0.0,16,58,3.6,0,,cam-cook-1
+713,Cam Cook,TCU,Big 12,9,16,58,3.6,0,6.4,0,0,,0,0.0,16,58,3.6,0,,cam-cook-1
 714,Eric Wilson Jr.,Temple,American,6,13,58,4.5,0,9.7,4,10,2.5,0,1.7,17,68,4.0,0,,eric-wilson-jr-1
 715,Miles Stewart,Army,Ind,7,15,58,3.9,0,8.3,0,0,,0,0.0,15,58,3.9,0,,miles-stewart-1
 716,Jacurri Brown*,Miami (FL),ACC,1,15,57,3.8,2,57.0,0,0,,0,0.0,15,57,3.8,2,,jacurri-brown-1
@@ -906,7 +906,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 905,Tiaquelin Mims,Southern Mississippi,Sun Belt,12,5,28,5.6,0,2.3,39,445,11.4,2,37.1,44,473,10.8,2,,tiaquelin-mims-1
 906,Alex Smith*,Georgia Southern,Sun Belt,13,2,27,13.5,0,2.1,0,0,,0,0.0,2,27,13.5,0,,alex-smith-12
 907,Chamon Metayer,Cincinnati,Big 12,11,1,27,27.0,0,2.5,23,258,11.2,5,23.5,24,285,11.9,5,,chamon-metayer-1
-908,Corey Wren,Texas Christian,Big 12,12,9,27,3.0,0,2.3,1,5,5.0,0,0.4,10,32,3.2,0,,corey-wren-1
+908,Corey Wren,TCU,Big 12,12,9,27,3.0,0,2.3,1,5,5.0,0,0.4,10,32,3.2,0,,corey-wren-1
 909,Max Johnson*,Texas A&M,SEC,8,51,27,0.5,2,3.4,0,0,,0,0.0,51,27,0.5,2,,max-johnson-2
 910,Sesi Vailahi*,Oklahoma State,Big 12,3,6,27,4.5,0,9.0,2,12,6.0,0,4.0,8,39,4.9,0,,sesi-vailahi-1
 911,Steve Angeli*,Notre Dame,Ind,8,8,27,3.4,0,3.4,0,0,,0,0.0,8,27,3.4,0,,steve-angeli-1
@@ -914,7 +914,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 913,Devin Boddie Jr.*,Wyoming,MWC,13,4,26,6.5,0,2.0,6,48,8.0,0,3.7,10,74,7.4,0,,devin-boddie-jr-1
 914,Jacob Cowing*,Arizona,Pac-12,13,5,26,5.2,0,2.0,90,848,9.4,13,65.2,95,874,9.2,13,,jacob-cowing-1
 915,Keagan Johnson*,Kansas State,Big 12,11,8,26,3.3,0,2.4,24,227,9.5,2,20.6,32,253,7.9,2,,keagan-johnson-1
-916,Major Everhart,Texas Christian,Big 12,12,7,26,3.7,0,2.2,20,197,9.9,0,16.4,27,223,8.3,0,,major-everhart-1
+916,Major Everhart,TCU,Big 12,12,7,26,3.7,0,2.2,20,197,9.9,0,16.4,27,223,8.3,0,,major-everhart-1
 917,Marvin Harrison Jr.*,Ohio State,Big Ten,12,2,26,13.0,1,2.2,67,1211,18.1,14,100.9,69,1237,17.9,15,H-4AA,marvin-harrison-jr-1
 918,Anton Hall,Navy,American,12,8,25,3.1,2,2.1,3,52,17.3,1,4.3,11,77,7.0,3,,anton-hall-1
 919,Dalvin Smith*,Western Kentucky,CUSA,11,1,25,25.0,0,2.3,50,513,10.3,6,46.6,51,538,10.5,6,,dalvin-smith-1
@@ -927,7 +927,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 926,Logan Kyle,Vanderbilt,SEC,12,2,25,12.5,0,2.1,11,103,9.4,0,8.6,13,128,9.8,0,,logan-kyle-1
 927,Malcolm Gillie,Ball State,MAC,10,4,25,6.3,0,2.5,9,81,9.0,0,8.1,13,106,8.2,0,,malcolm-gillie-1
 928,Quinton Jackson*,Rice,American,13,7,25,3.6,0,1.9,6,33,5.5,0,2.5,13,58,4.5,0,,quinton-jackson-1
-929,Trent Battle,Texas Christian,Big 12,12,10,25,2.5,0,2.1,4,68,17.0,0,5.7,14,93,6.6,0,,trent-battle-1
+929,Trent Battle,TCU,Big 12,12,10,25,2.5,0,2.1,4,68,17.0,0,5.7,14,93,6.6,0,,trent-battle-1
 930,Victor Venn*,Liberty,CUSA,10,5,25,5.0,0,2.5,2,10,5.0,1,1.0,7,35,5.0,1,,victor-venn-1
 931,Alan Bowman*,Oklahoma State,Big 12,14,26,24,0.9,2,1.7,1,3,3.0,0,0.2,27,27,1.0,2,,alan-bowman-1
 932,Colton Boomer*,UCF,Big 12,13,1,24,24.0,0,1.8,0,0,,0,0.0,1,24,24.0,0,,colton-boomer-1
@@ -1102,8 +1102,8 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 1101,Jared Rayman,Virginia,ACC,12,3,12,4.0,0,1.0,0,0,,0,0.0,3,12,4.0,0,,jared-rayman-1
 1102,Ja'Tavion Sanders*,Texas,Big 12,14,1,12,12.0,0,0.9,45,682,15.2,2,48.7,46,694,15.1,2,,jatavion-sanders-1
 1103,Ja'Varrius Johnson*,Auburn,SEC,10,1,12,12.0,1,1.2,19,347,18.3,3,34.7,20,359,18.0,4,,javarrius-johnson-1
-1104,John Paul Richardson,Texas Christian,Big 12,12,3,12,4.0,0,1.0,46,536,11.7,3,44.7,49,548,11.2,3,,john-paul-richardson-1
-1105,Jojo Earle,Texas Christian,Big 12,12,3,12,4.0,0,1.0,16,239,14.9,2,19.9,19,251,13.2,2,,jojo-earle-1
+1104,John Paul Richardson,TCU,Big 12,12,3,12,4.0,0,1.0,46,536,11.7,3,44.7,49,548,11.2,3,,john-paul-richardson-1
+1105,Jojo Earle,TCU,Big 12,12,3,12,4.0,0,1.0,16,239,14.9,2,19.9,19,251,13.2,2,,jojo-earle-1
 1106,Keldric Luster*,SMU,American,2,2,12,6.0,0,6.0,0,0,,0,0.0,2,12,6.0,0,,keldric-luster-1
 1107,Kellan Hood*,North Carolina,ACC,1,2,12,6.0,0,12.0,1,3,3.0,0,3.0,3,15,5.0,0,,kellan-hood-1
 1108,Kenyon Sadiq*,Oregon,Pac-12,14,1,12,12.0,0,0.9,5,24,4.8,1,1.7,6,36,6.0,1,,kenyon-sadiq-1
@@ -1277,7 +1277,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 1276,Jhaylin Embry*,Bowling Green,MAC,13,2,5,2.5,0,0.4,1,2,2.0,0,0.2,3,7,2.3,0,,jhaylin-embry-1
 1277,JJ Branham*,Syracuse,ACC,1,3,5,1.7,0,5.0,0,0,,0,0.0,3,5,1.7,0,,jj-branham-1
 1278,Joseph Daniels*,Georgia,SEC,1,2,5,2.5,0,5.0,0,0,,0,0.0,2,5,2.5,0,,joseph-daniels-1
-1279,Josh Hoover,Texas Christian,Big 12,10,20,5,0.3,2,0.5,0,0,,0,0.0,20,5,0.3,2,,josh-hoover-1
+1279,Josh Hoover,TCU,Big 12,10,20,5,0.3,2,0.5,0,0,,0,0.0,20,5,0.3,2,,josh-hoover-1
 1280,Josiah Gonzales*,UCLA,Pac-12,2,3,5,1.7,0,2.5,0,0,,0,0.0,3,5,1.7,0,,josiah-gonzales-1
 1281,Kyle Lowe,Middle Tennessee State,CUSA,2,3,5,1.7,0,2.5,0,0,,0,0.0,3,5,1.7,0,,kyle-lowe-2
 1282,London Humphreys,Vanderbilt,SEC,12,1,5,5.0,0,0.4,22,439,20.0,4,36.6,23,444,19.3,4,,london-humphreys-1
@@ -1299,7 +1299,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 1298,Diante Vines*,Iowa,Big Ten,10,1,4,4.0,0,0.4,12,134,11.2,1,13.4,13,138,10.6,1,,diante-vines-1
 1299,Dominic Gonnella*,South Florida,American,12,2,4,2.0,0,0.3,1,8,8.0,0,0.7,3,12,4.0,0,,dominic-gonnella-1
 1300,Drae McCray*,Texas Tech,Big 12,13,1,4,4.0,0,0.3,29,255,8.8,2,19.6,30,259,8.6,2,,drae-mccray-1
-1301,Franklin Estrada,Texas Christian,Big 12,1,1,4,4.0,0,4.0,0,0,,0,0.0,1,4,4.0,0,,franklin-estrada-1
+1301,Franklin Estrada,TCU,Big 12,1,1,4,4.0,0,4.0,0,0,,0,0.0,1,4,4.0,0,,franklin-estrada-1
 1302,Gaston Moore*,Tennessee,SEC,4,3,4,1.3,0,1.0,0,0,,0,0.0,3,4,1.3,0,,gaston-moore-1
 1303,Harold Joiner,Michigan State,Big Ten,9,6,4,0.7,0,0.4,4,27,6.8,0,3.0,10,31,3.1,0,,harold-joiner-1
 1304,Jaedon Wilson,Arkansas,SEC,12,1,4,4.0,0,0.3,15,199,13.3,2,16.6,16,203,12.7,2,,jaedon-wilson-1
@@ -1364,7 +1364,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 1363,Xavier White*,Texas Tech,Big 12,13,4,3,0.8,0,0.2,39,556,14.3,1,42.8,43,559,13.0,1,,xavier-white-1
 1364,Anthony Evans III*,Georgia,SEC,8,1,2,2.0,0,0.3,4,35,8.8,1,4.4,5,37,7.4,1,,anthony-evans-iii-1
 1365,Blake Bosma,Western Michigan,MAC,12,1,2,2.0,0,0.2,19,317,16.7,2,26.4,20,319,16.0,2,,blake-bosma-1
-1366,Brant Ahlfinger,Texas Christian,Big 12,8,1,2,2.0,0,0.3,0,0,,0,0.0,1,2,2.0,0,,brant-ahlfinger-1
+1366,Brant Ahlfinger,TCU,Big 12,8,1,2,2.0,0,0.3,0,0,,0,0.0,1,2,2.0,0,,brant-ahlfinger-1
 1367,Brian Kowall*,UCLA,Pac-12,1,1,2,2.0,0,2.0,0,0,,0,0.0,1,2,2.0,0,,brian-kowall-1
 1368,Bru McCoy*,Tennessee,SEC,5,1,2,2.0,0,0.4,17,217,12.8,1,43.4,18,219,12.2,1,,bru-mccoy-1
 1369,Caleb Hampton,Stanford,Pac-12,3,1,2,2.0,0,0.7,0,0,,0,0.0,1,2,2.0,0,,caleb-hampton-1
@@ -1372,7 +1372,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 1371,Derrick Graham*,Troy,Sun Belt,14,1,2,2.0,1,0.1,0,0,,0,0.0,1,2,2.0,1,,derrick-graham-2
 1372,Devonte Ross*,Troy,Sun Belt,14,1,2,2.0,0,0.1,40,428,10.7,3,30.6,41,430,10.5,3,,devonte-ross-2
 1373,Dylan Rizk*,UCF,Big 12,1,2,2,1.0,0,2.0,0,0,,0,0.0,2,2,1.0,0,,dylan-rizk-1
-1374,Grant Tisdale,Texas Christian,Big 12,1,1,2,2.0,0,2.0,0,0,,0,0.0,1,2,2.0,0,,grant-tisdale-2
+1374,Grant Tisdale,TCU,Big 12,1,1,2,2.0,0,2.0,0,0,,0,0.0,1,2,2.0,0,,grant-tisdale-2
 1375,Hal Presley,Baylor,Big 12,6,2,2,1.0,0,0.3,17,222,13.1,0,37.0,19,224,11.8,0,,hal-presley-1
 1376,Hayden Timosciek*,Bowling Green,MAC,2,4,2,0.5,0,1.0,0,0,,0,0.0,4,2,0.5,0,,hayden-timosciek-1
 1377,Jaheim Bell*,Florida State,ACC,13,4,2,0.5,1,0.2,39,503,12.9,2,38.7,43,505,11.7,3,,jaheim-bell-1
@@ -1503,7 +1503,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 1502,Jaden Alexis*,South Florida,American,13,1,-2,-2.0,0,-0.2,23,280,12.2,2,21.5,24,278,11.6,2,,jaden-alexis-1
 1503,Jay Butterfield*,San Jose State,MWC,4,2,-2,-1.0,0,-0.5,0,0,,0,0.0,2,-2,-1.0,0,,jay-butterfield-1
 1504,Jayden Clemons*,Wyoming,MWC,2,1,-2,-2.0,0,-1.0,0,0,,0,0.0,1,-2,-2.0,0,,jayden-clemons-1
-1505,Jaylon Robinson,Texas Christian,Big 12,10,2,-2,-1.0,0,-0.2,32,397,12.4,1,39.7,34,395,11.6,1,,jaylon-robinson-1
+1505,Jaylon Robinson,TCU,Big 12,10,2,-2,-1.0,0,-0.2,32,397,12.4,1,39.7,34,395,11.6,1,,jaylon-robinson-1
 1506,Kavosiey Smoke,Colorado,Pac-12,10,2,-2,-1.0,0,-0.2,0,0,,0,0.0,2,-2,-1.0,0,,kavosiey-smoke-1
 1507,Luke Lindenmeyer,Nebraska,Big Ten,12,1,-2,-2.0,0,-0.2,0,0,,0,0.0,1,-2,-2.0,0,,luke-lindenmeyer-1
 1508,Mekhi Mews*,Georgia,SEC,13,1,-2,-2.0,0,-0.2,13,155,11.9,1,11.9,14,153,10.9,1,,mekhi-mews-1
@@ -1515,7 +1515,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 1514,DT Sheffield,Washington State,Pac-12,2,1,-3,-3.0,0,-1.5,4,26,6.5,0,13.0,5,23,4.6,0,,dt-sheffield-1
 1515,Evan Stewart*,Texas A&M,SEC,8,1,-3,-3.0,0,-0.4,38,514,13.5,4,64.3,39,511,13.1,4,,evan-stewart-2
 1516,Gavin Kuld,Colorado,Pac-12,2,3,-3,-1.0,0,-1.5,0,0,,0,0.0,3,-3,-1.0,0,,gavin-kuld-1
-1517,Jack Bech,Texas Christian,Big 12,8,3,-3,-1.0,0,-0.4,12,146,12.2,0,18.3,15,143,9.5,0,,jack-bech-1
+1517,Jack Bech,TCU,Big 12,8,3,-3,-1.0,0,-0.4,12,146,12.2,0,18.3,15,143,9.5,0,,jack-bech-1
 1518,Jalen Knox*,Ole Miss,SEC,12,1,-3,-3.0,0,-0.3,1,9,9.0,0,0.8,2,6,3.0,0,,jalen-knox-2
 1519,Joey Gatewood*,Louisville,ACC,12,1,-3,-3.0,0,-0.3,9,150,16.7,3,12.5,10,147,14.7,3,,joey-gatewood-1
 1520,Joseph Manjack IV,Houston,Big 12,10,2,-3,-1.5,0,-0.3,46,577,12.5,6,57.7,48,574,12.0,6,,joseph-manjack-iv-1
@@ -1569,7 +1569,7 @@ Rk,Player,Team,Conf,G,Att,Yds,Y/A,TD,Y/G,Rec,Yds,Y/R,TD,Y/G,Plays,Yds,Avg,TD,Awa
 1568,Jacari Carter*,Georgia State,Sun Belt,13,1,-8,-8.0,0,-0.6,38,276,7.3,0,21.2,39,268,6.9,0,,jacari-carter-1
 1569,Jarius Mack,Charlotte,American,11,2,-8,-4.0,0,-0.7,25,453,18.1,2,41.2,27,445,16.5,2,,jarius-mack-1
 1570,Joey Cheek*,Utah,Pac-12,3,1,-8,-8.0,0,-2.7,0,0,,0,0.0,1,-8,-8.0,0,,joey-cheek-1
-1571,Jordy Sandy,Texas Christian,Big 12,12,1,-8,-8.0,0,-0.7,0,0,,0,0.0,1,-8,-8.0,0,,jordy-sandy-1
+1571,Jordy Sandy,TCU,Big 12,12,1,-8,-8.0,0,-0.7,0,0,,0,0.0,1,-8,-8.0,0,,jordy-sandy-1
 1572,Kobe Hudson*,UCF,Big 12,13,1,-8,-8.0,0,-0.6,44,900,20.5,8,69.2,45,892,19.8,8,,kobe-hudson-1
 1573,Roman Fuller,Tulsa,American,4,2,-8,-4.0,0,-2.0,0,0,,0,0.0,2,-8,-4.0,0,,roman-fuller-1
 1574,Sean Wilson,Virginia,ACC,12,1,-8,-8.0,0,-0.7,10,98,9.8,0,8.2,11,90,8.2,0,,sean-wilson-4

@@ -53,11 +53,12 @@ MIDDLEWARE = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dvai_db',
-        'USER': 'dvai',
-        'PASSWORD': 'password123',
-        'HOST': 'dpg-ct80ujl6l47c73cd3cg0-a.oregon-postgres.render.com',
-        'PORT': '5432',
+        'NAME': 'postgres',
+        'USER': 'postgres.pvuzvnemuhutrdmpchmi',
+        'HOST': 'aws-0-us-west-1.pooler.supabase.com',
+        'PORT': '6543',
+        'PASSWORD': 'lanorissellers16',
+        'POOL_MODE': 'transaction',
     }
 }
 
