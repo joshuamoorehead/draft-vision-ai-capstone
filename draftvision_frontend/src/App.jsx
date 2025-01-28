@@ -8,6 +8,7 @@ import AboutPage from './components/aboutpage/aboutpage'
 import MockDraft from './components/MockDraft/MockDraft'
 import DraftRoom from './components/MockDraft/DraftRoom.jsx'
 import LargeList from './components/LargeList/LargeList'
+import PlayerCompare from './components/PlayerCompare/PlayerCompare.jsx'
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
           <Route path="/mockdraft" element={<MockDraft />} />
           <Route path="/largelist" element={<LargeList />} />
           <Route path="/draftroom" element={<DraftRoom />} />
+          <Route path="/playercompare" element={<PlayerCompare />} />
         </Routes>
       </div>
     </Router>
