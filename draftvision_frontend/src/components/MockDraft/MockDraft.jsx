@@ -41,9 +41,10 @@ import '../../styles/main.css';
 const MockDraft = () => {
   const [selectedTeams, setSelectedTeams] = useState([]);
   const [rounds, setRounds] = useState(1);
-  const [timePerPick, setTimePerPick] = useState(30); // Default: 30 seconds
+  const [timePerPick, setTimePerPick] = useState(30); // Default 30 seconds
   const navigate = useNavigate();
 
+  // Team logos
   const logos = [
     AtlantaLogo,
     BaltimoreLogo,
@@ -79,41 +80,43 @@ const MockDraft = () => {
     WashingtonLogo
   ];
 
+  // Team location names matching the logos array
   const locations = [
-    "Atlanta",
-    "Baltimore",
-    "Buffalo",
-    "Arizona",
-    "Carolina",
-    "Chicago",
-    "Cincinnati",
-    "Cleveland",
-    "Dallas",
-    "Denver",
-    "Detroit",
-    "Green Bay",
-    "Houston",
-    "Indianapolis",
-    "Kansas City",
-    "Jacksonville",
-    "Los Angeles (Chargers)",
-    "Los Angeles (Rams)",
-    "Las Vegas",
-    "Miami",
-    "Minnesota",
-    "New England",
-    "New Orleans",
-    "New York (Giants)",
-    "New York (Jets)",
-    "Philadelphia",
-    "Pittsburgh",
-    "Seattle",
-    "San Francisco",
-    "Tampa Bay",
-    "Tennessee",
-    "Washington"
+    "Atlanta Falcons",
+    "Baltimore Ravens",
+    "Buffalo Bills",
+    "Arizona Cardinals",
+    "Carolina Panthers",
+    "Chicago Bears",
+    "Cincinnati Bengals",
+    "Cleveland Browns",
+    "Dallas Cowboys",
+    "Denver Broncos",
+    "Detroit Lions",
+    "Green Bay Packers",
+    "Houston Texans",
+    "Indianapolis Colts",
+    "Kansas City Chiefs ",
+    "Jacksonville Jaguars",
+    "Los Angeles Chargers",
+    "Los Angeles Rams",
+    "Las Vegas Raiders",
+    "Miami Dolphins",
+    "Minnesota Vikings",
+    "New England Patriots",
+    "New Orleans Saints",
+    "New York Giants",
+    "New York Jets",
+    "Philadelphia Eagles",
+    "Pittsburgh Steelers",
+    "Seattle Seahawks",
+    "San Francisco 49ers",
+    "Tampa Bay Buccaneers",
+    "Tennessee Titans",
+    "Washington Commanders"
   ];
 
+  // Handle selecting/deselecting team logos
   const handleLogoClick = (index) => {
     setSelectedTeams((prevSelectedTeams) =>
       prevSelectedTeams.includes(index)
@@ -122,14 +125,17 @@ const MockDraft = () => {
     );
   };
 
+  // Select all teams
   const handleSelectAll = () => {
     setSelectedTeams(logos.map((_, index) => index));
   };
 
+  // Deselect all teams
   const handleDeselectAll = () => {
     setSelectedTeams([]);
   };
 
+  // Start the draft and navigate to DraftRoom
   const handleStartDraft = () => {
     navigate("/draftroom", { state: { selectedTeams, locations, rounds, timePerPick } });
   };
@@ -145,6 +151,7 @@ const MockDraft = () => {
             <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">About Us</Link>
             <Link to="/mockdraft" className="text-2xl font-roboto-condensed underline">Mock Draft</Link>
             <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">Large List</Link>
+            <Link to="/PlayerCompare" className="text-2xl font-roboto-condensed opacity-50">Player Comparison</Link>
           </div>
         </div>
       </div>
@@ -153,11 +160,12 @@ const MockDraft = () => {
       <div className="container mx-auto px-4 mt-8 text-center">
         <h1 className="text-4xl text-white font-bold mb-4">Mock Draft</h1>
         <p className="text-white text-lg mb-8">
-          A mock draft is a simulation of how an actual draft might unfold. It's a great way to explore team needs and draft strategies.
+          A mock draft is a simulation of how an actual draft might unfold. It's a great way to
+          explore team needs and draft strategies.
         </p>
         <h2 className="text-2xl text-white font-semibold mb-4">Choose Your Team</h2>
 
-        {/* Select All and Deselect All Buttons */}
+        {/* Select All / Deselect All */}
         <div className="flex justify-start items-center mb-4 space-x-2">
           <button
             onClick={handleSelectAll}
@@ -186,9 +194,10 @@ const MockDraft = () => {
           ))}
         </div>
 
-        {/* Settings */}
+        {/* Draft Settings */}
         <div className="text-white text-left mb-6 mt-8">
           <h3 className="text-xl font-semibold mb-2">Draft Settings:</h3>
+          {/* Rounds 1-7 */}
           <label className="block mb-2">
             Number of Rounds:
             <select
@@ -203,6 +212,8 @@ const MockDraft = () => {
               ))}
             </select>
           </label>
+
+          {/* Time per Pick: 30 up to 600 in increments of 30 */}
           <label className="block mb-2">
             Time per Pick (seconds):
             <select
@@ -210,17 +221,19 @@ const MockDraft = () => {
               onChange={(e) => setTimePerPick(Number(e.target.value))}
               className="ml-2 px-2 py-1 bg-gray-200 rounded"
             >
-              {[...Array(20)].map((_, i) => (
-                <option key={30 * (i + 1)} value={30 * (i + 1)}>
-                  {30 * (i + 1)} seconds
-                </option>
-              ))}
+              {[...Array(20)].map((_, i) => {
+                const sec = 30 * (i + 1); // 30, 60, 90, ..., 600
+                return (
+                  <option key={sec} value={sec}>
+                    {sec} seconds
+                  </option>
+                );
+              })}
             </select>
           </label>
-          {/* Placeholder for additional settings */}
         </div>
 
-        {/* Enter Draft Button */}
+        {/* Start Draft Button */}
         <button
           onClick={handleStartDraft}
           className="mt-8 px-6 py-2 bg-white text-black text-lg font-semibold rounded hover:bg-gray-200"

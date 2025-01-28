@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api.core',
     'rest_framework',
+    'axios',
     'api'
 ]
 
