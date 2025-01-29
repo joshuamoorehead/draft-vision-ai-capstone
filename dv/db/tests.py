@@ -3,6 +3,8 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from .models import PlayerProfile, NCAATeams
 from .serializers import PlayerProfileSerializer, NCAATeamsSerializer
+from django.core.exceptions import ValidationError
+from django.db.utils import IntegrityError
 
 
 # Create your tests here.
@@ -29,3 +31,8 @@ class PlayerAPITest(APITestCase):
         LSU_team = PlayerProfile.objects.filter(school="LSU")
         self.assertEqual(LSU_team.count(), 1)
         self.assertEqual(LSU_team.first().name, "Joe Football")
+
+    #TODO This test doesn't work, I think the models accounts for and lets things be null
+    #def test_null_name(self):
+    #    with self.assertRaises(IntegrityError):
+    #        PlayerProfile.objects.create(school="LSU", position="QB")

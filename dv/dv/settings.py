@@ -83,6 +83,10 @@ DATABASES = {
         'PASSWORD': 'lanorissellers16',
         'HOST': 'aws-0-us-west-1.pooler.supabase.com',
         'PORT': '5432',
+        'TEST': {
+            'SERIALIZE': False,
+            'NAME': 'test_postgres',
+        },
     }
 }
 
