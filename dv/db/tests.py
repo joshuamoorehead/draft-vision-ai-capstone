@@ -26,6 +26,6 @@ class PlayerAPITest(APITestCase):
         self.assertEqual(quarterbacks.first().name, "Joe Football")
 
     def test_filter_team(self):
-        LSU_team = PlayerProfile.objects.filter(team="LSU")
+        LSU_team = PlayerProfile.objects.filter(school="LSU")
         self.assertEqual(LSU_team.count(), 1)
         self.assertEqual(LSU_team.first().name, "Joe Football")
