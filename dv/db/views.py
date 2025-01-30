@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import PlayerProfile, NCAATeams, YearlyNCAATeamData, PassingLeaders
-from .serializers import PlayerProfileSerializer, NCAATeamsSerializer, YearlyNCAATeamDataSerializer, PassingLeadersSerializer
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from .models import PlayerProfile, NCAATeams, YearlyNCAATeamData, PassingLeaders, UserProfile
+from .serializers import PlayerProfileSerializer, NCAATeamsSerializer, YearlyNCAATeamDataSerializer, PassingLeadersSerializer, UserProfileSerializer
 
 class PlayerList(APIView):
     def get(self, request):

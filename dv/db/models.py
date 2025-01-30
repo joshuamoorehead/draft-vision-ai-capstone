@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class PlayerProfile(models.Model):
@@ -47,3 +48,16 @@ class PassingLeaders(models.Model):
     yds_g = models.FloatField(null=True, blank=True)
     ratings = models.FloatField(null=True, blank=True)
     awards = models.JSONField(null=True, blank=True)
+
+class UserProfile(models.Model):
+    user_id = models.CharField(max_length=255, unique=True)  # Supabase user ID
+    email = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    # User preferences and saved data and whatever else we want
+    saved_mock_drafts = models.JSONField(default=list)
+    watchlist = models.JSONField(default=list)
+    prediction_history = models.JSONField(default=list)
+
+    def __str__(self):
+        return self.email

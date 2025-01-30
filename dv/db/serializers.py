@@ -1,6 +1,6 @@
 from rest_framework import serializers 
 import pandas as pd 
-from .models import PlayerProfile, NCAATeams, YearlyNCAATeamData, PassingLeaders
+from .models import PlayerProfile, NCAATeams, YearlyNCAATeamData, PassingLeaders, UserProfile
 
 class PlayerProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +21,8 @@ class PassingLeadersSerializer(serializers.ModelSerializer):
     class Meta:
         model = PassingLeaders
         fields = '__all__'
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['user_id', 'email', 'saved_mock_drafts', 'watchlist', 'prediction_history']
