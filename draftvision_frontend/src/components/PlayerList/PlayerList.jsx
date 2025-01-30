@@ -4,6 +4,8 @@ import { fetchPlayers } from '../../services/api';
 import Papa from 'papaparse';
 import { dvailogo } from '../Logos';
 import '../../styles/main.css';
+import PageTransition from '../Common/PageTransition';
+
 
 const PlayerList = () => {
   const [position, setPosition] = useState(''); // Selected position
@@ -133,142 +135,130 @@ const PlayerList = () => {
 
   return (
     <div className="min-h-screen bg-[#5A6BB0]">
-      {/* Header */}
-      <div className="w-full h-32 bg-black">
-        <div className="container mx-auto px-4 h-full flex items-center">
-          <img src={dvailogo} alt="Draft Vision AI Logo" className="h-32 w-32" />
-          <div className="flex space-x-8 text-white ml-12">
-            <Link to="/" className="text-2xl font-roboto-condensed underline">Player List</Link>
-            <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">About Us</Link>
-            <Link to="/mockdraft" className="text-2xl font-roboto-condensed opacity-50">Mock Draft</Link>
-            <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">Large List</Link>
-            <Link to="/PlayerCompare" className="text-2xl font-roboto-condensed opacity-50">Player Comparison</Link>
-          </div>
-        </div>
-      </div>
+      <PageTransition>
+          {/* Main Content */}
+          <div className="container mx-auto px-4 mt-8">
+            {/* Full Player List */}
+            <div className="mb-8">
+              <h3 className="text-2xl text-center mb-4">Full Player List</h3>
+              <div className="flex gap-4">
+                {/* Filters Panel */}
+                <div className="w-60 h-[624px] bg-gray-100 border-2 border-black p-4">
+                  <h3 className="text-center text-xl mb-4">Filters</h3>
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Position</label>
+                      <select
+                        value={position}
+                        onChange={(e) => setPosition(e.target.value)}
+                        className="w-full p-2 border-2 border-black rounded bg-white"
+                      >
+                        <option value="">All Positions</option>
+                        <option value="QB">Quarterback (QB)</option>
+                        <option value="RB">Running Back (RB)</option>
+                        <option value="WR">Wide Receiver (WR)</option>
+                        <option value="TE">Tight End (TE)</option>
+                      </select>
+                    </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 mt-8">
-        {/* Full Player List */}
-        <div className="mb-8">
-          <h3 className="text-2xl text-center mb-4">Full Player List</h3>
-          <div className="flex gap-4">
-            {/* Filters Panel */}
-            <div className="w-60 h-[624px] bg-gray-100 border-2 border-black p-4">
-              <h3 className="text-center text-xl mb-4">Filters</h3>
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Position</label>
-                  <select
-                    value={position}
-                    onChange={(e) => setPosition(e.target.value)}
-                    className="w-full p-2 border-2 border-black rounded bg-white"
-                  >
-                    <option value="">All Positions</option>
-                    <option value="QB">Quarterback (QB)</option>
-                    <option value="RB">Running Back (RB)</option>
-                    <option value="WR">Wide Receiver (WR)</option>
-                    <option value="TE">Tight End (TE)</option>
-                  </select>
-                </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Team</label>
+                      <input
+                        type="text"
+                        value={team}
+                        onChange={(e) => setTeam(e.target.value)}
+                        className="w-full p-2 border-2 border-black rounded bg-white"
+                        placeholder="Enter team name"
+                      />
+                    </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Team</label>
-                  <input
-                    type="text"
-                    value={team}
-                    onChange={(e) => setTeam(e.target.value)}
-                    className="w-full p-2 border-2 border-black rounded bg-white"
-                    placeholder="Enter team name"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Years</label>
-                  <div className="grid grid-cols-2 gap-y-2">
-                  {availableYears.map((year) => {
-  //console.log(`Year: ${year}, Checked: ${years.includes(year)}`);
-  console.log('Year Type:', typeof year);
-  return (
-    <label key={year} className="checkbox-label flex items-center">
-      <input
-        type="checkbox"
-        value={year}
-        checked={years.includes(year)} // Dynamically check if the year is in the state
-        onChange={(e) => {
-          const selectedYear = e.target.value;
-          console.log('Selected Year:', selectedYear, 'Type:', typeof selectedYear);
-        
-          setYears((prevYears) => {
-            const updatedYears = prevYears.includes(selectedYear)
-              ? prevYears.filter((y) => y !== selectedYear) // Remove if already selected
-              : [...prevYears, selectedYear]; // Add if not already selected
-        
-            console.log('Previous Years (from prevYears):', prevYears);
-            console.log('Updated Years:', updatedYears);
-            return updatedYears; // Return the updated array
-          });
-        }}
-        className="custom-checkbox"
-      />
-      <span>{year}</span>
-    </label>
-  );
-})}
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Years</label>
+                      <div className="grid grid-cols-2 gap-y-2">
+                      {availableYears.map((year) => {
+      //console.log(`Year: ${year}, Checked: ${years.includes(year)}`);
+      console.log('Year Type:', typeof year);
+      return (
+        <label key={year} className="checkbox-label flex items-center">
+          <input
+            type="checkbox"
+            value={year}
+            checked={years.includes(year)} // Dynamically check if the year is in the state
+            onChange={(e) => {
+              const selectedYear = e.target.value;
+              console.log('Selected Year:', selectedYear, 'Type:', typeof selectedYear);
+            
+              setYears((prevYears) => {
+                const updatedYears = prevYears.includes(selectedYear)
+                  ? prevYears.filter((y) => y !== selectedYear) // Remove if already selected
+                  : [...prevYears, selectedYear]; // Add if not already selected
+            
+                console.log('Previous Years (from prevYears):', prevYears);
+                console.log('Updated Years:', updatedYears);
+                return updatedYears; // Return the updated array
+              });
+            }}
+            className="custom-checkbox"
+          />
+          <span>{year}</span>
+        </label>
+      );
+    })}
+                      </div>
+                    </div>
                   </div>
+                </div>
+
+                {/* Players List */}
+                <div className="flex-1 space-y-4">
+                  {players.map((player, index) => (
+                    <div
+                      key={player.id}
+                      className="w-full bg-gray-100 border-2 border-black p-4 flex items-center cursor-pointer"
+                      onClick={() => handlePlayerSelect(player.id)}
+                    >
+                      <div className="w-16 text-center text-xl font-semibold">{index + 1}</div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-medium">{player.name}</h3>
+                        <p className="text-lg">{player.school}</p>
+                        <p className="text-lg">{player.position}</p>
+                      </div>
+                      <div className="text-right mr-8">
+                        <p className="text-lg">Player Rating (Career AV):</p>
+                        <p className="text-3xl font-medium">{player.career_av}</p>
+                      </div>
+                      <button className="w-12 h-12 border-4 border-black rounded">→</button>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Players List */}
-            <div className="flex-1 space-y-4">
-              {players.map((player, index) => (
-                <div
-                  key={player.id}
-                  className="w-full bg-gray-100 border-2 border-black p-4 flex items-center cursor-pointer"
-                  onClick={() => handlePlayerSelect(player.id)}
+          {/* Popup for Selected Player */}
+          {selectedPlayer && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="bg-white p-6 rounded shadow-lg w-1/3">
+                <h2 className="text-2xl font-bold mb-4">{selectedPlayer.name}</h2>
+                <p className="text-lg">School: {selectedPlayer.school}</p>
+                <p className="text-lg">Position: {selectedPlayer.position}</p>
+                <p className="text-lg">Career AV: {selectedPlayer.career_av}</p>
+                <p className="text-lg">Years in NCAA: {Array.isArray(selectedPlayer.years_ncaa)
+                  ? selectedPlayer.years_ncaa.join(', ')
+                  : (typeof selectedPlayer.years_ncaa === 'string'
+                    ? selectedPlayer.years_ncaa.split(',').map((year) => year.trim()).join(', ')
+                    : 'N/A')}</p>
+                <p className="text-lg">Biography: {selectedPlayer.biography}</p>
+                <button
+                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                  onClick={closePopup}
                 >
-                  <div className="w-16 text-center text-xl font-semibold">{index + 1}</div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-medium">{player.name}</h3>
-                    <p className="text-lg">{player.school}</p>
-                    <p className="text-lg">{player.position}</p>
-                  </div>
-                  <div className="text-right mr-8">
-                    <p className="text-lg">Player Rating (Career AV):</p>
-                    <p className="text-3xl font-medium">{player.career_av}</p>
-                  </div>
-                  <button className="w-12 h-12 border-4 border-black rounded">→</button>
-                </div>
-              ))}
+                  Close
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Popup for Selected Player */}
-      {selectedPlayer && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded shadow-lg w-1/3">
-            <h2 className="text-2xl font-bold mb-4">{selectedPlayer.name}</h2>
-            <p className="text-lg">School: {selectedPlayer.school}</p>
-            <p className="text-lg">Position: {selectedPlayer.position}</p>
-            <p className="text-lg">Career AV: {selectedPlayer.career_av}</p>
-            <p className="text-lg">Years in NCAA: {Array.isArray(selectedPlayer.years_ncaa)
-              ? selectedPlayer.years_ncaa.join(', ')
-              : (typeof selectedPlayer.years_ncaa === 'string'
-                ? selectedPlayer.years_ncaa.split(',').map((year) => year.trim()).join(', ')
-                : 'N/A')}</p>
-            <p className="text-lg">Biography: {selectedPlayer.biography}</p>
-            <button
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-              onClick={closePopup}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+          )}
+      </PageTransition>
     </div>
   );
 };

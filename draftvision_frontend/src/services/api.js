@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+export { supabase };
 
 // Initialize Supabase client
 const SUPABASE_URL = 'https://pvuzvnemuhutrdmpchmi.supabase.co';
@@ -19,6 +20,7 @@ export const fetchPlayers = async () => {
     throw error;
   }
 };
+
 
 // Fetch rankings with optional position filter
 export const getRankings = async (position = null) => {
@@ -100,6 +102,20 @@ export const getCurrentSession = async () => {
     return session;
   } catch (error) {
     console.error('Error getting session:', error.message);
+    throw error;
+  }
+};
+
+// Add this to your existing api.js
+export const signInWithGoogle = async () => {
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error signing in with Google:', error.message);
     throw error;
   }
 };
