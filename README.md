@@ -69,9 +69,9 @@ python manage.py runserver 8001
 ```
 
 ## Testing
-The tests are located in draft-vision-ai\dv\db\tests.py
-To run test: open the project file in your terminal
-navigate to the dv foler with: cd dv
+The tests are located in draft-vision-ai\dv\db\tests.py  
+To run test: open the project file in your terminal  
+navigate to the dv foler with: cd dv  
 To run the tests execute this command: python manage.py test --keepdb
 
 ## Coding Style
