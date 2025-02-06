@@ -1,5 +1,6 @@
 from rest_framework import viewsets, filters
 from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 #TODO says .models and .serializers cant be found, something to do with folder structure?
@@ -9,10 +10,17 @@ from rest_framework.response import Response
 from django.shortcuts import render
 from ..core.models import Team,TeamYear,DraftInfo, Player, PassingStats, RushingStats, ReceivingStats
 from ..core.serializers import TeamSerializer, TeamYearSerializer, DraftInfoSerializer, PlayerSerializer, PassingStatsSerializer, RushingStatsSerializer, ReceivingStatsSerializer
+from ..services.ml_model.prospect_analyzer import analyze_current_prospects
      
 class TeamViewSet(ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+class TeamYearViewSet(viewsets.ModelViewSet):
+    queryset = TeamYear.objects.all()
+    serializer_class = TeamYearSerializer
+class DraftInfoViewSet(viewsets.ModelViewSet):
+    queryset = DraftInfo.objects.all()
+    serializer_class = DraftInfoSerializer
 class TeamYearViewSet(viewsets.ModelViewSet):
     queryset = TeamYear.objects.all()
     serializer_class = TeamYearSerializer
@@ -97,3 +105,28 @@ class ApiRootView(APIView):
             "rushing_stats": "/api/rushing-stats/",
             "receiving_stats": "/api/receiving-stats/",
         })
+    
+
+@api_view(['GET'])
+def prospect_rankings(request):
+    """
+    Get analyzed prospect rankings with optional position filtering
+    """
+    try:
+        position = request.query_params.get('position', None)
+        rankings = analyze_current_prospects()
+        
+        # Apply position filter if specified
+        if position and position.upper() in ['QB', 'WR', 'RB']:
+            rankings = [r for r in rankings if r['position'] == position.upper()]
+            
+        return Response({
+            'success': True,
+            'count': len(rankings),
+            'rankings': rankings
+        })
+    except Exception as e:
+        return Response({
+            'success': False,
+            'error': str(e)
+        }, status=500)

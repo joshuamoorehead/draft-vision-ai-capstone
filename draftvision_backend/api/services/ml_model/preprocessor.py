@@ -6,33 +6,29 @@ import numpy as np
 
 class DraftPreprocessor:
     def __init__(self):
-        # Define features that match our database structure
+        # Update features to match only what we're getting from database
         self.numeric_features = {
             'QB': [
-                'completions', 'attempts', 'yards',
-                'touchdowns', 'rating', 'team_sos'
+                'completions', 'attempts', 'yards', 
+                'touchdowns', 'rating', 'sos'
             ],
             'RB': [
                 'attempts', 'yards', 'touchdowns',
                 'yards_per_attempt', 'receptions',
-                'receiving_yards', 'team_sos'
+                'receiving_yards', 'sos'
             ],
             'WR': [
                 'receptions', 'yards', 'touchdowns',
-                'yards_per_reception', 'team_sos'
+                'yards_per_reception', 'sos'
             ]
         }
-        self.categorical_features = ['school']  # Simplified to just school for now
+        self.categorical_features = ['school']
         self.scalers = {pos: StandardScaler() for pos in ['QB', 'RB', 'WR']}
-        self.encoder = OneHotEncoder(drop='first', sparse=False)
+        self.encoder = OneHotEncoder(drop='first', sparse_output=False)
 
     def fit_transform(self, data, position):
-        """
-        Preprocess training data for a specific position
-        Returns scaled and encoded features ready for model training
-        """
         # Handle numeric features
-        numeric_data = data[self.numeric_features[position]].fillna(0)  # Fill missing stats with 0
+        numeric_data = data[self.numeric_features[position]].fillna(0)
         scaled_numeric = self.scalers[position].fit_transform(numeric_data)
         
         if self.categorical_features:
@@ -43,9 +39,6 @@ class DraftPreprocessor:
         return scaled_numeric
 
     def transform(self, data, position):
-        """
-        Transform new data using fitted scalers/encoders
-        """
         numeric_data = data[self.numeric_features[position]].fillna(0)
         scaled_numeric = self.scalers[position].transform(numeric_data)
         
