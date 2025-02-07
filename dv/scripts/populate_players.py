@@ -972,6 +972,12 @@ def fix_profile():
                 playerinstance.nfl_team = player['team']
                 playerinstance.save()
 
+
+
+
+
+
+
 # populate_db()
 # populate_av()
 # populate_ncaa_teams()
@@ -995,4 +1001,4 @@ def fix_profile():
 # add_te()
 # fix_defensive()
 # upload_combine()
-fix_profile()
+# fix_profile()

@@ -3,9 +3,18 @@
 
 #these are the tables we're working with. The goal of this file is to get the current data ready to be put into tables. 
 
+import os, json 
+
+
 def create_qb():
-    teamstats = './NFLData/TeamStats/Passing/*'
-    print(teamstats)
+    teamaccuracydir = './NFLData/TeamStats/Passing/Accuracy/'
+    teamairyardsdir = './NFLData/TeamStats/Passing/AirYards/'
+    teampressuredir = './NFLData/TeamStats/Passing/Pressure/' 
+    advqbdir = './NFLData/PlayerStats/AdvQBLeaders/'
+    qbdir = './NFLData/PlayerStats/QBLeaders/'
+    contractsdir = './NFLData/Contracts/QB.csv'
+
+    
 
 
 create_qb()
