@@ -178,9 +178,9 @@ def clean_FA():
     splits = {
         5: 100, 
         10: 90, 
-        20: 80, 
-        40: 60, 
-        60: 30, 
+        20: 60, 
+        40: 30, 
+        60: 10, 
         90: 5,
         100: 0
     }
@@ -217,11 +217,157 @@ def clean_FA():
                     i += 1
 
     # print(data)
+    with open('./NFLData/2teamfainvestment.json', 'w', encoding='utf-8') as file:
+        json.dump(data, file, indent=4)
+
+
+def reformat_draft():
+    draftfile = './NFLData/teamdraftinvestment.json'
+    # positions = [] 
+    data = {} 
+    positions_map =  {
+        'C': 'OL', 
+        'LS': 'OL', 
+        'ILB': "LB", 
+        "OT": "OL", 
+        "OG": "OL", 
+        "G": "OL", 
+        "OLB": "LB", 
+        "NT": "DT"
+    }
+    with open(draftfile, 'r', encoding='utf-8') as file:
+        rookies = json.load(file)
+        for team, d1 in rookies.items():
+            for year, d2 in d1.items():
+                for pos, rating in d2.items():
+                    if pos in positions_map: 
+                        position = positions_map[pos]
+                    else:
+                        position = pos   
+                    if team not in data:
+                        data[team] = {}
+                    if year not in data[team]:
+                        data[team][year] = {}
+                    if position not in data[team][year]:
+                        data[team][year][position] = rating 
+                    else:
+                        data[team][year][position] += rating
+
     with open('./scripts/test.json', 'w', encoding='utf-8') as file:
+        json.dump(data, file, indent=4)            
+
+
+def final_draft():
+    filepath = './NFLData/almostdonedraft.json'
+    positions = ['OL', 'DB', "TE", "RB", "DL", "S", "WR", "LB", "CB", 'DT', "DE", "QB"]
+    data = {} 
+    with open(filepath, 'r', encoding='utf-8') as file:
+        oldfile = json.load(file)
+        for team, d1 in oldfile.items():
+            for year, d2 in d1.items():
+                teampos = [] 
+                for pos, rating in d2.items():
+                    teampos.append(pos)
+                    if team not in data:
+                        data[team] = {} 
+                    if year not in data[team]:
+                        data[team][year] = {} 
+                    if pos not in data[team][year]:
+                        data[team][year][pos] = rating
+                for p in positions:
+                    if p not in teampos:
+                        data[team][year][p] = 0 
+    with open('./scripts/test.json', 'w', encoding='utf-8') as file:
+        json.dump(data, file, indent=4)  
+    # print(positions)
+
+def reposition_FA():
+    filepath = './NFLData/2teamfainvestment.json'
+    data = {}
+    positions_map = {
+        'RT': "OL", 
+        "LT": "OL", 
+        "RG": "OL", 
+        "LG": "OL", 
+        "C": "OL", 
+    }
+    with open(filepath, 'r', encoding='utf-8') as file:
+        oldfile = json.load(file)
+        positions = ["QB", "RB", 'WR', "TE", 'OL', "DE", "DT", "LB", 'CB', 'S']
+        for team, d1 in oldfile.items():
+            for year, d2 in d1.items():
+                teampos = [] 
+                for pos, rating in d2.items():
+                    if pos in positions_map: 
+                        position = positions_map[pos]
+                    else:
+                        position = pos   
+                    if team not in data:
+                        data[team] = {}
+                    if year not in data[team]:
+                        data[team][year] = {}
+                    if position not in data[team][year]:
+                        data[team][year][position] = rating 
+                    else:
+                        data[team][year][position] += rating
+                    teampos.append(position)
+                for p in positions:
+                    if p not in teampos:
+                        data[team][year][p] = 0 
+    with open('./scripts/test.json', 'w', encoding='utf-8') as file:
+        json.dump(data, file, indent=4)  
+    
+def combine():
+    data = {} 
+    directory = './NFLData/finaldraft.json'
+    finalpositions = ['QB', 'RB', 'WR', 'TE', 'OL', 'DE', 'DT', 'LB', 'CB', 'S']
+    with open(directory, 'r', encoding='utf-8') as file:
+        draft = json.load(file)
+        for team, d1 in draft.items():
+            for year, d2 in d1.items():
+                for pos, rating in d2.items():
+                    if pos == 'DL': 
+                        draft[team][year]['DE'] += rating 
+                        draft[team][year]['DT'] += rating 
+                    elif pos == 'DB':
+                        draft[team][year]['CB'] += rating
+                        draft[team][year]['S'] += rating
+        for team, d1 in draft.items():
+            for year, d2 in d1.items():
+                for pos, rating in d2.items():
+                    if pos in finalpositions:
+                        if team not in data:
+                            data[team] = {} 
+                        if year not in data[team]:
+                            data[team][year] = {} 
+                        if pos not in data[team][year]:
+                            data[team][year][pos] = rating
+    directory = './NFLData/finalFA.json'
+    with open(directory, 'r', encoding='utf-8') as file:
+        fa = json.load(file)
+        for team, d1 in fa.items():
+            for year, d2 in d1.items():
+                if int(year) <= 2018 or int(year) == 2025:
+                    continue
+                for pos, rating in d2.items():
+                    adjrating = int(rating * 0.7)
+                    if team not in data:
+                            data[team] = {} 
+                    if year not in data[team]:
+                        data[team][year] = {} 
+                    if pos not in data[team][year]:
+                        data[team][year][pos] = adjrating
+                    else: 
+                        data[team][year][pos] += adjrating
+    with open('./NFLData/final_investment.json', 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=4)
 # upload_draft()
 # upload_contracts()
 # playerlist()
 # clean_playerlist()
 # rank_FA()
-clean_FA()
+# clean_FA()
+# reformat_draft()
+# final_draft()
+# reposition_FA()
+combine()
