@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-export { supabase };
 
 // Initialize Supabase client
 const SUPABASE_URL = 'https://pvuzvnemuhutrdmpchmi.supabase.co';
@@ -20,7 +19,6 @@ export const fetchPlayers = async () => {
     throw error;
   }
 };
-
 
 // Fetch rankings with optional position filter
 export const getRankings = async (position = null) => {
@@ -49,73 +47,6 @@ export const fetchPlayerDetails = async (playerId) => {
     return data;
   } catch (error) {
     console.error('Error fetching player details:', error.message);
-    throw error;
-  }
-};
-
-// Sign Up
-export const signUp = async (email, password) => {
-  try {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    console.error('Error signing up:', error.message);
-    throw error;
-  }
-};
-
-// Sign In
-export const signIn = async (email, password) => {
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    console.error('Error signing in:', error.message);
-    throw error;
-  }
-};
-
-// Sign Out
-export const signOut = async () => {
-  try {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
-  } catch (error) {
-    console.error('Error signing out:', error.message);
-    throw error;
-  }
-};
-
-// Get current session
-export const getCurrentSession = async () => {
-  try {
-    const { data: { session }, error } = await supabase.auth.getSession();
-    if (error) throw error;
-    return session;
-  } catch (error) {
-    console.error('Error getting session:', error.message);
-    throw error;
-  }
-};
-
-// Add this to your existing api.js
-export const signInWithGoogle = async () => {
-  try {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-    });
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    console.error('Error signing in with Google:', error.message);
     throw error;
   }
 };

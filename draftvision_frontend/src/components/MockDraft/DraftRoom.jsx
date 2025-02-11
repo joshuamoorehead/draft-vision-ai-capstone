@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from '../../context/AuthContext';
-import { supabase } from '../../services/api';
-import NavBar from '../Navigation/NavBar';
 
 const DraftRoom = () => {
-  const { user } = useAuth(); 
   const location = useLocation();
   const navigate = useNavigate();
   const { state } = location || {};
@@ -267,37 +263,6 @@ const DraftRoom = () => {
 
   const userTeams = new Set(selectedTeams.map((index) => locations[index]));
 
-  
-
-  
-  // Function for saving draft
-  const handleSaveDraft = async () => {
-    if (!user) {
-      alert("Please sign in to save drafts!");
-      return;
-    }
-
-    try {
-      const draftData = {
-        user_id: user.id,
-        draft_results: draftResults,
-        draft_date: new Date().toISOString(),
-        rounds: rounds,
-        selected_teams: selectedTeams.map(index => locations[index])
-      };
-
-      const { data, error } = await supabase
-        .from('saved_drafts')
-        .insert([draftData]);
-
-      if (error) throw error;
-      alert("Draft saved successfully!");
-      
-    } catch (error) {
-      console.error('Error saving draft:', error);
-      alert("Failed to save draft. Please try again.");
-    }
-  };
   const handleStartDraft = () => {
     setCurrentPickIndex(0);
     setDraftResults([...filteredDraftOrder]);
@@ -386,10 +351,21 @@ const DraftRoom = () => {
   }, [isDraftRunning, isUserPicking, currentPickIndex]);
 
   return (
-    <div className="min-h-screen bg-[#5A6BB0]">
-      <NavBar />
+    <div className="min-h-screen bg-[#5A6BB0] text-white">
+      {/* Header */}
+      <div className="w-full h-32 bg-black">
+        <div className="container mx-auto px-4 h-full flex items-center">
+          <h1 className="text-4xl font-bold text-white">Draft Room</h1>
+          <div className="ml-auto">
+            <Link to="/mockdraft" className="text-xl text-white underline">
+              Back to Mock Draft
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 mt-8">
         <div className="mb-8">
           <h2 className="text-3xl font-semibold mb-4">Draft Information</h2>
           <p className="text-lg">
@@ -462,37 +438,24 @@ const DraftRoom = () => {
           </div>
         )}
 
-
-        {/* Updated Draft Complete Modal */}
+        {/* Draft Complete Modal */}
         {isDraftComplete && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-4 rounded-lg text-black max-w-lg w-full">
               <h2 className="text-xl font-bold mb-4">Draft Complete!</h2>
               <div className="flex justify-between">
-                {user ? (
-                  <button 
-                    onClick={handleSaveDraft}
-                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                  >
-                    Save Draft
-                  </button>
-                ) : (
-                  <Link 
-                    to="/login" 
-                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                  >
-                    Sign in to Save Draft
-                  </Link>
-                )}
+                <button className="px-4 py-2 bg-blue-500 text-white rounded">
+                  Save Draft
+                </button>
                 <button
                   onClick={() => navigate("/mockdraft")}
-                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                  className="px-4 py-2 bg-green-500 text-white rounded"
                 >
                   Return to Mock Draft Home
                 </button>
                 <button
                   onClick={() => setIsDraftComplete(false)}
-                  className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+                  className="px-4 py-2 bg-gray-500 text-white rounded"
                 >
                   Return to Draft Room
                 </button>
