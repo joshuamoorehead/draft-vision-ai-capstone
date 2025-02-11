@@ -132,18 +132,7 @@ const LargeList = ({ players }) => {
 
   return (
     <div className="min-h-screen bg-[#5A6BB0]">
-      {/* Header */}
-      <div className="w-full h-32 bg-black">
-        <div className="container mx-auto px-4 h-full flex items-center">
-          <img src={dvailogo} alt="Draft Vision AI Logo" className="h-32 w-32" />
-          <div className="flex space-x-8 text-white ml-12">
-            <span className="text-2xl font-roboto-condensed underline">Large List</span>
-            <span className="text-2xl font-roboto-condensed opacity-50">Mock Draft</span>
-            <span className="text-2xl font-roboto-condensed opacity-50">Players</span>
-          </div>
-        </div>
-      </div>
-
+      
       {/* Main Content */}
       <div className="container mx-auto px-4 mt-8">
         {/* Predictions Table */}
