@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/main.css';
 import PageTransition from '../Common/PageTransition';
 
@@ -26,12 +25,12 @@ const PlayerComparison = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h1 className="text-3xl font-bold text-center mb-8">Player Comparison</h1>
-            
+
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               {/* Player 1 Selection */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Player 1:</label>
-                <select 
+                <select
                   onChange={(e) => setPlayer1(players.find(p => p.id === parseInt(e.target.value)))}
                   className="w-full p-2 border border-gray-300 rounded-md shadow-sm"
                 >
@@ -45,7 +44,7 @@ const PlayerComparison = () => {
               {/* Player 2 Selection */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Player 2:</label>
-                <select 
+                <select
                   onChange={(e) => setPlayer2(players.find(p => p.id === parseInt(e.target.value)))}
                   className="w-full p-2 border border-gray-300 rounded-md shadow-sm"
                 >

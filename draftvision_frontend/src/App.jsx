@@ -8,6 +8,7 @@ import AboutPage from './components/aboutpage/aboutpage';
 import MockDraft from './components/MockDraft/MockDraft';
 import DraftRoom from './components/MockDraft/DraftRoom.jsx';
 import LargeList from './components/LargeList/LargeList';
+import PlayerCompare from './components/PlayerCompare/PlayerCompare.jsx';
 import Auth from './components/Auth/Auth';
 import SavedDrafts from './components/SavedDrafts/SavedDrafts';
 import AccountSettings from './components/Account/AccountSettings';
@@ -32,6 +33,7 @@ const AppContent = () => {
           <Route path="/mockdraft" element={<MockDraft />} />
           <Route path="/draftroom" element={<DraftRoom />} />
           <Route path="/largelist" element={<LargeList />} />
+          <Route path="/playercompare" element={<PlayerCompare />} />
           <Route path="/saved-drafts" element={<SavedDrafts />} />
           <Route path="/account" element={<AccountSettings />} />
         </Routes>

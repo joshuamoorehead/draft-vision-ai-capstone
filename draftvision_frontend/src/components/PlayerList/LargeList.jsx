@@ -132,6 +132,7 @@ const LargeList = ({ players }) => {
 
   return (
     <div className="min-h-screen bg-[#5A6BB0]">
+      
       {/* Main Content */}
       <div className="container mx-auto px-4 mt-8">
         {/* Predictions Table */}

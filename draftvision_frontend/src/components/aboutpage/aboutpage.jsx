@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import { dvailogo } from '../Logos';
 import PageTransition from '../Common/PageTransition';
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-[#5A6BB0]">
+    <div className="min-h-screen bg-[#5A6BB0] transition-all duration-300">
       <PageTransition>
         {/* Main Content */}
         <div className="container mx-auto px-4 mt-8">

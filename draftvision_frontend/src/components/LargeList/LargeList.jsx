@@ -1,7 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { dvailogo } from '../Logos';
-import '../../styles/main.css';
 import PageTransition from '../Common/PageTransition';
 
 const LargeList = () => {

@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) #re
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dv.settings")
 django.setup()
 
-from db.models import PlayerProfile, NCAATeams, YearlyNCAATeamData, PassingLeaders
+from db.models import PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders, Conferences, Coaches, DefensivePositionalStats, RBStats, RECStats, TeamOffense, TeamDefense, TeamRatings, HistoricalTeamSuccess 
 
 def populate_db():
     with open('./data/fullplayerlist.json', 'r') as file:
@@ -117,6 +117,23 @@ def populate_av():
                 id += 1
         year += 1
 
+def fix_ncaa():
+    directory = './data/conferences/'
+    i = 1 
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'r', encoding='utf-8') as file:
+            teams = csv.DictReader(file)
+            conference = Conferences.objects.get(id=i)
+            for team in teams:
+                db_team, created = NCAATeams.objects.get_or_create(
+                    team_name = team['School'], 
+                    conference_id = conference
+                )
+                if(created):
+                    print(f'{db_team.team_name} created successfully')
+            i += 1
+
 def populate_ncaa_teams():
     directory = './data/conferences'
     conferences = ['acc', 'big10', 'big12', 'pac', 'sec']
@@ -154,7 +171,7 @@ def populate_yearly_team_data():
             year = csv.DictReader(file)
             for row in year:
                 print(row.items())
-                team, created = YearlyNCAATeamData.objects.get_or_create(
+                team, created = TeamSuccess.objects.get_or_create(
                     teamid = row.get('School', None) if row.get('School') else None,
                     year = year_ if year_ else None,
                     AP_Finish = row.get('ï»¿Rk', None) if row.get('ï»¿Rk') else None,
@@ -219,6 +236,415 @@ def populate_passing_stats():
                         print('error making player')
             year_ += 1
 
+def populate_defenders():
+    directory = './data/defensivestats/'
+    outputdir = './data/defensiveplayers/'
+    year = 2015
+    for filename in os.listdir(directory):
+        path = os.path.join(directory, filename)
+        players = {} 
+        with open(path, 'r') as file:
+            current_file = json.load(file)
+            for player in current_file: 
+                if player['name'] not in players:
+                    players[player['name']] = []
+                    players[player['name']].append(player)
+                    # for key, val in player.items():
+                    #     players[player['name']].append({key: val})
+                else:
+                    # for key, val in player.items():
+                    #     players[player['name']].append({key: val}) 
+                    data = {'stat_type': player['stat_type'], 'stat': player['stat']}
+                    players[player['name']].append(data)
+ 
+        extension = str(year) + '.json'
+        path = os.path.join(outputdir, extension)
+        with open(path, 'w') as file:
+            json.dump(players, file, indent=4)
+        year += 1 
+
+
+
+def populate_conferences():
+    csvfile = './data/conferences.csv'
+    with open(csvfile, 'r', encoding='utf-8') as file:
+        conferences = csv.DictReader(file)
+        for c in conferences:
+            # print(c)
+            conference_name = c.get('Conference')
+            founded = c.get('From')
+            to = c.get('To')
+            wins = c.get('W')
+            losses = c.get('L')
+            pct = c.get('Pct')
+            bowl_wins = c.get('BW')
+            bowl_losses = c.get('BL')
+            bowl_pct = c.get('BPct')
+            srs = c.get('SRS')
+            sos = c.get('SOS')
+            ap = c.get('AP')
+            conference_, created = Conferences.objects.get_or_create(
+                conference = conference_name, 
+                founded = founded, 
+                to = to, 
+                wins = wins, 
+                losses = losses, 
+                winpct = pct, 
+                bowl_wins = bowl_wins, 
+                bowl_losses = bowl_losses, 
+                bowl_winpct = bowl_pct, 
+                SRS = srs, 
+                SOS = sos, 
+                AP_finishes = ap
+            )
+            if(created):
+                print(f'{conference_.conference} added!')
+            else:
+                print('error adding conference')
+    
+def fill_conference_abbv():
+    abbreviations = ['ACC', 'American', 'Big 12', 'Big Ten', 'CUSA', 'Ind', 'MAC', 'MWC', 'SEC', "Sun Belt", 'Pac-12']
+    i = 1
+    while i < 12:
+        conference = Conferences.objects.get(id=i)
+        conference.abbreviation = abbreviations[i-1]
+        i += 1 
+        conference.save()
+    
+
+def populate_rb():
+    directory = './data/rb_leaders/'
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        # print(filename[:4])
+        with open(filepath, 'r', encoding='utf-8') as file:
+            yearlydata = pd.read_csv(file)
+            # print(yearlydata.columns)
+            for index, player in yearlydata.iterrows():
+                # # if the guy wasn't drafted we don't need him in the DB 
+                try:
+                    print(f'processing {player['Player']}')
+                    db_player = PlayerProfile.objects.get(name=player['Player'], position='RB')
+                    conference = Conferences.objects.get(abbreviation=player['Conf'])
+
+                    if(NCAATeams.objects.get(team_name = player['Team'])):
+                        team = NCAATeams.objects.get(team_name = player['Team'])
+                    else:
+                        print(f'mismatch: {player['Team']}')   
+
+
+                except:
+                    # print(f'Player {player['Player']} not found')
+                    print('did not add to DB')
+                    continue 
+                
+                awards = player.get('Awards', None)
+                if pd.isna(awards):
+                    awards = None
+                rb, created = RBStats.objects.get_or_create(
+                    games = player.get('G', None),
+                    att = player.get('Att', None), 
+                    yds = player.get('Yds', None), 
+                    yds_att = player.get('Y/A', None), 
+                    rush_td = player.get('TD', None), 
+                    rush_ypg = player.get('Y/G', None), 
+                    rec = player.get('Rec', None), 
+                    rec_yds = player.get('Yds.1', None),
+                    ypc = player.get('Y/R', None), 
+                    rec_td = player.get('TD.1', None), 
+                    rec_ypg = player.get('Y/G.1', None), 
+                    snaps = player.get('Plays', None), 
+                    tot_yds = player.get('Yds.2', None), 
+                    tot_avg = player.get('Avg', None), 
+                    tot_td = player.get('TD.2', None), 
+                    awards = awards,
+                    conference = conference, 
+                    playerid = db_player, 
+                    team = team, 
+                    year = filename[:4]
+                )               
+                if(created):
+                    print(f'{db_player.name} created successfully')
+                else:
+                    print(f'ERROR creating {player['Player']}')
+
+def populate_rec():
+    directory = './data/rec_leaders/'
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        # print(filename[:4])
+        with open(filepath, 'r', encoding='utf-8') as file:
+            yearlydata = pd.read_csv(file)
+            # print(yearlydata.columns)
+            for index, player in yearlydata.iterrows():
+                # # if the guy wasn't drafted we don't need him in the DB 
+                try:
+                    print(f'processing {player['Player']}')
+                    db_player = PlayerProfile.objects.get(name=player['Player'], position='WR')
+                    conference = Conferences.objects.get(abbreviation=player['Conf'])
+
+                    if(NCAATeams.objects.get(team_name = player['Team'])):
+                        team = NCAATeams.objects.get(team_name = player['Team'])
+                    else:
+                        print(f'mismatch: {player['Team']}')   
+
+
+                except:
+                    # print(f'Player {player['Player']} not found')
+                    print('did not add to DB')
+                    continue 
+                
+                awards = player.get('Awards', None)
+                if pd.isna(awards):
+                    awards = None
+                rb, created = RECStats.objects.get_or_create(
+                    games = player.get('G', None),
+                    att = player.get('Att', None), 
+                    yds = player.get('Yds', None), 
+                    yds_att = player.get('Y/A', None), 
+                    rush_td = player.get('TD', None), 
+                    rush_ypg = player.get('Y/G', None), 
+                    rec = player.get('Rec', None), 
+                    rec_yds = player.get('Yds.1', None),
+                    ypc = player.get('Y/R', None), 
+                    rec_td = player.get('TD.1', None), 
+                    rec_ypg = player.get('Y/G.1', None), 
+                    snaps = player.get('Plays', None), 
+                    tot_yds = player.get('Yds.2', None), 
+                    tot_avg = player.get('Avg', None), 
+                    tot_td = player.get('TD.2', None), 
+                    awards = awards,
+                    conference = conference, 
+                    playerid = db_player, 
+                    team = team, 
+                    year = filename[:4]
+                )               
+                if(created):
+                    print(f'{db_player.name} created successfully')
+                else:
+                    print(f'ERROR creating {player['Player']}')
+
+# to change: bowling green and TCU
+def upload_defensive():
+    directory = './data/defensiveplayers/'
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            for player, stats in data.items():
+                name = player 
+                print(f'processing {name}')
+                team = stats[0]['team']
+                categories = {'TFL': 0, 'SACKS': 0, 'QB HUR': 0, 'PD': 0, 'SOLO': 0, 'TD': 0, 'TOT': 0}
+                for stat in stats:
+                    if stat['stat_type'] in categories.keys(): 
+                        categories[stat['stat_type']] += stat['stat']
+                try:
+                    playerid = PlayerProfile.objects.get(name=name)
+                    try:
+                        team_ = NCAATeams.objects.get(team_name = team)
+                    except:
+                        print(f"couldn't find {team}")
+                        continue 
+                except:
+                    print(f'was not able to fetch {name}')
+                    continue 
+                guy, created = DefensivePositionalStats.objects.get_or_create(
+                    year = filename[:4],
+                    playerid = playerid, 
+                    team = team_,
+                    conference = team_.conference_id, 
+                    TFL = categories['TFL'], 
+                    sacks = categories['SACKS'], 
+                    hur = categories['QB HUR'], 
+                    pd = categories['PD'], 
+                    solo = categories['SOLO'], 
+                    td = categories['TD'], 
+                    tot = categories['TOT'] 
+                )
+                if(created):
+                    print(f'created {guy.playerid.name} successfully')
+                else:
+                    print(f'failed to create {name}')
+
+def upload_team_offense():
+    directory = './data/teamoffense/'
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'r', encoding='utf-8') as file:
+            yearlydata = pd.read_csv(file)
+            for index, row in yearlydata.iterrows():
+                teamid = NCAATeams.objects.get(team_name = row.get('School'))
+                team, created = TeamOffense.objects.get_or_create(
+                    year = filename[:4], 
+                    games = row.get('G', None), 
+                    pts = row.get('Pts', None),
+                    cmp = row.get('Cmp', None), 
+                    pass_att = row.get('Att', None), 
+                    comp_pct = row.get('Pct', None), 
+                    pass_yds = row.get('Yds', None), 
+                    pass_td = row.get('TD', None), 
+                    rush_att = row.get('Att.1', None), 
+                    rush_yds = row.get('Yds.1', None), 
+                    rush_avg = row.get("Avg", None), 
+                    rush_td = row.get("TD.1", None), 
+                    snaps = row.get("Plays", None), 
+                    tot_yds = row.get("Yds.2", None), 
+                    avg_yds = row.get("Avg.1", None), 
+                    pass_first_downs = row.get("Pass", None),
+                    rush_first_downs = row.get("Rush", None), 
+                    penalty_first_downs = row.get("Pen", None), 
+                    tot_first_downs = row.get("Tot", None), 
+                    penalty_count = row.get("No.", None), 
+                    penalty_yds = row.get("Yds.3", None), 
+                    fumbles_lost = row.get("Fum", None), 
+                    interceptions = row.get("Int", None), 
+                    total_turnovers = row.get("Tot.1", None), 
+                    teamid = teamid 
+                )
+                if(created):
+                    print(f'{teamid.team_name} created successfully!')
+                else:
+                    print(f'{row.get('School', None)} not added to DB')
+
+def upload_team_defense():
+    directory = './data/teamdefense/'
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'r', encoding='utf-8') as file:
+            yearlydata = pd.read_csv(file)
+            for index, row in yearlydata.iterrows():
+                teamid = NCAATeams.objects.get(team_name = row.get('School'))
+                team, created = TeamDefense.objects.get_or_create(
+                    year = filename[:4], 
+                    games = row.get('G', None), 
+                    pts = row.get('Pts', None),
+                    cmp = row.get('Cmp', None), 
+                    pass_att = row.get('Att', None), 
+                    comp_pct = row.get('Pct', None), 
+                    pass_yds = row.get('Yds', None), 
+                    pass_td = row.get('TD', None), 
+                    rush_att = row.get('Att.1', None), 
+                    rush_yds = row.get('Yds.1', None), 
+                    rush_avg = row.get("Avg", None), 
+                    rush_td = row.get("TD.1", None), 
+                    snaps = row.get("Plays", None), 
+                    tot_yds = row.get("Yds.2", None), 
+                    avg_yds = row.get("Avg.1", None), 
+                    pass_first_downs = row.get("Pass", None),
+                    rush_first_downs = row.get("Rush", None), 
+                    penalty_first_downs = row.get("Pen", None), 
+                    tot_first_downs = row.get("Tot", None), 
+                    penalty_count = row.get("No.", None), 
+                    penalty_yds = row.get("Yds.3", None), 
+                    fumbles_rec = row.get("Fum", None), 
+                    interceptions = row.get("Int", None), 
+                    total_turnovers = row.get("Tot.1", None), 
+                    teamid = teamid 
+                )
+                if(created):
+                    print(f'{teamid.team_name} created successfully!')
+                else:
+                    print(f'{row.get('School', None)} not added to DB')
+
+def upload_ratings():
+    directory = './data/ratings/'
+    for filename in os.listdir(directory): 
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'r', encoding='utf-8') as file:
+            yearlydata = pd.read_csv(file)
+            for index, row in yearlydata.iterrows():
+                try: 
+                    teamid = NCAATeams.objects.get(team_name = row.get("School"))
+                    conference = Conferences.objects.get(abbreviation = row.get('Conf'))
+                except:
+                    print('error in team or conference')
+                    continue 
+                AP_rank = row.get("AP Rank", None) 
+                if pd.isna(AP_rank):
+                    AP_rank = None
+                team, created = TeamRatings.objects.get_or_create(
+                    AP_Rank = AP_rank, 
+                    wins = row.get("W", None), 
+                    losses = row.get("L", None), 
+                    osrs = row.get("OSRS", None), 
+                    dsrs = row.get("DSRS", None), 
+                    ppg = row.get("Off", None), 
+                    opp_ppg = row.get("Def", None), 
+                    pass_ypa = row.get("Off.1", None), 
+                    opp_pass_ypa = row.get("Def.1", None), 
+                    rush_ypa = row.get("Off.2", None), 
+                    opp_rush_ypa = row.get("Def.2", None), 
+                    tot_ypa = row.get("Off.3", None), 
+                    opp_tot_ypa = row.get("Def.3", None), 
+                    conference = conference, 
+                    team = teamid, 
+                    year = filename[:4]
+                )
+                if(created):
+                    print(f'{teamid.team_name} created successfully!')
+                else:
+                    print(f'error adding {row.get("School")}')
+
+def upload_historical():
+    directory = './data/conferences/'
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'r', encoding='utf-8') as file:
+            conferencedata = pd.read_csv(file)
+            for index, row in conferencedata.iterrows():
+                name = row.get("School")
+                try:
+                    teamid = NCAATeams.objects.get(team_name = name)
+                except:
+                    print(f'unable to find {name}')
+                
+                bowl_wins = row.get("W.2", None)
+                if pd.isna(bowl_wins):
+                    bowl_wins = None
+                bowl_losses = row.get("L.2")
+                if pd.isna(bowl_losses):
+                    bowl_losses = None
+                AP = row.get("AP", None)
+                if pd.isna(AP):
+                    AP = None
+                CC = row.get("CC", None)
+                if pd.isna(CC):
+                    CC = None
+
+                team, created = HistoricalTeamSuccess.objects.get_or_create(
+                    startyear = row.get('From'),
+                    years = int(row.get("To")) - int(row.get("From")),
+                    games = row.get("G"), 
+                    wins = row.get("W"),
+                    losses = row.get("L"),
+                    pct = row.get("Pct"),
+                    conference_wins = row.get("W.1", None), 
+                    conference_losses = row.get("L.1", None),
+                    bowl_wins = bowl_wins, 
+                    bowl_losses = bowl_losses, 
+                    SRS = row.get("SRS", None), 
+                    SOS = row.get("SOS", None), 
+                    years_in_final_AP = AP, 
+                    conference_championships = CC, 
+                    team = teamid
+                )
+                if(created):
+                    print(f'{teamid.team_name} created successfully!')
+                else:
+                    print("Failure uploading" + str(name))
+
+def fix_ratings():
+    directory = './data/ratings/'
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'r', encoding='utf-8') as file:
+            yearlydata = pd.read_csv(file)
+            for index, row in yearlydata.iterrows():
+                id = NCAATeams.objects.get(team_name = row.get("School"))
+                instance = TeamRatings.objects.get(team=id, year=filename[:4])
+                instance.losses = row.get("L")
+                instance.save()
 
 
 # populate_db()
@@ -226,4 +652,16 @@ def populate_passing_stats():
 # populate_ncaa_teams()
 # populate_yearly_team_data()
 # populate_passing_stats()
-fix_av()
+# fix_av()
+# populate_defenders()
+# populate_conferences()
+# update_conferenes()
+# fix_ncaa()
+# fill_conference_abbv()
+# populate_rb()
+# populate_rec()
+# upload_defensive()
+# upload_team_defense()
+# upload_ratings()
+# upload_historical()
+fix_ratings()
