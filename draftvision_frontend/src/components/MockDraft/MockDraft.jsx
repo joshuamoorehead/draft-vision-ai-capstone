@@ -42,6 +42,7 @@ const MockDraft = () => {
   const [selectedTeams, setSelectedTeams] = useState([]);
   const [rounds, setRounds] = useState(1);
   const [timePerPick, setTimePerPick] = useState(30); // Default 30 seconds
+  const [draftYear, setDraftYear] = useState(2024); // Default draft year
   const navigate = useNavigate();
 
   // Team logos
@@ -82,38 +83,38 @@ const MockDraft = () => {
 
   // Team location names matching the logos array
   const locations = [
-    "Atlanta Falcons",
-    "Baltimore Ravens",
-    "Buffalo Bills",
-    "Arizona Cardinals",
-    "Carolina Panthers",
-    "Chicago Bears",
-    "Cincinnati Bengals",
-    "Cleveland Browns",
-    "Dallas Cowboys",
-    "Denver Broncos",
-    "Detroit Lions",
-    "Green Bay Packers",
-    "Houston Texans",
-    "Indianapolis Colts",
-    "Kansas City Chiefs ",
-    "Jacksonville Jaguars",
-    "Los Angeles Chargers",
-    "Los Angeles Rams",
-    "Las Vegas Raiders",
-    "Miami Dolphins",
-    "Minnesota Vikings",
-    "New England Patriots",
-    "New Orleans Saints",
-    "New York Giants",
-    "New York Jets",
-    "Philadelphia Eagles",
-    "Pittsburgh Steelers",
-    "Seattle Seahawks",
-    "San Francisco 49ers",
-    "Tampa Bay Buccaneers",
-    "Tennessee Titans",
-    "Washington Commanders"
+    "ATL",
+    "BAL",
+    "BUF",
+    "ARI",
+    "CAR",
+    "CHI",
+    "CIN",
+    "CLE",
+    "DAL",
+    "DEN",
+    "DET",
+    "GNB",
+    "HOU",
+    "IND",
+    "KAN",
+    "JAX",
+    "LAC",
+    "LAR",
+    "LVR",
+    "MIA",
+    "MIN",
+    "NWE",
+    "NOR",
+    "NYG",
+    "NYJ",
+    "PHI",
+    "PIT",
+    "SEA",
+    "SFO",
+    "TAM",
+    "TEN",
+    "WAS"
   ];
 
   // Handle selecting/deselecting team logos
@@ -137,7 +138,7 @@ const MockDraft = () => {
 
   // Start the draft and navigate to DraftRoom
   const handleStartDraft = () => {
-    navigate("/draftroom", { state: { selectedTeams, locations, rounds, timePerPick } });
+    navigate("/draftroom", { state: { selectedTeams, locations, rounds, timePerPick, draftYear } });
   };
 
   return (
@@ -147,18 +148,11 @@ const MockDraft = () => {
         <div className="container mx-auto px-4 h-full flex items-center">
           <img src={dvailogo} alt="Draft Vision AI Logo" className="h-32 w-32" />
           <div className="flex space-x-8 text-white ml-12">
-            <Link to="/" className="text-2xl font-roboto-condensed opacity-50">
-              Player List
-            </Link>
-            <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">
-              About Us
-            </Link>
-            <Link to="/mockdraft" className="text-2xl font-roboto-condensed underline">
-              Mock Draft
-            </Link>
-            <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">
-              Large List
-            </Link>
+            <Link to="/" className="text-2xl font-roboto-condensed opacity-50">Player List</Link>
+            <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">About Us</Link>
+            <Link to="/mockdraft" className="text-2xl font-roboto-condensed underline">Mock Draft</Link>
+            <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">Large List</Link>
+            <Link to="/PlayerCompare" className="text-2xl font-roboto-condensed opacity-50">Player Comparison</Link>
           </div>
         </div>
       </div>
@@ -204,6 +198,21 @@ const MockDraft = () => {
         {/* Draft Settings */}
         <div className="text-white text-left mb-6 mt-8">
           <h3 className="text-xl font-semibold mb-2">Draft Settings:</h3>
+          {/* Draft Year */}
+          <label className="block mb-2">
+            Draft Year:
+            <select
+              value={draftYear}
+              onChange={(e) => setDraftYear(Number(e.target.value))}
+              className="ml-2 px-2 py-1 bg-gray-200 rounded"
+            >
+              {[2020, 2021, 2022, 2023, 2024].map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </label>
           {/* Rounds 1-7 */}
           <label className="block mb-2">
             Number of Rounds:
