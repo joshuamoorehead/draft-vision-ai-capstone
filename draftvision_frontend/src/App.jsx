@@ -9,6 +9,8 @@ import MockDraft from './components/MockDraft/MockDraft'
 import DraftRoom from './components/MockDraft/DraftRoom.jsx'
 import LargeList from './components/LargeList/LargeList'
 import PlayerCompare from './components/PlayerCompare/PlayerCompare.jsx'
+import PlayerInput from './components/PlayerInput/PlayerInput.jsx'
+import NewPlayerComp from './components/PlayerInput/NewPlayerComp.jsx'
 function App() {
   return (
     <Router>
@@ -21,6 +23,8 @@ function App() {
           <Route path="/largelist" element={<LargeList />} />
           <Route path="/draftroom" element={<DraftRoom />} />
           <Route path="/playercompare" element={<PlayerCompare />} />
+          <Route path="/playerinput" element={<PlayerInput />} />
+          <Route path="/newplayercomp" element={<NewPlayerComp />} />
         </Routes>
       </div>
     </Router>

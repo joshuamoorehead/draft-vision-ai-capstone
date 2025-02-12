@@ -22,7 +22,7 @@ const PlayerComparison = () => {
     }, []);
 
     return (
-        <div>
+        <div className="min-h-screen bg-[#5A6BB0]">
         {/* Header */}
               <div className="w-full h-32 bg-black">
                 <div className="container mx-auto px-4 h-full flex items-center">
@@ -32,14 +32,15 @@ const PlayerComparison = () => {
                     <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">About Us</Link>
                     <Link to="/mockdraft" className="text-2xl font-roboto-condensed opacity-50">Mock Draft</Link>
                     <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">Large List</Link>
-                    <Link to="/PlayerCompare" className="text-2xl font-roboto-condensed underline">Player Comparison</Link>
+                    <Link to="/playercompare" className="text-2xl font-roboto-condensed underline">Player Comparison</Link>
+                    <Link to="/playerinput" className="text-2xl font-roboto-condensed opacity-50">Player Input</Link>
                   </div>
                 </div>
               </div>
-        <div>
-            <h1>Player Comparison</h1>
-            <div>
-                <label>Player 1:</label>
+        <div className="container px-8 mt-8">
+            <h1 className="text-2xl text-white">Player Comparison</h1>
+            <div className="container mx-auto px-8 mt-2">
+                <label className="text-white">Player 1: </label>
                 <select onChange={(e) => setPlayer1(players.find(p => p.id === parseInt(e.target.value)))}>
                     <option value="">Select a player</option>
                     {players.map(player => (
@@ -47,8 +48,8 @@ const PlayerComparison = () => {
                     ))}
                 </select>
             </div>
-            <div>
-                <label>Player 2:</label>
+            <div className="container px-8 mt-2">
+                <label className="text-white">Player 2: </label>
                 <select onChange={(e) => setPlayer2(players.find(p => p.id === parseInt(e.target.value)))}>
                     <option value="">Select a player</option>
                     {players.map(player => (
