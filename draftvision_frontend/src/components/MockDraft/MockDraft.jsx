@@ -151,7 +151,8 @@ const MockDraft = () => {
             <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">About Us</Link>
             <Link to="/mockdraft" className="text-2xl font-roboto-condensed underline">Mock Draft</Link>
             <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">Large List</Link>
-            <Link to="/PlayerCompare" className="text-2xl font-roboto-condensed opacity-50">Player Comparison</Link>
+            <Link to="/playercompare" className="text-2xl font-roboto-condensed opacity-50">Player Comparison</Link>
+            <Link to="/playerinput" className="text-2xl font-roboto-condensed opacity-50">Player Input</Link>
           </div>
         </div>
       </div>
