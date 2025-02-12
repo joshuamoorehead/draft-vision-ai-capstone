@@ -115,7 +115,9 @@ const DraftRoom = () => {
   }, [isPaused]);
 
   // Helper: get a CSS class for each team box.
-  const getTeamClass = (idx) => {
+  // If the team is a user team, it will be blue.
+  const getTeamClass = (order, idx) => {
+    if (userTeams.includes(order.team)) return "bg-blue-500";
     if (idx < currentPickIndex) return "bg-green-500";
     else if (idx === currentPickIndex) return "bg-orange-500";
     else return "bg-gray-800";
@@ -268,7 +270,7 @@ const DraftRoom = () => {
             <h2 className="text-xl font-semibold">Round {currentRound} Order:</h2>
             <ul className="flex flex-wrap gap-2 mt-2">
               {currentRoundOrders.map((order, idx) => (
-                <li key={idx} className={`${getTeamClass(idx)} px-3 py-1 rounded shadow`}>
+                <li key={idx} className={`${getTeamClass(order, idx)} px-3 py-1 rounded shadow`}>
                   {order.team}
                 </li>
               ))}
@@ -299,12 +301,20 @@ const DraftRoom = () => {
 
       <div className="mb-6 text-center">
         {!isDraftStarted && (
-          <button
-            onClick={startDraft}
-            className="px-8 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-black rounded-lg shadow-lg hover:from-green-500 hover:to-blue-600 transition duration-300"
-          >
-            Enter Draft
-          </button>
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={startDraft}
+              className="px-8 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-black rounded-lg shadow-lg hover:from-green-500 hover:to-blue-600 transition duration-300"
+            >
+              Enter Draft
+            </button>
+            <button
+              onClick={() => navigate("/mockdraft")}
+              className="px-8 py-3 bg-red-500 text-black rounded-lg shadow-lg hover:bg-red-600 transition duration-300"
+            >
+              Exit Draft
+            </button>
+          </div>
         )}
         {/* Only show "Begin Round" if the round is paused and there are rounds left */}
         {isRoundPaused && currentRound < rounds && (
@@ -328,14 +338,14 @@ const DraftRoom = () => {
                 {groupedPicks[String(round)] && groupedPicks[String(round)].length > 0 ? (
                   groupedPicks[String(round)].map(pick => (
                     <div
-  key={pick.pickNumber}
-  className="p-1 h-9 bg-gray-800 rounded shadow-sm text-sm flex items-center"
->
-  <span className="mr-1">{pick.pickNumber}.</span>
-  <strong>{pick.team}:</strong>
-  <span>&nbsp;</span>
-  {pick.playerName}
-</div>
+                      key={pick.pickNumber}
+                      className="p-1 h-9 bg-gray-800 rounded shadow-sm text-sm flex items-center"
+                    >
+                      <span className="mr-1">{pick.pickNumber}.</span>
+                      <strong>{pick.team}:</strong>
+                      <span>&nbsp;</span>
+                      {pick.playerName}
+                    </div>
                   ))
                 ) : (
                   <p className="col-span-4 text-gray-400">No picks yet.</p>
@@ -353,6 +363,7 @@ const DraftRoom = () => {
           timePerPick={timePerPick}
           onPick={handleUserPick}
           onTimeout={handleUserAutoPick}
+          // Here we reference currentTeam.team to display a string instead of the object
           currentTeam={currentTeam}
           openTradeModal={() => alert("Trade modal placeholder")}
         />
@@ -429,9 +440,10 @@ const UserPickModal = ({
 
   return (
     <div className="modal-overlay fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
-      <div className="modal-content bg-gray-800 p-4 rounded-lg shadow-xl w-11/12 max-w-md max-h-[80vh] overflow-y-auto transform transition-all duration-300">
+      <div className="modal-content bg-gray-800 p-4 rounded-lg shadow-xl w-11/12 max-w-[150vh] max-h-[95vh] overflow-y-scroll transform transition-all duration-300">
+        {/* Use currentTeam.team so that a string is rendered */}
         <h2 className="text-2xl font-bold mb-2 text-center">
-          {currentTeam} – Your Pick
+          {currentTeam && currentTeam.team} – Your Pick
         </h2>
         <p className="mb-4 text-center">Time remaining: {timer} sec</p>
         <div className="flex justify-center mb-4">
