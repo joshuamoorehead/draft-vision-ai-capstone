@@ -1,8 +1,13 @@
+// Declare a global variable outside the component
+
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import "../../styles/main.css";
 
+let globalUpdatedOrders = []; // global reference (though not strictly necessary)
+
+// Initialize Supabase client
 const supabaseUrl = "https://pvuzvnemuhutrdmpchmi.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY";
@@ -19,12 +24,15 @@ const DraftRoom = () => {
 
   // 2) Determine user teams
   const userTeams = selectedTeams.map((i) => locations[i]);
-  const primaryUserTeam = userTeams[0];
+  const primaryUserTeam = userTeams[0]; // The first is “owner” for acquired picks
 
   // 3) Refs
   const globalPickRef = useRef(1); // global pick counter
   const timerRef = useRef(null);
   const availablePlayersRef = useRef([]); // for quick picking
+
+  // NEW: Auto-scroll logic => reference to the bottom of the drafted picks
+  const picksEndRef = useRef(null);
 
   // 4) Basic states
   const [currentRound, setCurrentRound] = useState(1);
@@ -60,18 +68,23 @@ const DraftRoom = () => {
     }, {});
   }, [draftedPicks]);
 
-  // Keep availablePlayersRef in sync with availablePlayers
+  // Sync availablePlayersRef with availablePlayers
   useEffect(() => {
     availablePlayersRef.current = availablePlayers;
   }, [availablePlayers]);
 
-  // ------------------------------
-  // Fetch data on mount
-  // ------------------------------
+  // NEW: Auto-scroll whenever draftedPicks changes
+  useEffect(() => {
+    if (picksEndRef.current) {
+      picksEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [draftedPicks]);
+
+  // On mount, fetch from Supabase
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 1) fetch players
+        // fetch players
         const { data: players, error: playersErr } = await supabase
           .from("db_draftclasses")
           .select("*")
@@ -82,14 +95,14 @@ const DraftRoom = () => {
           setAvailablePlayers(players);
         }
 
-        // 2) fetch orders
+        // fetch draft orders
         const { data: orders, error: ordersErr } = await supabase
           .from("db_draftorders")
           .select("*")
           .eq("year", draftYear);
         if (ordersErr) {
           console.error("Draft order fetch error:", ordersErr);
-        } else if (orders) {
+        } else {
           const filteredOrders = orders.filter((o) => Number(o.round) <= rounds);
           console.log("Fetched Orders:", filteredOrders);
           setAllDraftOrders(filteredOrders);
@@ -102,18 +115,14 @@ const DraftRoom = () => {
     fetchData();
   }, [draftYear, rounds]);
 
-  // ------------------------------
-  // When allDraftOrders/currentRound changes => filter for that round
-  // ------------------------------
+  // Update currentRoundOrdersState when allDraftOrders or currentRound changes
   useEffect(() => {
     const roundOrders = allDraftOrders.filter((o) => Number(o.round) === currentRound);
     console.log("Recalc currentRoundOrdersState =>", roundOrders);
     setCurrentRoundOrdersState(roundOrders);
   }, [allDraftOrders, currentRound]);
 
-  // ------------------------------
-  // On round change, start picking from index 0 if not paused
-  // ------------------------------
+  // When a new round starts, process from index 0
   useEffect(() => {
     if (isDraftStarted && !isPaused && !isRoundPaused) {
       processNextPick(0);
@@ -121,9 +130,7 @@ const DraftRoom = () => {
     // eslint-disable-next-line
   }, [currentRound]);
 
-  // ------------------------------
-  // On unpause, resume
-  // ------------------------------
+  // Resume processing when unpausing
   useEffect(() => {
     if (isDraftStarted && !isPaused && !isRoundPaused) {
       processNextPick(currentPickIndex);
@@ -131,9 +138,7 @@ const DraftRoom = () => {
     // eslint-disable-next-line
   }, [isPaused]);
 
-  // ------------------------------
-  // UI helper for coloring teams
-  // ------------------------------
+  // Helper for displaying colored squares
   const getTeamClass = (order, idx) => {
     if (userTeams.includes(order.team)) return "bg-blue-500";
     if (idx < currentPickIndex) return "bg-green-500";
@@ -141,20 +146,15 @@ const DraftRoom = () => {
     return "bg-gray-800";
   };
 
-  // ------------------------------
   // Start the draft
-  // ------------------------------
   const startDraft = () => {
     setIsDraftStarted(true);
     processNextPick(0);
   };
 
-  // ------------------------------
   // Main pick logic
-  // ------------------------------
   const processNextPick = (index = currentPickIndex) => {
     if (index >= currentRoundOrdersState.length) {
-      // End of this round
       if (currentRound < rounds) {
         setIsRoundPaused(true);
       } else {
@@ -164,23 +164,20 @@ const DraftRoom = () => {
     }
     if (isPaused) return;
 
+    console.log(currentRoundOrdersState);
     const order = currentRoundOrdersState[index];
-    console.log("processNextPick => currentPickIndex:", index);
     console.log("processNextPick => order:", order);
     setCurrentTeam(order);
 
-    // If user controls the team => open pick modal
     if (userTeams.includes(order.team)) {
-      console.log("User-controlled pick -> open user pick modal");
+      console.log("User controlled pick. Opening user pick modal.");
       setUserPickModalOpen(true);
     } else {
-      // CPU pick
       timerRef.current = setTimeout(() => {
         if (isPaused) return;
         const cpuPlayer = pickBestAvailable();
         console.log("CPU picked:", cpuPlayer);
         recordPick(order.team, cpuPlayer, currentRound);
-
         const nextIdx = index + 1;
         setCurrentPickIndex(nextIdx);
         processNextPick(nextIdx);
@@ -188,9 +185,7 @@ const DraftRoom = () => {
     }
   };
 
-  // ------------------------------
   // pickBestAvailable
-  // ------------------------------
   const pickBestAvailable = () => {
     const players = availablePlayersRef.current;
     if (!players || players.length === 0) return { name: "No Available Player" };
@@ -203,9 +198,7 @@ const DraftRoom = () => {
     return best;
   };
 
-  // ------------------------------
   // recordPick
-  // ------------------------------
   const recordPick = (team, player, roundNum) => {
     const pickNumber = globalPickRef.current;
     const newPick = {
@@ -216,128 +209,94 @@ const DraftRoom = () => {
       id: player?.id || pickNumber,
     };
     setDraftedPicks((prev) => [...prev, newPick]);
-    console.log(`Recorded pick #${pickNumber}: ${team} selects ${player?.name || "No Pick"}`);
+    console.log(`Recorded pick ${pickNumber}: ${team} selects ${player?.name || "No Pick"}`, newPick);
     globalPickRef.current = pickNumber + 1;
   };
 
-  // ------------------------------
-  // handleUserPick
-  // ------------------------------
+  // When user makes a pick
   const handleUserPick = (player) => {
     console.log("User selected player:", player);
     recordPick(currentTeam.team, player, currentRound);
     setAvailablePlayers((prev) => prev.filter((p) => p.id !== player.id));
     availablePlayersRef.current = availablePlayersRef.current.filter((p) => p.id !== player.id);
-
     setUserPickModalOpen(false);
     const nextIdx = currentPickIndex + 1;
     setCurrentPickIndex(nextIdx);
     processNextPick(nextIdx);
   };
 
-  // ------------------------------
-  // handleUserAutoPick
-  // ------------------------------
+  // Auto pick on timeout
   const handleUserAutoPick = () => {
     const autoPlayer = pickBestAvailable();
-    console.log("Auto-pick triggered. Selected:", autoPlayer);
+    console.log("Auto pick triggered. Selected:", autoPlayer);
     recordPick(currentTeam.team, autoPlayer, currentRound);
-
     setUserPickModalOpen(false);
     const nextIdx = currentPickIndex + 1;
     setCurrentPickIndex(nextIdx);
     processNextPick(nextIdx);
   };
 
-  // ------------------------------
-  // Pause/resume
-  // ------------------------------
+  // Pause/resume draft
   const togglePause = () => {
     setIsPaused((prev) => {
       const newVal = !prev;
       if (newVal && timerRef.current) {
         clearTimeout(timerRef.current);
       }
-      console.log("Draft pause toggled:", newVal);
+      console.log("Draft pause toggled. New pause state:", newVal);
       return newVal;
     });
   };
 
-  // ------------------------------
   // Begin next round
-  // ------------------------------
   const beginNextRound = () => {
     setCurrentRound((prev) => prev + 1);
     setCurrentPickIndex(0);
     setIsRoundPaused(false);
   };
 
-  // ------------------------------
-  // handleTradeSubmit
-  // ------------------------------
+  //------------------------------------
+  // TRADE LOGIC (No CPU picks inside handleTradeSubmit)
+  //------------------------------------
   const handleTradeSubmit = (tradePartner, userPicks, partnerPicks) => {
     console.log("handleTradeSubmit =>", { tradePartner, userPicks, partnerPicks });
 
     // 1) Build updated orders
     const updatedOrders = allDraftOrders.map((order) => {
       if (partnerPicks.includes(order.id)) {
-        // Partner's picks => user acquires them
+        console.log(`Order ${order.id} => from ${order.team} => ${primaryUserTeam}`);
         return { ...order, team: primaryUserTeam };
-      }
-      if (userPicks.includes(order.id)) {
-        // User's picks => partner acquires them
+      } else if (userPicks.includes(order.id)) {
+        console.log(`Order ${order.id} => from ${order.team} => ${tradePartner}`);
         return { ...order, team: tradePartner };
       }
       return order;
     });
     console.log("Updated Orders =>", updatedOrders);
 
-    // 2) Update local states immediately
+    // 2) Update state
     setAllDraftOrders(updatedOrders);
     setIsTradeModalOpen(false);
+    setUserPickModalOpen(false);
 
-    // 3) Derive new round slice right away
+    // 3) Update current round
     const updatedRoundOrders = updatedOrders.filter((o) => Number(o.round) === currentRound);
-    console.log("updatedRoundOrders =>", updatedRoundOrders);
     setCurrentRoundOrdersState(updatedRoundOrders);
 
-    // 4) Check who now owns the current pick
-    const currentOrder = updatedRoundOrders[currentPickIndex];
-    console.log("currentOrder after trade =>", currentOrder);
-
-    if (!currentOrder) {
-      // If there's no pick at the current index, move forward
-      console.log("No updatedCurrentOrder found, resuming normal processing.");
-      setUserPickModalOpen(false);
-      processNextPick(currentPickIndex);
-      return;
+    // 4) Clear leftover CPU pick timer
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
 
-    // If user lost the pick => CPU picks next
-    if (userPicks.includes(currentOrder.id)) {
-      console.log("User lost the current pick => CPU picking now.");
-      setUserPickModalOpen(false);
-      const cpuPlayer = pickBestAvailable();
-      recordPick(tradePartner, cpuPlayer, currentRound);
+    // 5) Pause so the newly updated ownership “commits”
+    setIsPaused(true);
+    console.log("Draft is now paused after trade—auto-resuming in 100ms...");
 
-      const newIndex = currentPickIndex + 1;
-      setCurrentPickIndex(newIndex);
-      processNextPick(newIndex);
-    }
-    // If the user gained (or kept) the pick => open user pick modal
-    else if (
-      partnerPicks.includes(currentOrder.id) ||
-      currentOrder.team === primaryUserTeam
-    ) {
-      console.log("User gained/owns the pick => open user pick modal");
-      setUserPickModalOpen(true);
-    }
-    // Otherwise => let CPU proceed
-    else {
-      console.log("Pick belongs to another CPU team => normal processing");
-      setUserPickModalOpen(false);
-      processNextPick(currentPickIndex);
-    }
+    // 6) Auto-resume after 100ms
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 100);
   };
 
   return (
@@ -352,17 +311,13 @@ const DraftRoom = () => {
             <h2 className="text-xl font-semibold">Round {currentRound} Order:</h2>
             <ul className="flex flex-wrap gap-2 mt-2">
               {currentRoundOrdersState.map((order, idx) => (
-                <li
-                  key={order.id}
-                  className={`${getTeamClass(order, idx)} px-3 py-1 rounded shadow`}
-                >
+                <li key={order.id} className={`${getTeamClass(order, idx)} px-3 py-1 rounded shadow`}>
                   {order.team}
                 </li>
               ))}
             </ul>
           </div>
         </div>
-
         {isDraftStarted && (
           <div className="flex items-center">
             {!isRoundPaused && (
@@ -400,10 +355,14 @@ const DraftRoom = () => {
             </button>
           </div>
         )}
-
         {isRoundPaused && currentRound < rounds && (
           <button
-            onClick={beginNextRound}
+            onClick={() => {
+              setCurrentRound((prev) => prev + 1);
+              setCurrentPickIndex(0);
+              setIsRoundPaused(false);
+              console.log("Beginning Round", currentRound + 1);
+            }}
             className="px-8 py-3 bg-gradient-to-r from-blue-400 to-green-500 text-black rounded-lg shadow-lg hover:from-blue-500 hover:to-green-600 transition duration-300"
           >
             Begin Round {currentRound + 1}
@@ -436,6 +395,9 @@ const DraftRoom = () => {
               </div>
             </div>
           ))}
+
+          {/* NEW: An invisible anchor to scroll into view */}
+          <div ref={picksEndRef} />
         </section>
       )}
 
@@ -479,6 +441,22 @@ const DraftRoom = () => {
 };
 
 // -------------------------------------
+// Helper: Get a "Round X Pick Y" label from an ID
+// -------------------------------------
+function getPickLabelById(id, allDraftOrders) {
+  const order = allDraftOrders.find((o) => o.id === id);
+  if (!order) return `Pick #${id} (not found)`;
+
+  const { round, team } = order;
+  // find which pickNumber in that round
+  const ordersInRound = allDraftOrders.filter((o) => Number(o.round) === Number(round));
+  const pickIndex = ordersInRound.findIndex((o) => o.id === id);
+  const pickNum = pickIndex + 1;
+
+  return `Round ${round} Pick ${pickNum} - ${team}`;
+}
+
+// -------------------------------------
 // USER PICK MODAL
 // -------------------------------------
 const UserPickModal = ({
@@ -507,7 +485,7 @@ const UserPickModal = ({
     return ["All", ...Array.from(posSet)];
   }, [availablePlayers]);
 
-  // Filter the player list
+  // Filter player list
   useEffect(() => {
     let players = availablePlayers.filter((p) =>
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -530,21 +508,18 @@ const UserPickModal = ({
 
   // Generate CPU trade proposals
   useEffect(() => {
-    if (
-      !currentTeam ||
-      !allDraftOrders ||
-      currentPickIndex === undefined ||
-      !currentRoundOrders
-    ) {
+    if (!currentTeam || !allDraftOrders || !currentRoundOrders || currentPickIndex === undefined)
       return;
-    }
 
     const tradePartnerSet = new Set(allDraftOrders.map((o) => o.team));
     tradePartnerSet.delete(currentTeam.team);
     const tradePartners = Array.from(tradePartnerSet);
 
     const proposalCount = Math.floor(Math.random() * 4); // up to 3 proposals
-    const userFuturePicks = allDraftOrders.filter((order) => {
+    let proposals = [];
+
+    // user’s future picks (exclude the current pick)
+    const availableUserPicks = allDraftOrders.filter((order) => {
       return (
         order.team === currentTeam.team &&
         (
@@ -557,12 +532,12 @@ const UserPickModal = ({
       );
     });
 
-    let proposals = [];
     for (let i = 0; i < proposalCount; i++) {
       if (tradePartners.length === 0) break;
       const partner = tradePartners[Math.floor(Math.random() * tradePartners.length)];
 
-      const partnerAvailable = allDraftOrders.filter((order) => {
+      // partner's picks
+      const availablePartnerPicks = allDraftOrders.filter((order) => {
         return (
           order.team === partner &&
           (
@@ -574,25 +549,26 @@ const UserPickModal = ({
           )
         );
       });
-      if (partnerAvailable.length === 0) continue;
+      if (availablePartnerPicks.length === 0) continue;
 
       let userPicks = [];
       let partnerPicks = [];
 
-      // CPU wants your current pick
+      // CPU wants user's current pick => add that pick ID to partnerPicks
       partnerPicks.push(currentTeam.id);
 
-      // Optionally pick one future user pick
-      const nonCurrentUserPicks = userFuturePicks.filter((x) => x.id !== currentTeam.id);
-      if (nonCurrentUserPicks.length) {
+      // from availableUserPicks, exclude the current pick
+      const nonCurrentUserPicks = availableUserPicks.filter((o) => o.id !== currentTeam.id);
+      if (nonCurrentUserPicks.length > 0) {
         const randomUserPick =
           nonCurrentUserPicks[Math.floor(Math.random() * nonCurrentUserPicks.length)].id;
+        console.log("CPU Trade Proposal => adding future pick", randomUserPick, "to userPicks");
         userPicks.push(randomUserPick);
       }
 
       // Possibly add an extra partner pick
-      const numAdditional = Math.floor(Math.random() * 2); // 0-1
-      const shuffled = [...partnerAvailable].sort(() => 0.5 - Math.random());
+      const numAdditional = Math.floor(Math.random() * 2); // 0 or 1
+      const shuffled = [...availablePartnerPicks].sort(() => 0.5 - Math.random());
       const additionalPartnerPicks = shuffled.slice(0, numAdditional).map((o) => o.id);
       partnerPicks = partnerPicks.concat(additionalPartnerPicks);
 
@@ -603,10 +579,15 @@ const UserPickModal = ({
         partnerPicks,
       });
     }
-
     console.log("Generated CPU trade proposals:", proposals);
     setCpuTradeProposals(proposals);
   }, [currentTeam, allDraftOrders, currentRound, currentPickIndex, currentRoundOrders]);
+
+  // NEW: For printing picks as "Round X Pick Y" in proposals
+  function formatPicks(ids) {
+    if (!ids || ids.length === 0) return "";
+    return ids.map((id) => getPickLabelById(id, allDraftOrders)).join("; ");
+  }
 
   return (
     <div className="modal-overlay fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
@@ -615,7 +596,6 @@ const UserPickModal = ({
           {currentTeam && currentTeam.team} – Your Pick
         </h2>
         <p className="mb-4 text-center">Time remaining: {timer} sec</p>
-
         <div className="flex justify-center mb-4">
           <button
             className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
@@ -624,7 +604,6 @@ const UserPickModal = ({
             Propose Trade
           </button>
         </div>
-
         <div className="flex flex-col md:flex-row md:items-center md:space-x-4 mb-4">
           <input
             type="text"
@@ -648,7 +627,6 @@ const UserPickModal = ({
             </select>
           </div>
         </div>
-
         <div className="player-list mb-4 max-h-64 overflow-y-auto border p-4 rounded-lg bg-gray-700">
           {filteredPlayers.length > 0 ? (
             filteredPlayers.map((player) => (
@@ -664,44 +642,48 @@ const UserPickModal = ({
             <p className="text-center">No players found.</p>
           )}
         </div>
-
         <div className="cpu-trade-proposals border-t pt-2">
           <h3 className="font-semibold text-lg mb-2">CPU Trade Proposals:</h3>
           {cpuTradeProposals.length > 0 ? (
-            cpuTradeProposals.map((proposal) => (
-              <div
-                key={proposal.id}
-                className="trade-proposal border p-2 my-2 rounded bg-gray-600"
-              >
-                <p>
-                  CPU wants to trade **your** pick(s): [{proposal.userPicks.join(", ")}]
-                  <br />
-                  for CPU's pick(s): [{proposal.partnerPicks.join(", ")}] ({proposal.tradePartner})
-                </p>
-                <div className="mt-2 space-x-2">
-                  <button
-                    className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                    onClick={() =>
-                      onAcceptCpuTradeProposal(
-                        proposal.tradePartner,
-                        proposal.userPicks,
-                        proposal.partnerPicks
-                      )
-                    }
-                  >
-                    Accept Proposal
-                  </button>
-                  <button
-                    className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                    onClick={() =>
-                      setCpuTradeProposals((prev) => prev.filter((p) => p.id !== proposal.id))
-                    }
-                  >
-                    Decline
-                  </button>
+            cpuTradeProposals.map((proposal) => {
+              const userPicksFormatted = formatPicks(proposal.userPicks);
+              const partnerPicksFormatted = formatPicks(proposal.partnerPicks);
+
+              return (
+                <div
+                  key={proposal.id}
+                  className="trade-proposal border p-2 my-2 rounded bg-gray-600"
+                >
+                  <p>
+                    CPU wants to trade **your** pick(s): [{userPicksFormatted}]
+                    <br />
+                    for CPU's pick(s): [{partnerPicksFormatted}] ({proposal.tradePartner}).
+                  </p>
+                  <div className="mt-2 space-x-2">
+                    <button
+                      className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                      onClick={() =>
+                        onAcceptCpuTradeProposal(
+                          proposal.tradePartner,
+                          proposal.userPicks,
+                          proposal.partnerPicks
+                        )
+                      }
+                    >
+                      Accept Proposal
+                    </button>
+                    <button
+                      className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                      onClick={() =>
+                        setCpuTradeProposals((prev) => prev.filter((p) => p.id !== proposal.id))
+                      }
+                    >
+                      Decline
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <p className="text-center">No trade proposals.</p>
           )}
@@ -775,12 +757,12 @@ const TradeModal = ({
   };
 
   const handleSubmitTrade = () => {
-    if (selectedUserPicks.length === 0 && selectedPartnerPicks.length === 0) {
-      alert("Must select at least one pick from either side.");
+    if (selectedUserPicks.length === 0 || selectedPartnerPicks.length === 0) {
+      alert("Must select at least one pick from both sides.");
       return;
     }
-    console.log("Submitting trade:", {
-      tradePartner: selectedTradePartner,
+    console.log("Submitting trade with:", {
+      selectedTradePartner,
       selectedUserPicks,
       selectedPartnerPicks,
     });
@@ -805,9 +787,8 @@ const TradeModal = ({
             ))}
           </select>
         </div>
-
         <div className="flex flex-col md:flex-row gap-4">
-          {/* USER PICK SIDE */}
+          {/* USER AVAILABLE PICKS */}
           <div className="flex-1">
             <h3 className="text-xl font-semibold mb-2">Your Available Picks</h3>
             {availableUserPicks.length > 0 ? (
@@ -828,8 +809,7 @@ const TradeModal = ({
               <p>No available picks.</p>
             )}
           </div>
-
-          {/* PARTNER PICK SIDE */}
+          {/* PARTNER AVAILABLE PICKS */}
           <div className="flex-1">
             <h3 className="text-xl font-semibold mb-2">Partner's Available Picks</h3>
             {availablePartnerPicks.length > 0 ? (
@@ -851,7 +831,6 @@ const TradeModal = ({
             )}
           </div>
         </div>
-
         <div className="mt-4 flex justify-center gap-4">
           <button
             onClick={handleSubmitTrade}
