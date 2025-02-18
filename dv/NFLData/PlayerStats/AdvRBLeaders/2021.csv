@@ -303,7 +303,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 283,Zay Jones,26,LVR,WR,17,9,2,3,0,3,1.5,0,0.0,0,,,JoneZa00
 284,Travis Kelce,32,KAN,TE,16,16,2,3,1,3,1.5,0,0.0,0,,PBAP-2,KelcTr00
 285,John Kelly,25,CLE,RB,4,0,2,13,1,7,3.5,6,3.0,0,,,KellJo00
-286,Dallin Leavitt,27,LVR,DB,16,1,2,6,2,5,2.5,1,0.5,0,,,LeavDa00
+286,Dallin Leavitt,27,LVR,CB,16,1,2,6,2,5,2.5,1,0.5,0,,,LeavDa00
 287,Tyler Lockett,29,SEA,WR,16,16,2,9,0,9,4.5,0,0.0,0,,,LockTy00
 288,Sean Mannion,29,MIN,QB,1,1,2,14,2,11,5.5,3,1.5,0,,,MannSe00
 289,Ray-Ray McCloud,25,PIT,WR,16,5,2,15,0,10,5.0,5,2.5,1,2.0,,McClRa00
@@ -331,7 +331,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 311,Antonio Brown,33,TAM,WR,7,3,1,6,0,5,5.0,1,1.0,0,,,BrowAn04
 312,Dyami Brown,22,WAS,WR,15,6,1,-4,0,-4,-4.0,0,0.0,0,,,BrowDy00
 313,Marquise Brown,24,BAL,WR,16,16,1,5,1,2,2.0,3,3.0,0,,,BrowMa04
-314,Sean Chandler,25,CAR,SS,15,7,1,14,1,14,14.0,0,0.0,0,,,ChanSe00
+314,Sean Chandler,25,CAR,S,15,7,1,14,1,14,14.0,0,0.0,0,,,ChanSe00
 315,Randall Cobb,31,GNB,WR,12,3,1,1,0,0,0.0,1,1.0,1,1.0,,CobbRa00
 316,Chris Conley,29,HOU,WR,16,10,1,3,1,0,0.0,3,3.0,0,,,ConlCh00
 317,Pharoh Cooper,26,NYG,WR,8,0,1,3,0,3,3.0,0,0.0,0,,,CoopPh00
@@ -344,7 +344,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 324,Evan Engram,27,NYG,TE,15,12,1,-3,0,-3,-3.0,0,0.0,0,,,EngrEv00
 325,Zach Ertz,31,ARI,TE,11,11,1,4,0,4,4.0,0,0.0,0,,,ErtzZa00
 326,Mike Evans,28,TAM,WR,16,16,1,10,1,8,8.0,2,2.0,0,,PB,EvanMi00
-327,Clayton Fejedelem,28,MIA,DB,17,0,1,0,0,0,0.0,0,0.0,0,,,FejeCl00
+327,Clayton Fejedelem,28,MIA,CB,17,0,1,0,0,0,0.0,0,0.0,0,,,FejeCl00
 328,Maurice Ffrench,23,LAC,WR,3,0,1,3,0,3,3.0,0,0.0,0,,,FfreMa00
 329,Ryan Fitzpatrick,39,WAS,QB,1,1,1,2,0,2,2.0,0,0.0,0,,,FitzRy00
 330,Jamie Gillan,24,CLE,P,12,0,1,0,0,0,0.0,0,0.0,0,,,GillJa00
@@ -361,7 +361,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 341,D.K. Metcalf,24,SEA,WR,17,17,1,6,0,4,4.0,2,2.0,0,,,MetcDK00
 342,Jakobi Meyers,25,NWE,WR,17,16,1,9,0,8,8.0,1,1.0,0,,,MeyeJa01
 343,Dax Milne,22,WAS,WR,13,1,1,1,0,1,1.0,0,0.0,0,,,MilnDa00
-344,C.J. Moore,26,DET,DB,17,1,1,28,1,28,28.0,0,0.0,0,,,MoorCJ01
+344,C.J. Moore,26,DET,CB,17,1,1,28,1,28,28.0,0,0.0,0,,,MoorCJ01
 345,Stanley Morgan Jr.,25,CIN,WR,17,1,1,3,0,3,3.0,0,0.0,0,,,MorgSt02
 346,Ryan Nall,26,CHI,RB,9,0,1,4,0,0,0.0,4,4.0,0,,,NallRy00
 347,David Njoku,25,CLE,TE,16,11,1,1,0,0,0.0,1,1.0,0,,,NjokDa00
@@ -381,12 +381,12 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 361,Ito Smith,26,DAL,RB,1,0,1,4,1,4,4.0,0,0.0,0,,,SmitIt00
 362,Jeff Smith,24,NYJ,WR,12,3,1,-1,0,-1,-1.0,0,0.0,0,,,SmitJe03
 363,Shi Smith,23,CAR,WR,6,0,1,-3,0,-3,-3.0,0,0.0,0,,,SmitSh03
-364,Tremon Smith,25,HOU,DB,17,2,1,7,0,5,5.0,2,2.0,0,,,SmitTr04
+364,Tremon Smith,25,HOU,CB,17,2,1,7,0,5,5.0,2,2.0,0,,,SmitTr04
 365,Kenny Stills,29,NOR,WR,13,4,1,1,0,1,1.0,0,0.0,0,,,StilKe00
 366,Adam Thielen,31,MIN,WR,13,13,1,2,0,0,0.0,2,2.0,0,,,ThieAd00
 367,Quez Watkins,23,PHI,WR,17,12,1,3,0,3,3.0,0,0.0,0,,,WatkQu00
 368,Derek Watt,29,PIT,FB,17,4,1,1,1,0,0.0,1,1.0,0,,,WattDe00
 369,Preston Williams,24,MIA,WR,8,3,1,7,0,3,3.0,4,4.0,1,1.0,,WillPr01
-370,Andrew Wingard,25,JAX,SS,15,15,1,4,1,3,3.0,1,1.0,0,,,WingAn01
+370,Andrew Wingard,25,JAX,S,15,15,1,4,1,3,3.0,1,1.0,0,,,WingAn01
 371,Olamide Zaccheaus,24,ATL,WR,17,8,1,2,1,0,0.0,2,2.0,0,,,ZaccOl01
 372,Dawson Knox,25,BUF,TE,15,14,0,4,0,4,,0,,0,,,KnoxDa00

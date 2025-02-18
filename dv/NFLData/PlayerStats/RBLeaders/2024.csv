@@ -309,7 +309,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 295,Chris Godwin,28,TAM,WR,7,7,1,2,0,1,100.0,2,2.0,0.3,0.1,1,,GodwCh00
 296,Noah Gray,25,KAN,TE,17,10,1,-4,0,0,0.0,-4,-4.0,-0.2,0.1,0,,GrayNo00
 297,Matthew Hayball,27,NOR,P,17,0,1,11,0,1,100.0,11,11.0,0.6,0.1,0,,HaybMa00
-298,Jaden Hicks,22,KAN,DB,17,1,1,1,0,0,0.0,1,1.0,0.1,0.1,0,,HickJa01
+298,Jaden Hicks,22,KAN,CB,17,1,1,1,0,0,0.0,1,1.0,0.1,0.1,0,,HickJa01
 299,Sam Howell,24,SEA,QB,2,0,1,2,0,0,0.0,2,2.0,1.0,0.5,0,,HoweSa00
 300,Tanner Hudson,30,CIN,TE,11,0,1,1,0,1,100.0,1,1.0,0.1,0.1,1,,HudsTa00
 301,Jermaine Jackson,24,NOR,WR,4,0,1,-1,0,0,0.0,,-1.0,-0.3,0.3,0,,JackJe01
@@ -321,7 +321,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 307,Charlie Kolar,25,BAL,TE,13,3,1,2,0,1,100.0,2,2.0,0.2,0.1,0,,KolaCh00
 308,Dylan Laube,25,LVR,RB,10,0,1,0,0,0,0.0,,0.0,0.0,0.1,1,,LaubDy00
 309,Drake London,23,ATL,WR,17,17,1,-3,0,0,0.0,-3,-3.0,-0.2,0.1,0,,LondDr00
-310,Julian Love,26,SEA,FS,17,17,1,2,0,1,100.0,2,2.0,0.1,0.1,0,,LoveJu00
+310,Julian Love,26,SEA,S,17,17,1,2,0,1,100.0,2,2.0,0.1,0.1,0,,LoveJu00
 311,Trey McBride,25,ARI,TE,16,16,1,2,1,1,100.0,2,2.0,0.1,0.1,0,PB,McBrTr01
 312,David Moore,29,CAR,WR,17,5,1,0,0,0,0.0,,0.0,0.0,0.1,0,,MoorDa03
 313,Elijah Moore,24,CLE,WR,17,13,1,1,0,0,0.0,1,1.0,0.1,0.1,0,,MoorEl00
@@ -502,7 +502,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 478,Terrace Marshall Jr.,24,LVR,WR,7,1,0,0,0,0,,,,0.0,0.0,0,,MarsTe00
 479,Tay Martin,27,TEN,WR,1,0,0,0,0,0,,,,0.0,0.0,0,,MartTa00
 480,David Martin-Robinson,25,TEN,TE,5,2,0,0,0,0,,,,0.0,0.0,0,,MartDa01
-481,Scott Matlock,24,LAC,DL,17,11,0,0,0,0,,,,0.0,0.0,0,,MatlSc00
+481,Scott Matlock,24,LAC,DE,17,11,0,0,0,0,,,,0.0,0.0,0,,MatlSc00
 482,Jordan Matthews,32,CAR,TE,4,1,0,0,0,0,,,,0.0,0.0,0,,MattJo00
 483,Michael Mayer,23,LVR,TE,11,8,0,0,0,0,,,,0.0,0.0,0,,MayeMi00
 484,Luke McCaffrey,23,WAS,WR,17,4,0,0,0,0,,,,0.0,0.0,0,,McCaLu00

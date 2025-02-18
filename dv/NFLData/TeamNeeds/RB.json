@@ -1,0 +1,2480 @@
+{
+    "2018": {
+        "ATL": {
+            "TeamRush": [
+                "Att: 351",
+                "Yds: 1573",
+                "TD: 11",
+                "1D: 84",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.6",
+                "Att/Br: 17.6"
+            ]
+        },
+        "BUF": {
+            "TeamRush": [
+                "Att: 468",
+                "Yds: 1984",
+                "TD: 15",
+                "1D: 108",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.2",
+                "Att/Br: 19.5"
+            ]
+        },
+        "CAR": {
+            "TeamRush": [
+                "Att: 416",
+                "Yds: 2136",
+                "TD: 17",
+                "1D: 117",
+                "YBC/Att: 3.0",
+                "YAC/Att: 2.2",
+                "Att/Br: 16.0"
+            ]
+        },
+        "CHI": {
+            "TeamRush": [
+                "Att: 468",
+                "Yds: 1938",
+                "TD: 16",
+                "1D: 108",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.7",
+                "Att/Br: 24.6"
+            ]
+        },
+        "CIN": {
+            "TeamRush": [
+                "Att: 359",
+                "Yds: 1682",
+                "TD: 13",
+                "1D: 92",
+                "YBC/Att: 2.6",
+                "YAC/Att: 2.0",
+                "Att/Br: 39.9"
+            ]
+        },
+        "CLE": {
+            "TeamRush": [
+                "Att: 411",
+                "Yds: 1893",
+                "TD: 15",
+                "1D: 93",
+                "YBC/Att: 2.0",
+                "YAC/Att: 2.6",
+                "Att/Br: 10.0"
+            ]
+        },
+        "IND": {
+            "TeamRush": [
+                "Att: 408",
+                "Yds: 1718",
+                "TD: 13",
+                "1D: 96",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.9",
+                "Att/Br: 22.7"
+            ]
+        },
+        "ARI": {
+            "TeamRush": [
+                "Att: 355",
+                "Yds: 1342",
+                "TD: 9",
+                "1D: 76",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.6",
+                "Att/Br: 27.3"
+            ]
+        },
+        "DAL": {
+            "TeamRush": [
+                "Att: 439",
+                "Yds: 1963",
+                "TD: 13",
+                "1D: 113",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.8",
+                "Att/Br: 19.1"
+            ]
+        },
+        "DEN": {
+            "TeamRush": [
+                "Att: 393",
+                "Yds: 1907",
+                "TD: 18",
+                "1D: 107",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.9",
+                "Att/Br: 11.6"
+            ]
+        },
+        "DET": {
+            "TeamRush": [
+                "Att: 404",
+                "Yds: 1660",
+                "TD: 11",
+                "1D: 91",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.9",
+                "Att/Br: 15.0"
+            ]
+        },
+        "GNB": {
+            "TeamRush": [
+                "Att: 333",
+                "Yds: 1667",
+                "TD: 14",
+                "1D: 97",
+                "YBC/Att: 3.3",
+                "YAC/Att: 1.7",
+                "Att/Br: 23.8"
+            ]
+        },
+        "HOU": {
+            "TeamRush": [
+                "Att: 472",
+                "Yds: 2021",
+                "TD: 12",
+                "1D: 94",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.7",
+                "Att/Br: 20.5"
+            ]
+        },
+        "JAX": {
+            "TeamRush": [
+                "Att: 416",
+                "Yds: 1723",
+                "TD: 7",
+                "1D: 92",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.6",
+                "Att/Br: 21.9"
+            ]
+        },
+        "KAN": {
+            "TeamRush": [
+                "Att: 387",
+                "Yds: 1855",
+                "TD: 16",
+                "1D: 106",
+                "YBC/Att: 2.8",
+                "YAC/Att: 2.0",
+                "Att/Br: 12.9"
+            ]
+        },
+        "MIA": {
+            "TeamRush": [
+                "Att: 371",
+                "Yds: 1738",
+                "TD: 7",
+                "1D: 75",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.9",
+                "Att/Br: 17.7"
+            ]
+        },
+        "MIN": {
+            "TeamRush": [
+                "Att: 357",
+                "Yds: 1493",
+                "TD: 9",
+                "1D: 66",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.8",
+                "Att/Br: 16.2"
+            ]
+        },
+        "NOR": {
+            "TeamRush": [
+                "Att: 471",
+                "Yds: 2025",
+                "TD: 26",
+                "1D: 134",
+                "YBC/Att: 2.0",
+                "YAC/Att: 2.3",
+                "Att/Br: 8.9"
+            ]
+        },
+        "NWE": {
+            "TeamRush": [
+                "Att: 478",
+                "Yds: 2037",
+                "TD: 18",
+                "1D: 131",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.7",
+                "Att/Br: 21.7"
+            ]
+        },
+        "NYG": {
+            "TeamRush": [
+                "Att: 354",
+                "Yds: 1650",
+                "TD: 13",
+                "1D: 71",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.5",
+                "Att/Br: 10.1"
+            ]
+        },
+        "NYJ": {
+            "TeamRush": [
+                "Att: 410",
+                "Yds: 1622",
+                "TD: 11",
+                "1D: 84",
+                "YBC/Att: 1.8",
+                "YAC/Att: 2.1",
+                "Att/Br: 14.6"
+            ]
+        },
+        "TEN": {
+            "TeamRush": [
+                "Att: 456",
+                "Yds: 2027",
+                "TD: 15",
+                "1D: 105",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.3",
+                "Att/Br: 7.9"
+            ]
+        },
+        "PHI": {
+            "TeamRush": [
+                "Att: 398",
+                "Yds: 1570",
+                "TD: 12",
+                "1D: 93",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.9",
+                "Att/Br: 19.0"
+            ]
+        },
+        "PIT": {
+            "TeamRush": [
+                "Att: 345",
+                "Yds: 1445",
+                "TD: 16",
+                "1D: 88",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.9",
+                "Att/Br: 14.4"
+            ]
+        },
+        "LVR": {
+            "TeamRush": [
+                "Att: 387",
+                "Yds: 1628",
+                "TD: 9",
+                "1D: 86",
+                "YBC/Att: 1.9",
+                "YAC/Att: 2.3",
+                "Att/Br: 13.8"
+            ]
+        },
+        "LAR": {
+            "TeamRush": [
+                "Att: 459",
+                "Yds: 2231",
+                "TD: 23",
+                "1D: 134",
+                "YBC/Att: 2.6",
+                "YAC/Att: 2.3",
+                "Att/Br: 15.8"
+            ]
+        },
+        "BAL": {
+            "TeamRush": [
+                "Att: 547",
+                "Yds: 2441",
+                "TD: 19",
+                "1D: 152",
+                "YBC/Att: 2.4",
+                "YAC/Att: 2.1",
+                "Att/Br: 17.1"
+            ]
+        },
+        "LAC": {
+            "TeamRush": [
+                "Att: 399",
+                "Yds: 1873",
+                "TD: 16",
+                "1D: 99",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.5",
+                "Att/Br: 10.0"
+            ]
+        },
+        "SEA": {
+            "TeamRush": [
+                "Att: 534",
+                "Yds: 2560",
+                "TD: 15",
+                "1D: 133",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.9",
+                "Att/Br: 12.7"
+            ]
+        },
+        "SFO": {
+            "TeamRush": [
+                "Att: 423",
+                "Yds: 1902",
+                "TD: 7",
+                "1D: 98",
+                "YBC/Att: 2.4",
+                "YAC/Att: 2.1",
+                "Att/Br: 14.1"
+            ]
+        },
+        "TAM": {
+            "TeamRush": [
+                "Att: 389",
+                "Yds: 1523",
+                "TD: 11",
+                "1D: 80",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.7",
+                "Att/Br: 16.2"
+            ]
+        },
+        "WAS": {
+            "TeamRush": [
+                "Att: 414",
+                "Yds: 1774",
+                "TD: 12",
+                "1D: 96",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.6",
+                "Att/Br: 15.9"
+            ]
+        }
+    },
+    "2019": {
+        "ATL": {
+            "TeamRush": [
+                "Att: 362",
+                "Yds: 1361",
+                "TD: 10",
+                "1D: 84",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.5",
+                "Att/Br: 21.3"
+            ]
+        },
+        "BUF": {
+            "TeamRush": [
+                "Att: 465",
+                "Yds: 2054",
+                "TD: 13",
+                "1D: 120",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.2",
+                "Att/Br: 11.6"
+            ]
+        },
+        "CAR": {
+            "TeamRush": [
+                "Att: 386",
+                "Yds: 1819",
+                "TD: 20",
+                "1D: 82",
+                "YBC/Att: 3.1",
+                "YAC/Att: 1.6",
+                "Att/Br: 18.4"
+            ]
+        },
+        "CHI": {
+            "TeamRush": [
+                "Att: 395",
+                "Yds: 1458",
+                "TD: 8",
+                "1D: 85",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.4",
+                "Att/Br: 9.6"
+            ]
+        },
+        "CIN": {
+            "TeamRush": [
+                "Att: 385",
+                "Yds: 1517",
+                "TD: 9",
+                "1D: 85",
+                "YBC/Att: 1.9",
+                "YAC/Att: 2.1",
+                "Att/Br: 12.4"
+            ]
+        },
+        "CLE": {
+            "TeamRush": [
+                "Att: 393",
+                "Yds: 1901",
+                "TD: 15",
+                "1D: 90",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.7",
+                "Att/Br: 10.1"
+            ]
+        },
+        "IND": {
+            "TeamRush": [
+                "Att: 471",
+                "Yds: 2130",
+                "TD: 17",
+                "1D: 131",
+                "YBC/Att: 2.5",
+                "YAC/Att: 2.0",
+                "Att/Br: 17.4"
+            ]
+        },
+        "ARI": {
+            "TeamRush": [
+                "Att: 396",
+                "Yds: 1990",
+                "TD: 18",
+                "1D: 109",
+                "YBC/Att: 3.3",
+                "YAC/Att: 1.8",
+                "Att/Br: 17.2"
+            ]
+        },
+        "DAL": {
+            "TeamRush": [
+                "Att: 449",
+                "Yds: 2153",
+                "TD: 18",
+                "1D: 120",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.5",
+                "Att/Br: 11.0"
+            ]
+        },
+        "DEN": {
+            "TeamRush": [
+                "Att: 409",
+                "Yds: 1662",
+                "TD: 11",
+                "1D: 76",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.7",
+                "Att/Br: 10.2"
+            ]
+        },
+        "DET": {
+            "TeamRush": [
+                "Att: 407",
+                "Yds: 1649",
+                "TD: 7",
+                "1D: 82",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.0",
+                "Att/Br: 16.3"
+            ]
+        },
+        "GNB": {
+            "TeamRush": [
+                "Att: 411",
+                "Yds: 1795",
+                "TD: 18",
+                "1D: 90",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.9",
+                "Att/Br: 10.5"
+            ]
+        },
+        "HOU": {
+            "TeamRush": [
+                "Att: 434",
+                "Yds: 2009",
+                "TD: 17",
+                "1D: 112",
+                "YBC/Att: 2.6",
+                "YAC/Att: 2.0",
+                "Att/Br: 13.2"
+            ]
+        },
+        "JAX": {
+            "TeamRush": [
+                "Att: 389",
+                "Yds: 1708",
+                "TD: 3",
+                "1D: 84",
+                "YBC/Att: 1.8",
+                "YAC/Att: 2.6",
+                "Att/Br: 19.5"
+            ]
+        },
+        "KAN": {
+            "TeamRush": [
+                "Att: 375",
+                "Yds: 1569",
+                "TD: 16",
+                "1D: 93",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.0",
+                "Att/Br: 13.4"
+            ]
+        },
+        "MIA": {
+            "TeamRush": [
+                "Att: 349",
+                "Yds: 1156",
+                "TD: 10",
+                "1D: 64",
+                "YBC/Att: 1.7",
+                "YAC/Att: 1.6",
+                "Att/Br: 20.5"
+            ]
+        },
+        "MIN": {
+            "TeamRush": [
+                "Att: 476",
+                "Yds: 2133",
+                "TD: 19",
+                "1D: 106",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.2",
+                "Att/Br: 12.5"
+            ]
+        },
+        "NOR": {
+            "TeamRush": [
+                "Att: 405",
+                "Yds: 1738",
+                "TD: 12",
+                "1D: 97",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.9",
+                "Att/Br: 9.4"
+            ]
+        },
+        "NWE": {
+            "TeamRush": [
+                "Att: 447",
+                "Yds: 1703",
+                "TD: 17",
+                "1D: 110",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.6",
+                "Att/Br: 16.0"
+            ]
+        },
+        "NYG": {
+            "TeamRush": [
+                "Att: 362",
+                "Yds: 1685",
+                "TD: 11",
+                "1D: 89",
+                "YBC/Att: 2.4",
+                "YAC/Att: 2.2",
+                "Att/Br: 19.1"
+            ]
+        },
+        "NYJ": {
+            "TeamRush": [
+                "Att: 383",
+                "Yds: 1257",
+                "TD: 6",
+                "1D: 61",
+                "YBC/Att: 1.4",
+                "YAC/Att: 1.9",
+                "Att/Br: 18.2"
+            ]
+        },
+        "TEN": {
+            "TeamRush": [
+                "Att: 445",
+                "Yds: 2223",
+                "TD: 21",
+                "1D: 104",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.9",
+                "Att/Br: 11.1"
+            ]
+        },
+        "PHI": {
+            "TeamRush": [
+                "Att: 454",
+                "Yds: 1939",
+                "TD: 16",
+                "1D: 104",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.0",
+                "Att/Br: 14.6"
+            ]
+        },
+        "PIT": {
+            "TeamRush": [
+                "Att: 395",
+                "Yds: 1447",
+                "TD: 7",
+                "1D: 75",
+                "YBC/Att: 1.4",
+                "YAC/Att: 2.2",
+                "Att/Br: 19.8"
+            ]
+        },
+        "LVR": {
+            "TeamRush": [
+                "Att: 437",
+                "Yds: 1893",
+                "TD: 13",
+                "1D: 104",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.2",
+                "Att/Br: 14.1"
+            ]
+        },
+        "LAR": {
+            "TeamRush": [
+                "Att: 401",
+                "Yds: 1499",
+                "TD: 20",
+                "1D: 92",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.6",
+                "Att/Br: 9.8"
+            ]
+        },
+        "BAL": {
+            "TeamRush": [
+                "Att: 596",
+                "Yds: 3296",
+                "TD: 21",
+                "1D: 188",
+                "YBC/Att: 3.2",
+                "YAC/Att: 2.3",
+                "Att/Br: 18.6"
+            ]
+        },
+        "LAC": {
+            "TeamRush": [
+                "Att: 366",
+                "Yds: 1453",
+                "TD: 12",
+                "1D: 90",
+                "YBC/Att: 1.9",
+                "YAC/Att: 2.0",
+                "Att/Br: 15.3"
+            ]
+        },
+        "SEA": {
+            "TeamRush": [
+                "Att: 481",
+                "Yds: 2200",
+                "TD: 15",
+                "1D: 121",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.2",
+                "Att/Br: 12.7"
+            ]
+        },
+        "SFO": {
+            "TeamRush": [
+                "Att: 498",
+                "Yds: 2305",
+                "TD: 23",
+                "1D: 110",
+                "YBC/Att: 3.0",
+                "YAC/Att: 1.7",
+                "Att/Br: 17.2"
+            ]
+        },
+        "TAM": {
+            "TeamRush": [
+                "Att: 409",
+                "Yds: 1521",
+                "TD: 15",
+                "1D: 81",
+                "YBC/Att: 1.8",
+                "YAC/Att: 1.9",
+                "Att/Br: 11.7"
+            ]
+        },
+        "WAS": {
+            "TeamRush": [
+                "Att: 356",
+                "Yds: 1583",
+                "TD: 9",
+                "1D: 74",
+                "YBC/Att: 1.9",
+                "YAC/Att: 2.5",
+                "Att/Br: 23.7"
+            ]
+        }
+    },
+    "2020": {
+        "ATL": {
+            "TeamRush": [
+                "Att: 409",
+                "Yds: 1532",
+                "TD: 13",
+                "1D: 86",
+                "YBC/Att: 2.0",
+                "YAC/Att: 1.8",
+                "Att/Br: 15.1"
+            ]
+        },
+        "BUF": {
+            "TeamRush": [
+                "Att: 411",
+                "Yds: 1723",
+                "TD: 16",
+                "1D: 119",
+                "YBC/Att: 1.9",
+                "YAC/Att: 2.3",
+                "Att/Br: 14.7"
+            ]
+        },
+        "CAR": {
+            "TeamRush": [
+                "Att: 407",
+                "Yds: 1704",
+                "TD: 19",
+                "1D: 110",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.1",
+                "Att/Br: 9.7"
+            ]
+        },
+        "CHI": {
+            "TeamRush": [
+                "Att: 393",
+                "Yds: 1647",
+                "TD: 12",
+                "1D: 93",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.0",
+                "Att/Br: 10.1"
+            ]
+        },
+        "CIN": {
+            "TeamRush": [
+                "Att: 411",
+                "Yds: 1668",
+                "TD: 13",
+                "1D: 92",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.8",
+                "Att/Br: 17.9"
+            ]
+        },
+        "CLE": {
+            "TeamRush": [
+                "Att: 495",
+                "Yds: 2374",
+                "TD: 21",
+                "1D: 133",
+                "YBC/Att: 2.5",
+                "YAC/Att: 2.3",
+                "Att/Br: 11.8"
+            ]
+        },
+        "IND": {
+            "TeamRush": [
+                "Att: 459",
+                "Yds: 1996",
+                "TD: 20",
+                "1D: 129",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.9",
+                "Att/Br: 13.1"
+            ]
+        },
+        "ARI": {
+            "TeamRush": [
+                "Att: 479",
+                "Yds: 2237",
+                "TD: 22",
+                "1D: 136",
+                "YBC/Att: 3.1",
+                "YAC/Att: 1.5",
+                "Att/Br: 15.5"
+            ]
+        },
+        "DAL": {
+            "TeamRush": [
+                "Att: 430",
+                "Yds: 1788",
+                "TD: 14",
+                "1D: 115",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.0",
+                "Att/Br: 16.5"
+            ]
+        },
+        "DEN": {
+            "TeamRush": [
+                "Att: 442",
+                "Yds: 1918",
+                "TD: 13",
+                "1D: 94",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.7",
+                "Att/Br: 19.2"
+            ]
+        },
+        "DET": {
+            "TeamRush": [
+                "Att: 367",
+                "Yds: 1499",
+                "TD: 17",
+                "1D: 93",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.4",
+                "Att/Br: 15.3"
+            ]
+        },
+        "GNB": {
+            "TeamRush": [
+                "Att: 443",
+                "Yds: 2118",
+                "TD: 16",
+                "1D: 114",
+                "YBC/Att: 2.5",
+                "YAC/Att: 2.3",
+                "Att/Br: 17.0"
+            ]
+        },
+        "HOU": {
+            "TeamRush": [
+                "Att: 344",
+                "Yds: 1466",
+                "TD: 10",
+                "1D: 83",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.6",
+                "Att/Br: 17.2"
+            ]
+        },
+        "JAX": {
+            "TeamRush": [
+                "Att: 337",
+                "Yds: 1519",
+                "TD: 9",
+                "1D: 80",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.3",
+                "Att/Br: 16.9"
+            ]
+        },
+        "KAN": {
+            "TeamRush": [
+                "Att: 403",
+                "Yds: 1799",
+                "TD: 13",
+                "1D: 110",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.8",
+                "Att/Br: 16.1"
+            ]
+        },
+        "MIA": {
+            "TeamRush": [
+                "Att: 428",
+                "Yds: 1688",
+                "TD: 15",
+                "1D: 100",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.4",
+                "Att/Br: 22.5"
+            ]
+        },
+        "MIN": {
+            "TeamRush": [
+                "Att: 468",
+                "Yds: 2283",
+                "TD: 20",
+                "1D: 139",
+                "YBC/Att: 2.6",
+                "YAC/Att: 2.3",
+                "Att/Br: 9.6"
+            ]
+        },
+        "NOR": {
+            "TeamRush": [
+                "Att: 494",
+                "Yds: 2265",
+                "TD: 30",
+                "1D: 147",
+                "YBC/Att: 2.8",
+                "YAC/Att: 1.8",
+                "Att/Br: 17.6"
+            ]
+        },
+        "NWE": {
+            "TeamRush": [
+                "Att: 502",
+                "Yds: 2346",
+                "TD: 20",
+                "1D: 143",
+                "YBC/Att: 2.8",
+                "YAC/Att: 1.9",
+                "Att/Br: 14.3"
+            ]
+        },
+        "NYG": {
+            "TeamRush": [
+                "Att: 399",
+                "Yds: 1768",
+                "TD: 13",
+                "1D: 91",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.8",
+                "Att/Br: 22.2"
+            ]
+        },
+        "NYJ": {
+            "TeamRush": [
+                "Att: 406",
+                "Yds: 1683",
+                "TD: 9",
+                "1D: 94",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.0",
+                "Att/Br: 21.4"
+            ]
+        },
+        "TEN": {
+            "TeamRush": [
+                "Att: 521",
+                "Yds: 2690",
+                "TD: 26",
+                "1D: 142",
+                "YBC/Att: 2.7",
+                "YAC/Att: 2.5",
+                "Att/Br: 12.7"
+            ]
+        },
+        "PHI": {
+            "TeamRush": [
+                "Att: 403",
+                "Yds: 2027",
+                "TD: 16",
+                "1D: 114",
+                "YBC/Att: 3.1",
+                "YAC/Att: 2.0",
+                "Att/Br: 13.9"
+            ]
+        },
+        "PIT": {
+            "TeamRush": [
+                "Att: 373",
+                "Yds: 1351",
+                "TD: 12",
+                "1D: 81",
+                "YBC/Att: 1.9",
+                "YAC/Att: 1.7",
+                "Att/Br: 14.9"
+            ]
+        },
+        "LVR": {
+            "TeamRush": [
+                "Att: 457",
+                "Yds: 1916",
+                "TD: 20",
+                "1D: 121",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.8",
+                "Att/Br: 16.3"
+            ]
+        },
+        "LAR": {
+            "TeamRush": [
+                "Att: 473",
+                "Yds: 2018",
+                "TD: 19",
+                "1D: 123",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.7",
+                "Att/Br: 22.5"
+            ]
+        },
+        "BAL": {
+            "TeamRush": [
+                "Att: 555",
+                "Yds: 3071",
+                "TD: 24",
+                "1D: 165",
+                "YBC/Att: 3.4",
+                "YAC/Att: 2.2",
+                "Att/Br: 16.8"
+            ]
+        },
+        "LAC": {
+            "TeamRush": [
+                "Att: 466",
+                "Yds: 1784",
+                "TD: 12",
+                "1D: 111",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.7",
+                "Att/Br: 15.5"
+            ]
+        },
+        "SEA": {
+            "TeamRush": [
+                "Att: 411",
+                "Yds: 1971",
+                "TD: 15",
+                "1D: 111",
+                "YBC/Att: 3.1",
+                "YAC/Att: 1.7",
+                "Att/Br: 20.6"
+            ]
+        },
+        "SFO": {
+            "TeamRush": [
+                "Att: 437",
+                "Yds: 1889",
+                "TD: 19",
+                "1D: 101",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.8",
+                "Att/Br: 19.0"
+            ]
+        },
+        "TAM": {
+            "TeamRush": [
+                "Att: 369",
+                "Yds: 1519",
+                "TD: 16",
+                "1D: 82",
+                "YBC/Att: 1.8",
+                "YAC/Att: 2.3",
+                "Att/Br: 28.4"
+            ]
+        },
+        "WAS": {
+            "TeamRush": [
+                "Att: 400",
+                "Yds: 1611",
+                "TD: 18",
+                "1D: 108",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.8",
+                "Att/Br: 11.4"
+            ]
+        }
+    },
+    "2021": {
+        "ATL": {
+            "TeamRush": [
+                "Att: 393",
+                "Yds: 1451",
+                "TD: 11",
+                "1D: 75",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.6",
+                "Att/Br: 20.7"
+            ]
+        },
+        "BUF": {
+            "TeamRush": [
+                "Att: 461",
+                "Yds: 2209",
+                "TD: 20",
+                "1D: 134",
+                "YBC/Att: 2.6",
+                "YAC/Att: 2.2",
+                "Att/Br: 11.5"
+            ]
+        },
+        "CAR": {
+            "TeamRush": [
+                "Att: 455",
+                "Yds: 1842",
+                "TD: 17",
+                "1D: 117",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.8",
+                "Att/Br: 14.7"
+            ]
+        },
+        "CHI": {
+            "TeamRush": [
+                "Att: 475",
+                "Yds: 2018",
+                "TD: 14",
+                "1D: 119",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.7",
+                "Att/Br: 12.8"
+            ]
+        },
+        "CIN": {
+            "TeamRush": [
+                "Att: 436",
+                "Yds: 1742",
+                "TD: 16",
+                "1D: 96",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.8",
+                "Att/Br: 12.1"
+            ]
+        },
+        "CLE": {
+            "TeamRush": [
+                "Att: 485",
+                "Yds: 2471",
+                "TD: 20",
+                "1D: 138",
+                "YBC/Att: 2.6",
+                "YAC/Att: 2.5",
+                "Att/Br: 11.0"
+            ]
+        },
+        "IND": {
+            "TeamRush": [
+                "Att: 499",
+                "Yds: 2540",
+                "TD: 22",
+                "1D: 154",
+                "YBC/Att: 2.7",
+                "YAC/Att: 2.4",
+                "Att/Br: 13.5"
+            ]
+        },
+        "ARI": {
+            "TeamRush": [
+                "Att: 496",
+                "Yds: 2076",
+                "TD: 23",
+                "1D: 127",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.6",
+                "Att/Br: 17.7"
+            ]
+        },
+        "DAL": {
+            "TeamRush": [
+                "Att: 473",
+                "Yds: 2119",
+                "TD: 15",
+                "1D: 111",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.8",
+                "Att/Br: 24.9"
+            ]
+        },
+        "DEN": {
+            "TeamRush": [
+                "Att: 455",
+                "Yds: 2025",
+                "TD: 16",
+                "1D: 123",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.1",
+                "Att/Br: 8.8"
+            ]
+        },
+        "DET": {
+            "TeamRush": [
+                "Att: 427",
+                "Yds: 1886",
+                "TD: 12",
+                "1D: 104",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.7",
+                "Att/Br: 16.4"
+            ]
+        },
+        "GNB": {
+            "TeamRush": [
+                "Att: 446",
+                "Yds: 1900",
+                "TD: 13",
+                "1D: 109",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.0",
+                "Att/Br: 13.9"
+            ]
+        },
+        "HOU": {
+            "TeamRush": [
+                "Att: 420",
+                "Yds: 1422",
+                "TD: 8",
+                "1D: 77",
+                "YBC/Att: 1.7",
+                "YAC/Att: 1.6",
+                "Att/Br: 28.0"
+            ]
+        },
+        "JAX": {
+            "TeamRush": [
+                "Att: 392",
+                "Yds: 1755",
+                "TD: 13",
+                "1D: 92",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.6",
+                "Att/Br: 21.8"
+            ]
+        },
+        "KAN": {
+            "TeamRush": [
+                "Att: 431",
+                "Yds: 1955",
+                "TD: 16",
+                "1D: 119",
+                "YBC/Att: 3.1",
+                "YAC/Att: 1.4",
+                "Att/Br: 30.8"
+            ]
+        },
+        "MIA": {
+            "TeamRush": [
+                "Att: 442",
+                "Yds: 1568",
+                "TD: 12",
+                "1D: 87",
+                "YBC/Att: 2.0",
+                "YAC/Att: 1.6",
+                "Att/Br: 19.2"
+            ]
+        },
+        "MIN": {
+            "TeamRush": [
+                "Att: 449",
+                "Yds: 1930",
+                "TD: 10",
+                "1D: 103",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.9",
+                "Att/Br: 13.6"
+            ]
+        },
+        "NOR": {
+            "TeamRush": [
+                "Att: 510",
+                "Yds: 1991",
+                "TD: 12",
+                "1D: 113",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.6",
+                "Att/Br: 12.8"
+            ]
+        },
+        "NWE": {
+            "TeamRush": [
+                "Att: 489",
+                "Yds: 2151",
+                "TD: 24",
+                "1D: 139",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.2",
+                "Att/Br: 13.2"
+            ]
+        },
+        "NYG": {
+            "TeamRush": [
+                "Att: 419",
+                "Yds: 1688",
+                "TD: 8",
+                "1D: 90",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.5",
+                "Att/Br: 46.6"
+            ]
+        },
+        "NYJ": {
+            "TeamRush": [
+                "Att: 380",
+                "Yds: 1667",
+                "TD: 14",
+                "1D: 87",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.9",
+                "Att/Br: 15.8"
+            ]
+        },
+        "TEN": {
+            "TeamRush": [
+                "Att: 551",
+                "Yds: 2404",
+                "TD: 23",
+                "1D: 134",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.0",
+                "Att/Br: 19.7"
+            ]
+        },
+        "PHI": {
+            "TeamRush": [
+                "Att: 550",
+                "Yds: 2715",
+                "TD: 25",
+                "1D: 163",
+                "YBC/Att: 3.3",
+                "YAC/Att: 1.7",
+                "Att/Br: 14.1"
+            ]
+        },
+        "PIT": {
+            "TeamRush": [
+                "Att: 411",
+                "Yds: 1583",
+                "TD: 10",
+                "1D: 85",
+                "YBC/Att: 1.9",
+                "YAC/Att: 2.0",
+                "Att/Br: 11.7"
+            ]
+        },
+        "LVR": {
+            "TeamRush": [
+                "Att: 414",
+                "Yds: 1617",
+                "TD: 14",
+                "1D: 95",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.7",
+                "Att/Br: 14.8"
+            ]
+        },
+        "LAR": {
+            "TeamRush": [
+                "Att: 420",
+                "Yds: 1683",
+                "TD: 10",
+                "1D: 99",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.8",
+                "Att/Br: 22.1"
+            ]
+        },
+        "BAL": {
+            "TeamRush": [
+                "Att: 517",
+                "Yds: 2479",
+                "TD: 18",
+                "1D: 159",
+                "YBC/Att: 3.1",
+                "YAC/Att: 1.7",
+                "Att/Br: 16.7"
+            ]
+        },
+        "LAC": {
+            "TeamRush": [
+                "Att: 423",
+                "Yds: 1834",
+                "TD: 18",
+                "1D: 112",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.7",
+                "Att/Br: 23.5"
+            ]
+        },
+        "SEA": {
+            "TeamRush": [
+                "Att: 413",
+                "Yds: 2074",
+                "TD: 18",
+                "1D: 106",
+                "YBC/Att: 2.8",
+                "YAC/Att: 2.2",
+                "Att/Br: 12.1"
+            ]
+        },
+        "SFO": {
+            "TeamRush": [
+                "Att: 499",
+                "Yds: 2166",
+                "TD: 22",
+                "1D: 130",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.0",
+                "Att/Br: 15.6"
+            ]
+        },
+        "TAM": {
+            "TeamRush": [
+                "Att: 385",
+                "Yds: 1672",
+                "TD: 18",
+                "1D: 106",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.0",
+                "Att/Br: 18.3"
+            ]
+        },
+        "WAS": {
+            "TeamRush": [
+                "Att: 477",
+                "Yds: 2061",
+                "TD: 13",
+                "1D: 129",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.7",
+                "Att/Br: 18.3"
+            ]
+        }
+    },
+    "2022": {
+        "ATL": {
+            "TeamRush": [
+                "Att: 559",
+                "Yds: 2718",
+                "TD: 17",
+                "1D: 152",
+                "YBC/Att: 3.0",
+                "YAC/Att: 1.8",
+                "Att/Br: 55.9"
+            ]
+        },
+        "BUF": {
+            "TeamRush": [
+                "Att: 430",
+                "Yds: 2232",
+                "TD: 15",
+                "1D: 130",
+                "YBC/Att: 3.7",
+                "YAC/Att: 1.5",
+                "Att/Br: 25.3"
+            ]
+        },
+        "CAR": {
+            "TeamRush": [
+                "Att: 483",
+                "Yds: 2210",
+                "TD: 16",
+                "1D: 119",
+                "YBC/Att: 2.8",
+                "YAC/Att: 1.8",
+                "Att/Br: 25.4"
+            ]
+        },
+        "CHI": {
+            "TeamRush": [
+                "Att: 558",
+                "Yds: 3014",
+                "TD: 18",
+                "1D: 148",
+                "YBC/Att: 3.4",
+                "YAC/Att: 2.0",
+                "Att/Br: 13.6"
+            ]
+        },
+        "CIN": {
+            "TeamRush": [
+                "Att: 399",
+                "Yds: 1528",
+                "TD: 14",
+                "1D: 97",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.3",
+                "Att/Br: 26.6"
+            ]
+        },
+        "CLE": {
+            "TeamRush": [
+                "Att: 532",
+                "Yds: 2490",
+                "TD: 19",
+                "1D: 142",
+                "YBC/Att: 2.7",
+                "YAC/Att: 2.0",
+                "Att/Br: 14.8"
+            ]
+        },
+        "IND": {
+            "TeamRush": [
+                "Att: 439",
+                "Yds: 1866",
+                "TD: 8",
+                "1D: 91",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.7",
+                "Att/Br: 13.3"
+            ]
+        },
+        "ARI": {
+            "TeamRush": [
+                "Att: 434",
+                "Yds: 1873",
+                "TD: 15",
+                "1D: 115",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.4",
+                "Att/Br: 27.1"
+            ]
+        },
+        "DAL": {
+            "TeamRush": [
+                "Att: 531",
+                "Yds: 2298",
+                "TD: 24",
+                "1D: 129",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.8",
+                "Att/Br: 22.1"
+            ]
+        },
+        "DEN": {
+            "TeamRush": [
+                "Att: 444",
+                "Yds: 1935",
+                "TD: 11",
+                "1D: 105",
+                "YBC/Att: 2.8",
+                "YAC/Att: 1.6",
+                "Att/Br: 18.5"
+            ]
+        },
+        "DET": {
+            "TeamRush": [
+                "Att: 480",
+                "Yds: 2179",
+                "TD: 23",
+                "1D: 114",
+                "YBC/Att: 3.0",
+                "YAC/Att: 1.6",
+                "Att/Br: 22.9"
+            ]
+        },
+        "GNB": {
+            "TeamRush": [
+                "Att: 456",
+                "Yds: 2113",
+                "TD: 12",
+                "1D: 116",
+                "YBC/Att: 2.8",
+                "YAC/Att: 1.8",
+                "Att/Br: 24.0"
+            ]
+        },
+        "HOU": {
+            "TeamRush": [
+                "Att: 398",
+                "Yds: 1476",
+                "TD: 7",
+                "1D: 90",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.6",
+                "Att/Br: 12.4"
+            ]
+        },
+        "JAX": {
+            "TeamRush": [
+                "Att: 448",
+                "Yds: 2116",
+                "TD: 16",
+                "1D: 114",
+                "YBC/Att: 3.3",
+                "YAC/Att: 1.4",
+                "Att/Br: 16.0"
+            ]
+        },
+        "KAN": {
+            "TeamRush": [
+                "Att: 417",
+                "Yds: 1970",
+                "TD: 18",
+                "1D: 105",
+                "YBC/Att: 3.2",
+                "YAC/Att: 1.5",
+                "Att/Br: 24.5"
+            ]
+        },
+        "MIA": {
+            "TeamRush": [
+                "Att: 390",
+                "Yds: 1686",
+                "TD: 12",
+                "1D: 93",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.7",
+                "Att/Br: 15.6"
+            ]
+        },
+        "MIN": {
+            "TeamRush": [
+                "Att: 404",
+                "Yds: 1661",
+                "TD: 18",
+                "1D: 93",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.6",
+                "Att/Br: 21.3"
+            ]
+        },
+        "NOR": {
+            "TeamRush": [
+                "Att: 465",
+                "Yds: 1982",
+                "TD: 12",
+                "1D: 103",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.9",
+                "Att/Br: 33.2"
+            ]
+        },
+        "NWE": {
+            "TeamRush": [
+                "Att: 425",
+                "Yds: 1812",
+                "TD: 12",
+                "1D: 98",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.6",
+                "Att/Br: 12.1"
+            ]
+        },
+        "NYG": {
+            "TeamRush": [
+                "Att: 520",
+                "Yds: 2519",
+                "TD: 21",
+                "1D: 150",
+                "YBC/Att: 3.2",
+                "YAC/Att: 1.7",
+                "Att/Br: 28.9"
+            ]
+        },
+        "NYJ": {
+            "TeamRush": [
+                "Att: 405",
+                "Yds: 1686",
+                "TD: 13",
+                "1D: 79",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.2",
+                "Att/Br: 19.3"
+            ]
+        },
+        "TEN": {
+            "TeamRush": [
+                "Att: 487",
+                "Yds: 2131",
+                "TD: 16",
+                "1D: 104",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.0",
+                "Att/Br: 11.6"
+            ]
+        },
+        "PHI": {
+            "TeamRush": [
+                "Att: 544",
+                "Yds: 2509",
+                "TD: 32",
+                "1D: 161",
+                "YBC/Att: 3.3",
+                "YAC/Att: 1.3",
+                "Att/Br: 21.8"
+            ]
+        },
+        "PIT": {
+            "TeamRush": [
+                "Att: 500",
+                "Yds: 2073",
+                "TD: 16",
+                "1D: 129",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.5",
+                "Att/Br: 17.9"
+            ]
+        },
+        "LVR": {
+            "TeamRush": [
+                "Att: 428",
+                "Yds: 2059",
+                "TD: 12",
+                "1D: 122",
+                "YBC/Att: 2.7",
+                "YAC/Att: 2.1",
+                "Att/Br: 13.4"
+            ]
+        },
+        "LAR": {
+            "TeamRush": [
+                "Att: 411",
+                "Yds: 1661",
+                "TD: 15",
+                "1D: 89",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.7",
+                "Att/Br: 21.6"
+            ]
+        },
+        "BAL": {
+            "TeamRush": [
+                "Att: 526",
+                "Yds: 2720",
+                "TD: 14",
+                "1D: 167",
+                "YBC/Att: 3.5",
+                "YAC/Att: 1.6",
+                "Att/Br: 14.2"
+            ]
+        },
+        "LAC": {
+            "TeamRush": [
+                "Att: 404",
+                "Yds: 1524",
+                "TD: 15",
+                "1D: 93",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.5",
+                "Att/Br: 33.7"
+            ]
+        },
+        "SEA": {
+            "TeamRush": [
+                "Att: 425",
+                "Yds: 2042",
+                "TD: 12",
+                "1D: 106",
+                "YBC/Att: 3.1",
+                "YAC/Att: 1.8",
+                "Att/Br: 20.2"
+            ]
+        },
+        "SFO": {
+            "TeamRush": [
+                "Att: 504",
+                "Yds: 2360",
+                "TD: 20",
+                "1D: 132",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.8",
+                "Att/Br: 22.9"
+            ]
+        },
+        "TAM": {
+            "TeamRush": [
+                "Att: 386",
+                "Yds: 1308",
+                "TD: 5",
+                "1D: 79",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.3",
+                "Att/Br: 42.9"
+            ]
+        },
+        "WAS": {
+            "TeamRush": [
+                "Att: 538",
+                "Yds: 2143",
+                "TD: 9",
+                "1D: 124",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.6",
+                "Att/Br: 29.9"
+            ]
+        }
+    },
+    "2023": {
+        "ATL": {
+            "TeamRush": [
+                "Att: 522",
+                "Yds: 2159",
+                "TD: 14",
+                "1D: 121",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.7",
+                "Att/Br: 15.4"
+            ]
+        },
+        "BUF": {
+            "TeamRush": [
+                "Att: 512",
+                "Yds: 2212",
+                "TD: 22",
+                "1D: 158",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.8",
+                "Att/Br: 21.3"
+            ]
+        },
+        "CAR": {
+            "TeamRush": [
+                "Att: 445",
+                "Yds: 1769",
+                "TD: 7",
+                "1D: 111",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.8",
+                "Att/Br: 13.1"
+            ]
+        },
+        "CHI": {
+            "TeamRush": [
+                "Att: 534",
+                "Yds: 2399",
+                "TD: 16",
+                "1D: 137",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.6",
+                "Att/Br: 16.7"
+            ]
+        },
+        "CIN": {
+            "TeamRush": [
+                "Att: 383",
+                "Yds: 1527",
+                "TD: 12",
+                "1D: 90",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.5",
+                "Att/Br: 31.9"
+            ]
+        },
+        "CLE": {
+            "TeamRush": [
+                "Att: 518",
+                "Yds: 2017",
+                "TD: 15",
+                "1D: 121",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.7",
+                "Att/Br: 12.6"
+            ]
+        },
+        "IND": {
+            "TeamRush": [
+                "Att: 479",
+                "Yds: 2059",
+                "TD: 19",
+                "1D: 113",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.0",
+                "Att/Br: 20.8"
+            ]
+        },
+        "ARI": {
+            "TeamRush": [
+                "Att: 471",
+                "Yds: 2365",
+                "TD: 17",
+                "1D: 127",
+                "YBC/Att: 3.2",
+                "YAC/Att: 1.8",
+                "Att/Br: 12.1"
+            ]
+        },
+        "DAL": {
+            "TeamRush": [
+                "Att: 468",
+                "Yds: 1920",
+                "TD: 14",
+                "1D: 113",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.8",
+                "Att/Br: 14.6"
+            ]
+        },
+        "DEN": {
+            "TeamRush": [
+                "Att: 451",
+                "Yds: 1810",
+                "TD: 8",
+                "1D: 116",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.7",
+                "Att/Br: 23.7"
+            ]
+        },
+        "DET": {
+            "TeamRush": [
+                "Att: 500",
+                "Yds: 2311",
+                "TD: 27",
+                "1D: 124",
+                "YBC/Att: 2.5",
+                "YAC/Att: 2.2",
+                "Att/Br: 12.5"
+            ]
+        },
+        "GNB": {
+            "TeamRush": [
+                "Att: 441",
+                "Yds: 1905",
+                "TD: 10",
+                "1D: 101",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.8",
+                "Att/Br: 15.8"
+            ]
+        },
+        "HOU": {
+            "TeamRush": [
+                "Att: 444",
+                "Yds: 1647",
+                "TD: 10",
+                "1D: 84",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.5",
+                "Att/Br: 15.3"
+            ]
+        },
+        "JAX": {
+            "TeamRush": [
+                "Att: 453",
+                "Yds: 1646",
+                "TD: 17",
+                "1D: 98",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.4",
+                "Att/Br: 10.1"
+            ]
+        },
+        "KAN": {
+            "TeamRush": [
+                "Att: 417",
+                "Yds: 1784",
+                "TD: 9",
+                "1D: 107",
+                "YBC/Att: 2.8",
+                "YAC/Att: 1.5",
+                "Att/Br: 18.1"
+            ]
+        },
+        "MIA": {
+            "TeamRush": [
+                "Att: 456",
+                "Yds: 2308",
+                "TD: 27",
+                "1D: 113",
+                "YBC/Att: 2.8",
+                "YAC/Att: 2.3",
+                "Att/Br: 12.0"
+            ]
+        },
+        "MIN": {
+            "TeamRush": [
+                "Att: 393",
+                "Yds: 1553",
+                "TD: 7",
+                "1D: 79",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.6",
+                "Att/Br: 30.2"
+            ]
+        },
+        "NOR": {
+            "TeamRush": [
+                "Att: 480",
+                "Yds: 1742",
+                "TD: 13",
+                "1D: 112",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.4",
+                "Att/Br: 22.9"
+            ]
+        },
+        "NWE": {
+            "TeamRush": [
+                "Att: 415",
+                "Yds: 1627",
+                "TD: 9",
+                "1D: 93",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.9",
+                "Att/Br: 21.8"
+            ]
+        },
+        "NYG": {
+            "TeamRush": [
+                "Att: 454",
+                "Yds: 1874",
+                "TD: 10",
+                "1D: 97",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.5",
+                "Att/Br: 25.2"
+            ]
+        },
+        "NYJ": {
+            "TeamRush": [
+                "Att: 388",
+                "Yds: 1647",
+                "TD: 7",
+                "1D: 77",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.8",
+                "Att/Br: 13.9"
+            ]
+        },
+        "TEN": {
+            "TeamRush": [
+                "Att: 444",
+                "Yds: 1846",
+                "TD: 16",
+                "1D: 103",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.0",
+                "Att/Br: 15.9"
+            ]
+        },
+        "PHI": {
+            "TeamRush": [
+                "Att: 510",
+                "Yds: 2190",
+                "TD: 22",
+                "1D: 149",
+                "YBC/Att: 2.8",
+                "YAC/Att: 1.5",
+                "Att/Br: 15.5"
+            ]
+        },
+        "PIT": {
+            "TeamRush": [
+                "Att: 487",
+                "Yds: 2010",
+                "TD: 16",
+                "1D: 115",
+                "YBC/Att: 2.0",
+                "YAC/Att: 2.1",
+                "Att/Br: 8.3"
+            ]
+        },
+        "LVR": {
+            "TeamRush": [
+                "Att: 413",
+                "Yds: 1542",
+                "TD: 11",
+                "1D: 83",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.6",
+                "Att/Br: 18.0"
+            ]
+        },
+        "LAR": {
+            "TeamRush": [
+                "Att: 477",
+                "Yds: 2045",
+                "TD: 18",
+                "1D: 110",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.7",
+                "Att/Br: 11.9"
+            ]
+        },
+        "BAL": {
+            "TeamRush": [
+                "Att: 541",
+                "Yds: 2661",
+                "TD: 26",
+                "1D: 145",
+                "YBC/Att: 3.1",
+                "YAC/Att: 1.8",
+                "Att/Br: 11.8"
+            ]
+        },
+        "LAC": {
+            "TeamRush": [
+                "Att: 431",
+                "Yds: 1642",
+                "TD: 11",
+                "1D: 89",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.5",
+                "Att/Br: 18.7"
+            ]
+        },
+        "SEA": {
+            "TeamRush": [
+                "Att: 382",
+                "Yds: 1580",
+                "TD: 11",
+                "1D: 93",
+                "YBC/Att: 2.6",
+                "YAC/Att: 1.5",
+                "Att/Br: 11.6"
+            ]
+        },
+        "SFO": {
+            "TeamRush": [
+                "Att: 499",
+                "Yds: 2389",
+                "TD: 27",
+                "1D: 147",
+                "YBC/Att: 2.8",
+                "YAC/Att: 2.0",
+                "Att/Br: 16.6"
+            ]
+        },
+        "TAM": {
+            "TeamRush": [
+                "Att: 439",
+                "Yds: 1509",
+                "TD: 8",
+                "1D: 79",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.4",
+                "Att/Br: 20.9"
+            ]
+        },
+        "WAS": {
+            "TeamRush": [
+                "Att: 359",
+                "Yds: 1592",
+                "TD: 14",
+                "1D: 99",
+                "YBC/Att: 2.3",
+                "YAC/Att: 2.1",
+                "Att/Br: 10.6"
+            ]
+        }
+    },
+    "2024": {
+        "ATL": {
+            "TeamRush": [
+                "Att: 495",
+                "Yds: 2219",
+                "TD: 18",
+                "1D: 133",
+                "YBC/Att: 2.2",
+                "YAC/Att: 2.3",
+                "Att/Br: 16.5"
+            ]
+        },
+        "BUF": {
+            "TeamRush": [
+                "Att: 491",
+                "Yds: 2230",
+                "TD: 32",
+                "1D: 140",
+                "YBC/Att: 2.5",
+                "YAC/Att: 2.1",
+                "Att/Br: 15.8"
+            ]
+        },
+        "CAR": {
+            "TeamRush": [
+                "Att: 410",
+                "Yds: 1878",
+                "TD: 18",
+                "1D: 99",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.9",
+                "Att/Br: 15.8"
+            ]
+        },
+        "CHI": {
+            "TeamRush": [
+                "Att: 431",
+                "Yds: 1734",
+                "TD: 13",
+                "1D: 97",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.6",
+                "Att/Br: 33.2"
+            ]
+        },
+        "CIN": {
+            "TeamRush": [
+                "Att: 380",
+                "Yds: 1574",
+                "TD: 11",
+                "1D: 88",
+                "YBC/Att: 2.7",
+                "YAC/Att: 1.5",
+                "Att/Br: 14.1"
+            ]
+        },
+        "CLE": {
+            "TeamRush": [
+                "Att: 391",
+                "Yds: 1608",
+                "TD: 8",
+                "1D: 93",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.6",
+                "Att/Br: 32.6"
+            ]
+        },
+        "IND": {
+            "TeamRush": [
+                "Att: 496",
+                "Yds: 2331",
+                "TD: 20",
+                "1D: 130",
+                "YBC/Att: 2.9",
+                "YAC/Att: 1.8",
+                "Att/Br: 17.7"
+            ]
+        },
+        "ARI": {
+            "TeamRush": [
+                "Att: 463",
+                "Yds: 2451",
+                "TD: 18",
+                "1D: 136",
+                "YBC/Att: 3.0",
+                "YAC/Att: 2.3",
+                "Att/Br: 13.6"
+            ]
+        },
+        "DAL": {
+            "TeamRush": [
+                "Att: 429",
+                "Yds: 1705",
+                "TD: 6",
+                "1D: 98",
+                "YBC/Att: 2.1",
+                "YAC/Att: 1.8",
+                "Att/Br: 25.2"
+            ]
+        },
+        "DEN": {
+            "TeamRush": [
+                "Att: 461",
+                "Yds: 1908",
+                "TD: 12",
+                "1D: 124",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.7",
+                "Att/Br: 23.1"
+            ]
+        },
+        "DET": {
+            "TeamRush": [
+                "Att: 534",
+                "Yds: 2488",
+                "TD: 29",
+                "1D: 144",
+                "YBC/Att: 2.6",
+                "YAC/Att: 2.1",
+                "Att/Br: 12.7"
+            ]
+        },
+        "GNB": {
+            "TeamRush": [
+                "Att: 526",
+                "Yds: 2496",
+                "TD: 23",
+                "1D: 142",
+                "YBC/Att: 2.4",
+                "YAC/Att: 2.4",
+                "Att/Br: 9.1"
+            ]
+        },
+        "HOU": {
+            "TeamRush": [
+                "Att: 434",
+                "Yds: 1909",
+                "TD: 15",
+                "1D: 89",
+                "YBC/Att: 2.4",
+                "YAC/Att: 2.0",
+                "Att/Br: 14.0"
+            ]
+        },
+        "JAX": {
+            "TeamRush": [
+                "Att: 414",
+                "Yds: 1729",
+                "TD: 13",
+                "1D: 106",
+                "YBC/Att: 2.0",
+                "YAC/Att: 2.2",
+                "Att/Br: 21.8"
+            ]
+        },
+        "KAN": {
+            "TeamRush": [
+                "Att: 450",
+                "Yds: 1790",
+                "TD: 15",
+                "1D: 106",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.6",
+                "Att/Br: 37.5"
+            ]
+        },
+        "MIA": {
+            "TeamRush": [
+                "Att: 448",
+                "Yds: 1795",
+                "TD: 12",
+                "1D: 90",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.8",
+                "Att/Br: 34.5"
+            ]
+        },
+        "MIN": {
+            "TeamRush": [
+                "Att: 457",
+                "Yds: 1855",
+                "TD: 9",
+                "1D: 100",
+                "YBC/Att: 2.3",
+                "YAC/Att: 1.8",
+                "Att/Br: 25.4"
+            ]
+        },
+        "NOR": {
+            "TeamRush": [
+                "Att: 444",
+                "Yds: 1954",
+                "TD: 15",
+                "1D: 111",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.9",
+                "Att/Br: 17.1"
+            ]
+        },
+        "NWE": {
+            "TeamRush": [
+                "Att: 446",
+                "Yds: 1969",
+                "TD: 11",
+                "1D: 101",
+                "YBC/Att: 2.4",
+                "YAC/Att: 2.1",
+                "Att/Br: 15.9"
+            ]
+        },
+        "NYG": {
+            "TeamRush": [
+                "Att: 424",
+                "Yds: 1783",
+                "TD: 13",
+                "1D: 104",
+                "YBC/Att: 2.5",
+                "YAC/Att: 1.7",
+                "Att/Br: 20.2"
+            ]
+        },
+        "NYJ": {
+            "TeamRush": [
+                "Att: 363",
+                "Yds: 1561",
+                "TD: 8",
+                "1D: 83",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.2",
+                "Att/Br: 19.1"
+            ]
+        },
+        "TEN": {
+            "TeamRush": [
+                "Att: 450",
+                "Yds: 1855",
+                "TD: 11",
+                "1D: 112",
+                "YBC/Att: 2.1",
+                "YAC/Att: 2.0",
+                "Att/Br: 10.2"
+            ]
+        },
+        "PHI": {
+            "TeamRush": [
+                "Att: 621",
+                "Yds: 3048",
+                "TD: 29",
+                "1D: 164",
+                "YBC/Att: 3.2",
+                "YAC/Att: 1.7",
+                "Att/Br: 18.8"
+            ]
+        },
+        "PIT": {
+            "TeamRush": [
+                "Att: 533",
+                "Yds: 2166",
+                "TD: 14",
+                "1D: 122",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.8",
+                "Att/Br: 14.0"
+            ]
+        },
+        "LVR": {
+            "TeamRush": [
+                "Att: 380",
+                "Yds: 1357",
+                "TD: 10",
+                "1D: 78",
+                "YBC/Att: 1.9",
+                "YAC/Att: 1.7",
+                "Att/Br: 15.8"
+            ]
+        },
+        "LAR": {
+            "TeamRush": [
+                "Att: 450",
+                "Yds: 1765",
+                "TD: 15",
+                "1D: 119",
+                "YBC/Att: 2.2",
+                "YAC/Att: 1.7",
+                "Att/Br: 15.5"
+            ]
+        },
+        "BAL": {
+            "TeamRush": [
+                "Att: 554",
+                "Yds: 3189",
+                "TD: 21",
+                "1D: 164",
+                "YBC/Att: 3.3",
+                "YAC/Att: 2.5",
+                "Att/Br: 9.6"
+            ]
+        },
+        "LAC": {
+            "TeamRush": [
+                "Att: 463",
+                "Yds: 1882",
+                "TD: 17",
+                "1D: 110",
+                "YBC/Att: 2.0",
+                "YAC/Att: 2.1",
+                "Att/Br: 11.9"
+            ]
+        },
+        "SEA": {
+            "TeamRush": [
+                "Att: 383",
+                "Yds: 1627",
+                "TD: 17",
+                "1D: 88",
+                "YBC/Att: 2.4",
+                "YAC/Att: 1.9",
+                "Att/Br: 12.4"
+            ]
+        },
+        "SFO": {
+            "TeamRush": [
+                "Att: 457",
+                "Yds: 2163",
+                "TD: 17",
+                "1D: 120",
+                "YBC/Att: 2.7",
+                "YAC/Att: 2.0",
+                "Att/Br: 19.0"
+            ]
+        },
+        "TAM": {
+            "TeamRush": [
+                "Att: 483",
+                "Yds: 2536",
+                "TD: 16",
+                "1D: 137",
+                "YBC/Att: 2.8",
+                "YAC/Att: 2.5",
+                "Att/Br: 14.2"
+            ]
+        },
+        "WAS": {
+            "TeamRush": [
+                "Att: 526",
+                "Yds: 2619",
+                "TD: 25",
+                "1D: 154",
+                "YBC/Att: 2.9",
+                "YAC/Att: 2.1",
+                "Att/Br: 17.0"
+            ]
+        }
+    }
+}

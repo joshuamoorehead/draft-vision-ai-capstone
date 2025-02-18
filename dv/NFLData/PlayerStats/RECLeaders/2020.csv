@@ -492,7 +492,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 475,Gardner Minshew II,24,JAX,QB,9,8,1,1,0,0.0,0,0,0.0,,0.1,0.0,100.0,0.0,5,,MinsGa00
 476,Donte Moncrief,27,NWE,WR,6,0,2,1,15,15.0,0,1,50.0,15,0.2,2.5,50.0,7.5,0,,MoncDo00
 477,Isaac Nauta,23,DET,TE,7,0,2,1,3,3.0,0,0,0.0,3,0.1,0.4,50.0,1.5,0,,NautIs00
-478,Siran Neal,26,BUF,DB,16,0,1,1,13,13.0,0,1,0.0,13,0.1,0.8,100.0,13.0,0,,NealSi00
+478,Siran Neal,26,BUF,CB,16,0,1,1,13,13.0,0,1,0.0,13,0.1,0.8,100.0,13.0,0,,NealSi00
 479,Scottie Phillips,23,HOU,RB,8,0,1,1,7,7.0,0,0,100.0,7,0.1,0.9,100.0,7.0,0,,PhilSc01
 480,Dak Prescott,27,DAL,QB,5,5,1,1,11,11.0,1,1,100.0,11,0.2,2.2,100.0,11.0,3,,PresDa01
 481,James Proche,24,BAL,WR,14,0,3,1,14,14.0,0,1,33.3,14,0.1,1.0,33.3,4.7,0,,ProcJa00
@@ -508,7 +508,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 490,Jordan Thomas,24,ARI,TE,4,0,1,1,3,3.0,1,1,100.0,3,0.3,0.8,100.0,3.0,0,,ThomJo05
 490,Jordan Thomas,24,NWE,TE,2,0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,ThomJo05
 491,Colin Thompson,27,CAR,TE,15,4,2,1,7,7.0,1,1,50.0,7,0.1,0.5,50.0,3.5,0,,ThomCo03
-492,Zeke Turner,24,ARI,DB,16,0,1,1,26,26.0,0,1,0.0,26,0.1,1.6,100.0,26.0,0,,TurnZe00
+492,Zeke Turner,24,ARI,CB,16,0,1,1,26,26.0,0,1,0.0,26,0.1,1.6,100.0,26.0,0,,TurnZe00
 493,Austin Walter,24,SFO,RB,4,0,1,1,27,27.0,0,1,100.0,27,0.3,6.8,100.0,27.0,0,,WaltAu00
 494,Jonathan Ward,23,ARI,RB,14,0,1,1,11,11.0,1,1,100.0,11,0.1,0.8,100.0,11.0,0,,WardJo00
 495,Trevon Wesco,25,NYJ,TE,12,4,2,1,5,5.0,0,0,50.0,5,0.1,0.4,50.0,2.5,0,,WescTr00
@@ -534,7 +534,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 515,Joe Burrow,24,CIN,QB,10,10,0,0,0,,0,0,,,0.0,0.0,,,9,,BurrJo01
 516,Hakeem Butler,24,PHI,WR,2,0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,ButlHa00
 517,Derek Carr,29,LVR,QB,16,16,0,0,0,,0,0,,,0.0,0.0,,,11,,CarrDe02
-518,Jeremy Chinn,22,CAR,RLB,15,15,0,0,0,,0,0,,,0.0,0.0,,,0,AP DRoY-2,ChinJe00
+518,Jeremy Chinn,22,CAR,LB,15,15,0,0,0,,0,0,,,0.0,0.0,,,0,AP DRoY-2,ChinJe00
 519,AJ Cole III,25,LVR,P,16,0,0,0,0,,0,0,,,0.0,0.0,,,1,,ColeAJ01
 520,Kirk Cousins,32,MIN,QB,16,16,0,0,0,,0,0,,,0.0,0.0,,,9,,CousKi00
 521,Chase Daniel,34,DET,QB,4,0,0,0,0,,0,0,,,0.0,0.0,,,0,,DaniCh00
@@ -545,32 +545,32 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 526,Joshua Dobbs,25,PIT,QB,1,0,0,0,0,,0,0,,,0.0,0.0,,,0,,DobbJo00
 527,Rico Dowdle,22,DAL,RB,15,0,0,0,0,,0,0,,,0.0,0.0,,,0,,DowdRi01
 528,Jeff Driskel,27,DEN,QB,3,1,0,0,0,,0,0,,,0.0,0.0,,,0,,DrisJe00
-529,Clayton Fejedelem,27,MIA,DB,13,0,0,0,0,,0,0,,,0.0,0.0,,,0,,FejeCl00
+529,Clayton Fejedelem,27,MIA,CB,13,0,0,0,0,,0,0,,,0.0,0.0,,,0,,FejeCl00
 530,Ryan Finley,26,CIN,QB,5,1,0,0,0,,0,0,,,0.0,0.0,,,0,,FinlRy00
 531,Joe Flacco,35,NYJ,QB,5,4,0,0,0,,0,0,,,0.0,0.0,,,1,,FlacJo00
 532,Nick Foles,31,CHI,QB,9,7,0,0,0,,0,0,,,0.0,0.0,,,2,,FoleNi00
 533,Blaine Gabbert,31,TAM,QB,4,0,0,0,0,,0,0,,,0.0,0.0,,,1,,GabbBl00
-534,Rico Gafford,24,LVR,DB,3,0,2,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,GaffRi00
+534,Rico Gafford,24,LVR,CB,3,0,2,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,GaffRi00
 535,Jimmy Garoppolo,29,SFO,QB,6,6,0,0,0,,0,0,,,0.0,0.0,,,2,,GaroJi00
 536,Nick Gates,25,NYG,C,16,16,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,GateNi00
 537,Garrett Gilbert,29,DAL,QB,1,1,0,0,0,,0,0,,,0.0,0.0,,,0,,GilbGa01
 538,Jamie Gillan,23,CLE,P,16,0,0,0,0,,0,0,,,0.0,0.0,,,1,,GillJa00
 539,Mike Glennon,31,JAX,QB,5,5,0,0,0,,0,0,,,0.0,0.0,,,2,,GlenMi00
 540,Jared Goff,26,LAR,QB,15,15,0,0,0,,0,0,,,0.0,0.0,,,7,,GoffJa00
-541,C.J. Goodwin,30,DAL,DB,16,0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,GoodC.00
+541,C.J. Goodwin,30,DAL,CB,16,0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,GoodC.00
 542,Cyril Grayson,27,TAM,WR,3,0,3,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,GrayCy01
 543,Robert Griffin III,30,BAL,QB,4,1,0,0,0,,0,0,,,0.0,0.0,,,1,,GrifRo01
-544,Myles Hartsfield,23,CAR,DB,16,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HartMy00
+544,Myles Hartsfield,23,CAR,CB,16,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HartMy00
 545,Dwayne Haskins,23,WAS,QB,7,6,0,0,0,,0,0,,,0.0,0.0,,,6,,HaskDw00
 546,Jerald Hawkins,27,PIT,T,13,0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,HawkJe00
-547,Jeff Heath,29,LVR,FS,13,5,0,0,0,,0,0,,,0.0,0.0,,,0,,HeatJe00
+547,Jeff Heath,29,LVR,S,13,5,0,0,0,,0,0,,,0.0,0.0,,,0,,HeatJe00
 548,Charlie Heck,24,HOU,T,3,1,0,0,8,,0,0,,8,0.0,2.7,,,1,,HeckCh00
 549,Taylor Heinicke,27,WAS,QB,1,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HeinTa00
 550,Chad Henne,35,KAN,QB,3,1,0,0,0,,0,0,,,0.0,0.0,,,2,,HennCh01
 551,Justin Herbert,22,LAC,QB,15,15,0,0,0,,0,0,,,0.0,0.0,,,8,AP ORoY-1,HerbJu00
 552,Kendall Hinton,23,DEN,WR,1,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HintKe00
 553,J.P. Holtz,27,CHI,TE,16,1,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,HoltJ.01
-554,Amani Hooker,22,TEN,DB,16,3,0,0,0,,0,0,,,0.0,0.0,,,0,,HookAm00
+554,Amani Hooker,22,TEN,CB,16,3,0,0,0,,0,0,,,0.0,0.0,,,0,,HookAm00
 555,Brian Hoyer,35,NWE,QB,1,1,0,0,0,,0,0,,,0.0,0.0,,,1,,HoyeBr00
 556,Tyler Huntley,22,BAL,QB,2,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HuntTy01
 557,Lamar Jackson,23,BAL,QB,15,15,0,0,0,,0,0,,,0.0,0.0,,,10,,JackLa00
@@ -588,11 +588,11 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 569,Colt McCoy,34,NYG,QB,4,2,0,0,0,,0,0,,,0.0,0.0,,,1,,McCoCo00
 570,Trace McSorley,25,BAL,QB,2,0,0,0,0,,0,0,,,0.0,0.0,,,0,,McSoTr00
 571,Barkevious Mingo,30,CHI,LB,16,3,0,0,0,,0,0,,,0.0,0.0,,,0,,MingBa00
-572,C.J. Moore,25,DET,DB,12,0,0,0,0,,0,0,,,0.0,0.0,,,0,,MoorCJ01
+572,C.J. Moore,25,DET,CB,12,0,0,0,0,,0,0,,,0.0,0.0,,,0,,MoorCJ01
 573,Nick Mullens,25,SFO,QB,10,8,0,0,0,,0,0,,,0.0,0.0,,,6,,MullNi00
 574,Kyler Murray,23,ARI,QB,16,16,0,0,0,,0,0,,,0.0,0.0,,,9,PB,MurrKy00
 575,Jojo Natson,26,CLE,WR,3,0,0,0,0,,0,0,,,0.0,0.0,,,0,,NatsJo00
-576,Sharrod Neasman,29,ATL,DB,16,2,0,0,0,,0,0,,,0.0,0.0,,,1,,NeasSh00
+576,Sharrod Neasman,29,ATL,CB,16,2,0,0,0,,0,0,,,0.0,0.0,,,1,,NeasSh00
 577,Qadree Ollison,24,ATL,RB,3,0,0,0,0,,0,0,,,0.0,0.0,,,0,,OlliQa00
 578,Rashaad Penny,24,SEA,RB,3,0,0,0,0,,0,0,,,0.0,0.0,,,0,,PennRa00
 579,Senorise Perry,29,TEN,RB,7,0,0,0,0,,0,0,,,0.0,0.0,,,0,,PerrSe00
@@ -623,7 +623,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 604,Tua Tagovailoa,22,MIA,QB,10,9,0,0,0,,0,0,,,0.0,0.0,,,1,,TagoTu00
 605,Taywan Taylor,25,CLE,WR,3,0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,TaylTa00
 606,Tyrod Taylor,31,LAC,QB,2,1,0,0,0,,0,0,,,0.0,0.0,,,0,,TaylTy00
-607,Darian Thompson,27,DAL,SS,15,7,0,0,0,,0,0,,,0.0,0.0,,,0,,ThomDa05
+607,Darian Thompson,27,DAL,S,15,7,0,0,0,,0,0,,,0.0,0.0,,,0,,ThomDa05
 608,Noah Togiai,23,IND,TE,4,0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,TogiNo00
 609,Eric Tomlinson,28,BAL,TE,6,2,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,TomlEr01
 610,Mitchell Trubisky,26,CHI,QB,10,9,0,0,0,,0,0,,,0.0,0.0,,,6,,TrubMi00
@@ -632,7 +632,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 613,Deshaun Watson,25,HOU,QB,16,16,0,0,0,,0,0,,,0.0,0.0,,,8,PB,WatsDe00
 614,Carson Wentz,28,PHI,QB,12,12,0,0,0,,0,0,,,0.0,0.0,,,10,,WentCa00
 615,Dexter Williams,23,GNB,RB,3,0,0,0,0,,0,0,,,0.0,0.0,,,0,,WillDe07
-616,Shawn Williams,29,CIN,DB,13,0,0,0,0,,0,0,,,0.0,0.0,,,0,,WillSh02
+616,Shawn Williams,29,CIN,CB,13,0,0,0,0,,0,0,,,0.0,0.0,,,0,,WillSh02
 617,Russell Wilson,32,SEA,QB,16,16,0,0,0,,0,0,,,0.0,0.0,,,7,PB,WilsRu00
 618,Jameis Winston,26,NOR,QB,4,0,0,0,0,,0,0,,,0.0,0.0,,,0,,WinsJa00
 619,John Wolford,25,LAR,QB,1,1,0,0,0,,0,0,,,0.0,0.0,,,0,,WolfJo00

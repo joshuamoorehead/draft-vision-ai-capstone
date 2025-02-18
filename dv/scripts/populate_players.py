@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) #re
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dv.settings")
 django.setup()
 
-from db.models import PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders, Conferences, Combine, Coaches, DefensivePositionalStats, RBStats, RECStats, TeamOffense, TeamDefense, TeamRatings, HistoricalTeamSuccess 
+from db.models import PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders, Conferences, Combine, Coaches, DefensivePositionalStats, RBStats, RECStats, TeamOffense, TeamDefense, TeamRatings, HistoricalTeamSuccess, NFLQBTeam, NFLRBTeam, NFLWRTeam, NFLTETeam, NFLOLTeam, NFLDETeam, NFLDTTeam, NFLLBTeam, NFLCBTeam, NFLSTeam 
 
 def populate_db():
     with open('./data/fullplayerlist.json', 'r') as file:
@@ -974,7 +974,11 @@ def fix_profile():
 
 
 
-
+def push_NFL():
+    directory = './NFLData/CleanedNFL/'
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        print(filename[:-5])
 
 
 
@@ -1002,3 +1006,4 @@ def fix_profile():
 # fix_defensive()
 # upload_combine()
 # fix_profile()
+push_NFL()

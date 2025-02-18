@@ -509,7 +509,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,1D,YBC,YBC/R,YAC,YAC/R,ADOT,BrkTkl,Rec/B
 479,Taylor Heinicke,28,WAS,QB,16,15,1,1,-2,0,-4,-4.0,2,2.0,-4.0,0,,0,0.0,0,79.2,,HeinTa00
 480,Daniel Helm,26,LVR,TE,9,1,2,1,-1,0,-3,-3.0,2,2.0,0.5,0,,0,0.0,0,56.2,,HelmDa01
 481,Kylin Hill,23,GNB,RB,8,0,2,1,5,0,-2,-2.0,7,7.0,1.5,0,,0,0.0,0,56.2,,HillKy00
-482,Amani Hooker,23,TEN,FS,12,12,1,1,6,1,4,4.0,2,2.0,4.0,0,,0,0.0,0,91.7,,HookAm00
+482,Amani Hooker,23,TEN,S,12,12,1,1,6,1,4,4.0,2,2.0,4.0,0,,0,0.0,0,91.7,,HookAm00
 483,Brycen Hopkins,24,LAR,TE,5,0,1,1,9,1,3,3.0,6,6.0,3.0,0,,0,0.0,0,104.2,,HopkBr01
 484,Andy Isabella,25,ARI,WR,8,0,1,1,13,1,6,6.0,7,7.0,6.0,0,,0,0.0,0,118.7,,IsabAn00
 485,Lane Johnson,31,PHI,RT,13,13,1,1,5,1,5,5.0,0,0.0,5.0,0,,0,0.0,0,127.1,AP-2,JohnLa01
@@ -524,7 +524,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,1D,YBC,YBC/R,YAC,YAC/R,ADOT,BrkTkl,Rec/B
 494,Ryan Nall,26,CHI,RB,9,0,1,1,4,0,4,4.0,0,0.0,4.0,0,,0,0.0,0,83.3,,NallRy00
 495,Devine Ozigbo,25,NOR,RB,2,0,1,1,7,1,4,4.0,3,3.0,4.0,0,,0,0.0,0,95.8,,OzigDe01
 496,Danny Pinter,25,IND,G,16,3,1,1,2,1,2,2.0,0,0.0,2.0,0,,0,0.0,0,118.7,,PintDa00
-497,Bobby Price,23,DET,DB,15,2,1,1,17,1,9,9.0,8,8.0,9.0,0,,0,0.0,0,118.7,,PricBo00
+497,Bobby Price,23,DET,CB,15,2,1,1,17,1,9,9.0,8,8.0,9.0,0,,0,0.0,0,118.7,,PricBo00
 498,Mike Remmers,32,KAN,T,4,2,1,1,-2,0,0,0.0,-2,-2.0,0.0,0,,0,0.0,0,79.2,,RemmMi00
 499,Andre Roberts,33,HOU,WR,6,0,2,1,35,1,19,19.0,16,16.0,14.5,0,,0,0.0,1,56.2,AP-2,RobeAn00
 500,Aaron Rodgers,38,GNB,QB,16,16,1,1,-4,0,-4,-4.0,0,0.0,-4.0,0,,0,0.0,0,79.2,PBAP-1AP MVP-1AP OPoY-4,RodgAa00
@@ -534,7 +534,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,1D,YBC,YBC/R,YAC,YAC/R,ADOT,BrkTkl,Rec/B
 504,Andrew Thomas,22,NYG,LT,13,13,1,1,2,1,2,2.0,0,0.0,2.0,0,,0,0.0,0,118.7,,ThomAn02
 505,Eric Tomlinson,29,BAL,TE,17,7,1,1,7,0,3,3.0,4,4.0,3.0,0,,0,0.0,0,95.8,,TomlEr01
 506,Kevin White,29,NOR,WR,6,1,5,1,38,1,29,29.0,9,9.0,24.4,0,,1,20.0,0,58.7,,WhitKe00
-507,Christian Wilkins,26,MIA,RDE,17,17,1,1,1,1,1,1.0,0,0.0,1.0,0,,0,0.0,0,118.7,,WilkCh00
+507,Christian Wilkins,26,MIA,DE,17,17,1,1,1,1,1,1.0,0,0.0,1.0,0,,0,0.0,0,118.7,,WilkCh00
 508,Seth Williams,21,DEN,WR,2,1,1,1,34,1,30,30.0,4,4.0,30.0,0,,0,0.0,0,118.7,,WillSe00
 509,Trayveon Williams,24,CIN,RB,5,0,2,1,4,0,-7,-7.0,11,11.0,-3.5,1,1.0,0,0.0,0,56.2,,WillTr06
 510,Easop Winston,25,NOR,WR,3,1,1,1,5,0,-4,-4.0,9,9.0,-4.0,0,,0,0.0,0,87.5,,WinsEa00
@@ -546,10 +546,10 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,1D,YBC,YBC/R,YAC,YAC/R,ADOT,BrkTkl,Rec/B
 516,John Brown,31,2TM,WR,4,0,3,0,0,0,0,,0,,31.0,0,,0,0.0,1,0.0,,BrowJo02
 516,John Brown,31,DEN,WR,2,0,1,0,0,0,0,,0,,31.0,0,,0,0.0,1,0.0,,BrowJo02
 516,John Brown,31,JAX,WR,2,0,2,0,0,0,0,,0,,31.0,0,,0,0.0,0,39.6,,BrowJo02
-517,Tevaughn Campbell,28,LAC,RCB,16,7,1,0,0,0,0,,0,,10.0,0,,0,0.0,0,39.6,,CampTe00
+517,Tevaughn Campbell,28,LAC,CB,16,7,1,0,0,0,0,,0,,10.0,0,,0,0.0,0,39.6,,CampTe00
 518,Tyrie Cleveland,24,DEN,WR,7,0,1,0,0,0,0,,0,,5.0,0,,0,0.0,0,39.6,,ClevTy00
 519,Isaiah Coulter,23,CHI,WR,3,0,1,0,0,0,0,,0,,22.0,0,,0,0.0,0,39.6,,CoulIs00
-520,Keion Crossen,25,NYG,DB,16,0,1,0,0,0,0,,0,,13.0,0,,0,0.0,0,39.6,,CrosKe00
+520,Keion Crossen,25,NYG,CB,16,0,1,0,0,0,0,,0,,13.0,0,,0,0.0,0,39.6,,CrosKe00
 521,Dion Dawkins,27,BUF,LT,16,15,1,0,0,0,0,,0,,1.0,0,,0,0.0,0,39.6,PB,DawkDi00
 522,Ben Ellefson,25,MIN,TE,5,0,1,0,0,0,0,,0,,7.0,0,,1,100.0,0,39.6,,ElleBe00
 523,Jason Huntley,23,PHI,RB,1,0,1,0,0,0,0,,0,,0.0,0,,0,0.0,0,39.6,,HuntJa01

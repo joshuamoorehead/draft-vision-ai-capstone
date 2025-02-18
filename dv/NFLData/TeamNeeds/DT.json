@@ -1,0 +1,5176 @@
+{
+    "2018": {
+        "ATL": {
+            "TeamAdv": [
+                "Hrry%: 10.8%",
+                "QBKD%: 5.1%",
+                "Prss%: 21.2%",
+                "MTkl: 112"
+            ],
+            "TeamPassRush": [
+                "Rate: 98.3",
+                "Sk: 37",
+                "Yds.1: 255",
+                "QBHits: 77",
+                "TFL: 58",
+                "ANY/A: 6.7",
+                "EXP: -122.25"
+            ],
+            "TeamRushDef": [
+                "Yds: 1999.0",
+                "Y/A: 4.9",
+                "Y/G: 124.9",
+                "EXP: -49.88"
+            ]
+        },
+        "BUF": {
+            "TeamAdv": [
+                "Hrry%: 13.9%",
+                "QBKD%: 8.3%",
+                "Prss%: 28.0%",
+                "MTkl: 137"
+            ],
+            "TeamPassRush": [
+                "Rate: 82.6",
+                "Sk: 36",
+                "Yds.1: 217",
+                "QBHits: 87",
+                "TFL: 88",
+                "ANY/A: 4.9",
+                "EXP: -5.19"
+            ],
+            "TeamRushDef": [
+                "Yds: 1839.0",
+                "Y/A: 4.2",
+                "Y/G: 114.9",
+                "EXP: 14.75"
+            ]
+        },
+        "CAR": {
+            "TeamAdv": [
+                "Hrry%: 11.5%",
+                "QBKD%: 4.7%",
+                "Prss%: 21.6%",
+                "MTkl: 104"
+            ],
+            "TeamPassRush": [
+                "Rate: 99.6",
+                "Sk: 35",
+                "Yds.1: 215",
+                "QBHits: 71",
+                "TFL: 82",
+                "ANY/A: 6.9",
+                "EXP: -107.56"
+            ],
+            "TeamRushDef": [
+                "Yds: 1804.0",
+                "Y/A: 4.7",
+                "Y/G: 112.8",
+                "EXP: -5.6"
+            ]
+        },
+        "CHI": {
+            "TeamAdv": [
+                "Hrry%: 13.5%",
+                "QBKD%: 6.7%",
+                "Prss%: 26.7%",
+                "MTkl: 81"
+            ],
+            "TeamPassRush": [
+                "Rate: 72.9",
+                "Sk: 50",
+                "Yds.1: 339",
+                "QBHits: 100",
+                "TFL: 86",
+                "ANY/A: 4.1",
+                "EXP: 33.19"
+            ],
+            "TeamRushDef": [
+                "Yds: 1280.0",
+                "Y/A: 3.8",
+                "Y/G: 80.0",
+                "EXP: 47.17"
+            ]
+        },
+        "CIN": {
+            "TeamAdv": [
+                "Hrry%: 11.7%",
+                "QBKD%: 7.2%",
+                "Prss%: 23.6%",
+                "MTkl: 104"
+            ],
+            "TeamPassRush": [
+                "Rate: 100.0",
+                "Sk: 34",
+                "Yds.1: 173",
+                "QBHits: 83",
+                "TFL: 63",
+                "ANY/A: 7.3",
+                "EXP: -139.92"
+            ],
+            "TeamRushDef": [
+                "Yds: 2204.0",
+                "Y/A: 4.7",
+                "Y/G: 137.8",
+                "EXP: -31.83"
+            ]
+        },
+        "CLE": {
+            "TeamAdv": [
+                "Hrry%: 12.7%",
+                "QBKD%: 7.2%",
+                "Prss%: 24.6%",
+                "MTkl: 149"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.4",
+                "Sk: 37",
+                "Yds.1: 245",
+                "QBHits: 90",
+                "TFL: 78",
+                "ANY/A: 5.7",
+                "EXP: -53.01"
+            ],
+            "TeamRushDef": [
+                "Yds: 2163.0",
+                "Y/A: 4.7",
+                "Y/G: 135.2",
+                "EXP: 2.53"
+            ]
+        },
+        "IND": {
+            "TeamAdv": [
+                "Hrry%: 9.9%",
+                "QBKD%: 5.4%",
+                "Prss%: 21.0%",
+                "MTkl: 102"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.5",
+                "Sk: 38",
+                "Yds.1: 228",
+                "QBHits: 77",
+                "TFL: 91",
+                "ANY/A: 6.1",
+                "EXP: -49.1"
+            ],
+            "TeamRushDef": [
+                "Yds: 1630.0",
+                "Y/A: 3.9",
+                "Y/G: 101.9",
+                "EXP: 9.62"
+            ]
+        },
+        "ARI": {
+            "TeamAdv": [
+                "Hrry%: 11.8%",
+                "QBKD%: 7.5%",
+                "Prss%: 26.9%",
+                "MTkl: 124"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.1",
+                "Sk: 49",
+                "Yds.1: 333",
+                "QBHits: 90",
+                "TFL: 99",
+                "ANY/A: 6.1",
+                "EXP: -62.52"
+            ],
+            "TeamRushDef": [
+                "Yds: 2479.0",
+                "Y/A: 4.9",
+                "Y/G: 154.9",
+                "EXP: -34.43"
+            ]
+        },
+        "DAL": {
+            "TeamAdv": [
+                "Hrry%: 12.6%",
+                "QBKD%: 9.2%",
+                "Prss%: 27.2%",
+                "MTkl: 112"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.7",
+                "Sk: 39",
+                "Yds.1: 229",
+                "QBHits: 97",
+                "TFL: 69",
+                "ANY/A: 6.5",
+                "EXP: -83.33"
+            ],
+            "TeamRushDef": [
+                "Yds: 1513.0",
+                "Y/A: 3.8",
+                "Y/G: 94.6",
+                "EXP: 26.93"
+            ]
+        },
+        "DEN": {
+            "TeamAdv": [
+                "Hrry%: 8.7%",
+                "QBKD%: 7.3%",
+                "Prss%: 22.5%",
+                "MTkl: 114"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.7",
+                "Sk: 44",
+                "Yds.1: 311",
+                "QBHits: 94",
+                "TFL: 70",
+                "ANY/A: 6.2",
+                "EXP: -62.82"
+            ],
+            "TeamRushDef": [
+                "Yds: 1913.0",
+                "Y/A: 4.5",
+                "Y/G: 119.6",
+                "EXP: 10.71"
+            ]
+        },
+        "DET": {
+            "TeamAdv": [
+                "Hrry%: 9.7%",
+                "QBKD%: 5.6%",
+                "Prss%: 22.5%",
+                "MTkl: 83"
+            ],
+            "TeamPassRush": [
+                "Rate: 102.7",
+                "Sk: 43",
+                "Yds.1: 298",
+                "QBHits: 77",
+                "TFL: 68",
+                "ANY/A: 7.2",
+                "EXP: -106.38"
+            ],
+            "TeamRushDef": [
+                "Yds: 1761.0",
+                "Y/A: 4.4",
+                "Y/G: 110.1",
+                "EXP: 0.26"
+            ]
+        },
+        "GNB": {
+            "TeamAdv": [
+                "Hrry%: 13.1%",
+                "QBKD%: 4.6%",
+                "Prss%: 24.5%",
+                "MTkl: 130"
+            ],
+            "TeamPassRush": [
+                "Rate: 100.9",
+                "Sk: 44",
+                "Yds.1: 322",
+                "QBHits: 74",
+                "TFL: 72",
+                "ANY/A: 7.1",
+                "EXP: -131.84"
+            ],
+            "TeamRushDef": [
+                "Yds: 1918.0",
+                "Y/A: 4.3",
+                "Y/G: 119.9",
+                "EXP: 17.05"
+            ]
+        },
+        "HOU": {
+            "TeamAdv": [
+                "Hrry%: 13.8%",
+                "QBKD%: 7.2%",
+                "Prss%: 26.6%",
+                "MTkl: 134"
+            ],
+            "TeamPassRush": [
+                "Rate: 92.7",
+                "Sk: 43",
+                "Yds.1: 310",
+                "QBHits: 92",
+                "TFL: 80",
+                "ANY/A: 6.4",
+                "EXP: -71.19"
+            ],
+            "TeamRushDef": [
+                "Yds: 1323.0",
+                "Y/A: 3.4",
+                "Y/G: 82.7",
+                "EXP: 51.4"
+            ]
+        },
+        "JAX": {
+            "TeamAdv": [
+                "Hrry%: 12.6%",
+                "QBKD%: 9.4%",
+                "Prss%: 27.2%",
+                "MTkl: 107"
+            ],
+            "TeamPassRush": [
+                "Rate: 84.4",
+                "Sk: 37",
+                "Yds.1: 241",
+                "QBHits: 93",
+                "TFL: 73",
+                "ANY/A: 5.5",
+                "EXP: -16.56"
+            ],
+            "TeamRushDef": [
+                "Yds: 1870.0",
+                "Y/A: 4.3",
+                "Y/G: 116.9",
+                "EXP: 15.96"
+            ]
+        },
+        "KAN": {
+            "TeamAdv": [
+                "Hrry%: 13.1%",
+                "QBKD%: 7.6%",
+                "Prss%: 27.4%",
+                "MTkl: 116"
+            ],
+            "TeamPassRush": [
+                "Rate: 92.7",
+                "Sk: 52",
+                "Yds.1: 347",
+                "QBHits: 105",
+                "TFL: 70",
+                "ANY/A: 6.3",
+                "EXP: -116.31"
+            ],
+            "TeamRushDef": [
+                "Yds: 2114.0",
+                "Y/A: 5.0",
+                "Y/G: 132.1",
+                "EXP: -46.37"
+            ]
+        },
+        "MIA": {
+            "TeamAdv": [
+                "Hrry%: 14.0%",
+                "QBKD%: 7.1%",
+                "Prss%: 25.8%",
+                "MTkl: 119"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.1",
+                "Sk: 31",
+                "Yds.1: 209",
+                "QBHits: 76",
+                "TFL: 66",
+                "ANY/A: 6.7",
+                "EXP: -120.2"
+            ],
+            "TeamRushDef": [
+                "Yds: 2325.0",
+                "Y/A: 4.8",
+                "Y/G: 145.3",
+                "EXP: -12.93"
+            ]
+        },
+        "MIN": {
+            "TeamAdv": [
+                "Hrry%: 13.7%",
+                "QBKD%: 4.0%",
+                "Prss%: 25.8%",
+                "MTkl: 76"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.3",
+                "Sk: 50",
+                "Yds.1: 361",
+                "QBHits: 94",
+                "TFL: 88",
+                "ANY/A: 5.2",
+                "EXP: 4.12"
+            ],
+            "TeamRushDef": [
+                "Yds: 1815.0",
+                "Y/A: 4.1",
+                "Y/G: 113.4",
+                "EXP: 16.07"
+            ]
+        },
+        "NOR": {
+            "TeamAdv": [
+                "Hrry%: 12.8%",
+                "QBKD%: 7.9%",
+                "Prss%: 27.2%",
+                "MTkl: 87"
+            ],
+            "TeamPassRush": [
+                "Rate: 100.3",
+                "Sk: 49",
+                "Yds.1: 321",
+                "QBHits: 98",
+                "TFL: 83",
+                "ANY/A: 7.0",
+                "EXP: -140.01"
+            ],
+            "TeamRushDef": [
+                "Yds: 1283.0",
+                "Y/A: 3.6",
+                "Y/G: 80.2",
+                "EXP: 53.71"
+            ]
+        },
+        "NWE": {
+            "TeamAdv": [
+                "Hrry%: 10.7%",
+                "QBKD%: 8.8%",
+                "Prss%: 23.2%",
+                "MTkl: 73"
+            ],
+            "TeamPassRush": [
+                "Rate: 85.4",
+                "Sk: 30",
+                "Yds.1: 238",
+                "QBHits: 100",
+                "TFL: 51",
+                "ANY/A: 5.8",
+                "EXP: -52.38"
+            ],
+            "TeamRushDef": [
+                "Yds: 1803.0",
+                "Y/A: 4.9",
+                "Y/G: 112.7",
+                "EXP: 8.45"
+            ]
+        },
+        "NYG": {
+            "TeamAdv": [
+                "Hrry%: 11.7%",
+                "QBKD%: 8.8%",
+                "Prss%: 24.5%",
+                "MTkl: 108"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.8",
+                "Sk: 30",
+                "Yds.1: 185",
+                "QBHits: 84",
+                "TFL: 71",
+                "ANY/A: 6.4",
+                "EXP: -105.62"
+            ],
+            "TeamRushDef": [
+                "Yds: 1898.0",
+                "Y/A: 4.3",
+                "Y/G: 118.6",
+                "EXP: -10.05"
+            ]
+        },
+        "NYJ": {
+            "TeamAdv": [
+                "Hrry%: 9.6%",
+                "QBKD%: 9.3%",
+                "Prss%: 24.1%",
+                "MTkl: 115"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.1",
+                "Sk: 39",
+                "Yds.1: 293",
+                "QBHits: 114",
+                "TFL: 77",
+                "ANY/A: 6.5",
+                "EXP: -76.59"
+            ],
+            "TeamRushDef": [
+                "Yds: 2021.0",
+                "Y/A: 4.6",
+                "Y/G: 126.3",
+                "EXP: -0.65"
+            ]
+        },
+        "TEN": {
+            "TeamAdv": [
+                "Hrry%: 12.8%",
+                "QBKD%: 5.8%",
+                "Prss%: 24.5%",
+                "MTkl: 100"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.4",
+                "Sk: 39",
+                "Yds.1: 248",
+                "QBHits: 84",
+                "TFL: 65",
+                "ANY/A: 5.9",
+                "EXP: -35.95"
+            ],
+            "TeamRushDef": [
+                "Yds: 1863.0",
+                "Y/A: 4.3",
+                "Y/G: 116.4",
+                "EXP: 8.17"
+            ]
+        },
+        "PHI": {
+            "TeamAdv": [
+                "Hrry%: 10.7%",
+                "QBKD%: 10.4%",
+                "Prss%: 26.3%",
+                "MTkl: 102"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.4",
+                "Sk: 44",
+                "Yds.1: 311",
+                "QBHits: 133",
+                "TFL: 86",
+                "ANY/A: 6.4",
+                "EXP: -100.8"
+            ],
+            "TeamRushDef": [
+                "Yds: 1551.0",
+                "Y/A: 4.7",
+                "Y/G: 96.9",
+                "EXP: -5.81"
+            ]
+        },
+        "PIT": {
+            "TeamAdv": [
+                "Hrry%: 11.2%",
+                "QBKD%: 9.2%",
+                "Prss%: 27.5%",
+                "MTkl: 80"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.2",
+                "Sk: 52",
+                "Yds.1: 347",
+                "QBHits: 115",
+                "TFL: 77",
+                "ANY/A: 6.3",
+                "EXP: -73.72"
+            ],
+            "TeamRushDef": [
+                "Yds: 1538.0",
+                "Y/A: 4.2",
+                "Y/G: 96.1",
+                "EXP: 12.17"
+            ]
+        },
+        "LVR": {
+            "TeamAdv": [
+                "Hrry%: 10.5%",
+                "QBKD%: 5.4%",
+                "Prss%: 18.1%",
+                "MTkl: 114"
+            ],
+            "TeamPassRush": [
+                "Rate: 101.0",
+                "Sk: 13",
+                "Yds.1: 80",
+                "QBHits: 48",
+                "TFL: 53",
+                "ANY/A: 8.0",
+                "EXP: -156.09"
+            ],
+            "TeamRushDef": [
+                "Yds: 2249.0",
+                "Y/A: 4.7",
+                "Y/G: 140.6",
+                "EXP: -15.94"
+            ]
+        },
+        "LAR": {
+            "TeamAdv": [
+                "Hrry%: 15.4%",
+                "QBKD%: 9.0%",
+                "Prss%: 30.2%",
+                "MTkl: 93"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.7",
+                "Sk: 41",
+                "Yds.1: 326",
+                "QBHits: 94",
+                "TFL: 71",
+                "ANY/A: 6.3",
+                "EXP: -63.15"
+            ],
+            "TeamRushDef": [
+                "Yds: 1957.0",
+                "Y/A: 5.1",
+                "Y/G: 122.3",
+                "EXP: -7.27"
+            ]
+        },
+        "BAL": {
+            "TeamAdv": [
+                "Hrry%: 14.8%",
+                "QBKD%: 8.1%",
+                "Prss%: 28.9%",
+                "MTkl: 105"
+            ],
+            "TeamPassRush": [
+                "Rate: 80.6",
+                "Sk: 43",
+                "Yds.1: 291",
+                "QBHits: 104",
+                "TFL: 86",
+                "ANY/A: 5.2",
+                "EXP: 0.96"
+            ],
+            "TeamRushDef": [
+                "Yds: 1327.0",
+                "Y/A: 3.7",
+                "Y/G: 82.9",
+                "EXP: 34.35"
+            ]
+        },
+        "LAC": {
+            "TeamAdv": [
+                "Hrry%: 10.0%",
+                "QBKD%: 6.2%",
+                "Prss%: 21.7%",
+                "MTkl: 112"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.1",
+                "Sk: 38",
+                "Yds.1: 240",
+                "QBHits: 85",
+                "TFL: 68",
+                "ANY/A: 6.0",
+                "EXP: -58.84"
+            ],
+            "TeamRushDef": [
+                "Yds: 1693.0",
+                "Y/A: 4.3",
+                "Y/G: 105.8",
+                "EXP: 11.12"
+            ]
+        },
+        "SEA": {
+            "TeamAdv": [
+                "Hrry%: 12.0%",
+                "QBKD%: 10.4%",
+                "Prss%: 28.5%",
+                "MTkl: 98"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.3",
+                "Sk: 43",
+                "Yds.1: 261",
+                "QBHits: 109",
+                "TFL: 69",
+                "ANY/A: 6.5",
+                "EXP: -68.19"
+            ],
+            "TeamRushDef": [
+                "Yds: 1811.0",
+                "Y/A: 4.9",
+                "Y/G: 113.2",
+                "EXP: -1.8"
+            ]
+        },
+        "SFO": {
+            "TeamAdv": [
+                "Hrry%: 15.7%",
+                "QBKD%: 8.1%",
+                "Prss%: 29.1%",
+                "MTkl: 114"
+            ],
+            "TeamPassRush": [
+                "Rate: 105.4",
+                "Sk: 37",
+                "Yds.1: 227",
+                "QBHits: 92",
+                "TFL: 81",
+                "ANY/A: 7.5",
+                "EXP: -141.78"
+            ],
+            "TeamRushDef": [
+                "Yds: 1814.0",
+                "Y/A: 4.1",
+                "Y/G: 113.4",
+                "EXP: 13.85"
+            ]
+        },
+        "TAM": {
+            "TeamAdv": [
+                "Hrry%: 6.6%",
+                "QBKD%: 7.9%",
+                "Prss%: 20.2%",
+                "MTkl: 99"
+            ],
+            "TeamPassRush": [
+                "Rate: 110.9",
+                "Sk: 38",
+                "Yds.1: 232",
+                "QBHits: 93",
+                "TFL: 85",
+                "ANY/A: 7.7",
+                "EXP: -148.12"
+            ],
+            "TeamRushDef": [
+                "Yds: 1983.0",
+                "Y/A: 4.7",
+                "Y/G: 123.9",
+                "EXP: -4.67"
+            ]
+        },
+        "WAS": {
+            "TeamAdv": [
+                "Hrry%: 11.3%",
+                "QBKD%: 6.1%",
+                "Prss%: 24.2%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.1",
+                "Sk: 46",
+                "Yds.1: 297",
+                "QBHits: 89",
+                "TFL: 65",
+                "ANY/A: 6.3",
+                "EXP: -66.83"
+            ],
+            "TeamRushDef": [
+                "Yds: 1860.0",
+                "Y/A: 4.5",
+                "Y/G: 116.3",
+                "EXP: -22.34"
+            ]
+        },
+        "Avg Team": {
+            "TeamRushDef": [
+                "Yds: 1831.3",
+                "Y/A: 4.4",
+                "Y/G: 114.5",
+                "EXP: 3.3"
+            ]
+        }
+    },
+    "2019": {
+        "ATL": {
+            "TeamAdv": [
+                "Hrry%: 8.8%",
+                "QBKD%: 5.4%",
+                "Prss%: 18.4%",
+                "MTkl: 95"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.9",
+                "Sk: 28",
+                "Yds.1: 219",
+                "QBHits: 69",
+                "TFL: 66",
+                "ANY/A: 7.0",
+                "EXP: -128.75"
+            ],
+            "TeamRushDef": [
+                "Yds: 1775",
+                "Y/A: 4.2",
+                "Y/G: 110.9",
+                "EXP: 17.98"
+            ]
+        },
+        "BUF": {
+            "TeamAdv": [
+                "Hrry%: 9.4%",
+                "QBKD%: 7.4%",
+                "Prss%: 23.3%",
+                "MTkl: 132"
+            ],
+            "TeamPassRush": [
+                "Rate: 78.8",
+                "Sk: 44",
+                "Yds.1: 298",
+                "QBHits: 92",
+                "TFL: 97",
+                "ANY/A: 4.7",
+                "EXP: 30.01"
+            ],
+            "TeamRushDef": [
+                "Yds: 1649",
+                "Y/A: 4.3",
+                "Y/G: 103.1",
+                "EXP: 10.92"
+            ]
+        },
+        "CAR": {
+            "TeamAdv": [
+                "Hrry%: 9.2%",
+                "QBKD%: 8.5%",
+                "Prss%: 25.2%",
+                "MTkl: 109"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.0",
+                "Sk: 53",
+                "Yds.1: 301",
+                "QBHits: 108",
+                "TFL: 78",
+                "ANY/A: 5.8",
+                "EXP: -63.03"
+            ],
+            "TeamRushDef": [
+                "Yds: 2296",
+                "Y/A: 5.2",
+                "Y/G: 143.5",
+                "EXP: -62.69"
+            ]
+        },
+        "CHI": {
+            "TeamAdv": [
+                "Hrry%: 12.9%",
+                "QBKD%: 7.9%",
+                "Prss%: 25.2%",
+                "MTkl: 100"
+            ],
+            "TeamPassRush": [
+                "Rate: 85.2",
+                "Sk: 32",
+                "Yds.1: 242",
+                "QBHits: 79",
+                "TFL: 53",
+                "ANY/A: 5.7",
+                "EXP: -47.04"
+            ],
+            "TeamRushDef": [
+                "Yds: 1632",
+                "Y/A: 3.9",
+                "Y/G: 102.0",
+                "EXP: 38.83"
+            ]
+        },
+        "CIN": {
+            "TeamAdv": [
+                "Hrry%: 8.9%",
+                "QBKD%: 9.6%",
+                "Prss%: 22.9%",
+                "MTkl: 109"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.4",
+                "Sk: 31",
+                "Yds.1: 204",
+                "QBHits: 86",
+                "TFL: 59",
+                "ANY/A: 7.4",
+                "EXP: -126.81"
+            ],
+            "TeamRushDef": [
+                "Yds: 2382",
+                "Y/A: 4.7",
+                "Y/G: 148.9",
+                "EXP: -12.07"
+            ]
+        },
+        "CLE": {
+            "TeamAdv": [
+                "Hrry%: 10.7%",
+                "QBKD%: 7.4%",
+                "Prss%: 23.8%",
+                "MTkl: 140"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.0",
+                "Sk: 38",
+                "Yds.1: 270",
+                "QBHits: 82",
+                "TFL: 78",
+                "ANY/A: 6.1",
+                "EXP: -64.09"
+            ],
+            "TeamRushDef": [
+                "Yds: 2315",
+                "Y/A: 5.0",
+                "Y/G: 144.7",
+                "EXP: -37.5"
+            ]
+        },
+        "IND": {
+            "TeamAdv": [
+                "Hrry%: 8.8%",
+                "QBKD%: 6.6%",
+                "Prss%: 21.3%",
+                "MTkl: 87"
+            ],
+            "TeamPassRush": [
+                "Rate: 98.0",
+                "Sk: 41",
+                "Yds.1: 249",
+                "QBHits: 82",
+                "TFL: 69",
+                "ANY/A: 6.4",
+                "EXP: -86.44"
+            ],
+            "TeamRushDef": [
+                "Yds: 1567",
+                "Y/A: 4.1",
+                "Y/G: 97.9",
+                "EXP: 21.54"
+            ]
+        },
+        "ARI": {
+            "TeamAdv": [
+                "Hrry%: 7.7%",
+                "QBKD%: 7.3%",
+                "Prss%: 20.2%",
+                "MTkl: 135"
+            ],
+            "TeamPassRush": [
+                "Rate: 109.9",
+                "Sk: 40",
+                "Yds.1: 275",
+                "QBHits: 91",
+                "TFL: 91",
+                "ANY/A: 7.7",
+                "EXP: -190.81"
+            ],
+            "TeamRushDef": [
+                "Yds: 1922",
+                "Y/A: 4.4",
+                "Y/G: 120.1",
+                "EXP: 15.13"
+            ]
+        },
+        "DAL": {
+            "TeamAdv": [
+                "Hrry%: 9.6%",
+                "QBKD%: 8.6%",
+                "Prss%: 23.4%",
+                "MTkl: 119"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.9",
+                "Sk: 39",
+                "Yds.1: 303",
+                "QBHits: 90",
+                "TFL: 76",
+                "ANY/A: 6.1",
+                "EXP: -67.46"
+            ],
+            "TeamRushDef": [
+                "Yds: 1656",
+                "Y/A: 4.1",
+                "Y/G: 103.5",
+                "EXP: 25.11"
+            ]
+        },
+        "DEN": {
+            "TeamAdv": [
+                "Hrry%: 10.4%",
+                "QBKD%: 6.5%",
+                "Prss%: 22.9%",
+                "MTkl: 96"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.8",
+                "Sk: 40",
+                "Yds.1: 213",
+                "QBHits: 79",
+                "TFL: 79",
+                "ANY/A: 6.1",
+                "EXP: -61.45"
+            ],
+            "TeamRushDef": [
+                "Yds: 1783",
+                "Y/A: 4.2",
+                "Y/G: 111.4",
+                "EXP: 12.72"
+            ]
+        },
+        "DET": {
+            "TeamAdv": [
+                "Hrry%: 8.0%",
+                "QBKD%: 7.0%",
+                "Prss%: 18.8%",
+                "MTkl: 127"
+            ],
+            "TeamPassRush": [
+                "Rate: 99.6",
+                "Sk: 28",
+                "Yds.1: 188",
+                "QBHits: 70",
+                "TFL: 49",
+                "ANY/A: 7.7",
+                "EXP: -162.94"
+            ],
+            "TeamRushDef": [
+                "Yds: 1855",
+                "Y/A: 4.1",
+                "Y/G: 115.9",
+                "EXP: 17.32"
+            ]
+        },
+        "GNB": {
+            "TeamAdv": [
+                "Hrry%: 7.5%",
+                "QBKD%: 8.4%",
+                "Prss%: 21.8%",
+                "MTkl: 104"
+            ],
+            "TeamPassRush": [
+                "Rate: 81.1",
+                "Sk: 41",
+                "Yds.1: 295",
+                "QBHits: 94",
+                "TFL: 63",
+                "ANY/A: 5.7",
+                "EXP: -27.3"
+            ],
+            "TeamRushDef": [
+                "Yds: 1921",
+                "Y/A: 4.7",
+                "Y/G: 120.1",
+                "EXP: -42.18"
+            ]
+        },
+        "HOU": {
+            "TeamAdv": [
+                "Hrry%: 6.8%",
+                "QBKD%: 7.2%",
+                "Prss%: 18.1%",
+                "MTkl: 115"
+            ],
+            "TeamPassRush": [
+                "Rate: 97.6",
+                "Sk: 31",
+                "Yds.1: 215",
+                "QBHits: 91",
+                "TFL: 51",
+                "ANY/A: 7.1",
+                "EXP: -160.6"
+            ],
+            "TeamRushDef": [
+                "Yds: 1937",
+                "Y/A: 4.8",
+                "Y/G: 121.1",
+                "EXP: -6.34"
+            ]
+        },
+        "JAX": {
+            "TeamAdv": [
+                "Hrry%: 7.9%",
+                "QBKD%: 11.0%",
+                "Prss%: 25.8%",
+                "MTkl: 126"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.9",
+                "Sk: 47",
+                "Yds.1: 310",
+                "QBHits: 104",
+                "TFL: 79",
+                "ANY/A: 6.7",
+                "EXP: -98.77"
+            ],
+            "TeamRushDef": [
+                "Yds: 2229",
+                "Y/A: 5.1",
+                "Y/G: 139.3",
+                "EXP: -21.95"
+            ]
+        },
+        "KAN": {
+            "TeamAdv": [
+                "Hrry%: 7.5%",
+                "QBKD%: 8.8%",
+                "Prss%: 22.2%",
+                "MTkl: 101"
+            ],
+            "TeamPassRush": [
+                "Rate: 80.8",
+                "Sk: 45",
+                "Yds.1: 338",
+                "QBHits: 96",
+                "TFL: 66",
+                "ANY/A: 5.2",
+                "EXP: -36.78"
+            ],
+            "TeamRushDef": [
+                "Yds: 2051",
+                "Y/A: 4.9",
+                "Y/G: 128.2",
+                "EXP: -41.35"
+            ]
+        },
+        "MIA": {
+            "TeamAdv": [
+                "Hrry%: 6.1%",
+                "QBKD%: 6.8%",
+                "Prss%: 16.5%",
+                "MTkl: 115"
+            ],
+            "TeamPassRush": [
+                "Rate: 101.9",
+                "Sk: 23",
+                "Yds.1: 155",
+                "QBHits: 64",
+                "TFL: 48",
+                "ANY/A: 7.7",
+                "EXP: -172.01"
+            ],
+            "TeamRushDef": [
+                "Yds: 2166",
+                "Y/A: 4.5",
+                "Y/G: 135.4",
+                "EXP: -6.14"
+            ]
+        },
+        "MIN": {
+            "TeamAdv": [
+                "Hrry%: 8.2%",
+                "QBKD%: 6.8%",
+                "Prss%: 21.7%",
+                "MTkl: 67"
+            ],
+            "TeamPassRush": [
+                "Rate: 86.1",
+                "Sk: 48",
+                "Yds.1: 362",
+                "QBHits: 101",
+                "TFL: 87",
+                "ANY/A: 5.3",
+                "EXP: -34.01"
+            ],
+            "TeamRushDef": [
+                "Yds: 1728",
+                "Y/A: 4.3",
+                "Y/G: 108.0",
+                "EXP: 21.01"
+            ]
+        },
+        "NOR": {
+            "TeamAdv": [
+                "Hrry%: 12.1%",
+                "QBKD%: 7.6%",
+                "Prss%: 26.4%",
+                "MTkl: 86"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.3",
+                "Sk: 51",
+                "Yds.1: 333",
+                "QBHits: 110",
+                "TFL: 80",
+                "ANY/A: 5.8",
+                "EXP: -94.59"
+            ],
+            "TeamRushDef": [
+                "Yds: 1461",
+                "Y/A: 4.2",
+                "Y/G: 91.3",
+                "EXP: 39.45"
+            ]
+        },
+        "NWE": {
+            "TeamAdv": [
+                "Hrry%: 9.6%",
+                "QBKD%: 7.6%",
+                "Prss%: 24.1%",
+                "MTkl: 66"
+            ],
+            "TeamPassRush": [
+                "Rate: 62.8",
+                "Sk: 47",
+                "Yds.1: 328",
+                "QBHits: 102",
+                "TFL: 58",
+                "ANY/A: 3.5",
+                "EXP: 117.74"
+            ],
+            "TeamRushDef": [
+                "Yds: 1528",
+                "Y/A: 4.2",
+                "Y/G: 95.5",
+                "EXP: 33.13"
+            ]
+        },
+        "NYG": {
+            "TeamAdv": [
+                "Hrry%: 9.0%",
+                "QBKD%: 9.9%",
+                "Prss%: 23.7%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 101.4",
+                "Sk: 36",
+                "Yds.1: 246",
+                "QBHits: 98",
+                "TFL: 80",
+                "ANY/A: 7.4",
+                "EXP: -152.48"
+            ],
+            "TeamRushDef": [
+                "Yds: 1812",
+                "Y/A: 3.9",
+                "Y/G: 113.3",
+                "EXP: 40.51"
+            ]
+        },
+        "NYJ": {
+            "TeamAdv": [
+                "Hrry%: 7.7%",
+                "QBKD%: 8.9%",
+                "Prss%: 21.1%",
+                "MTkl: 96"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.0",
+                "Sk: 35",
+                "Yds.1: 222",
+                "QBHits: 99",
+                "TFL: 97",
+                "ANY/A: 6.0",
+                "EXP: -79.16"
+            ],
+            "TeamRushDef": [
+                "Yds: 1391",
+                "Y/A: 3.3",
+                "Y/G: 86.9",
+                "EXP: 72.34"
+            ]
+        },
+        "TEN": {
+            "TeamAdv": [
+                "Hrry%: 10.7%",
+                "QBKD%: 4.5%",
+                "Prss%: 21.1%",
+                "MTkl: 110"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.4",
+                "Sk: 43",
+                "Yds.1: 276",
+                "QBHits: 84",
+                "TFL: 71",
+                "ANY/A: 6.2",
+                "EXP: -92.39"
+            ],
+            "TeamRushDef": [
+                "Yds: 1672",
+                "Y/A: 4.0",
+                "Y/G: 104.5",
+                "EXP: 28.27"
+            ]
+        },
+        "PHI": {
+            "TeamAdv": [
+                "Hrry%: 8.7%",
+                "QBKD%: 9.8%",
+                "Prss%: 24.3%",
+                "MTkl: 97"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.8",
+                "Sk: 43",
+                "Yds.1: 271",
+                "QBHits: 106",
+                "TFL: 80",
+                "ANY/A: 6.4",
+                "EXP: -88.15"
+            ],
+            "TeamRushDef": [
+                "Yds: 1442",
+                "Y/A: 4.1",
+                "Y/G: 90.1",
+                "EXP: 47.64"
+            ]
+        },
+        "PIT": {
+            "TeamAdv": [
+                "Hrry%: 11.8%",
+                "QBKD%: 10.9%",
+                "Prss%: 30.5%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 79.7",
+                "Sk: 54",
+                "Yds.1: 342",
+                "QBHits: 118",
+                "TFL: 90",
+                "ANY/A: 4.7",
+                "EXP: 20.19"
+            ],
+            "TeamRushDef": [
+                "Yds: 1753",
+                "Y/A: 3.8",
+                "Y/G: 109.6",
+                "EXP: 63.09"
+            ]
+        },
+        "LVR": {
+            "TeamAdv": [
+                "Hrry%: 9.8%",
+                "QBKD%: 5.1%",
+                "Prss%: 19.9%",
+                "MTkl: 108"
+            ],
+            "TeamPassRush": [
+                "Rate: 103.8",
+                "Sk: 32",
+                "Yds.1: 248",
+                "QBHits: 64",
+                "TFL: 74",
+                "ANY/A: 7.8",
+                "EXP: -177.69"
+            ],
+            "TeamRushDef": [
+                "Yds: 1570",
+                "Y/A: 3.9",
+                "Y/G: 98.1",
+                "EXP: 17.69"
+            ]
+        },
+        "LAR": {
+            "TeamAdv": [
+                "Hrry%: 14.5%",
+                "QBKD%: 6.2%",
+                "Prss%: 27.9%",
+                "MTkl: 98"
+            ],
+            "TeamPassRush": [
+                "Rate: 86.8",
+                "Sk: 50",
+                "Yds.1: 303",
+                "QBHits: 93",
+                "TFL: 81",
+                "ANY/A: 5.7",
+                "EXP: -42.76"
+            ],
+            "TeamRushDef": [
+                "Yds: 1809",
+                "Y/A: 4.1",
+                "Y/G: 113.1",
+                "EXP: 21.49"
+            ]
+        },
+        "BAL": {
+            "TeamAdv": [
+                "Hrry%: 7.3%",
+                "QBKD%: 10.8%",
+                "Prss%: 23.4%",
+                "MTkl: 93"
+            ],
+            "TeamPassRush": [
+                "Rate: 77.5",
+                "Sk: 37",
+                "Yds.1: 268",
+                "QBHits: 111",
+                "TFL: 72",
+                "ANY/A: 5.2",
+                "EXP: 15.4"
+            ],
+            "TeamRushDef": [
+                "Yds: 1494",
+                "Y/A: 4.4",
+                "Y/G: 93.4",
+                "EXP: -1.25"
+            ]
+        },
+        "LAC": {
+            "TeamAdv": [
+                "Hrry%: 12.2%",
+                "QBKD%: 6.7%",
+                "Prss%: 23.8%",
+                "MTkl: 118"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.7",
+                "Sk: 30",
+                "Yds.1: 190",
+                "QBHits: 67",
+                "TFL: 69",
+                "ANY/A: 6.3",
+                "EXP: -92.16"
+            ],
+            "TeamRushDef": [
+                "Yds: 1805",
+                "Y/A: 4.2",
+                "Y/G: 112.8",
+                "EXP: 1.08"
+            ]
+        },
+        "SEA": {
+            "TeamAdv": [
+                "Hrry%: 9.2%",
+                "QBKD%: 6.4%",
+                "Prss%: 19.3%",
+                "MTkl: 131"
+            ],
+            "TeamPassRush": [
+                "Rate: 85.6",
+                "Sk: 28",
+                "Yds.1: 184",
+                "QBHits: 68",
+                "TFL: 52",
+                "ANY/A: 6.2",
+                "EXP: -77.18"
+            ],
+            "TeamRushDef": [
+                "Yds: 1883",
+                "Y/A: 4.9",
+                "Y/G: 117.7",
+                "EXP: -17.45"
+            ]
+        },
+        "SFO": {
+            "TeamAdv": [
+                "Hrry%: 14.7%",
+                "QBKD%: 6.9%",
+                "Prss%: 28.7%",
+                "MTkl: 107"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.0",
+                "Sk: 48",
+                "Yds.1: 367",
+                "QBHits: 93",
+                "TFL: 87",
+                "ANY/A: 4.6",
+                "EXP: 58.3"
+            ],
+            "TeamRushDef": [
+                "Yds: 1802",
+                "Y/A: 4.5",
+                "Y/G: 112.6",
+                "EXP: 9.91"
+            ]
+        },
+        "TAM": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 9.9%",
+                "Prss%: 23.9%",
+                "MTkl: 118"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.0",
+                "Sk: 47",
+                "Yds.1: 325",
+                "QBHits: 117",
+                "TFL: 87",
+                "ANY/A: 6.2",
+                "EXP: -38.17"
+            ],
+            "TeamRushDef": [
+                "Yds: 1181",
+                "Y/A: 3.3",
+                "Y/G: 73.8",
+                "EXP: 56.23"
+            ]
+        },
+        "WAS": {
+            "TeamAdv": [
+                "Hrry%: 13.6%",
+                "QBKD%: 8.3%",
+                "Prss%: 28.5%",
+                "MTkl: 116"
+            ],
+            "TeamPassRush": [
+                "Rate: 102.5",
+                "Sk: 46",
+                "Yds.1: 270",
+                "QBHits: 95",
+                "TFL: 75",
+                "ANY/A: 6.7",
+                "EXP: -135.17"
+            ],
+            "TeamRushDef": [
+                "Yds: 2339",
+                "Y/A: 4.7",
+                "Y/G: 146.2",
+                "EXP: -6.89"
+            ]
+        }
+    },
+    "2020": {
+        "ATL": {
+            "TeamAdv": [
+                "Hrry%: 10.4%",
+                "QBKD%: 9.8%",
+                "Prss%: 23.6%",
+                "MTkl: 101"
+            ],
+            "TeamPassRush": [
+                "Rate: 101.7",
+                "Sk: 29",
+                "Yds.1: 221",
+                "QBHits: 92",
+                "TFL: 63",
+                "ANY/A: 7.4",
+                "EXP: -177.33"
+            ],
+            "TeamRushDef": [
+                "Yds: 1677",
+                "Y/A: 4.4",
+                "Y/G: 104.8",
+                "EXP: 20.45"
+            ]
+        },
+        "BUF": {
+            "TeamAdv": [
+                "Hrry%: 7.8%",
+                "QBKD%: 9.6%",
+                "Prss%: 22.2%",
+                "MTkl: 125"
+            ],
+            "TeamPassRush": [
+                "Rate: 86.9",
+                "Sk: 38",
+                "Yds.1: 220",
+                "QBHits: 92",
+                "TFL: 72",
+                "ANY/A: 5.7",
+                "EXP: -79.64"
+            ],
+            "TeamRushDef": [
+                "Yds: 1914",
+                "Y/A: 4.6",
+                "Y/G: 119.6",
+                "EXP: -53.52"
+            ]
+        },
+        "CAR": {
+            "TeamAdv": [
+                "Hrry%: 8.6%",
+                "QBKD%: 10.1%",
+                "Prss%: 22.4%",
+                "MTkl: 121"
+            ],
+            "TeamPassRush": [
+                "Rate: 98.4",
+                "Sk: 29",
+                "Yds.1: 199",
+                "QBHits: 89",
+                "TFL: 55",
+                "ANY/A: 6.6",
+                "EXP: -106.79"
+            ],
+            "TeamRushDef": [
+                "Yds: 1936",
+                "Y/A: 4.7",
+                "Y/G: 121.0",
+                "EXP: -27.66"
+            ]
+        },
+        "CHI": {
+            "TeamAdv": [
+                "Hrry%: 8.0%",
+                "QBKD%: 9.7%",
+                "Prss%: 22.4%",
+                "MTkl: 89"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.9",
+                "Sk: 35",
+                "Yds.1: 234",
+                "QBHits: 88",
+                "TFL: 63",
+                "ANY/A: 6.6",
+                "EXP: -116.33"
+            ],
+            "TeamRushDef": [
+                "Yds: 1814",
+                "Y/A: 4.1",
+                "Y/G: 113.4",
+                "EXP: 25.22"
+            ]
+        },
+        "CIN": {
+            "TeamAdv": [
+                "Hrry%: 6.7%",
+                "QBKD%: 10.2%",
+                "Prss%: 19.0%",
+                "MTkl: 110"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.1",
+                "Sk: 17",
+                "Yds.1: 83",
+                "QBHits: 73",
+                "TFL: 45",
+                "ANY/A: 7.2",
+                "EXP: -122.53"
+            ],
+            "TeamRushDef": [
+                "Yds: 2368",
+                "Y/A: 5.1",
+                "Y/G: 148.0",
+                "EXP: -30.61"
+            ]
+        },
+        "CLE": {
+            "TeamAdv": [
+                "Hrry%: 10.6%",
+                "QBKD%: 6.0%",
+                "Prss%: 21.9%",
+                "MTkl: 96"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.8",
+                "Sk: 38",
+                "Yds.1: 262",
+                "QBHits: 75",
+                "TFL: 57",
+                "ANY/A: 6.6",
+                "EXP: -148.14"
+            ],
+            "TeamRushDef": [
+                "Yds: 1773",
+                "Y/A: 4.3",
+                "Y/G: 110.8",
+                "EXP: -19.02"
+            ]
+        },
+        "IND": {
+            "TeamAdv": [
+                "Hrry%: 11.1%",
+                "QBKD%: 6.6%",
+                "Prss%: 23.3%",
+                "MTkl: 70"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.5",
+                "Sk: 40",
+                "Yds.1: 261",
+                "QBHits: 81",
+                "TFL: 71",
+                "ANY/A: 6.1",
+                "EXP: -90.05"
+            ],
+            "TeamRushDef": [
+                "Yds: 1448",
+                "Y/A: 3.7",
+                "Y/G: 90.5",
+                "EXP: 13.82"
+            ]
+        },
+        "ARI": {
+            "TeamAdv": [
+                "Hrry%: 10.0%",
+                "QBKD%: 9.8%",
+                "Prss%: 25.9%",
+                "MTkl: 110"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.5",
+                "Sk: 48",
+                "Yds.1: 326",
+                "QBHits: 100",
+                "TFL: 88",
+                "ANY/A: 5.9",
+                "EXP: -79.44"
+            ],
+            "TeamRushDef": [
+                "Yds: 2008",
+                "Y/A: 4.6",
+                "Y/G: 125.5",
+                "EXP: -24.28"
+            ]
+        },
+        "DAL": {
+            "TeamAdv": [
+                "Hrry%: 9.7%",
+                "QBKD%: 8.8%",
+                "Prss%: 22.8%",
+                "MTkl: 102"
+            ],
+            "TeamPassRush": [
+                "Rate: 100.4",
+                "Sk: 31",
+                "Yds.1: 178",
+                "QBHits: 74",
+                "TFL: 54",
+                "ANY/A: 7.1",
+                "EXP: -105.15"
+            ],
+            "TeamRushDef": [
+                "Yds: 2541",
+                "Y/A: 5.0",
+                "Y/G: 158.8",
+                "EXP: -50.73"
+            ]
+        },
+        "DEN": {
+            "TeamAdv": [
+                "Hrry%: 11.5%",
+                "QBKD%: 9.2%",
+                "Prss%: 26.2%",
+                "MTkl: 94"
+            ],
+            "TeamPassRush": [
+                "Rate: 92.1",
+                "Sk: 42",
+                "Yds.1: 282",
+                "QBHits: 93",
+                "TFL: 65",
+                "ANY/A: 6.2",
+                "EXP: -72.16"
+            ],
+            "TeamRushDef": [
+                "Yds: 2080",
+                "Y/A: 4.8",
+                "Y/G: 130.0",
+                "EXP: -28.92"
+            ]
+        },
+        "DET": {
+            "TeamAdv": [
+                "Hrry%: 7.7%",
+                "QBKD%: 6.3%",
+                "Prss%: 17.5%",
+                "MTkl: 128"
+            ],
+            "TeamPassRush": [
+                "Rate: 112.4",
+                "Sk: 24",
+                "Yds.1: 195",
+                "QBHits: 56",
+                "TFL: 61",
+                "ANY/A: 8.6",
+                "EXP: -247.97"
+            ],
+            "TeamRushDef": [
+                "Yds: 2158",
+                "Y/A: 4.4",
+                "Y/G: 134.9",
+                "EXP: -42.32"
+            ]
+        },
+        "GNB": {
+            "TeamAdv": [
+                "Hrry%: 8.1%",
+                "QBKD%: 7.1%",
+                "Prss%: 21.1%",
+                "MTkl: 109"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.1",
+                "Sk: 41",
+                "Yds.1: 254",
+                "QBHits: 80",
+                "TFL: 58",
+                "ANY/A: 6.1",
+                "EXP: -73.0"
+            ],
+            "TeamRushDef": [
+                "Yds: 1805",
+                "Y/A: 4.5",
+                "Y/G: 112.8",
+                "EXP: -36.94"
+            ]
+        },
+        "HOU": {
+            "TeamAdv": [
+                "Hrry%: 7.8%",
+                "QBKD%: 8.7%",
+                "Prss%: 21.5%",
+                "MTkl: 125"
+            ],
+            "TeamPassRush": [
+                "Rate: 109.6",
+                "Sk: 34",
+                "Yds.1: 221",
+                "QBHits: 80",
+                "TFL: 65",
+                "ANY/A: 7.9",
+                "EXP: -190.89"
+            ],
+            "TeamRushDef": [
+                "Yds: 2564",
+                "Y/A: 5.2",
+                "Y/G: 160.3",
+                "EXP: -58.2"
+            ]
+        },
+        "JAX": {
+            "TeamAdv": [
+                "Hrry%: 7.1%",
+                "QBKD%: 10.7%",
+                "Prss%: 20.1%",
+                "MTkl: 114"
+            ],
+            "TeamPassRush": [
+                "Rate: 105.6",
+                "Sk: 18",
+                "Yds.1: 91",
+                "QBHits: 77",
+                "TFL: 57",
+                "ANY/A: 7.9",
+                "EXP: -206.62"
+            ],
+            "TeamRushDef": [
+                "Yds: 2452",
+                "Y/A: 4.7",
+                "Y/G: 153.3",
+                "EXP: -26.0"
+            ]
+        },
+        "KAN": {
+            "TeamAdv": [
+                "Hrry%: 8.9%",
+                "QBKD%: 11.8%",
+                "Prss%: 24.6%",
+                "MTkl: 119"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.4",
+                "Sk: 32",
+                "Yds.1: 189",
+                "QBHits: 99",
+                "TFL: 47",
+                "ANY/A: 6.2",
+                "EXP: -91.63"
+            ],
+            "TeamRushDef": [
+                "Yds: 1954",
+                "Y/A: 4.5",
+                "Y/G: 122.1",
+                "EXP: -54.78"
+            ]
+        },
+        "MIA": {
+            "TeamAdv": [
+                "Hrry%: 9.2%",
+                "QBKD%: 9.9%",
+                "Prss%: 24.8%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 87.0",
+                "Sk: 41",
+                "Yds.1: 349",
+                "QBHits: 99",
+                "TFL: 69",
+                "ANY/A: 6.2",
+                "EXP: -11.04"
+            ],
+            "TeamRushDef": [
+                "Yds: 1862",
+                "Y/A: 4.5",
+                "Y/G: 116.4",
+                "EXP: -26.37"
+            ]
+        },
+        "MIN": {
+            "TeamAdv": [
+                "Hrry%: 8.3%",
+                "QBKD%: 8.1%",
+                "Prss%: 19.6%",
+                "MTkl: 131"
+            ],
+            "TeamPassRush": [
+                "Rate: 97.0",
+                "Sk: 23",
+                "Yds.1: 126",
+                "QBHits: 70",
+                "TFL: 54",
+                "ANY/A: 7.2",
+                "EXP: -149.87"
+            ],
+            "TeamRushDef": [
+                "Yds: 2151",
+                "Y/A: 4.6",
+                "Y/G: 134.4",
+                "EXP: -41.77"
+            ]
+        },
+        "NOR": {
+            "TeamAdv": [
+                "Hrry%: 8.2%",
+                "QBKD%: 12.0%",
+                "Prss%: 26.3%",
+                "MTkl: 82"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.3",
+                "Sk: 45",
+                "Yds.1: 287",
+                "QBHits: 113",
+                "TFL: 81",
+                "ANY/A: 5.4",
+                "EXP: -73.09"
+            ],
+            "TeamRushDef": [
+                "Yds: 1502",
+                "Y/A: 3.9",
+                "Y/G: 93.9",
+                "EXP: 22.79"
+            ]
+        },
+        "NWE": {
+            "TeamAdv": [
+                "Hrry%: 14.3%",
+                "QBKD%: 8.7%",
+                "Prss%: 26.4%",
+                "MTkl: 90"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.3",
+                "Sk: 24",
+                "Yds.1: 165",
+                "QBHits: 65",
+                "TFL: 48",
+                "ANY/A: 6.2",
+                "EXP: -70.19"
+            ],
+            "TeamRushDef": [
+                "Yds: 2103",
+                "Y/A: 4.5",
+                "Y/G: 131.4",
+                "EXP: -42.97"
+            ]
+        },
+        "NYG": {
+            "TeamAdv": [
+                "Hrry%: 9.4%",
+                "QBKD%: 11.1%",
+                "Prss%: 25.5%",
+                "MTkl: 97"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.2",
+                "Sk: 40",
+                "Yds.1: 323",
+                "QBHits: 107",
+                "TFL: 74",
+                "ANY/A: 6.1",
+                "EXP: -82.73"
+            ],
+            "TeamRushDef": [
+                "Yds: 1782",
+                "Y/A: 4.1",
+                "Y/G: 111.4",
+                "EXP: -0.25"
+            ]
+        },
+        "NYJ": {
+            "TeamAdv": [
+                "Hrry%: 8.8%",
+                "QBKD%: 8.8%",
+                "Prss%: 21.7%",
+                "MTkl: 132"
+            ],
+            "TeamPassRush": [
+                "Rate: 103.2",
+                "Sk: 31",
+                "Yds.1: 186",
+                "QBHits: 84",
+                "TFL: 72",
+                "ANY/A: 7.3",
+                "EXP: -197.81"
+            ],
+            "TeamRushDef": [
+                "Yds: 1792",
+                "Y/A: 4.0",
+                "Y/G: 112.0",
+                "EXP: 23.32"
+            ]
+        },
+        "TEN": {
+            "TeamAdv": [
+                "Hrry%: 7.2%",
+                "QBKD%: 8.1%",
+                "Prss%: 17.6%",
+                "MTkl: 113"
+            ],
+            "TeamPassRush": [
+                "Rate: 97.5",
+                "Sk: 19",
+                "Yds.1: 154",
+                "QBHits: 72",
+                "TFL: 54",
+                "ANY/A: 6.9",
+                "EXP: -179.72"
+            ],
+            "TeamRushDef": [
+                "Yds: 1933",
+                "Y/A: 4.5",
+                "Y/G: 120.8",
+                "EXP: -31.76"
+            ]
+        },
+        "PHI": {
+            "TeamAdv": [
+                "Hrry%: 9.4%",
+                "QBKD%: 11.7%",
+                "Prss%: 27.9%",
+                "MTkl: 115"
+            ],
+            "TeamPassRush": [
+                "Rate: 102.4",
+                "Sk: 49",
+                "Yds.1: 324",
+                "QBHits: 115",
+                "TFL: 91",
+                "ANY/A: 6.9",
+                "EXP: -83.17"
+            ],
+            "TeamRushDef": [
+                "Yds: 2012",
+                "Y/A: 4.2",
+                "Y/G: 125.8",
+                "EXP: 14.58"
+            ]
+        },
+        "PIT": {
+            "TeamAdv": [
+                "Hrry%: 12.7%",
+                "QBKD%: 15.2%",
+                "Prss%: 35.1%",
+                "MTkl: 111"
+            ],
+            "TeamPassRush": [
+                "Rate: 76.7",
+                "Sk: 56",
+                "Yds.1: 384",
+                "QBHits: 137",
+                "TFL: 103",
+                "ANY/A: 4.7",
+                "EXP: 22.83"
+            ],
+            "TeamRushDef": [
+                "Yds: 1783",
+                "Y/A: 4.3",
+                "Y/G: 111.4",
+                "EXP: 3.99"
+            ]
+        },
+        "LVR": {
+            "TeamAdv": [
+                "Hrry%: 11.3%",
+                "QBKD%: 9.5%",
+                "Prss%: 23.5%",
+                "MTkl: 143"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.3",
+                "Sk: 21",
+                "Yds.1: 129",
+                "QBHits: 77",
+                "TFL: 61",
+                "ANY/A: 7.2",
+                "EXP: -181.81"
+            ],
+            "TeamRushDef": [
+                "Yds: 2013",
+                "Y/A: 4.6",
+                "Y/G: 125.8",
+                "EXP: -38.01"
+            ]
+        },
+        "LAR": {
+            "TeamAdv": [
+                "Hrry%: 7.2%",
+                "QBKD%: 8.9%",
+                "Prss%: 23.4%",
+                "MTkl: 77"
+            ],
+            "TeamPassRush": [
+                "Rate: 80.4",
+                "Sk: 53",
+                "Yds.1: 350",
+                "QBHits: 102",
+                "TFL: 66",
+                "ANY/A: 4.6",
+                "EXP: 35.85"
+            ],
+            "TeamRushDef": [
+                "Yds: 1460",
+                "Y/A: 3.8",
+                "Y/G: 91.3",
+                "EXP: 35.94"
+            ]
+        },
+        "BAL": {
+            "TeamAdv": [
+                "Hrry%: 9.1%",
+                "QBKD%: 12.9%",
+                "Prss%: 26.8%",
+                "MTkl: 134"
+            ],
+            "TeamPassRush": [
+                "Rate: 87.2",
+                "Sk: 39",
+                "Yds.1: 272",
+                "QBHits: 116",
+                "TFL: 71",
+                "ANY/A: 5.6",
+                "EXP: -51.17"
+            ],
+            "TeamRushDef": [
+                "Yds: 1740",
+                "Y/A: 4.6",
+                "Y/G: 108.8",
+                "EXP: 14.33"
+            ]
+        },
+        "LAC": {
+            "TeamAdv": [
+                "Hrry%: 9.7%",
+                "QBKD%: 10.7%",
+                "Prss%: 23.8%",
+                "MTkl: 109"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.4",
+                "Sk: 27",
+                "Yds.1: 137",
+                "QBHits: 85",
+                "TFL: 55",
+                "ANY/A: 6.3",
+                "EXP: -95.87"
+            ],
+            "TeamRushDef": [
+                "Yds: 1917",
+                "Y/A: 4.5",
+                "Y/G: 119.8",
+                "EXP: -3.97"
+            ]
+        },
+        "SEA": {
+            "TeamAdv": [
+                "Hrry%: 9.3%",
+                "QBKD%: 9.8%",
+                "Prss%: 24.1%",
+                "MTkl: 88"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.2",
+                "Sk: 46",
+                "Yds.1: 251",
+                "QBHits: 109",
+                "TFL: 88",
+                "ANY/A: 6.1",
+                "EXP: -118.72"
+            ],
+            "TeamRushDef": [
+                "Yds: 1529",
+                "Y/A: 3.9",
+                "Y/G: 95.6",
+                "EXP: 13.95"
+            ]
+        },
+        "SFO": {
+            "TeamAdv": [
+                "Hrry%: 11.2%",
+                "QBKD%: 7.3%",
+                "Prss%: 22.6%",
+                "MTkl: 68"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.6",
+                "Sk: 30",
+                "Yds.1: 199",
+                "QBHits: 72",
+                "TFL: 67",
+                "ANY/A: 5.8",
+                "EXP: -42.15"
+            ],
+            "TeamRushDef": [
+                "Yds: 1703",
+                "Y/A: 4.0",
+                "Y/G: 106.4",
+                "EXP: 15.79"
+            ]
+        },
+        "TAM": {
+            "TeamAdv": [
+                "Hrry%: 10.6%",
+                "QBKD%: 11.0%",
+                "Prss%: 27.5%",
+                "MTkl: 103"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.3",
+                "Sk: 48",
+                "Yds.1: 366",
+                "QBHits: 116",
+                "TFL: 91",
+                "ANY/A: 5.8",
+                "EXP: -45.76"
+            ],
+            "TeamRushDef": [
+                "Yds: 1289",
+                "Y/A: 3.6",
+                "Y/G: 80.6",
+                "EXP: 20.2"
+            ]
+        },
+        "WAS": {
+            "TeamAdv": [
+                "Hrry%: 9.8%",
+                "QBKD%: 9.5%",
+                "Prss%: 25.9%",
+                "MTkl: 120"
+            ],
+            "TeamPassRush": [
+                "Rate: 81.4",
+                "Sk: 47",
+                "Yds.1: 325",
+                "QBHits: 97",
+                "TFL: 78",
+                "ANY/A: 4.8",
+                "EXP: 22.79"
+            ],
+            "TeamRushDef": [
+                "Yds: 1805",
+                "Y/A: 4.2",
+                "Y/G: 112.8",
+                "EXP: 7.17"
+            ]
+        }
+    },
+    "2021": {
+        "ATL": {
+            "TeamAdv": [
+                "Hrry%: 7.6%",
+                "QBKD%: 6.8%",
+                "Prss%: 16.7%",
+                "MTkl: 120"
+            ],
+            "TeamPassRush": [
+                "Rate: 97.4",
+                "Sk: 18",
+                "Yds.1: 152",
+                "QBHits: 59",
+                "TFL: 58",
+                "ANY/A: 6.8",
+                "EXP: -119.11"
+            ],
+            "TeamRushDef": [
+                "Yds: 2242",
+                "Y/A: 4.3",
+                "Y/G: 131.9",
+                "EXP: -30.17"
+            ]
+        },
+        "BUF": {
+            "TeamAdv": [
+                "Hrry%: 15.4%",
+                "QBKD%: 9.6%",
+                "Prss%: 30.8%",
+                "MTkl: 118"
+            ],
+            "TeamPassRush": [
+                "Rate: 65.3",
+                "Sk: 42",
+                "Yds.1: 276",
+                "QBHits: 91",
+                "TFL: 92",
+                "ANY/A: 3.8",
+                "EXP: 20.04"
+            ],
+            "TeamRushDef": [
+                "Yds: 1866",
+                "Y/A: 4.2",
+                "Y/G: 109.8",
+                "EXP: 2.99"
+            ]
+        },
+        "CAR": {
+            "TeamAdv": [
+                "Hrry%: 10.9%",
+                "QBKD%: 9.3%",
+                "Prss%: 26.1%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.0",
+                "Sk: 39",
+                "Yds.1: 293",
+                "QBHits: 94",
+                "TFL: 84",
+                "ANY/A: 6.1",
+                "EXP: -47.59"
+            ],
+            "TeamRushDef": [
+                "Yds: 1935",
+                "Y/A: 4.1",
+                "Y/G: 113.8",
+                "EXP: 13.54"
+            ]
+        },
+        "CHI": {
+            "TeamAdv": [
+                "Hrry%: 8.4%",
+                "QBKD%: 6.5%",
+                "Prss%: 23.1%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 103.3",
+                "Sk: 49",
+                "Yds.1: 366",
+                "QBHits: 83",
+                "TFL: 77",
+                "ANY/A: 6.7",
+                "EXP: -78.8"
+            ],
+            "TeamRushDef": [
+                "Yds: 2127",
+                "Y/A: 4.4",
+                "Y/G: 125.1",
+                "EXP: 0.21"
+            ]
+        },
+        "CIN": {
+            "TeamAdv": [
+                "Hrry%: 10.8%",
+                "QBKD%: 8.5%",
+                "Prss%: 24.5%",
+                "MTkl: 108"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.1",
+                "Sk: 42",
+                "Yds.1: 276",
+                "QBHits: 99",
+                "TFL: 80",
+                "ANY/A: 6.2",
+                "EXP: -67.23"
+            ],
+            "TeamRushDef": [
+                "Yds: 1742",
+                "Y/A: 4.3",
+                "Y/G: 102.5",
+                "EXP: -0.39"
+            ]
+        },
+        "CLE": {
+            "TeamAdv": [
+                "Hrry%: 9.3%",
+                "QBKD%: 9.2%",
+                "Prss%: 24.3%",
+                "MTkl: 118"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.4",
+                "Sk: 43",
+                "Yds.1: 273",
+                "QBHits: 102",
+                "TFL: 76",
+                "ANY/A: 5.5",
+                "EXP: -51.01"
+            ],
+            "TeamRushDef": [
+                "Yds: 1857",
+                "Y/A: 4.2",
+                "Y/G: 109.2",
+                "EXP: -20.07"
+            ]
+        },
+        "IND": {
+            "TeamAdv": [
+                "Hrry%: 5.6%",
+                "QBKD%: 8.4%",
+                "Prss%: 18.1%",
+                "MTkl: 90"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.5",
+                "Sk: 33",
+                "Yds.1: 223",
+                "QBHits: 86",
+                "TFL: 56",
+                "ANY/A: 6.0",
+                "EXP: -73.9"
+            ],
+            "TeamRushDef": [
+                "Yds: 1854",
+                "Y/A: 4.4",
+                "Y/G: 109.1",
+                "EXP: 9.34"
+            ]
+        },
+        "ARI": {
+            "TeamAdv": [
+                "Hrry%: 9.8%",
+                "QBKD%: 10.7%",
+                "Prss%: 25.9%",
+                "MTkl: 110"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.5",
+                "Sk: 41",
+                "Yds.1: 227",
+                "QBHits: 100",
+                "TFL: 76",
+                "ANY/A: 6.1",
+                "EXP: -49.69"
+            ],
+            "TeamRushDef": [
+                "Yds: 1952",
+                "Y/A: 4.6",
+                "Y/G: 114.8",
+                "EXP: 20.49"
+            ]
+        },
+        "DAL": {
+            "TeamAdv": [
+                "Hrry%: 11.6%",
+                "QBKD%: 11.1%",
+                "Prss%: 27.6%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 76.6",
+                "Sk: 41",
+                "Yds.1: 297",
+                "QBHits: 114",
+                "TFL: 72",
+                "ANY/A: 5.1",
+                "EXP: 13.82"
+            ],
+            "TeamRushDef": [
+                "Yds: 1918",
+                "Y/A: 4.5",
+                "Y/G: 112.8",
+                "EXP: -5.54"
+            ]
+        },
+        "DEN": {
+            "TeamAdv": [
+                "Hrry%: 13.1%",
+                "QBKD%: 8.0%",
+                "Prss%: 25.9%",
+                "MTkl: 84"
+            ],
+            "TeamPassRush": [
+                "Rate: 85.0",
+                "Sk: 36",
+                "Yds.1: 249",
+                "QBHits: 83",
+                "TFL: 65",
+                "ANY/A: 5.9",
+                "EXP: -43.39"
+            ],
+            "TeamRushDef": [
+                "Yds: 1892",
+                "Y/A: 4.3",
+                "Y/G: 111.3",
+                "EXP: -6.12"
+            ]
+        },
+        "DET": {
+            "TeamAdv": [
+                "Hrry%: 10.7%",
+                "QBKD%: 5.3%",
+                "Prss%: 20.5%",
+                "MTkl: 132"
+            ],
+            "TeamPassRush": [
+                "Rate: 101.0",
+                "Sk: 30",
+                "Yds.1: 201",
+                "QBHits: 63",
+                "TFL: 58",
+                "ANY/A: 7.5",
+                "EXP: -161.97"
+            ],
+            "TeamRushDef": [
+                "Yds: 2296",
+                "Y/A: 4.4",
+                "Y/G: 135.1",
+                "EXP: -25.93"
+            ]
+        },
+        "GNB": {
+            "TeamAdv": [
+                "Hrry%: 11.3%",
+                "QBKD%: 8.5%",
+                "Prss%: 24.4%",
+                "MTkl: 87"
+            ],
+            "TeamPassRush": [
+                "Rate: 86.9",
+                "Sk: 39",
+                "Yds.1: 297",
+                "QBHits: 94",
+                "TFL: 52",
+                "ANY/A: 5.5",
+                "EXP: -33.4"
+            ],
+            "TeamRushDef": [
+                "Yds: 1855",
+                "Y/A: 4.7",
+                "Y/G: 109.1",
+                "EXP: -32.98"
+            ]
+        },
+        "HOU": {
+            "TeamAdv": [
+                "Hrry%: 8.8%",
+                "QBKD%: 7.1%",
+                "Prss%: 20.7%",
+                "MTkl: 124"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.1",
+                "Sk: 32",
+                "Yds.1: 225",
+                "QBHits: 70",
+                "TFL: 81",
+                "ANY/A: 6.7",
+                "EXP: -131.46"
+            ],
+            "TeamRushDef": [
+                "Yds: 2418",
+                "Y/A: 4.6",
+                "Y/G: 142.2",
+                "EXP: -21.18"
+            ]
+        },
+        "JAX": {
+            "TeamAdv": [
+                "Hrry%: 10.8%",
+                "QBKD%: 9.0%",
+                "Prss%: 24.2%",
+                "MTkl: 130"
+            ],
+            "TeamPassRush": [
+                "Rate: 100.8",
+                "Sk: 32",
+                "Yds.1: 236",
+                "QBHits: 83",
+                "TFL: 63",
+                "ANY/A: 7.0",
+                "EXP: -137.16"
+            ],
+            "TeamRushDef": [
+                "Yds: 2127",
+                "Y/A: 4.3",
+                "Y/G: 125.1",
+                "EXP: -25.13"
+            ]
+        },
+        "KAN": {
+            "TeamAdv": [
+                "Hrry%: 13.0%",
+                "QBKD%: 9.7%",
+                "Prss%: 26.4%",
+                "MTkl: 93"
+            ],
+            "TeamPassRush": [
+                "Rate: 92.0",
+                "Sk: 31",
+                "Yds.1: 209",
+                "QBHits: 91",
+                "TFL: 56",
+                "ANY/A: 6.5",
+                "EXP: -110.25"
+            ],
+            "TeamRushDef": [
+                "Yds: 1999",
+                "Y/A: 4.8",
+                "Y/G: 117.6",
+                "EXP: -33.7"
+            ]
+        },
+        "MIA": {
+            "TeamAdv": [
+                "Hrry%: 10.0%",
+                "QBKD%: 12.7%",
+                "Prss%: 28.5%",
+                "MTkl: 118"
+            ],
+            "TeamPassRush": [
+                "Rate: 85.4",
+                "Sk: 48",
+                "Yds.1: 380",
+                "QBHits: 129",
+                "TFL: 74",
+                "ANY/A: 5.6",
+                "EXP: -26.14"
+            ],
+            "TeamRushDef": [
+                "Yds: 1867",
+                "Y/A: 4.4",
+                "Y/G: 109.8",
+                "EXP: -5.29"
+            ]
+        },
+        "MIN": {
+            "TeamAdv": [
+                "Hrry%: 12.7%",
+                "QBKD%: 7.2%",
+                "Prss%: 26.2%",
+                "MTkl: 109"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.4",
+                "Sk: 51",
+                "Yds.1: 378",
+                "QBHits: 100",
+                "TFL: 61",
+                "ANY/A: 6.1",
+                "EXP: -57.45"
+            ],
+            "TeamRushDef": [
+                "Yds: 2222",
+                "Y/A: 4.7",
+                "Y/G: 130.7",
+                "EXP: -44.57"
+            ]
+        },
+        "NOR": {
+            "TeamAdv": [
+                "Hrry%: 8.3%",
+                "QBKD%: 10.8%",
+                "Prss%: 24.7%",
+                "MTkl: 108"
+            ],
+            "TeamPassRush": [
+                "Rate: 81.7",
+                "Sk: 46",
+                "Yds.1: 310",
+                "QBHits: 113",
+                "TFL: 88",
+                "ANY/A: 5.3",
+                "EXP: -1.74"
+            ],
+            "TeamRushDef": [
+                "Yds: 1589",
+                "Y/A: 3.7",
+                "Y/G: 93.5",
+                "EXP: 35.22"
+            ]
+        },
+        "NWE": {
+            "TeamAdv": [
+                "Hrry%: 12.5%",
+                "QBKD%: 8.0%",
+                "Prss%: 25.6%",
+                "MTkl: 95"
+            ],
+            "TeamPassRush": [
+                "Rate: 73.3",
+                "Sk: 36",
+                "Yds.1: 256",
+                "QBHits: 86",
+                "TFL: 60",
+                "ANY/A: 4.5",
+                "EXP: -0.86"
+            ],
+            "TeamRushDef": [
+                "Yds: 2103",
+                "Y/A: 4.5",
+                "Y/G: 123.7",
+                "EXP: -9.38"
+            ]
+        },
+        "NYG": {
+            "TeamAdv": [
+                "Hrry%: 8.8%",
+                "QBKD%: 6.7%",
+                "Prss%: 20.1%",
+                "MTkl: 95"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.0",
+                "Sk: 34",
+                "Yds.1: 205",
+                "QBHits: 79",
+                "TFL: 53",
+                "ANY/A: 5.7",
+                "EXP: -56.19"
+            ],
+            "TeamRushDef": [
+                "Yds: 2193",
+                "Y/A: 4.5",
+                "Y/G: 129.0",
+                "EXP: -27.69"
+            ]
+        },
+        "NYJ": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 8.5%",
+                "Prss%: 21.4%",
+                "MTkl: 122"
+            ],
+            "TeamPassRush": [
+                "Rate: 103.2",
+                "Sk: 33",
+                "Yds.1: 273",
+                "QBHits: 88",
+                "TFL: 71",
+                "ANY/A: 7.5",
+                "EXP: -198.18"
+            ],
+            "TeamRushDef": [
+                "Yds: 2351",
+                "Y/A: 4.5",
+                "Y/G: 138.3",
+                "EXP: -3.91"
+            ]
+        },
+        "TEN": {
+            "TeamAdv": [
+                "Hrry%: 11.2%",
+                "QBKD%: 7.5%",
+                "Prss%: 24.0%",
+                "MTkl: 94"
+            ],
+            "TeamPassRush": [
+                "Rate: 86.4",
+                "Sk: 43",
+                "Yds.1: 316",
+                "QBHits: 94",
+                "TFL: 69",
+                "ANY/A: 5.9",
+                "EXP: -59.34"
+            ],
+            "TeamRushDef": [
+                "Yds: 1438",
+                "Y/A: 3.9",
+                "Y/G: 84.6",
+                "EXP: 6.93"
+            ]
+        },
+        "PHI": {
+            "TeamAdv": [
+                "Hrry%: 11.6%",
+                "QBKD%: 8.7%",
+                "Prss%: 24.0%",
+                "MTkl: 103"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.4",
+                "Sk: 29",
+                "Yds.1: 220",
+                "QBHits: 83",
+                "TFL: 71",
+                "ANY/A: 6.1",
+                "EXP: -81.44"
+            ],
+            "TeamRushDef": [
+                "Yds: 1834",
+                "Y/A: 4.0",
+                "Y/G: 107.9",
+                "EXP: 3.23"
+            ]
+        },
+        "PIT": {
+            "TeamAdv": [
+                "Hrry%: 10.9%",
+                "QBKD%: 7.8%",
+                "Prss%: 26.1%",
+                "MTkl: 125"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.7",
+                "Sk: 55",
+                "Yds.1: 321",
+                "QBHits: 106",
+                "TFL: 94",
+                "ANY/A: 5.7",
+                "EXP: -44.6"
+            ],
+            "TeamRushDef": [
+                "Yds: 2483",
+                "Y/A: 5.0",
+                "Y/G: 146.1",
+                "EXP: -32.29"
+            ]
+        },
+        "LVR": {
+            "TeamAdv": [
+                "Hrry%: 9.2%",
+                "QBKD%: 11.2%",
+                "Prss%: 24.4%",
+                "MTkl: 109"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.4",
+                "Sk: 35",
+                "Yds.1: 207",
+                "QBHits: 114",
+                "TFL: 65",
+                "ANY/A: 6.4",
+                "EXP: -159.12"
+            ],
+            "TeamRushDef": [
+                "Yds: 1943",
+                "Y/A: 4.2",
+                "Y/G: 114.3",
+                "EXP: 14.7"
+            ]
+        },
+        "LAR": {
+            "TeamAdv": [
+                "Hrry%: 10.5%",
+                "QBKD%: 5.9%",
+                "Prss%: 22.8%",
+                "MTkl: 119"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.8",
+                "Sk: 50",
+                "Yds.1: 367",
+                "QBHits: 95",
+                "TFL: 85",
+                "ANY/A: 5.3",
+                "EXP: -41.65"
+            ],
+            "TeamRushDef": [
+                "Yds: 1754",
+                "Y/A: 4.0",
+                "Y/G: 103.2",
+                "EXP: 5.16"
+            ]
+        },
+        "BAL": {
+            "TeamAdv": [
+                "Hrry%: 8.6%",
+                "QBKD%: 10.0%",
+                "Prss%: 23.0%",
+                "MTkl: 115"
+            ],
+            "TeamPassRush": [
+                "Rate: 99.4",
+                "Sk: 34",
+                "Yds.1: 244",
+                "QBHits: 96",
+                "TFL: 76",
+                "ANY/A: 7.6",
+                "EXP: -166.26"
+            ],
+            "TeamRushDef": [
+                "Yds: 1436",
+                "Y/A: 3.8",
+                "Y/G: 84.5",
+                "EXP: 36.77"
+            ]
+        },
+        "LAC": {
+            "TeamAdv": [
+                "Hrry%: 10.9%",
+                "QBKD%: 9.5%",
+                "Prss%: 25.0%",
+                "MTkl: 127"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.0",
+                "Sk: 35",
+                "Yds.1: 231",
+                "QBHits: 89",
+                "TFL: 65",
+                "ANY/A: 6.4",
+                "EXP: -89.74"
+            ],
+            "TeamRushDef": [
+                "Yds: 2361",
+                "Y/A: 4.6",
+                "Y/G: 138.9",
+                "EXP: -41.6"
+            ]
+        },
+        "SEA": {
+            "TeamAdv": [
+                "Hrry%: 10.4%",
+                "QBKD%: 7.6%",
+                "Prss%: 22.1%",
+                "MTkl: 113"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.6",
+                "Sk: 34",
+                "Yds.1: 253",
+                "QBHits: 93",
+                "TFL: 70",
+                "ANY/A: 6.5",
+                "EXP: -126.34"
+            ],
+            "TeamRushDef": [
+                "Yds: 1932",
+                "Y/A: 3.8",
+                "Y/G: 113.6",
+                "EXP: 27.0"
+            ]
+        },
+        "SFO": {
+            "TeamAdv": [
+                "Hrry%: 8.1%",
+                "QBKD%: 9.5%",
+                "Prss%: 24.1%",
+                "MTkl: 99"
+            ],
+            "TeamPassRush": [
+                "Rate: 97.0",
+                "Sk: 48",
+                "Yds.1: 364",
+                "QBHits: 103",
+                "TFL: 98",
+                "ANY/A: 6.1",
+                "EXP: -91.78"
+            ],
+            "TeamRushDef": [
+                "Yds: 1760",
+                "Y/A: 4.0",
+                "Y/G: 103.5",
+                "EXP: 28.14"
+            ]
+        },
+        "TAM": {
+            "TeamAdv": [
+                "Hrry%: 12.4%",
+                "QBKD%: 11.3%",
+                "Prss%: 28.6%",
+                "MTkl: 120"
+            ],
+            "TeamPassRush": [
+                "Rate: 85.6",
+                "Sk: 47",
+                "Yds.1: 285",
+                "QBHits: 127",
+                "TFL: 81",
+                "ANY/A: 5.3",
+                "EXP: -30.09"
+            ],
+            "TeamRushDef": [
+                "Yds: 1573",
+                "Y/A: 4.3",
+                "Y/G: 92.5",
+                "EXP: 20.32"
+            ]
+        },
+        "WAS": {
+            "TeamAdv": [
+                "Hrry%: 10.2%",
+                "QBKD%: 9.2%",
+                "Prss%: 24.2%",
+                "MTkl: 99"
+            ],
+            "TeamPassRush": [
+                "Rate: 100.8",
+                "Sk: 38",
+                "Yds.1: 187",
+                "QBHits: 105",
+                "TFL: 60",
+                "ANY/A: 7.1",
+                "EXP: -142.08"
+            ],
+            "TeamRushDef": [
+                "Yds: 1775",
+                "Y/A: 4.1",
+                "Y/G: 104.4",
+                "EXP: 3.16"
+            ]
+        }
+    },
+    "2022": {
+        "ATL": {
+            "TeamAdv": [
+                "Hrry%: 3.8%",
+                "QBKD%: 7.8%",
+                "Prss%: 14.6%",
+                "MTkl: 54"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.7",
+                "Sk: 21",
+                "Yds.1: 148",
+                "QBHits: 69",
+                "TFL: 57",
+                "ANY/A: 6.9",
+                "EXP: -112.41"
+            ],
+            "TeamRushDef": [
+                "Yds: 2214",
+                "Y/A: 4.4",
+                "Y/G: 130.2",
+                "EXP: -24.68"
+            ]
+        },
+        "BUF": {
+            "TeamAdv": [
+                "Hrry%: 7.2%",
+                "QBKD%: 9.8%",
+                "Prss%: 22.2%",
+                "MTkl: 77"
+            ],
+            "TeamPassRush": [
+                "Rate: 82.1",
+                "Sk: 40",
+                "Yds.1: 288",
+                "QBHits: 98",
+                "TFL: 93",
+                "ANY/A: 5.1",
+                "EXP: -18.33"
+            ],
+            "TeamRushDef": [
+                "Yds: 1673",
+                "Y/A: 4.3",
+                "Y/G: 104.6",
+                "EXP: 5.81"
+            ]
+        },
+        "CAR": {
+            "TeamAdv": [
+                "Hrry%: 6.4%",
+                "QBKD%: 8.6%",
+                "Prss%: 19.8%",
+                "MTkl: 72"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.7",
+                "Sk: 35",
+                "Yds.1: 230",
+                "QBHits: 91",
+                "TFL: 88",
+                "ANY/A: 6.4",
+                "EXP: -82.35"
+            ],
+            "TeamRushDef": [
+                "Yds: 2085",
+                "Y/A: 4.3",
+                "Y/G: 122.6",
+                "EXP: 10.22"
+            ]
+        },
+        "CHI": {
+            "TeamAdv": [
+                "Hrry%: 8.4%",
+                "QBKD%: 4.2%",
+                "Prss%: 15.9%",
+                "MTkl: 74"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.4",
+                "Sk: 20",
+                "Yds.1: 124",
+                "QBHits: 43",
+                "TFL: 67",
+                "ANY/A: 7.0",
+                "EXP: -131.85"
+            ],
+            "TeamRushDef": [
+                "Yds: 2674",
+                "Y/A: 4.9",
+                "Y/G: 157.3",
+                "EXP: -46.52"
+            ]
+        },
+        "CIN": {
+            "TeamAdv": [
+                "Hrry%: 6.3%",
+                "QBKD%: 12.2%",
+                "Prss%: 22.4%",
+                "MTkl: 69"
+            ],
+            "TeamPassRush": [
+                "Rate: 80.1",
+                "Sk: 30",
+                "Yds.1: 163",
+                "QBHits: 102",
+                "TFL: 57",
+                "ANY/A: 5.8",
+                "EXP: -31.64"
+            ],
+            "TeamRushDef": [
+                "Yds: 1706",
+                "Y/A: 4.2",
+                "Y/G: 106.6",
+                "EXP: 2.26"
+            ]
+        },
+        "CLE": {
+            "TeamAdv": [
+                "Hrry%: 7.4%",
+                "QBKD%: 5.2%",
+                "Prss%: 18.2%",
+                "MTkl: 76"
+            ],
+            "TeamPassRush": [
+                "Rate: 85.2",
+                "Sk: 34",
+                "Yds.1: 211",
+                "QBHits: 66",
+                "TFL: 69",
+                "ANY/A: 5.9",
+                "EXP: -36.46"
+            ],
+            "TeamRushDef": [
+                "Yds: 2295",
+                "Y/A: 4.7",
+                "Y/G: 135.0",
+                "EXP: -34.44"
+            ]
+        },
+        "IND": {
+            "TeamAdv": [
+                "Hrry%: 8.7%",
+                "QBKD%: 6.9%",
+                "Prss%: 22.0%",
+                "MTkl: 85"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.2",
+                "Sk: 44",
+                "Yds.1: 267",
+                "QBHits: 90",
+                "TFL: 91",
+                "ANY/A: 6.2",
+                "EXP: -68.37"
+            ],
+            "TeamRushDef": [
+                "Yds: 2109",
+                "Y/A: 4.1",
+                "Y/G: 124.1",
+                "EXP: 6.68"
+            ]
+        },
+        "ARI": {
+            "TeamAdv": [
+                "Hrry%: 7.4%",
+                "QBKD%: 10.6%",
+                "Prss%: 22.5%",
+                "MTkl: 83"
+            ],
+            "TeamPassRush": [
+                "Rate: 98.2",
+                "Sk: 36",
+                "Yds.1: 266",
+                "QBHits: 106",
+                "TFL: 87",
+                "ANY/A: 6.4",
+                "EXP: -78.0"
+            ],
+            "TeamRushDef": [
+                "Yds: 2016",
+                "Y/A: 4.5",
+                "Y/G: 118.6",
+                "EXP: -7.46"
+            ]
+        },
+        "DAL": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 9.8%",
+                "Prss%: 25.6%",
+                "MTkl: 64"
+            ],
+            "TeamPassRush": [
+                "Rate: 84.7",
+                "Sk: 54",
+                "Yds.1: 352",
+                "QBHits: 110",
+                "TFL: 93",
+                "ANY/A: 5.2",
+                "EXP: 7.43"
+            ],
+            "TeamRushDef": [
+                "Yds: 2198",
+                "Y/A: 4.4",
+                "Y/G: 129.3",
+                "EXP: 6.58"
+            ]
+        },
+        "DEN": {
+            "TeamAdv": [
+                "Hrry%: 6.0%",
+                "QBKD%: 7.8%",
+                "Prss%: 18.5%",
+                "MTkl: 98"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.1",
+                "Sk: 36",
+                "Yds.1: 245",
+                "QBHits: 81",
+                "TFL: 64",
+                "ANY/A: 5.1",
+                "EXP: -14.65"
+            ],
+            "TeamRushDef": [
+                "Yds: 1866",
+                "Y/A: 4.3",
+                "Y/G: 109.8",
+                "EXP: 6.71"
+            ]
+        },
+        "DET": {
+            "TeamAdv": [
+                "Hrry%: 9.5%",
+                "QBKD%: 8.8%",
+                "Prss%: 23.2%",
+                "MTkl: 63"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.2",
+                "Sk: 39",
+                "Yds.1: 267",
+                "QBHits: 100",
+                "TFL: 76",
+                "ANY/A: 6.9",
+                "EXP: -107.31"
+            ],
+            "TeamRushDef": [
+                "Yds: 2491",
+                "Y/A: 5.2",
+                "Y/G: 146.5",
+                "EXP: -67.67"
+            ]
+        },
+        "GNB": {
+            "TeamAdv": [
+                "Hrry%: 7.9%",
+                "QBKD%: 10.5%",
+                "Prss%: 23.6%",
+                "MTkl: 59"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.3",
+                "Sk: 34",
+                "Yds.1: 204",
+                "QBHits: 87",
+                "TFL: 68",
+                "ANY/A: 5.9",
+                "EXP: -31.99"
+            ],
+            "TeamRushDef": [
+                "Yds: 2372",
+                "Y/A: 5.0",
+                "Y/G: 139.5",
+                "EXP: -43.83"
+            ]
+        },
+        "HOU": {
+            "TeamAdv": [
+                "Hrry%: 6.4%",
+                "QBKD%: 8.0%",
+                "Prss%: 20.1%",
+                "MTkl: 90"
+            ],
+            "TeamPassRush": [
+                "Rate: 82.7",
+                "Sk: 39",
+                "Yds.1: 217",
+                "QBHits: 78",
+                "TFL: 95",
+                "ANY/A: 5.6",
+                "EXP: -51.52"
+            ],
+            "TeamRushDef": [
+                "Yds: 2894",
+                "Y/A: 5.1",
+                "Y/G: 170.2",
+                "EXP: -32.99"
+            ]
+        },
+        "JAX": {
+            "TeamAdv": [
+                "Hrry%: 8.4%",
+                "QBKD%: 12.8%",
+                "Prss%: 25.1%",
+                "MTkl: 82"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.1",
+                "Sk: 35",
+                "Yds.1: 203",
+                "QBHits: 113",
+                "TFL: 80",
+                "ANY/A: 6.2",
+                "EXP: -70.33"
+            ],
+            "TeamRushDef": [
+                "Yds: 1951",
+                "Y/A: 4.2",
+                "Y/G: 114.8",
+                "EXP: 5.23"
+            ]
+        },
+        "KAN": {
+            "TeamAdv": [
+                "Hrry%: 8.3%",
+                "QBKD%: 10.3%",
+                "Prss%: 24.9%",
+                "MTkl: 82"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.3",
+                "Sk: 55",
+                "Yds.1: 388",
+                "QBHits: 118",
+                "TFL: 89",
+                "ANY/A: 5.8",
+                "EXP: -49.49"
+            ],
+            "TeamRushDef": [
+                "Yds: 1823",
+                "Y/A: 4.4",
+                "Y/G: 107.2",
+                "EXP: -22.49"
+            ]
+        },
+        "MIA": {
+            "TeamAdv": [
+                "Hrry%: 8.3%",
+                "QBKD%: 8.7%",
+                "Prss%: 21.7%",
+                "MTkl: 78"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.3",
+                "Sk: 40",
+                "Yds.1: 290",
+                "QBHits: 101",
+                "TFL: 75",
+                "ANY/A: 6.3",
+                "EXP: -70.3"
+            ],
+            "TeamRushDef": [
+                "Yds: 1751",
+                "Y/A: 4.1",
+                "Y/G: 103.0",
+                "EXP: -5.44"
+            ]
+        },
+        "MIN": {
+            "TeamAdv": [
+                "Hrry%: 7.1%",
+                "QBKD%: 7.8%",
+                "Prss%: 19.5%",
+                "MTkl: 64"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.6",
+                "Sk: 38",
+                "Yds.1: 241",
+                "QBHits: 88",
+                "TFL: 81",
+                "ANY/A: 6.6",
+                "EXP: -99.95"
+            ],
+            "TeamRushDef": [
+                "Yds: 2093",
+                "Y/A: 4.5",
+                "Y/G: 123.1",
+                "EXP: -14.81"
+            ]
+        },
+        "NOR": {
+            "TeamAdv": [
+                "Hrry%: 4.8%",
+                "QBKD%: 5.4%",
+                "Prss%: 17.5%",
+                "MTkl: 74"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.8",
+                "Sk: 48",
+                "Yds.1: 279",
+                "QBHits: 87",
+                "TFL: 77",
+                "ANY/A: 5.4",
+                "EXP: -27.47"
+            ],
+            "TeamRushDef": [
+                "Yds: 2218",
+                "Y/A: 4.5",
+                "Y/G: 130.5",
+                "EXP: -16.64"
+            ]
+        },
+        "NWE": {
+            "TeamAdv": [
+                "Hrry%: 10.8%",
+                "QBKD%: 6.0%",
+                "Prss%: 24.1%",
+                "MTkl: 73"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.5",
+                "Sk: 54",
+                "Yds.1: 348",
+                "QBHits: 93",
+                "TFL: 72",
+                "ANY/A: 5.2",
+                "EXP: 25.49"
+            ],
+            "TeamRushDef": [
+                "Yds: 1793",
+                "Y/A: 4.1",
+                "Y/G: 105.5",
+                "EXP: 15.97"
+            ]
+        },
+        "NYG": {
+            "TeamAdv": [
+                "Hrry%: 7.5%",
+                "QBKD%: 11.6%",
+                "Prss%: 24.3%",
+                "MTkl: 49"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.9",
+                "Sk: 41",
+                "Yds.1: 271",
+                "QBHits: 106",
+                "TFL: 73",
+                "ANY/A: 6.2",
+                "EXP: -69.2"
+            ],
+            "TeamRushDef": [
+                "Yds: 2451",
+                "Y/A: 5.2",
+                "Y/G: 144.2",
+                "EXP: -74.11"
+            ]
+        },
+        "NYJ": {
+            "TeamAdv": [
+                "Hrry%: 6.2%",
+                "QBKD%: 13.7%",
+                "Prss%: 25.4%",
+                "MTkl: 68"
+            ],
+            "TeamPassRush": [
+                "Rate: 80.5",
+                "Sk: 45",
+                "Yds.1: 306",
+                "QBHits: 130",
+                "TFL: 81",
+                "ANY/A: 5.0",
+                "EXP: 3.76"
+            ],
+            "TeamRushDef": [
+                "Yds: 2068",
+                "Y/A: 4.2",
+                "Y/G: 121.6",
+                "EXP: 14.66"
+            ]
+        },
+        "TEN": {
+            "TeamAdv": [
+                "Hrry%: 7.7%",
+                "QBKD%: 8.9%",
+                "Prss%: 21.2%",
+                "MTkl: 86"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.0",
+                "Sk: 39",
+                "Yds.1: 264",
+                "QBHits: 104",
+                "TFL: 77",
+                "ANY/A: 6.5",
+                "EXP: -109.62"
+            ],
+            "TeamRushDef": [
+                "Yds: 1307",
+                "Y/A: 3.4",
+                "Y/G: 76.9",
+                "EXP: 32.7"
+            ]
+        },
+        "PHI": {
+            "TeamAdv": [
+                "Hrry%: 7.3%",
+                "QBKD%: 9.0%",
+                "Prss%: 25.5%",
+                "MTkl: 68"
+            ],
+            "TeamPassRush": [
+                "Rate: 81.6",
+                "Sk: 70",
+                "Yds.1: 491",
+                "QBHits: 124",
+                "TFL: 97",
+                "ANY/A: 4.4",
+                "EXP: 61.34"
+            ],
+            "TeamRushDef": [
+                "Yds: 2068",
+                "Y/A: 4.6",
+                "Y/G: 121.6",
+                "EXP: -49.48"
+            ]
+        },
+        "PIT": {
+            "TeamAdv": [
+                "Hrry%: 4.5%",
+                "QBKD%: 7.4%",
+                "Prss%: 17.4%",
+                "MTkl: 68"
+            ],
+            "TeamPassRush": [
+                "Rate: 86.8",
+                "Sk: 40",
+                "Yds.1: 287",
+                "QBHits: 84",
+                "TFL: 68",
+                "ANY/A: 5.9",
+                "EXP: -65.82"
+            ],
+            "TeamRushDef": [
+                "Yds: 1838",
+                "Y/A: 4.2",
+                "Y/G: 108.1",
+                "EXP: 13.16"
+            ]
+        },
+        "LVR": {
+            "TeamAdv": [
+                "Hrry%: 5.6%",
+                "QBKD%: 10.3%",
+                "Prss%: 19.3%",
+                "MTkl: 69"
+            ],
+            "TeamPassRush": [
+                "Rate: 98.8",
+                "Sk: 27",
+                "Yds.1: 192",
+                "QBHits: 94",
+                "TFL: 68",
+                "ANY/A: 7.1",
+                "EXP: -119.4"
+            ],
+            "TeamRushDef": [
+                "Yds: 2087",
+                "Y/A: 4.5",
+                "Y/G: 122.8",
+                "EXP: -16.21"
+            ]
+        },
+        "LAR": {
+            "TeamAdv": [
+                "Hrry%: 5.7%",
+                "QBKD%: 6.8%",
+                "Prss%: 17.9%",
+                "MTkl: 67"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.8",
+                "Sk: 38",
+                "Yds.1: 250",
+                "QBHits: 80",
+                "TFL: 68",
+                "ANY/A: 6.0",
+                "EXP: -85.14"
+            ],
+            "TeamRushDef": [
+                "Yds: 1956",
+                "Y/A: 4.3",
+                "Y/G: 115.1",
+                "EXP: -0.2"
+            ]
+        },
+        "BAL": {
+            "TeamAdv": [
+                "Hrry%: 6.3%",
+                "QBKD%: 6.4%",
+                "Prss%: 19.2%",
+                "MTkl: 79"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.7",
+                "Sk: 48",
+                "Yds.1: 305",
+                "QBHits: 95",
+                "TFL: 77",
+                "ANY/A: 5.8",
+                "EXP: -56.18"
+            ],
+            "TeamRushDef": [
+                "Yds: 1566",
+                "Y/A: 3.9",
+                "Y/G: 92.1",
+                "EXP: 15.65"
+            ]
+        },
+        "LAC": {
+            "TeamAdv": [
+                "Hrry%: 6.1%",
+                "QBKD%: 7.5%",
+                "Prss%: 19.8%",
+                "MTkl: 65"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.0",
+                "Sk: 40",
+                "Yds.1: 287",
+                "QBHits: 77",
+                "TFL: 77",
+                "ANY/A: 6.0",
+                "EXP: -37.07"
+            ],
+            "TeamRushDef": [
+                "Yds: 2478",
+                "Y/A: 5.4",
+                "Y/G: 145.8",
+                "EXP: -55.06"
+            ]
+        },
+        "SEA": {
+            "TeamAdv": [
+                "Hrry%: 5.4%",
+                "QBKD%: 9.3%",
+                "Prss%: 20.8%",
+                "MTkl: 77"
+            ],
+            "TeamPassRush": [
+                "Rate: 87.3",
+                "Sk: 45",
+                "Yds.1: 296",
+                "QBHits: 98",
+                "TFL: 75",
+                "ANY/A: 5.8",
+                "EXP: -84.93"
+            ],
+            "TeamRushDef": [
+                "Yds: 2554",
+                "Y/A: 4.9",
+                "Y/G: 150.2",
+                "EXP: -41.32"
+            ]
+        },
+        "SFO": {
+            "TeamAdv": [
+                "Hrry%: 5.9%",
+                "QBKD%: 11.6%",
+                "Prss%: 22.9%",
+                "MTkl: 64"
+            ],
+            "TeamPassRush": [
+                "Rate: 82.7",
+                "Sk: 44",
+                "Yds.1: 307",
+                "QBHits: 121",
+                "TFL: 77",
+                "ANY/A: 5.2",
+                "EXP: 30.77"
+            ],
+            "TeamRushDef": [
+                "Yds: 1321",
+                "Y/A: 3.4",
+                "Y/G: 77.7",
+                "EXP: 17.54"
+            ]
+        },
+        "TAM": {
+            "TeamAdv": [
+                "Hrry%: 5.9%",
+                "QBKD%: 10.2%",
+                "Prss%: 21.9%",
+                "MTkl: 68"
+            ],
+            "TeamPassRush": [
+                "Rate: 92.7",
+                "Sk: 45",
+                "Yds.1: 331",
+                "QBHits: 104",
+                "TFL: 89",
+                "ANY/A: 5.8",
+                "EXP: -59.81"
+            ],
+            "TeamRushDef": [
+                "Yds: 2052",
+                "Y/A: 4.5",
+                "Y/G: 120.7",
+                "EXP: 12.95"
+            ]
+        },
+        "WAS": {
+            "TeamAdv": [
+                "Hrry%: 4.2%",
+                "QBKD%: 13.4%",
+                "Prss%: 23.1%",
+                "MTkl: 49"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.2",
+                "Sk: 43",
+                "Yds.1: 279",
+                "QBHits: 107",
+                "TFL: 88",
+                "ANY/A: 6.0",
+                "EXP: -20.42"
+            ],
+            "TeamRushDef": [
+                "Yds: 1926",
+                "Y/A: 4.4",
+                "Y/G: 113.3",
+                "EXP: 19.8"
+            ]
+        }
+    },
+    "2023": {
+        "ATL": {
+            "TeamAdv": [
+                "Hrry%: 7.9%",
+                "QBKD%: 9.5%",
+                "Prss%: 23.0%",
+                "MTkl: 95"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.3",
+                "Sk: 42",
+                "Yds.1: 258",
+                "QBHits: 98",
+                "TFL: 83",
+                "ANY/A: 6.0",
+                "EXP: -47.91"
+            ],
+            "TeamRushDef": [
+                "Yds: 2009",
+                "Y/A: 4.0",
+                "Y/G: 118.2",
+                "EXP: 46.27"
+            ]
+        },
+        "BUF": {
+            "TeamAdv": [
+                "Hrry%: 6.9%",
+                "QBKD%: 10.7%",
+                "Prss%: 24.4%",
+                "MTkl: 101"
+            ],
+            "TeamPassRush": [
+                "Rate: 81.9",
+                "Sk: 54",
+                "Yds.1: 334",
+                "QBHits: 117",
+                "TFL: 85",
+                "ANY/A: 4.8",
+                "EXP: -8.17"
+            ],
+            "TeamRushDef": [
+                "Yds: 1880",
+                "Y/A: 4.6",
+                "Y/G: 110.6",
+                "EXP: -4.93"
+            ]
+        },
+        "CAR": {
+            "TeamAdv": [
+                "Hrry%: 3.4%",
+                "QBKD%: 9.4%",
+                "Prss%: 17.2%",
+                "MTkl: 131"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.8",
+                "Sk: 27",
+                "Yds.1: 193",
+                "QBHits: 74",
+                "TFL: 77",
+                "ANY/A: 5.8",
+                "EXP: -43.53"
+            ],
+            "TeamRushDef": [
+                "Yds: 2081",
+                "Y/A: 4.1",
+                "Y/G: 122.4",
+                "EXP: -8.41"
+            ]
+        },
+        "CHI": {
+            "TeamAdv": [
+                "Hrry%: 6.4%",
+                "QBKD%: 8.8%",
+                "Prss%: 18.8%",
+                "MTkl: 110"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.0",
+                "Sk: 30",
+                "Yds.1: 202",
+                "QBHits: 92",
+                "TFL: 72",
+                "ANY/A: 5.7",
+                "EXP: -75.71"
+            ],
+            "TeamRushDef": [
+                "Yds: 1468",
+                "Y/A: 3.8",
+                "Y/G: 86.4",
+                "EXP: 25.81"
+            ]
+        },
+        "CIN": {
+            "TeamAdv": [
+                "Hrry%: 5.6%",
+                "QBKD%: 11.2%",
+                "Prss%: 22.1%",
+                "MTkl: 71"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.4",
+                "Sk: 44",
+                "Yds.1: 257",
+                "QBHits: 110",
+                "TFL: 75",
+                "ANY/A: 6.5",
+                "EXP: -65.71"
+            ],
+            "TeamRushDef": [
+                "Yds: 2145",
+                "Y/A: 4.7",
+                "Y/G: 126.2",
+                "EXP: -33.94"
+            ]
+        },
+        "CLE": {
+            "TeamAdv": [
+                "Hrry%: 6.4%",
+                "QBKD%: 10.8%",
+                "Prss%: 23.8%",
+                "MTkl: 116"
+            ],
+            "TeamPassRush": [
+                "Rate: 74.7",
+                "Sk: 49",
+                "Yds.1: 349",
+                "QBHits: 109",
+                "TFL: 113",
+                "ANY/A: 4.2",
+                "EXP: 46.11"
+            ],
+            "TeamRushDef": [
+                "Yds: 1793",
+                "Y/A: 4.3",
+                "Y/G: 105.5",
+                "EXP: 30.82"
+            ]
+        },
+        "IND": {
+            "TeamAdv": [
+                "Hrry%: 4.5%",
+                "QBKD%: 8.3%",
+                "Prss%: 19.6%",
+                "MTkl: 98"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.2",
+                "Sk: 51",
+                "Yds.1: 315",
+                "QBHits: 108",
+                "TFL: 94",
+                "ANY/A: 5.8",
+                "EXP: -35.93"
+            ],
+            "TeamRushDef": [
+                "Yds: 2105",
+                "Y/A: 4.1",
+                "Y/G: 123.8",
+                "EXP: -11.95"
+            ]
+        },
+        "ARI": {
+            "TeamAdv": [
+                "Hrry%: 7.3%",
+                "QBKD%: 4.5%",
+                "Prss%: 17.1%",
+                "MTkl: 73"
+            ],
+            "TeamPassRush": [
+                "Rate: 102.9",
+                "Sk: 33",
+                "Yds.1: 233",
+                "QBHits: 59",
+                "TFL: 76",
+                "ANY/A: 7.0",
+                "EXP: -137.06"
+            ],
+            "TeamRushDef": [
+                "Yds: 2434",
+                "Y/A: 4.7",
+                "Y/G: 143.2",
+                "EXP: -30.78"
+            ]
+        },
+        "DAL": {
+            "TeamAdv": [
+                "Hrry%: 5.5%",
+                "QBKD%: 9.4%",
+                "Prss%: 21.3%",
+                "MTkl: 63"
+            ],
+            "TeamPassRush": [
+                "Rate: 80.8",
+                "Sk: 46",
+                "Yds.1: 296",
+                "QBHits: 99",
+                "TFL: 83",
+                "ANY/A: 5.1",
+                "EXP: -25.38"
+            ],
+            "TeamRushDef": [
+                "Yds: 1910",
+                "Y/A: 4.2",
+                "Y/G: 112.4",
+                "EXP: 9.56"
+            ]
+        },
+        "DEN": {
+            "TeamAdv": [
+                "Hrry%: 4.4%",
+                "QBKD%: 8.2%",
+                "Prss%: 18.2%",
+                "MTkl: 97"
+            ],
+            "TeamPassRush": [
+                "Rate: 98.0",
+                "Sk: 42",
+                "Yds.1: 330",
+                "QBHits: 100",
+                "TFL: 71",
+                "ANY/A: 6.6",
+                "EXP: -85.1"
+            ],
+            "TeamRushDef": [
+                "Yds: 2331",
+                "Y/A: 5.0",
+                "Y/G: 137.1",
+                "EXP: -9.82"
+            ]
+        },
+        "DET": {
+            "TeamAdv": [
+                "Hrry%: 11.2%",
+                "QBKD%: 12.2%",
+                "Prss%: 28.2%",
+                "MTkl: 124"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.5",
+                "Sk: 41",
+                "Yds.1: 357",
+                "QBHits: 116",
+                "TFL: 81",
+                "ANY/A: 6.4",
+                "EXP: -138.18"
+            ],
+            "TeamRushDef": [
+                "Yds: 1509",
+                "Y/A: 3.7",
+                "Y/G: 88.8",
+                "EXP: 9.7"
+            ]
+        },
+        "GNB": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 9.9%",
+                "Prss%: 24.3%",
+                "MTkl: 101"
+            ],
+            "TeamPassRush": [
+                "Rate: 94.7",
+                "Sk: 45",
+                "Yds.1: 288",
+                "QBHits: 108",
+                "TFL: 76",
+                "ANY/A: 6.4",
+                "EXP: -72.76"
+            ],
+            "TeamRushDef": [
+                "Yds: 2181",
+                "Y/A: 4.4",
+                "Y/G: 128.3",
+                "EXP: -17.64"
+            ]
+        },
+        "HOU": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 11.5%",
+                "Prss%: 25.7%",
+                "MTkl: 130"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.1",
+                "Sk: 46",
+                "Yds.1: 355",
+                "QBHits: 113",
+                "TFL: 105",
+                "ANY/A: 6.0",
+                "EXP: -54.21"
+            ],
+            "TeamRushDef": [
+                "Yds: 1643",
+                "Y/A: 3.5",
+                "Y/G: 96.6",
+                "EXP: 22.94"
+            ]
+        },
+        "JAX": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 9.4%",
+                "Prss%: 22.6%",
+                "MTkl: 127"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.8",
+                "Sk: 40",
+                "Yds.1: 279",
+                "QBHits: 107",
+                "TFL: 73",
+                "ANY/A: 5.9",
+                "EXP: -11.29"
+            ],
+            "TeamRushDef": [
+                "Yds: 1752",
+                "Y/A: 4.2",
+                "Y/G: 103.1",
+                "EXP: -9.24"
+            ]
+        },
+        "KAN": {
+            "TeamAdv": [
+                "Hrry%: 9.8%",
+                "QBKD%: 10.8%",
+                "Prss%: 27.8%",
+                "MTkl: 76"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.6",
+                "Sk: 57",
+                "Yds.1: 351",
+                "QBHits: 125",
+                "TFL: 87",
+                "ANY/A: 4.9",
+                "EXP: 51.83"
+            ],
+            "TeamRushDef": [
+                "Yds: 1925",
+                "Y/A: 4.5",
+                "Y/G: 113.2",
+                "EXP: -20.6"
+            ]
+        },
+        "MIA": {
+            "TeamAdv": [
+                "Hrry%: 8.0%",
+                "QBKD%: 12.7%",
+                "Prss%: 27.7%",
+                "MTkl: 129"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.0",
+                "Sk: 56",
+                "Yds.1: 371",
+                "QBHits: 140",
+                "TFL: 79",
+                "ANY/A: 5.8",
+                "EXP: -30.77"
+            ],
+            "TeamRushDef": [
+                "Yds: 1650",
+                "Y/A: 3.8",
+                "Y/G: 97.1",
+                "EXP: 16.04"
+            ]
+        },
+        "MIN": {
+            "TeamAdv": [
+                "Hrry%: 9.5%",
+                "QBKD%: 6.8%",
+                "Prss%: 21.9%",
+                "MTkl: 100"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.2",
+                "Sk: 43",
+                "Yds.1: 302",
+                "QBHits: 91",
+                "TFL: 70",
+                "ANY/A: 6.1",
+                "EXP: -71.57"
+            ],
+            "TeamRushDef": [
+                "Yds: 1678",
+                "Y/A: 3.8",
+                "Y/G: 98.7",
+                "EXP: 17.31"
+            ]
+        },
+        "NOR": {
+            "TeamAdv": [
+                "Hrry%: 7.3%",
+                "QBKD%: 6.8%",
+                "Prss%: 18.7%",
+                "MTkl: 87"
+            ],
+            "TeamPassRush": [
+                "Rate: 79.7",
+                "Sk: 34",
+                "Yds.1: 244",
+                "QBHits: 76",
+                "TFL: 70",
+                "ANY/A: 5.3",
+                "EXP: -0.8"
+            ],
+            "TeamRushDef": [
+                "Yds: 2038",
+                "Y/A: 4.4",
+                "Y/G: 119.9",
+                "EXP: 23.07"
+            ]
+        },
+        "NWE": {
+            "TeamAdv": [
+                "Hrry%: 9.7%",
+                "QBKD%: 5.9%",
+                "Prss%: 20.7%",
+                "MTkl: 89"
+            ],
+            "TeamPassRush": [
+                "Rate: 86.9",
+                "Sk: 36",
+                "Yds.1: 248",
+                "QBHits: 78",
+                "TFL: 80",
+                "ANY/A: 5.7",
+                "EXP: -43.06"
+            ],
+            "TeamRushDef": [
+                "Yds: 1584",
+                "Y/A: 3.3",
+                "Y/G: 93.2",
+                "EXP: 62.77"
+            ]
+        },
+        "NYG": {
+            "TeamAdv": [
+                "Hrry%: 8.8%",
+                "QBKD%: 7.4%",
+                "Prss%: 20.9%",
+                "MTkl: 117"
+            ],
+            "TeamPassRush": [
+                "Rate: 84.1",
+                "Sk: 34",
+                "Yds.1: 259",
+                "QBHits: 83",
+                "TFL: 76",
+                "ANY/A: 5.7",
+                "EXP: -23.09"
+            ],
+            "TeamRushDef": [
+                "Yds: 2251",
+                "Y/A: 4.7",
+                "Y/G: 132.4",
+                "EXP: -22.38"
+            ]
+        },
+        "NYJ": {
+            "TeamAdv": [
+                "Hrry%: 10.1%",
+                "QBKD%: 9.8%",
+                "Prss%: 26.5%",
+                "MTkl: 117"
+            ],
+            "TeamPassRush": [
+                "Rate: 76.0",
+                "Sk: 48",
+                "Yds.1: 321",
+                "QBHits: 108",
+                "TFL: 100",
+                "ANY/A: 4.3",
+                "EXP: 50.07"
+            ],
+            "TeamRushDef": [
+                "Yds: 2108",
+                "Y/A: 4.1",
+                "Y/G: 124.0",
+                "EXP: 20.74"
+            ]
+        },
+        "TEN": {
+            "TeamAdv": [
+                "Hrry%: 6.3%",
+                "QBKD%: 6.3%",
+                "Prss%: 18.8%",
+                "MTkl: 83"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.4",
+                "Sk: 45",
+                "Yds.1: 315",
+                "QBHits: 84",
+                "TFL: 90",
+                "ANY/A: 6.5",
+                "EXP: -103.95"
+            ],
+            "TeamRushDef": [
+                "Yds: 1831",
+                "Y/A: 3.8",
+                "Y/G: 107.7",
+                "EXP: 31.53"
+            ]
+        },
+        "PHI": {
+            "TeamAdv": [
+                "Hrry%: 9.3%",
+                "QBKD%: 8.3%",
+                "Prss%: 22.4%",
+                "MTkl: 98"
+            ],
+            "TeamPassRush": [
+                "Rate: 97.6",
+                "Sk: 43",
+                "Yds.1: 255",
+                "QBHits: 106",
+                "TFL: 73",
+                "ANY/A: 6.6",
+                "EXP: -97.95"
+            ],
+            "TeamRushDef": [
+                "Yds: 1758",
+                "Y/A: 4.3",
+                "Y/G: 103.4",
+                "EXP: -31.41"
+            ]
+        },
+        "PIT": {
+            "TeamAdv": [
+                "Hrry%: 6.9%",
+                "QBKD%: 10.1%",
+                "Prss%: 22.9%",
+                "MTkl: 103"
+            ],
+            "TeamPassRush": [
+                "Rate: 84.7",
+                "Sk: 47",
+                "Yds.1: 304",
+                "QBHits: 107",
+                "TFL: 83",
+                "ANY/A: 5.8",
+                "EXP: -16.35"
+            ],
+            "TeamRushDef": [
+                "Yds: 1956",
+                "Y/A: 4.3",
+                "Y/G: 115.1",
+                "EXP: 5.25"
+            ]
+        },
+        "LVR": {
+            "TeamAdv": [
+                "Hrry%: 5.9%",
+                "QBKD%: 7.4%",
+                "Prss%: 19.4%",
+                "MTkl: 104"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.3",
+                "Sk: 46",
+                "Yds.1: 290",
+                "QBHits: 89",
+                "TFL: 82",
+                "ANY/A: 5.6",
+                "EXP: -35.78"
+            ],
+            "TeamRushDef": [
+                "Yds: 2015",
+                "Y/A: 4.2",
+                "Y/G: 118.5",
+                "EXP: 12.66"
+            ]
+        },
+        "LAR": {
+            "TeamAdv": [
+                "Hrry%: 6.0%",
+                "QBKD%: 7.6%",
+                "Prss%: 18.9%",
+                "MTkl: 104"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.0",
+                "Sk: 41",
+                "Yds.1: 267",
+                "QBHits: 91",
+                "TFL: 75",
+                "ANY/A: 6.1",
+                "EXP: -80.06"
+            ],
+            "TeamRushDef": [
+                "Yds: 1816",
+                "Y/A: 4.2",
+                "Y/G: 106.8",
+                "EXP: 4.42"
+            ]
+        },
+        "BAL": {
+            "TeamAdv": [
+                "Hrry%: 3.8%",
+                "QBKD%: 8.7%",
+                "Prss%: 19.5%",
+                "MTkl: 92"
+            ],
+            "TeamPassRush": [
+                "Rate: 74.6",
+                "Sk: 60",
+                "Yds.1: 454",
+                "QBHits: 117",
+                "TFL: 89",
+                "ANY/A: 4.1",
+                "EXP: 62.64"
+            ],
+            "TeamRushDef": [
+                "Yds: 1860",
+                "Y/A: 4.5",
+                "Y/G: 109.4",
+                "EXP: 23.36"
+            ]
+        },
+        "LAC": {
+            "TeamAdv": [
+                "Hrry%: 7.0%",
+                "QBKD%: 6.4%",
+                "Prss%: 19.9%",
+                "MTkl: 100"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.4",
+                "Sk: 48",
+                "Yds.1: 334",
+                "QBHits: 87",
+                "TFL: 82",
+                "ANY/A: 6.8",
+                "EXP: -89.66"
+            ],
+            "TeamRushDef": [
+                "Yds: 1924",
+                "Y/A: 4.1",
+                "Y/G: 113.2",
+                "EXP: -7.24"
+            ]
+        },
+        "SEA": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 8.5%",
+                "Prss%: 23.1%",
+                "MTkl: 129"
+            ],
+            "TeamPassRush": [
+                "Rate: 92.1",
+                "Sk: 47",
+                "Yds.1: 298",
+                "QBHits: 97",
+                "TFL: 99",
+                "ANY/A: 6.1",
+                "EXP: -88.83"
+            ],
+            "TeamRushDef": [
+                "Yds: 2352",
+                "Y/A: 4.6",
+                "Y/G: 138.4",
+                "EXP: -40.04"
+            ]
+        },
+        "SFO": {
+            "TeamAdv": [
+                "Hrry%: 5.4%",
+                "QBKD%: 10.0%",
+                "Prss%: 21.0%",
+                "MTkl: 69"
+            ],
+            "TeamPassRush": [
+                "Rate: 79.6",
+                "Sk: 48",
+                "Yds.1: 307",
+                "QBHits: 122",
+                "TFL: 80",
+                "ANY/A: 4.6",
+                "EXP: -23.23"
+            ],
+            "TeamRushDef": [
+                "Yds: 1525",
+                "Y/A: 4.1",
+                "Y/G: 89.7",
+                "EXP: -4.82"
+            ]
+        },
+        "TAM": {
+            "TeamAdv": [
+                "Hrry%: 6.5%",
+                "QBKD%: 6.9%",
+                "Prss%: 19.7%",
+                "MTkl: 75"
+            ],
+            "TeamPassRush": [
+                "Rate: 92.0",
+                "Sk: 48",
+                "Yds.1: 336",
+                "QBHits: 84",
+                "TFL: 91",
+                "ANY/A: 6.2",
+                "EXP: -78.65"
+            ],
+            "TeamRushDef": [
+                "Yds: 1620",
+                "Y/A: 3.8",
+                "Y/G: 95.3",
+                "EXP: 31.56"
+            ]
+        },
+        "WAS": {
+            "TeamAdv": [
+                "Hrry%: 5.1%",
+                "QBKD%: 6.4%",
+                "Prss%: 16.8%",
+                "MTkl: 100"
+            ],
+            "TeamPassRush": [
+                "Rate: 105.7",
+                "Sk: 39",
+                "Yds.1: 170",
+                "QBHits: 84",
+                "TFL: 86",
+                "ANY/A: 7.7",
+                "EXP: -152.14"
+            ],
+            "TeamRushDef": [
+                "Yds: 2155",
+                "Y/A: 4.5",
+                "Y/G: 126.8",
+                "EXP: -4.12"
+            ]
+        }
+    },
+    "2024": {
+        "ATL": {
+            "TeamAdv": [
+                "Hrry%: 8.9%",
+                "QBKD%: 7.3%",
+                "Prss%: 20.0%",
+                "MTkl: 114"
+            ],
+            "TeamPassRush": [
+                "Rate: 100.2",
+                "Sk: 31",
+                "Yds.1: 187",
+                "QBHits: 74",
+                "TFL: 79",
+                "ANY/A: 6.5",
+                "EXP: -76.07"
+            ],
+            "TeamRushDef": [
+                "Yds: 2051",
+                "Y/A: 4.5",
+                "Y/G: 120.6",
+                "EXP: -20.08"
+            ]
+        },
+        "BUF": {
+            "TeamAdv": [
+                "Hrry%: 8.9%",
+                "QBKD%: 9.5%",
+                "Prss%: 23.6%",
+                "MTkl: 95"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.3",
+                "Sk: 39",
+                "Yds.1: 257",
+                "QBHits: 94",
+                "TFL: 93",
+                "ANY/A: 6.0",
+                "EXP: -116.31"
+            ],
+            "TeamRushDef": [
+                "Yds: 1963",
+                "Y/A: 4.5",
+                "Y/G: 115.5",
+                "EXP: 16.75"
+            ]
+        },
+        "CAR": {
+            "TeamAdv": [
+                "Hrry%: 5.9%",
+                "QBKD%: 5.5%",
+                "Prss%: 16.2%",
+                "MTkl: 132"
+            ],
+            "TeamPassRush": [
+                "Rate: 105.4",
+                "Sk: 32",
+                "Yds.1: 223",
+                "QBHits: 64",
+                "TFL: 65",
+                "ANY/A: 7.3",
+                "EXP: -143.21"
+            ],
+            "TeamRushDef": [
+                "Yds: 3057",
+                "Y/A: 5.2",
+                "Y/G: 179.8",
+                "EXP: -97.76"
+            ]
+        },
+        "CHI": {
+            "TeamAdv": [
+                "Hrry%: 7.4%",
+                "QBKD%: 11.9%",
+                "Prss%: 25.1%",
+                "MTkl: 94"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.9",
+                "Sk: 40",
+                "Yds.1: 254",
+                "QBHits: 100",
+                "TFL: 81",
+                "ANY/A: 6.5",
+                "EXP: -39.42"
+            ],
+            "TeamRushDef": [
+                "Yds: 2317",
+                "Y/A: 4.8",
+                "Y/G: 136.3",
+                "EXP: -24.05"
+            ]
+        },
+        "CIN": {
+            "TeamAdv": [
+                "Hrry%: 7.8%",
+                "QBKD%: 11.3%",
+                "Prss%: 23.2%",
+                "MTkl: 116"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.9",
+                "Sk: 36",
+                "Yds.1: 217",
+                "QBHits: 105",
+                "TFL: 72",
+                "ANY/A: 6.1",
+                "EXP: -78.94"
+            ],
+            "TeamRushDef": [
+                "Yds: 2122",
+                "Y/A: 4.4",
+                "Y/G: 124.8",
+                "EXP: -33.29"
+            ]
+        },
+        "CLE": {
+            "TeamAdv": [
+                "Hrry%: 7.9%",
+                "QBKD%: 13.3%",
+                "Prss%: 26.5%",
+                "MTkl: 101"
+            ],
+            "TeamPassRush": [
+                "Rate: 98.9",
+                "Sk: 41",
+                "Yds.1: 267",
+                "QBHits: 108",
+                "TFL: 112",
+                "ANY/A: 7.2",
+                "EXP: -80.69"
+            ],
+            "TeamRushDef": [
+                "Yds: 2205",
+                "Y/A: 4.5",
+                "Y/G: 129.7",
+                "EXP: 8.9"
+            ]
+        },
+        "IND": {
+            "TeamAdv": [
+                "Hrry%: 7.7%",
+                "QBKD%: 8.1%",
+                "Prss%: 20.8%",
+                "MTkl: 157"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.8",
+                "Sk: 36",
+                "Yds.1: 243",
+                "QBHits: 83",
+                "TFL: 88",
+                "ANY/A: 6.4",
+                "EXP: -101.05"
+            ],
+            "TeamRushDef": [
+                "Yds: 2241",
+                "Y/A: 4.2",
+                "Y/G: 131.8",
+                "EXP: 13.53"
+            ]
+        },
+        "ARI": {
+            "TeamAdv": [
+                "Hrry%: 7.1%",
+                "QBKD%: 6.3%",
+                "Prss%: 19.2%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.1",
+                "Sk: 41",
+                "Yds.1: 256",
+                "QBHits: 76",
+                "TFL: 87",
+                "ANY/A: 6.3",
+                "EXP: -85.53"
+            ],
+            "TeamRushDef": [
+                "Yds: 2149",
+                "Y/A: 4.6",
+                "Y/G: 126.4",
+                "EXP: -35.69"
+            ]
+        },
+        "DAL": {
+            "TeamAdv": [
+                "Hrry%: 12.4%",
+                "QBKD%: 10.5%",
+                "Prss%: 30.1%",
+                "MTkl: 87"
+            ],
+            "TeamPassRush": [
+                "Rate: 99.5",
+                "Sk: 52",
+                "Yds.1: 337",
+                "QBHits: 105",
+                "TFL: 70",
+                "ANY/A: 6.5",
+                "EXP: -63.96"
+            ],
+            "TeamRushDef": [
+                "Yds: 2331",
+                "Y/A: 4.8",
+                "Y/G: 137.1",
+                "EXP: -67.95"
+            ]
+        },
+        "DEN": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 11.9%",
+                "Prss%: 27.7%",
+                "MTkl: 78"
+            ],
+            "TeamPassRush": [
+                "Rate: 86.2",
+                "Sk: 63",
+                "Yds.1: 360",
+                "QBHits: 142",
+                "TFL: 94",
+                "ANY/A: 5.3",
+                "EXP: -16.14"
+            ],
+            "TeamRushDef": [
+                "Yds: 1639",
+                "Y/A: 3.9",
+                "Y/G: 96.4",
+                "EXP: 35.91"
+            ]
+        },
+        "DET": {
+            "TeamAdv": [
+                "Hrry%: 10.7%",
+                "QBKD%: 11.3%",
+                "Prss%: 26.2%",
+                "MTkl: 85"
+            ],
+            "TeamPassRush": [
+                "Rate: 82.0",
+                "Sk: 37",
+                "Yds.1: 256",
+                "QBHits: 110",
+                "TFL: 70",
+                "ANY/A: 5.9",
+                "EXP: -55.0"
+            ],
+            "TeamRushDef": [
+                "Yds: 1672",
+                "Y/A: 4.5",
+                "Y/G: 98.4",
+                "EXP: -19.57"
+            ]
+        },
+        "GNB": {
+            "TeamAdv": [
+                "Hrry%: 8.5%",
+                "QBKD%: 7.6%",
+                "Prss%: 22.1%",
+                "MTkl: 108"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.5",
+                "Sk: 45",
+                "Yds.1: 301",
+                "QBHits: 91",
+                "TFL: 95",
+                "ANY/A: 5.5",
+                "EXP: -22.66"
+            ],
+            "TeamRushDef": [
+                "Yds: 1689",
+                "Y/A: 4.0",
+                "Y/G: 99.4",
+                "EXP: 13.86"
+            ]
+        },
+        "HOU": {
+            "TeamAdv": [
+                "Hrry%: 7.2%",
+                "QBKD%: 9.0%",
+                "Prss%: 22.8%",
+                "MTkl: 119"
+            ],
+            "TeamPassRush": [
+                "Rate: 83.7",
+                "Sk: 49",
+                "Yds.1: 336",
+                "QBHits: 98",
+                "TFL: 106",
+                "ANY/A: 5.3",
+                "EXP: -5.15"
+            ],
+            "TeamRushDef": [
+                "Yds: 1938",
+                "Y/A: 4.3",
+                "Y/G: 114.0",
+                "EXP: 6.85"
+            ]
+        },
+        "JAX": {
+            "TeamAdv": [
+                "Hrry%: 6.5%",
+                "QBKD%: 5.9%",
+                "Prss%: 16.9%",
+                "MTkl: 104"
+            ],
+            "TeamPassRush": [
+                "Rate: 103.4",
+                "Sk: 34",
+                "Yds.1: 230",
+                "QBHits: 68",
+                "TFL: 82",
+                "ANY/A: 7.6",
+                "EXP: -161.72"
+            ],
+            "TeamRushDef": [
+                "Yds: 2254",
+                "Y/A: 4.4",
+                "Y/G: 132.6",
+                "EXP: -25.28"
+            ]
+        },
+        "KAN": {
+            "TeamAdv": [
+                "Hrry%: 9.0%",
+                "QBKD%: 12.8%",
+                "Prss%: 26.1%",
+                "MTkl: 92"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.6",
+                "Sk: 39",
+                "Yds.1: 250",
+                "QBHits: 112",
+                "TFL: 87",
+                "ANY/A: 5.9",
+                "EXP: -78.98"
+            ],
+            "TeamRushDef": [
+                "Yds: 1731",
+                "Y/A: 4.1",
+                "Y/G: 101.8",
+                "EXP: -9.62"
+            ]
+        },
+        "MIA": {
+            "TeamAdv": [
+                "Hrry%: 8.2%",
+                "QBKD%: 7.5%",
+                "Prss%: 20.6%",
+                "MTkl: 112"
+            ],
+            "TeamPassRush": [
+                "Rate: 88.7",
+                "Sk: 35",
+                "Yds.1: 247",
+                "QBHits: 81",
+                "TFL: 83",
+                "ANY/A: 5.9",
+                "EXP: -36.64"
+            ],
+            "TeamRushDef": [
+                "Yds: 1763",
+                "Y/A: 4.4",
+                "Y/G: 103.7",
+                "EXP: 10.56"
+            ]
+        },
+        "MIN": {
+            "TeamAdv": [
+                "Hrry%: 8.7%",
+                "QBKD%: 10.8%",
+                "Prss%: 25.3%",
+                "MTkl: 79"
+            ],
+            "TeamPassRush": [
+                "Rate: 82.4",
+                "Sk: 49",
+                "Yds.1: 345",
+                "QBHits: 113",
+                "TFL: 96",
+                "ANY/A: 5.1",
+                "EXP: -26.89"
+            ],
+            "TeamRushDef": [
+                "Yds: 1588",
+                "Y/A: 4.1",
+                "Y/G: 93.4",
+                "EXP: 43.57"
+            ]
+        },
+        "NOR": {
+            "TeamAdv": [
+                "Hrry%: 9.3%",
+                "QBKD%: 7.3%",
+                "Prss%: 21.5%",
+                "MTkl: 129"
+            ],
+            "TeamPassRush": [
+                "Rate: 84.8",
+                "Sk: 39",
+                "Yds.1: 240",
+                "QBHits: 84",
+                "TFL: 77",
+                "ANY/A: 6.0",
+                "EXP: -60.31"
+            ],
+            "TeamRushDef": [
+                "Yds: 2404",
+                "Y/A: 4.9",
+                "Y/G: 141.4",
+                "EXP: -60.21"
+            ]
+        },
+        "NWE": {
+            "TeamAdv": [
+                "Hrry%: 7.3%",
+                "QBKD%: 6.2%",
+                "Prss%: 17.6%",
+                "MTkl: 87"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.9",
+                "Sk: 28",
+                "Yds.1: 153",
+                "QBHits: 66",
+                "TFL: 62",
+                "ANY/A: 6.8",
+                "EXP: -119.58"
+            ],
+            "TeamRushDef": [
+                "Yds: 2233",
+                "Y/A: 4.4",
+                "Y/G: 131.4",
+                "EXP: -25.99"
+            ]
+        },
+        "NYG": {
+            "TeamAdv": [
+                "Hrry%: 6.8%",
+                "QBKD%: 8.3%",
+                "Prss%: 21.8%",
+                "MTkl: 106"
+            ],
+            "TeamPassRush": [
+                "Rate: 103.1",
+                "Sk: 45",
+                "Yds.1: 289",
+                "QBHits: 94",
+                "TFL: 96",
+                "ANY/A: 7.0",
+                "EXP: -98.19"
+            ],
+            "TeamRushDef": [
+                "Yds: 2316",
+                "Y/A: 4.6",
+                "Y/G: 136.2",
+                "EXP: -7.19"
+            ]
+        },
+        "NYJ": {
+            "TeamAdv": [
+                "Hrry%: 9.2%",
+                "QBKD%: 8.1%",
+                "Prss%: 23.5%",
+                "MTkl: 128"
+            ],
+            "TeamPassRush": [
+                "Rate: 89.0",
+                "Sk: 43",
+                "Yds.1: 313",
+                "QBHits: 84",
+                "TFL: 89",
+                "ANY/A: 5.9",
+                "EXP: -92.67"
+            ],
+            "TeamRushDef": [
+                "Yds: 2059",
+                "Y/A: 4.1",
+                "Y/G: 121.1",
+                "EXP: -14.76"
+            ]
+        },
+        "TEN": {
+            "TeamAdv": [
+                "Hrry%: 4.9%",
+                "QBKD%: 6.8%",
+                "Prss%: 16.7%",
+                "MTkl: 95"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.1",
+                "Sk: 32",
+                "Yds.1: 202",
+                "QBHits: 67",
+                "TFL: 92",
+                "ANY/A: 6.1",
+                "EXP: -89.7"
+            ],
+            "TeamRushDef": [
+                "Yds: 2277",
+                "Y/A: 4.5",
+                "Y/G: 133.9",
+                "EXP: -14.45"
+            ]
+        },
+        "PHI": {
+            "TeamAdv": [
+                "Hrry%: 4.7%",
+                "QBKD%: 7.6%",
+                "Prss%: 17.9%",
+                "MTkl: 90"
+            ],
+            "TeamPassRush": [
+                "Rate: 82.5",
+                "Sk: 41",
+                "Yds.1: 305",
+                "QBHits: 87",
+                "TFL: 81",
+                "ANY/A: 4.8",
+                "EXP: 12.27"
+            ],
+            "TeamRushDef": [
+                "Yds: 1771",
+                "Y/A: 4.3",
+                "Y/G: 104.2",
+                "EXP: 29.98"
+            ]
+        },
+        "PIT": {
+            "TeamAdv": [
+                "Hrry%: 5.8%",
+                "QBKD%: 10.8%",
+                "Prss%: 22.0%",
+                "MTkl: 69"
+            ],
+            "TeamPassRush": [
+                "Rate: 87.5",
+                "Sk: 40",
+                "Yds.1: 275",
+                "QBHits: 105",
+                "TFL: 83",
+                "ANY/A: 5.7",
+                "EXP: -55.5"
+            ],
+            "TeamRushDef": [
+                "Yds: 1678",
+                "Y/A: 4.1",
+                "Y/G: 98.7",
+                "EXP: -3.68"
+            ]
+        },
+        "LVR": {
+            "TeamAdv": [
+                "Hrry%: 8.8%",
+                "QBKD%: 7.3%",
+                "Prss%: 21.4%",
+                "MTkl: 134"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.5",
+                "Sk: 38",
+                "Yds.1: 313",
+                "QBHits: 86",
+                "TFL: 83",
+                "ANY/A: 6.4",
+                "EXP: -91.34"
+            ],
+            "TeamRushDef": [
+                "Yds: 1987",
+                "Y/A: 4.4",
+                "Y/G: 116.9",
+                "EXP: 4.2"
+            ]
+        },
+        "LAR": {
+            "TeamAdv": [
+                "Hrry%: 9.7%",
+                "QBKD%: 6.3%",
+                "Prss%: 21.4%",
+                "MTkl: 119"
+            ],
+            "TeamPassRush": [
+                "Rate: 95.9",
+                "Sk: 38",
+                "Yds.1: 308",
+                "QBHits: 72",
+                "TFL: 72",
+                "ANY/A: 6.5",
+                "EXP: -60.58"
+            ],
+            "TeamRushDef": [
+                "Yds: 2210",
+                "Y/A: 4.6",
+                "Y/G: 130.0",
+                "EXP: -43.37"
+            ]
+        },
+        "BAL": {
+            "TeamAdv": [
+                "Hrry%: 6.2%",
+                "QBKD%: 9.8%",
+                "Prss%: 22.5%",
+                "MTkl: 76"
+            ],
+            "TeamPassRush": [
+                "Rate: 91.1",
+                "Sk: 54",
+                "Yds.1: 318",
+                "QBHits: 122",
+                "TFL: 82",
+                "ANY/A: 6.1",
+                "EXP: -113.15"
+            ],
+            "TeamRushDef": [
+                "Yds: 1361",
+                "Y/A: 3.6",
+                "Y/G: 80.1",
+                "EXP: 43.67"
+            ]
+        },
+        "LAC": {
+            "TeamAdv": [
+                "Hrry%: 5.2%",
+                "QBKD%: 8.7%",
+                "Prss%: 19.8%",
+                "MTkl: 92"
+            ],
+            "TeamPassRush": [
+                "Rate: 87.1",
+                "Sk: 46",
+                "Yds.1: 245",
+                "QBHits: 98",
+                "TFL: 78",
+                "ANY/A: 5.4",
+                "EXP: -18.84"
+            ],
+            "TeamRushDef": [
+                "Yds: 1997",
+                "Y/A: 4.7",
+                "Y/G: 117.5",
+                "EXP: -5.14"
+            ]
+        },
+        "SEA": {
+            "TeamAdv": [
+                "Hrry%: 7.3%",
+                "QBKD%: 12.0%",
+                "Prss%: 24.8%",
+                "MTkl: 95"
+            ],
+            "TeamPassRush": [
+                "Rate: 90.9",
+                "Sk: 45",
+                "Yds.1: 327",
+                "QBHits: 112",
+                "TFL: 74",
+                "ANY/A: 5.8",
+                "EXP: -36.64"
+            ],
+            "TeamRushDef": [
+                "Yds: 2053",
+                "Y/A: 4.6",
+                "Y/G: 120.8",
+                "EXP: 5.65"
+            ]
+        },
+        "SFO": {
+            "TeamAdv": [
+                "Hrry%: 6.5%",
+                "QBKD%: 8.3%",
+                "Prss%: 20.5%",
+                "MTkl: 107"
+            ],
+            "TeamPassRush": [
+                "Rate: 92.0",
+                "Sk: 37",
+                "Yds.1: 198",
+                "QBHits: 80",
+                "TFL: 67",
+                "ANY/A: 5.9",
+                "EXP: -56.36"
+            ],
+            "TeamRushDef": [
+                "Yds: 2118",
+                "Y/A: 4.4",
+                "Y/G: 124.6",
+                "EXP: -45.07"
+            ]
+        },
+        "TAM": {
+            "TeamAdv": [
+                "Hrry%: 8.6%",
+                "QBKD%: 10.5%",
+                "Prss%: 24.3%",
+                "MTkl: 100"
+            ],
+            "TeamPassRush": [
+                "Rate: 96.6",
+                "Sk: 46",
+                "Yds.1: 317",
+                "QBHits: 114",
+                "TFL: 81",
+                "ANY/A: 6.5",
+                "EXP: -115.82"
+            ],
+            "TeamRushDef": [
+                "Yds: 1663",
+                "Y/A: 4.3",
+                "Y/G: 97.8",
+                "EXP: 17.82"
+            ]
+        },
+        "WAS": {
+            "TeamAdv": [
+                "Hrry%: 7.9%",
+                "QBKD%: 8.3%",
+                "Prss%: 22.6%",
+                "MTkl: 80"
+            ],
+            "TeamPassRush": [
+                "Rate: 93.9",
+                "Sk: 43",
+                "Yds.1: 271",
+                "QBHits: 88",
+                "TFL: 86",
+                "ANY/A: 6.3",
+                "EXP: -126.77"
+            ],
+            "TeamRushDef": [
+                "Yds: 2337",
+                "Y/A: 4.8",
+                "Y/G: 137.5",
+                "EXP: -46.56"
+            ]
+        }
+    }
+}

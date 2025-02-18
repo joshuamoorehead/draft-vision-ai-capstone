@@ -342,7 +342,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 316,Damien Williams,30,ATL,RB,1,1,2,2,0,0,0.0,2,1.0,0,,,WillDa05
 317,Olamide Zaccheaus,25,ATL,WR,17,13,2,7,1,-6,-3.0,13,6.5,0,,,ZaccOl01
 318,Keenan Allen,30,LAC,WR,10,10,1,8,1,6,6.0,2,2.0,0,,,AlleKe00
-319,Marcus Allen,26,PIT,DB,15,0,1,4,1,4,4.0,0,0.0,0,,,AlleMa03
+319,Marcus Allen,26,PIT,CB,15,0,1,4,1,4,4.0,0,0.0,0,,,AlleMa03
 320,Bryan Anger,34,DAL,P,17,0,1,0,0,0,0.0,0,0.0,0,,,AngeBr00
 321,Tyler Badie,22,DEN,RB,1,0,1,0,0,0,0.0,0,0.0,0,,,BadiTy00
 322,Daniel Bellinger,22,NYG,TE,12,11,1,2,1,0,0.0,2,2.0,0,,,BellDa00
@@ -383,7 +383,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 357,Jonnu Smith,27,NWE,TE,14,8,1,5,1,5,5.0,0,0.0,0,,,SmitJo01
 358,Keith Smith,30,ATL,WR,17,6,1,2,1,0,0.0,2,2.0,0,,,SmitKe03
 359,Ihmir Smith-Marsette,23,CHI,WR,6,0,1,-1,0,-1,-1.0,0,0.0,0,,,SmitIh00
-360,M.J. Stewart,27,HOU,DB,17,0,1,3,1,1,1.0,2,2.0,0,,,StewM.00
+360,M.J. Stewart,27,HOU,CB,17,0,1,3,1,1,1.0,2,2.0,0,,,StewM.00
 361,Courtland Sutton,27,DEN,WR,15,15,1,5,0,3,3.0,2,2.0,0,,,SuttCo00
 362,Adam Thielen,32,MIN,WR,17,17,1,4,0,3,3.0,1,1.0,0,,,ThieAd00
 363,Marquez Valdes-Scantling,28,KAN,WR,17,11,1,-3,0,-3,-3.0,0,0.0,1,1.0,,ValdMa00

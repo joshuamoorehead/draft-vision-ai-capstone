@@ -1,0 +1,4720 @@
+{
+    "2018": {
+        "ATL": {
+            "Accuracy": [
+                "Cmp: 428",
+                "Att: 617",
+                "Yds: 4653",
+                "Drop%: 6.2%",
+                "Bad%: 13.5%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.5",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 42",
+                "PktTime: 2.3",
+                "Hits: 48",
+                "Prss%: 21.1%"
+            ]
+        },
+        "BUF": {
+            "Accuracy": [
+                "Cmp: 271",
+                "Att: 499",
+                "Yds: 2794",
+                "Drop%: 5.0%",
+                "Bad%: 23.0%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 9.9",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.4",
+                "Hits: 49",
+                "Prss%: 29.0%"
+            ]
+        },
+        "CAR": {
+            "Accuracy": [
+                "Cmp: 378",
+                "Att: 563",
+                "Yds: 3836",
+                "Drop%: 4.5%",
+                "Bad%: 15.8%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.3",
+                "Hits: 36",
+                "Prss%: 20.1%"
+            ]
+        },
+        "CHI": {
+            "Accuracy": [
+                "Cmp: 344",
+                "Att: 512",
+                "Yds: 3564",
+                "Drop%: 2.6%",
+                "Bad%: 18.0%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.7",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 4.6"
+            ],
+            "Pressure": [
+                "Sk: 33",
+                "PktTime: 2.4",
+                "Hits: 24",
+                "Prss%: 20.8%"
+            ]
+        },
+        "CIN": {
+            "Accuracy": [
+                "Cmp: 331",
+                "Att: 542",
+                "Yds: 3290",
+                "Drop%: 5.7%",
+                "Bad%: 17.7%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 37",
+                "PktTime: 2.3",
+                "Hits: 32",
+                "Prss%: 21.9%"
+            ]
+        },
+        "CLE": {
+            "Accuracy": [
+                "Cmp: 353",
+                "Att: 574",
+                "Yds: 4007",
+                "Drop%: 6.5%",
+                "Bad%: 18.3%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 9.5",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.2",
+                "Hits: 27",
+                "Prss%: 26.6%"
+            ]
+        },
+        "IND": {
+            "Accuracy": [
+                "Cmp: 432",
+                "Att: 644",
+                "Yds: 4461",
+                "Drop%: 5.8%",
+                "Bad%: 14.2%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 4.6"
+            ],
+            "Pressure": [
+                "Sk: 18",
+                "PktTime: 2.3",
+                "Hits: 52",
+                "Prss%: 17.7%"
+            ]
+        },
+        "ARI": {
+            "Accuracy": [
+                "Cmp: 283",
+                "Att: 495",
+                "Yds: 2523",
+                "Drop%: 5.5%",
+                "Bad%: 19.6%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 4.4"
+            ],
+            "Pressure": [
+                "Sk: 52",
+                "PktTime: 2.3",
+                "Hits: 47",
+                "Prss%: 26.2%"
+            ]
+        },
+        "DAL": {
+            "Accuracy": [
+                "Cmp: 356",
+                "Att: 527",
+                "Yds: 3538",
+                "Drop%: 4.3%",
+                "Bad%: 17.5%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 56",
+                "PktTime: 2.4",
+                "Hits: 49",
+                "Prss%: 29.2%"
+            ]
+        },
+        "DEN": {
+            "Accuracy": [
+                "Cmp: 367",
+                "Att: 588",
+                "Yds: 3695",
+                "Drop%: 6.2%",
+                "Bad%: 17.2%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 34",
+                "PktTime: 2.2",
+                "Hits: 51",
+                "Prss%: 25.6%"
+            ]
+        },
+        "DET": {
+            "Accuracy": [
+                "Cmp: 375",
+                "Att: 574",
+                "Yds: 3576",
+                "Drop%: 5.4%",
+                "Bad%: 17.8%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 6.9",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 5.5"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.3",
+                "Hits: 34",
+                "Prss%: 21.0%"
+            ]
+        },
+        "GNB": {
+            "Accuracy": [
+                "Cmp: 392",
+                "Att: 640",
+                "Yds: 4238",
+                "Drop%: 5.3%",
+                "Bad%: 19.8%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.8",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 53",
+                "PktTime: 2.5",
+                "Hits: 42",
+                "Prss%: 26.0%"
+            ]
+        },
+        "HOU": {
+            "Accuracy": [
+                "Cmp: 345",
+                "Att: 506",
+                "Yds: 3781",
+                "Drop%: 3.5%",
+                "Bad%: 17.5%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 4.8",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 62",
+                "PktTime: 2.5",
+                "Hits: 59",
+                "Prss%: 31.6%"
+            ]
+        },
+        "JAX": {
+            "Accuracy": [
+                "Cmp: 329",
+                "Att: 536",
+                "Yds: 3109",
+                "Drop%: 6.4%",
+                "Bad%: 17.3%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.0",
+                "CAY/PA: 2.9",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 53",
+                "PktTime: 2.4",
+                "Hits: 45",
+                "Prss%: 24.1%"
+            ]
+        },
+        "KAN": {
+            "Accuracy": [
+                "Cmp: 385",
+                "Att: 583",
+                "Yds: 4955",
+                "Drop%: 5.2%",
+                "Bad%: 17.0%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 9.1",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 6.8"
+            ],
+            "Pressure": [
+                "Sk: 26",
+                "PktTime: 2.4",
+                "Hits: 67",
+                "Prss%: 33.6%"
+            ]
+        },
+        "MIA": {
+            "Accuracy": [
+                "Cmp: 292",
+                "Att: 455",
+                "Yds: 2900",
+                "Drop%: 3.7%",
+                "Bad%: 16.2%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 6.1"
+            ],
+            "Pressure": [
+                "Sk: 52",
+                "PktTime: 2.3",
+                "Hits: 43",
+                "Prss%: 30.1%"
+            ]
+        },
+        "MIN": {
+            "Accuracy": [
+                "Cmp: 425",
+                "Att: 606",
+                "Yds: 4036",
+                "Drop%: 4.3%",
+                "Bad%: 11.6%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 4.6"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.5",
+                "Hits: 39",
+                "Prss%: 26.5%"
+            ]
+        },
+        "NOR": {
+            "Accuracy": [
+                "Cmp: 381",
+                "Att: 519",
+                "Yds: 4042",
+                "Drop%: 4.8%",
+                "Bad%: 10.3%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 4.4",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 20",
+                "PktTime: 2.4",
+                "Hits: 25",
+                "Prss%: 17.0%"
+            ]
+        },
+        "NWE": {
+            "Accuracy": [
+                "Cmp: 378",
+                "Att: 574",
+                "Yds: 4258",
+                "Drop%: 4.5%",
+                "Bad%: 18.9%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.8"
+            ],
+            "Pressure": [
+                "Sk: 21",
+                "PktTime: 2.4",
+                "Hits: 39",
+                "Prss%: 18.0%"
+            ]
+        },
+        "NYG": {
+            "Accuracy": [
+                "Cmp: 382",
+                "Att: 583",
+                "Yds: 4047",
+                "Drop%: 4.2%",
+                "Bad%: 16.8%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.7"
+            ],
+            "Pressure": [
+                "Sk: 47",
+                "PktTime: 2.3",
+                "Hits: 44",
+                "Prss%: 24.4%"
+            ]
+        },
+        "NYJ": {
+            "Accuracy": [
+                "Cmp: 299",
+                "Att: 524",
+                "Yds: 3165",
+                "Drop%: 5.3%",
+                "Bad%: 20.0%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.9",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 37",
+                "PktTime: 2.4",
+                "Hits: 26",
+                "Prss%: 24.1%"
+            ]
+        },
+        "TEN": {
+            "Accuracy": [
+                "Cmp: 293",
+                "Att: 437",
+                "Yds: 2975",
+                "Drop%: 4.5%",
+                "Bad%: 18.4%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 47",
+                "PktTime: 2.3",
+                "Hits: 16",
+                "Prss%: 25.5%"
+            ]
+        },
+        "PHI": {
+            "Accuracy": [
+                "Cmp: 422",
+                "Att: 599",
+                "Yds: 4275",
+                "Drop%: 3.9%",
+                "Bad%: 13.2%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.3",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.3",
+                "Hits: 47",
+                "Prss%: 23.0%"
+            ]
+        },
+        "PIT": {
+            "Accuracy": [
+                "Cmp: 459",
+                "Att: 689",
+                "Yds: 5008",
+                "Drop%: 3.5%",
+                "Bad%: 18.4%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 6.1"
+            ],
+            "Pressure": [
+                "Sk: 24",
+                "PktTime: 2.2",
+                "Hits: 39",
+                "Prss%: 16.8%"
+            ]
+        },
+        "LVR": {
+            "Accuracy": [
+                "Cmp: 382",
+                "Att: 556",
+                "Yds: 3751",
+                "Drop%: 6.3%",
+                "Bad%: 12.5%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 6.8",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 52",
+                "PktTime: 2.2",
+                "Hits: 29",
+                "Prss%: 24.5%"
+            ]
+        },
+        "LAR": {
+            "Accuracy": [
+                "Cmp: 368",
+                "Att: 568",
+                "Yds: 4507",
+                "Drop%: 2.6%",
+                "Bad%: 17.3%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.5",
+                "YAC/Cmp: 5.9"
+            ],
+            "Pressure": [
+                "Sk: 33",
+                "PktTime: 2.6",
+                "Hits: 34",
+                "Prss%: 21.5%"
+            ]
+        },
+        "BAL": {
+            "Accuracy": [
+                "Cmp: 334",
+                "Att: 556",
+                "Yds: 3558",
+                "Drop%: 5.4%",
+                "Bad%: 18.8%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.3",
+                "Hits: 31",
+                "Prss%: 23.6%"
+            ]
+        },
+        "LAC": {
+            "Accuracy": [
+                "Cmp: 348",
+                "Att: 512",
+                "Yds: 4089",
+                "Drop%: 4.6%",
+                "Bad%: 12.9%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 6.1"
+            ],
+            "Pressure": [
+                "Sk: 34",
+                "PktTime: 2.4",
+                "Hits: 48",
+                "Prss%: 23.6%"
+            ]
+        },
+        "SEA": {
+            "Accuracy": [
+                "Cmp: 280",
+                "Att: 427",
+                "Yds: 3093",
+                "Drop%: 4.6%",
+                "Bad%: 15.4%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 9.0",
+                "CAY/PA: 4.8",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 51",
+                "PktTime: 2.5",
+                "Hits: 31",
+                "Prss%: 32.3%"
+            ]
+        },
+        "SFO": {
+            "Accuracy": [
+                "Cmp: 331",
+                "Att: 532",
+                "Yds: 3867",
+                "Drop%: 5.3%",
+                "Bad%: 15.2%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.0",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 7.0"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.3",
+                "Hits: 63",
+                "Prss%: 28.3%"
+            ]
+        },
+        "TAM": {
+            "Accuracy": [
+                "Cmp: 408",
+                "Att: 625",
+                "Yds: 5125",
+                "Drop%: 4.2%",
+                "Bad%: 15.7%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 10.6",
+                "CAY/PA: 5.7",
+                "YAC/Cmp: 4.4"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.4",
+                "Hits: 56",
+                "Prss%: 22.6%"
+            ]
+        },
+        "WAS": {
+            "Accuracy": [
+                "Cmp: 311",
+                "Att: 509",
+                "Yds: 3021",
+                "Drop%: 6.0%",
+                "Bad%: 16.5%",
+                "OnTgt%: 0.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 44",
+                "PktTime: 2.4",
+                "Hits: 36",
+                "Prss%: 28.1%"
+            ]
+        }
+    },
+    "2019": {
+        "ATL": {
+            "Accuracy": [
+                "Cmp: 459",
+                "Att: 684",
+                "Yds: 4714",
+                "Drop%: 2.6%",
+                "Bad%: 14.7%",
+                "OnTgt%: 75.7%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 4.6",
+                "YAC/Cmp: 4.2"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.5",
+                "Hits: 68",
+                "Prss%: 23.0%"
+            ]
+        },
+        "BUF": {
+            "Accuracy": [
+                "Cmp: 299",
+                "Att: 513",
+                "Yds: 3229",
+                "Drop%: 7.4%",
+                "Bad%: 20.0%",
+                "OnTgt%: 72.7%"
+            ],
+            "Air": [
+                "IAY/PA: 9.1",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.3",
+                "Hits: 44",
+                "Prss%: 22.0%"
+            ]
+        },
+        "CAR": {
+            "Accuracy": [
+                "Cmp: 382",
+                "Att: 633",
+                "Yds: 3650",
+                "Drop%: 5.5%",
+                "Bad%: 19.2%",
+                "OnTgt%: 73.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.3",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 58",
+                "PktTime: 2.4",
+                "Hits: 35",
+                "Prss%: 23.5%"
+            ]
+        },
+        "CHI": {
+            "Accuracy": [
+                "Cmp: 371",
+                "Att: 580",
+                "Yds: 3291",
+                "Drop%: 5.6%",
+                "Bad%: 17.9%",
+                "OnTgt%: 75.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 4.2"
+            ],
+            "Pressure": [
+                "Sk: 45",
+                "PktTime: 2.4",
+                "Hits: 37",
+                "Prss%: 22.5%"
+            ]
+        },
+        "CIN": {
+            "Accuracy": [
+                "Cmp: 356",
+                "Att: 616",
+                "Yds: 3652",
+                "Drop%: 5.3%",
+                "Bad%: 18.8%",
+                "OnTgt%: 70.5%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.3",
+                "Hits: 31",
+                "Prss%: 19.7%"
+            ]
+        },
+        "CLE": {
+            "Accuracy": [
+                "Cmp: 318",
+                "Att: 539",
+                "Yds: 3554",
+                "Drop%: 6.0%",
+                "Bad%: 18.0%",
+                "OnTgt%: 70.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.7"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.3",
+                "Hits: 24",
+                "Prss%: 21.8%"
+            ]
+        },
+        "IND": {
+            "Accuracy": [
+                "Cmp: 307",
+                "Att: 513",
+                "Yds: 3108",
+                "Drop%: 5.5%",
+                "Bad%: 19.1%",
+                "OnTgt%: 73.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.6",
+                "Hits: 61",
+                "Prss%: 26.9%"
+            ]
+        },
+        "ARI": {
+            "Accuracy": [
+                "Cmp: 355",
+                "Att: 554",
+                "Yds: 3477",
+                "Drop%: 3.4%",
+                "Bad%: 17.7%",
+                "OnTgt%: 73.4%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.3",
+                "Hits: 16",
+                "Prss%: 20.3%"
+            ]
+        },
+        "DAL": {
+            "Accuracy": [
+                "Cmp: 388",
+                "Att: 597",
+                "Yds: 4751",
+                "Drop%: 6.2%",
+                "Bad%: 14.8%",
+                "OnTgt%: 77.6%"
+            ],
+            "Air": [
+                "IAY/PA: 9.3",
+                "CAY/PA: 5.0",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 23",
+                "PktTime: 2.6",
+                "Hits: 57",
+                "Prss%: 18.9%"
+            ]
+        },
+        "DEN": {
+            "Accuracy": [
+                "Cmp: 312",
+                "Att: 504",
+                "Yds: 3115",
+                "Drop%: 5.6%",
+                "Bad%: 17.8%",
+                "OnTgt%: 74.9%"
+            ],
+            "Air": [
+                "IAY/PA: 6.9",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 5.5"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.4",
+                "Hits: 36",
+                "Prss%: 24.6%"
+            ]
+        },
+        "DET": {
+            "Accuracy": [
+                "Cmp: 344",
+                "Att: 571",
+                "Yds: 3900",
+                "Drop%: 3.6%",
+                "Bad%: 22.7%",
+                "OnTgt%: 67.3%"
+            ],
+            "Air": [
+                "IAY/PA: 9.6",
+                "CAY/PA: 4.7",
+                "YAC/Cmp: 4.4"
+            ],
+            "Pressure": [
+                "Sk: 43",
+                "PktTime: 2.5",
+                "Hits: 47",
+                "Prss%: 23.2%"
+            ]
+        },
+        "GNB": {
+            "Accuracy": [
+                "Cmp: 356",
+                "Att: 573",
+                "Yds: 3733",
+                "Drop%: 4.4%",
+                "Bad%: 21.3%",
+                "OnTgt%: 74.7%"
+            ],
+            "Air": [
+                "IAY/PA: 8.8",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.7"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.6",
+                "Hits: 46",
+                "Prss%: 21.9%"
+            ]
+        },
+        "HOU": {
+            "Accuracy": [
+                "Cmp: 355",
+                "Att: 534",
+                "Yds: 3783",
+                "Drop%: 4.1%",
+                "Bad%: 17.0%",
+                "OnTgt%: 76.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.8",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 49",
+                "PktTime: 2.5",
+                "Hits: 41",
+                "Prss%: 22.9%"
+            ]
+        },
+        "JAX": {
+            "Accuracy": [
+                "Cmp: 364",
+                "Att: 589",
+                "Yds: 3760",
+                "Drop%: 5.0%",
+                "Bad%: 17.2%",
+                "OnTgt%: 74.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 42",
+                "PktTime: 2.4",
+                "Hits: 34",
+                "Prss%: 20.2%"
+            ]
+        },
+        "KAN": {
+            "Accuracy": [
+                "Cmp: 378",
+                "Att: 576",
+                "Yds: 4498",
+                "Drop%: 5.0%",
+                "Bad%: 18.0%",
+                "OnTgt%: 76.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 5.9"
+            ],
+            "Pressure": [
+                "Sk: 25",
+                "PktTime: 2.5",
+                "Hits: 45",
+                "Prss%: 20.8%"
+            ]
+        },
+        "MIA": {
+            "Accuracy": [
+                "Cmp: 371",
+                "Att: 615",
+                "Yds: 3804",
+                "Drop%: 6.0%",
+                "Bad%: 18.5%",
+                "OnTgt%: 71.5%"
+            ],
+            "Air": [
+                "IAY/PA: 8.8",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 4.3"
+            ],
+            "Pressure": [
+                "Sk: 58",
+                "PktTime: 2.3",
+                "Hits: 81",
+                "Prss%: 28.5%"
+            ]
+        },
+        "MIN": {
+            "Accuracy": [
+                "Cmp: 319",
+                "Att: 466",
+                "Yds: 3523",
+                "Drop%: 4.5%",
+                "Bad%: 15.6%",
+                "OnTgt%: 78.7%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 5.8"
+            ],
+            "Pressure": [
+                "Sk: 28",
+                "PktTime: 2.7",
+                "Hits: 33",
+                "Prss%: 23.3%"
+            ]
+        },
+        "NOR": {
+            "Accuracy": [
+                "Cmp: 418",
+                "Att: 581",
+                "Yds: 4244",
+                "Drop%: 5.2%",
+                "Bad%: 11.1%",
+                "OnTgt%: 82.8%"
+            ],
+            "Air": [
+                "IAY/PA: 6.4",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 25",
+                "PktTime: 2.4",
+                "Hits: 27",
+                "Prss%: 16.1%"
+            ]
+        },
+        "NWE": {
+            "Accuracy": [
+                "Cmp: 378",
+                "Att: 620",
+                "Yds: 3961",
+                "Drop%: 5.9%",
+                "Bad%: 20.7%",
+                "OnTgt%: 73.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 28",
+                "PktTime: 2.5",
+                "Hits: 38",
+                "Prss%: 18.6%"
+            ]
+        },
+        "NYG": {
+            "Accuracy": [
+                "Cmp: 376",
+                "Att: 607",
+                "Yds: 3731",
+                "Drop%: 3.6%",
+                "Bad%: 18.3%",
+                "OnTgt%: 71.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 43",
+                "PktTime: 2.5",
+                "Hits: 74",
+                "Prss%: 25.8%"
+            ]
+        },
+        "NYJ": {
+            "Accuracy": [
+                "Cmp: 323",
+                "Att: 521",
+                "Yds: 3111",
+                "Drop%: 5.9%",
+                "Bad%: 17.8%",
+                "OnTgt%: 74.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 52",
+                "PktTime: 2.5",
+                "Hits: 49",
+                "Prss%: 30.5%"
+            ]
+        },
+        "TEN": {
+            "Accuracy": [
+                "Cmp: 297",
+                "Att: 448",
+                "Yds: 3582",
+                "Drop%: 4.4%",
+                "Bad%: 15.4%",
+                "OnTgt%: 77.4%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.7",
+                "YAC/Cmp: 6.2"
+            ],
+            "Pressure": [
+                "Sk: 56",
+                "PktTime: 2.6",
+                "Hits: 36",
+                "Prss%: 26.3%"
+            ]
+        },
+        "PHI": {
+            "Accuracy": [
+                "Cmp: 391",
+                "Att: 613",
+                "Yds: 3833",
+                "Drop%: 4.8%",
+                "Bad%: 17.6%",
+                "OnTgt%: 72.3%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 37",
+                "PktTime: 2.4",
+                "Hits: 53",
+                "Prss%: 23.2%"
+            ]
+        },
+        "PIT": {
+            "Accuracy": [
+                "Cmp: 315",
+                "Att: 510",
+                "Yds: 2981",
+                "Drop%: 6.7%",
+                "Bad%: 19.8%",
+                "OnTgt%: 73.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 2.9",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.5",
+                "Hits: 46",
+                "Prss%: 25.3%"
+            ]
+        },
+        "LVR": {
+            "Accuracy": [
+                "Cmp: 367",
+                "Att: 523",
+                "Yds: 3926",
+                "Drop%: 5.1%",
+                "Bad%: 11.4%",
+                "OnTgt%: 82.4%"
+            ],
+            "Air": [
+                "IAY/PA: 6.6",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.8"
+            ],
+            "Pressure": [
+                "Sk: 29",
+                "PktTime: 2.5",
+                "Hits: 19",
+                "Prss%: 20.3%"
+            ]
+        },
+        "LAR": {
+            "Accuracy": [
+                "Cmp: 397",
+                "Att: 632",
+                "Yds: 4499",
+                "Drop%: 4.4%",
+                "Bad%: 20.2%",
+                "OnTgt%: 71.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.7"
+            ],
+            "Pressure": [
+                "Sk: 22",
+                "PktTime: 2.6",
+                "Hits: 48",
+                "Prss%: 18.4%"
+            ]
+        },
+        "BAL": {
+            "Accuracy": [
+                "Cmp: 289",
+                "Att: 440",
+                "Yds: 3225",
+                "Drop%: 3.3%",
+                "Bad%: 17.4%",
+                "OnTgt%: 75.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.7",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 28",
+                "PktTime: 2.5",
+                "Hits: 25",
+                "Prss%: 16.5%"
+            ]
+        },
+        "LAC": {
+            "Accuracy": [
+                "Cmp: 394",
+                "Att: 597",
+                "Yds: 4426",
+                "Drop%: 4.5%",
+                "Bad%: 15.4%",
+                "OnTgt%: 76.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 34",
+                "PktTime: 2.4",
+                "Hits: 56",
+                "Prss%: 20.4%"
+            ]
+        },
+        "SEA": {
+            "Accuracy": [
+                "Cmp: 341",
+                "Att: 517",
+                "Yds: 3791",
+                "Drop%: 3.4%",
+                "Bad%: 18.4%",
+                "OnTgt%: 76.1%"
+            ],
+            "Air": [
+                "IAY/PA: 9.4",
+                "CAY/PA: 4.6",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.4",
+                "Hits: 58",
+                "Prss%: 29.0%"
+            ]
+        },
+        "SFO": {
+            "Accuracy": [
+                "Cmp: 331",
+                "Att: 478",
+                "Yds: 3792",
+                "Drop%: 6.0%",
+                "Bad%: 13.6%",
+                "OnTgt%: 80.8%"
+            ],
+            "Air": [
+                "IAY/PA: 6.5",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 6.6"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.4",
+                "Hits: 32",
+                "Prss%: 20.7%"
+            ]
+        },
+        "TAM": {
+            "Accuracy": [
+                "Cmp: 382",
+                "Att: 630",
+                "Yds: 4845",
+                "Drop%: 3.8%",
+                "Bad%: 20.7%",
+                "OnTgt%: 69.9%"
+            ],
+            "Air": [
+                "IAY/PA: 10.3",
+                "CAY/PA: 5.2",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 47",
+                "PktTime: 2.5",
+                "Hits: 54",
+                "Prss%: 22.9%"
+            ]
+        },
+        "WAS": {
+            "Accuracy": [
+                "Cmp: 298",
+                "Att: 479",
+                "Yds: 2812",
+                "Drop%: 5.6%",
+                "Bad%: 18.4%",
+                "OnTgt%: 73.4%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.5",
+                "Hits: 47",
+                "Prss%: 30.4%"
+            ]
+        }
+    },
+    "2020": {
+        "ATL": {
+            "Accuracy": [
+                "Cmp: 408",
+                "Att: 628",
+                "Yds: 4363",
+                "Drop%: 5.6%",
+                "Bad%: 14.6%",
+                "OnTgt%: 75.5%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.7",
+                "YAC/Cmp: 4.0"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.6",
+                "Hits: 71",
+                "Prss%: 24.4%"
+            ]
+        },
+        "BUF": {
+            "Accuracy": [
+                "Cmp: 410",
+                "Att: 596",
+                "Yds: 4620",
+                "Drop%: 4.7%",
+                "Bad%: 16.2%",
+                "OnTgt%: 78.4%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.8",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 27",
+                "PktTime: 2.6",
+                "Hits: 48",
+                "Prss%: 21.5%"
+            ]
+        },
+        "CAR": {
+            "Accuracy": [
+                "Cmp: 373",
+                "Att: 550",
+                "Yds: 3888",
+                "Drop%: 4.9%",
+                "Bad%: 14.2%",
+                "OnTgt%: 78.6%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.3",
+                "Hits: 42",
+                "Prss%: 19.9%"
+            ]
+        },
+        "CHI": {
+            "Accuracy": [
+                "Cmp: 402",
+                "Att: 614",
+                "Yds: 3655",
+                "Drop%: 3.0%",
+                "Bad%: 17.4%",
+                "OnTgt%: 75.7%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 4.3"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.3",
+                "Hits: 63",
+                "Prss%: 20.7%"
+            ]
+        },
+        "CIN": {
+            "Accuracy": [
+                "Cmp: 372",
+                "Att: 581",
+                "Yds: 3448",
+                "Drop%: 4.9%",
+                "Bad%: 15.9%",
+                "OnTgt%: 75.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.3",
+                "Hits: 72",
+                "Prss%: 24.1%"
+            ]
+        },
+        "CLE": {
+            "Accuracy": [
+                "Cmp: 315",
+                "Att: 501",
+                "Yds: 3539",
+                "Drop%: 4.5%",
+                "Bad%: 18.8%",
+                "OnTgt%: 74.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.4",
+                "CAY/PA: 4.6",
+                "YAC/Cmp: 4.5"
+            ],
+            "Pressure": [
+                "Sk: 26",
+                "PktTime: 2.6",
+                "Hits: 31",
+                "Prss%: 19.2%"
+            ]
+        },
+        "IND": {
+            "Accuracy": [
+                "Cmp: 371",
+                "Att: 552",
+                "Yds: 4053",
+                "Drop%: 3.4%",
+                "Bad%: 16.5%",
+                "OnTgt%: 76.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 6.0"
+            ],
+            "Pressure": [
+                "Sk: 21",
+                "PktTime: 2.4",
+                "Hits: 37",
+                "Prss%: 17.0%"
+            ]
+        },
+        "ARI": {
+            "Accuracy": [
+                "Cmp: 387",
+                "Att: 575",
+                "Yds: 3916",
+                "Drop%: 2.4%",
+                "Bad%: 16.6%",
+                "OnTgt%: 77.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 29",
+                "PktTime: 2.4",
+                "Hits: 25",
+                "Prss%: 16.6%"
+            ]
+        },
+        "DAL": {
+            "Accuracy": [
+                "Cmp: 413",
+                "Att: 639",
+                "Yds: 4161",
+                "Drop%: 5.8%",
+                "Bad%: 17.0%",
+                "OnTgt%: 75.6%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 44",
+                "PktTime: 2.4",
+                "Hits: 53",
+                "Prss%: 21.6%"
+            ]
+        },
+        "DEN": {
+            "Accuracy": [
+                "Cmp: 317",
+                "Att: 556",
+                "Yds: 3451",
+                "Drop%: 5.8%",
+                "Bad%: 22.2%",
+                "OnTgt%: 68.6%"
+            ],
+            "Air": [
+                "IAY/PA: 9.0",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.6",
+                "Hits: 70",
+                "Prss%: 27.4%"
+            ]
+        },
+        "DET": {
+            "Accuracy": [
+                "Cmp: 374",
+                "Att: 582",
+                "Yds: 4104",
+                "Drop%: 6.4%",
+                "Bad%: 17.8%",
+                "OnTgt%: 77.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 42",
+                "PktTime: 2.4",
+                "Hits: 49",
+                "Prss%: 21.6%"
+            ]
+        },
+        "GNB": {
+            "Accuracy": [
+                "Cmp: 372",
+                "Att: 526",
+                "Yds: 4106",
+                "Drop%: 5.4%",
+                "Bad%: 13.8%",
+                "OnTgt%: 81.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 6.0"
+            ],
+            "Pressure": [
+                "Sk: 21",
+                "PktTime: 2.4",
+                "Hits: 28",
+                "Prss%: 14.4%"
+            ]
+        },
+        "HOU": {
+            "Accuracy": [
+                "Cmp: 383",
+                "Att: 546",
+                "Yds: 4538",
+                "Drop%: 3.6%",
+                "Bad%: 15.2%",
+                "OnTgt%: 80.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.9",
+                "CAY/PA: 5.2",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.5",
+                "Hits: 47",
+                "Prss%: 26.1%"
+            ]
+        },
+        "JAX": {
+            "Accuracy": [
+                "Cmp: 387",
+                "Att: 616",
+                "Yds: 3699",
+                "Drop%: 3.8%",
+                "Bad%: 19.3%",
+                "OnTgt%: 73.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 4.4"
+            ],
+            "Pressure": [
+                "Sk: 44",
+                "PktTime: 2.4",
+                "Hits: 40",
+                "Prss%: 20.6%"
+            ]
+        },
+        "KAN": {
+            "Accuracy": [
+                "Cmp: 420",
+                "Att: 630",
+                "Yds: 4854",
+                "Drop%: 4.8%",
+                "Bad%: 17.4%",
+                "OnTgt%: 77.1%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 5.9"
+            ],
+            "Pressure": [
+                "Sk: 24",
+                "PktTime: 2.5",
+                "Hits: 63",
+                "Prss%: 21.8%"
+            ]
+        },
+        "MIA": {
+            "Accuracy": [
+                "Cmp: 370",
+                "Att: 559",
+                "Yds: 3736",
+                "Drop%: 4.0%",
+                "Bad%: 16.6%",
+                "OnTgt%: 76.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 4.5"
+            ],
+            "Pressure": [
+                "Sk: 34",
+                "PktTime: 2.2",
+                "Hits: 46",
+                "Prss%: 18.5%"
+            ]
+        },
+        "MIN": {
+            "Accuracy": [
+                "Cmp: 349",
+                "Att: 516",
+                "Yds: 4009",
+                "Drop%: 3.7%",
+                "Bad%: 13.8%",
+                "OnTgt%: 81.3%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 4.5",
+                "YAC/Cmp: 5.5"
+            ],
+            "Pressure": [
+                "Sk: 39",
+                "PktTime: 2.6",
+                "Hits: 78",
+                "Prss%: 30.2%"
+            ]
+        },
+        "NOR": {
+            "Accuracy": [
+                "Cmp: 370",
+                "Att: 522",
+                "Yds: 3758",
+                "Drop%: 5.3%",
+                "Bad%: 13.7%",
+                "OnTgt%: 80.2%"
+            ],
+            "Air": [
+                "IAY/PA: 6.2",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 29",
+                "PktTime: 2.4",
+                "Hits: 47",
+                "Prss%: 17.5%"
+            ]
+        },
+        "NWE": {
+            "Accuracy": [
+                "Cmp: 283",
+                "Att: 440",
+                "Yds: 2890",
+                "Drop%: 4.5%",
+                "Bad%: 19.8%",
+                "OnTgt%: 74.8%"
+            ],
+            "Air": [
+                "IAY/PA: 6.8",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 5.5"
+            ],
+            "Pressure": [
+                "Sk: 37",
+                "PktTime: 2.6",
+                "Hits: 40",
+                "Prss%: 26.0%"
+            ]
+        },
+        "NYG": {
+            "Accuracy": [
+                "Cmp: 321",
+                "Att: 517",
+                "Yds: 3026",
+                "Drop%: 5.6%",
+                "Bad%: 18.0%",
+                "OnTgt%: 75.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 3.9"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.5",
+                "Hits: 64",
+                "Prss%: 29.7%"
+            ]
+        },
+        "NYJ": {
+            "Accuracy": [
+                "Cmp: 292",
+                "Att: 499",
+                "Yds: 2796",
+                "Drop%: 4.1%",
+                "Bad%: 19.6%",
+                "OnTgt%: 71.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 43",
+                "PktTime: 2.4",
+                "Hits: 58",
+                "Prss%: 27.9%"
+            ]
+        },
+        "TEN": {
+            "Accuracy": [
+                "Cmp: 316",
+                "Att: 485",
+                "Yds: 3653",
+                "Drop%: 4.3%",
+                "Bad%: 13.7%",
+                "OnTgt%: 76.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.4",
+                "CAY/PA: 4.7",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 25",
+                "PktTime: 2.5",
+                "Hits: 61",
+                "Prss%: 23.2%"
+            ]
+        },
+        "PHI": {
+            "Accuracy": [
+                "Cmp: 334",
+                "Att: 598",
+                "Yds: 3327",
+                "Drop%: 5.0%",
+                "Bad%: 22.6%",
+                "OnTgt%: 67.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.9",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 4.5"
+            ],
+            "Pressure": [
+                "Sk: 65",
+                "PktTime: 2.6",
+                "Hits: 80",
+                "Prss%: 27.8%"
+            ]
+        },
+        "PIT": {
+            "Accuracy": [
+                "Cmp: 428",
+                "Att: 656",
+                "Yds: 4003",
+                "Drop%: 6.6%",
+                "Bad%: 15.3%",
+                "OnTgt%: 76.5%"
+            ],
+            "Air": [
+                "IAY/PA: 7.1",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 14",
+                "PktTime: 2.1",
+                "Hits: 55",
+                "Prss%: 18.2%"
+            ]
+        },
+        "LVR": {
+            "Accuracy": [
+                "Cmp: 369",
+                "Att: 551",
+                "Yds: 4217",
+                "Drop%: 4.0%",
+                "Bad%: 16.4%",
+                "OnTgt%: 78.5%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 28",
+                "PktTime: 2.5",
+                "Hits: 32",
+                "Prss%: 19.6%"
+            ]
+        },
+        "LAR": {
+            "Accuracy": [
+                "Cmp: 392",
+                "Att: 590",
+                "Yds: 4014",
+                "Drop%: 5.0%",
+                "Bad%: 16.7%",
+                "OnTgt%: 77.8%"
+            ],
+            "Air": [
+                "IAY/PA: 6.7",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 5.7"
+            ],
+            "Pressure": [
+                "Sk: 25",
+                "PktTime: 2.4",
+                "Hits: 58",
+                "Prss%: 20.0%"
+            ]
+        },
+        "BAL": {
+            "Accuracy": [
+                "Cmp: 257",
+                "Att: 406",
+                "Yds: 2739",
+                "Drop%: 5.3%",
+                "Bad%: 18.6%",
+                "OnTgt%: 73.5%"
+            ],
+            "Air": [
+                "IAY/PA: 8.7",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.5",
+                "Hits: 28",
+                "Prss%: 22.7%"
+            ]
+        },
+        "LAC": {
+            "Accuracy": [
+                "Cmp: 413",
+                "Att: 627",
+                "Yds: 4329",
+                "Drop%: 3.9%",
+                "Bad%: 18.2%",
+                "OnTgt%: 76.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 34",
+                "PktTime: 2.4",
+                "Hits: 72",
+                "Prss%: 28.5%"
+            ]
+        },
+        "SEA": {
+            "Accuracy": [
+                "Cmp: 388",
+                "Att: 563",
+                "Yds: 3941",
+                "Drop%: 5.0%",
+                "Bad%: 15.8%",
+                "OnTgt%: 79.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.6",
+                "Hits: 68",
+                "Prss%: 27.3%"
+            ]
+        },
+        "SFO": {
+            "Accuracy": [
+                "Cmp: 371",
+                "Att: 570",
+                "Yds: 4033",
+                "Drop%: 6.1%",
+                "Bad%: 15.9%",
+                "OnTgt%: 76.3%"
+            ],
+            "Air": [
+                "IAY/PA: 6.6",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 6.2"
+            ],
+            "Pressure": [
+                "Sk: 39",
+                "PktTime: 2.4",
+                "Hits: 83",
+                "Prss%: 27.1%"
+            ]
+        },
+        "TAM": {
+            "Accuracy": [
+                "Cmp: 410",
+                "Att: 626",
+                "Yds: 4626",
+                "Drop%: 5.3%",
+                "Bad%: 20.9%",
+                "OnTgt%: 73.7%"
+            ],
+            "Air": [
+                "IAY/PA: 9.0",
+                "CAY/PA: 4.6",
+                "YAC/Cmp: 4.6"
+            ],
+            "Pressure": [
+                "Sk: 22",
+                "PktTime: 2.4",
+                "Hits: 58",
+                "Prss%: 17.6%"
+            ]
+        },
+        "WAS": {
+            "Accuracy": [
+                "Cmp: 389",
+                "Att: 601",
+                "Yds: 3465",
+                "Drop%: 4.0%",
+                "Bad%: 18.6%",
+                "OnTgt%: 74.0%"
+            ],
+            "Air": [
+                "IAY/PA: 6.2",
+                "CAY/PA: 2.7",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.4",
+                "Hits: 62",
+                "Prss%: 26.3%"
+            ]
+        }
+    },
+    "2021": {
+        "ATL": {
+            "Accuracy": [
+                "Cmp: 377",
+                "Att: 573",
+                "Yds: 3713",
+                "Drop%: 4.1%",
+                "Bad%: 15.0%",
+                "OnTgt%: 77.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 4.6"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.4",
+                "Hits: 85",
+                "Prss%: 28.0%"
+            ]
+        },
+        "BUF": {
+            "Accuracy": [
+                "Cmp: 415",
+                "Att: 655",
+                "Yds: 4284",
+                "Drop%: 5.8%",
+                "Bad%: 17.3%",
+                "OnTgt%: 75.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 4.2"
+            ],
+            "Pressure": [
+                "Sk: 27",
+                "PktTime: 2.4",
+                "Hits: 64",
+                "Prss%: 25.5%"
+            ]
+        },
+        "CAR": {
+            "Accuracy": [
+                "Cmp: 348",
+                "Att: 599",
+                "Yds: 3239",
+                "Drop%: 6.1%",
+                "Bad%: 20.9%",
+                "OnTgt%: 71.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 2.9",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 52",
+                "PktTime: 2.4",
+                "Hits: 59",
+                "Prss%: 28.3%"
+            ]
+        },
+        "CHI": {
+            "Accuracy": [
+                "Cmp: 332",
+                "Att: 542",
+                "Yds: 3207",
+                "Drop%: 5.4%",
+                "Bad%: 19.1%",
+                "OnTgt%: 72.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 58",
+                "PktTime: 2.4",
+                "Hits: 45",
+                "Prss%: 24.1%"
+            ]
+        },
+        "CIN": {
+            "Accuracy": [
+                "Cmp: 384",
+                "Att: 555",
+                "Yds: 4403",
+                "Drop%: 4.6%",
+                "Bad%: 11.7%",
+                "OnTgt%: 81.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 6.4"
+            ],
+            "Pressure": [
+                "Sk: 55",
+                "PktTime: 2.4",
+                "Hits: 50",
+                "Prss%: 24.2%"
+            ]
+        },
+        "CLE": {
+            "Accuracy": [
+                "Cmp: 320",
+                "Att: 520",
+                "Yds: 3320",
+                "Drop%: 5.0%",
+                "Bad%: 19.8%",
+                "OnTgt%: 74.1%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 5.5"
+            ],
+            "Pressure": [
+                "Sk: 49",
+                "PktTime: 2.4",
+                "Hits: 30",
+                "Prss%: 23.7%"
+            ]
+        },
+        "IND": {
+            "Accuracy": [
+                "Cmp: 324",
+                "Att: 521",
+                "Yds: 3361",
+                "Drop%: 5.2%",
+                "Bad%: 18.8%",
+                "OnTgt%: 73.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.5",
+                "Hits: 76",
+                "Prss%: 25.7%"
+            ]
+        },
+        "ARI": {
+            "Accuracy": [
+                "Cmp: 415",
+                "Att: 591",
+                "Yds: 4276",
+                "Drop%: 3.7%",
+                "Bad%: 13.7%",
+                "OnTgt%: 80.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 5.5"
+            ],
+            "Pressure": [
+                "Sk: 39",
+                "PktTime: 2.3",
+                "Hits: 23",
+                "Prss%: 21.2%"
+            ]
+        },
+        "DAL": {
+            "Accuracy": [
+                "Cmp: 444",
+                "Att: 647",
+                "Yds: 4800",
+                "Drop%: 4.7%",
+                "Bad%: 14.9%",
+                "OnTgt%: 76.7%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 33",
+                "PktTime: 2.4",
+                "Hits: 51",
+                "Prss%: 18.5%"
+            ]
+        },
+        "DEN": {
+            "Accuracy": [
+                "Cmp: 354",
+                "Att: 541",
+                "Yds: 3593",
+                "Drop%: 3.9%",
+                "Bad%: 18.0%",
+                "OnTgt%: 76.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.4",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.5",
+                "Hits: 51",
+                "Prss%: 28.2%"
+            ]
+        },
+        "DET": {
+            "Accuracy": [
+                "Cmp: 396",
+                "Att: 593",
+                "Yds: 3598",
+                "Drop%: 4.2%",
+                "Bad%: 17.3%",
+                "OnTgt%: 78.0%"
+            ],
+            "Air": [
+                "IAY/PA: 6.4",
+                "CAY/PA: 3.0",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.4",
+                "Hits: 58",
+                "Prss%: 23.2%"
+            ]
+        },
+        "GNB": {
+            "Accuracy": [
+                "Cmp: 402",
+                "Att: 593",
+                "Yds: 4315",
+                "Drop%: 2.6%",
+                "Bad%: 18.9%",
+                "OnTgt%: 76.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 6.0"
+            ],
+            "Pressure": [
+                "Sk: 33",
+                "PktTime: 2.3",
+                "Hits: 47",
+                "Prss%: 22.8%"
+            ]
+        },
+        "HOU": {
+            "Accuracy": [
+                "Cmp: 354",
+                "Att: 546",
+                "Yds: 3305",
+                "Drop%: 3.2%",
+                "Bad%: 18.7%",
+                "OnTgt%: 73.7%"
+            ],
+            "Air": [
+                "IAY/PA: 7.3",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 44",
+                "PktTime: 2.3",
+                "Hits: 46",
+                "Prss%: 22.6%"
+            ]
+        },
+        "JAX": {
+            "Accuracy": [
+                "Cmp: 361",
+                "Att: 604",
+                "Yds: 3436",
+                "Drop%: 5.7%",
+                "Bad%: 20.4%",
+                "OnTgt%: 71.4%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 4.6"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.4",
+                "Hits: 52",
+                "Prss%: 22.7%"
+            ]
+        },
+        "KAN": {
+            "Accuracy": [
+                "Cmp: 448",
+                "Att: 675",
+                "Yds: 4791",
+                "Drop%: 5.0%",
+                "Bad%: 18.8%",
+                "OnTgt%: 77.6%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 6.1"
+            ],
+            "Pressure": [
+                "Sk: 28",
+                "PktTime: 2.4",
+                "Hits: 60",
+                "Prss%: 22.0%"
+            ]
+        },
+        "MIA": {
+            "Accuracy": [
+                "Cmp: 404",
+                "Att: 615",
+                "Yds: 3651",
+                "Drop%: 5.8%",
+                "Bad%: 16.5%",
+                "OnTgt%: 77.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 4.3"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.3",
+                "Hits: 48",
+                "Prss%: 23.1%"
+            ]
+        },
+        "MIN": {
+            "Accuracy": [
+                "Cmp: 398",
+                "Att: 604",
+                "Yds: 4238",
+                "Drop%: 3.9%",
+                "Bad%: 17.6%",
+                "OnTgt%: 76.4%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 30",
+                "PktTime: 2.4",
+                "Hits: 70",
+                "Prss%: 26.6%"
+            ]
+        },
+        "NOR": {
+            "Accuracy": [
+                "Cmp: 293",
+                "Att: 504",
+                "Yds: 3186",
+                "Drop%: 6.3%",
+                "Bad%: 18.7%",
+                "OnTgt%: 72.9%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.8"
+            ],
+            "Pressure": [
+                "Sk: 37",
+                "PktTime: 2.5",
+                "Hits: 47",
+                "Prss%: 25.0%"
+            ]
+        },
+        "NWE": {
+            "Accuracy": [
+                "Cmp: 364",
+                "Att: 535",
+                "Yds: 3857",
+                "Drop%: 3.1%",
+                "Bad%: 17.2%",
+                "OnTgt%: 76.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 28",
+                "PktTime: 2.4",
+                "Hits: 48",
+                "Prss%: 18.2%"
+            ]
+        },
+        "NYG": {
+            "Accuracy": [
+                "Cmp: 351",
+                "Att: 593",
+                "Yds: 3196",
+                "Drop%: 6.0%",
+                "Bad%: 18.8%",
+                "OnTgt%: 72.7%"
+            ],
+            "Air": [
+                "IAY/PA: 7.3",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 4.6"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.4",
+                "Hits: 62",
+                "Prss%: 23.1%"
+            ]
+        },
+        "NYJ": {
+            "Accuracy": [
+                "Cmp: 357",
+                "Att: 603",
+                "Yds: 3541",
+                "Drop%: 5.9%",
+                "Bad%: 21.0%",
+                "OnTgt%: 70.9%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 53",
+                "PktTime: 2.5",
+                "Hits: 51",
+                "Prss%: 27.5%"
+            ]
+        },
+        "TEN": {
+            "Accuracy": [
+                "Cmp: 359",
+                "Att: 535",
+                "Yds: 3418",
+                "Drop%: 4.4%",
+                "Bad%: 16.0%",
+                "OnTgt%: 78.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 47",
+                "PktTime: 2.3",
+                "Hits: 64",
+                "Prss%: 23.6%"
+            ]
+        },
+        "PHI": {
+            "Accuracy": [
+                "Cmp: 307",
+                "Att: 494",
+                "Yds: 3404",
+                "Drop%: 5.8%",
+                "Bad%: 13.9%",
+                "OnTgt%: 78.3%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.7"
+            ],
+            "Pressure": [
+                "Sk: 31",
+                "PktTime: 2.6",
+                "Hits: 37",
+                "Prss%: 26.1%"
+            ]
+        },
+        "PIT": {
+            "Accuracy": [
+                "Cmp: 425",
+                "Att: 664",
+                "Yds: 3778",
+                "Drop%: 5.0%",
+                "Bad%: 18.3%",
+                "OnTgt%: 75.7%"
+            ],
+            "Air": [
+                "IAY/PA: 6.7",
+                "CAY/PA: 3.0",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.1",
+                "Hits: 39",
+                "Prss%: 17.1%"
+            ]
+        },
+        "LVR": {
+            "Accuracy": [
+                "Cmp: 429",
+                "Att: 628",
+                "Yds: 4567",
+                "Drop%: 4.3%",
+                "Bad%: 15.6%",
+                "OnTgt%: 77.3%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.5",
+                "Hits: 48",
+                "Prss%: 21.3%"
+            ]
+        },
+        "LAR": {
+            "Accuracy": [
+                "Cmp: 406",
+                "Att: 607",
+                "Yds: 4642",
+                "Drop%: 5.1%",
+                "Bad%: 18.5%",
+                "OnTgt%: 76.3%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 4.5",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 31",
+                "PktTime: 2.5",
+                "Hits: 43",
+                "Prss%: 16.6%"
+            ]
+        },
+        "BAL": {
+            "Accuracy": [
+                "Cmp: 396",
+                "Att: 611",
+                "Yds: 3961",
+                "Drop%: 3.7%",
+                "Bad%: 19.3%",
+                "OnTgt%: 73.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 4.3"
+            ],
+            "Pressure": [
+                "Sk: 57",
+                "PktTime: 2.4",
+                "Hits: 43",
+                "Prss%: 22.0%"
+            ]
+        },
+        "LAC": {
+            "Accuracy": [
+                "Cmp: 443",
+                "Att: 674",
+                "Yds: 4800",
+                "Drop%: 5.8%",
+                "Bad%: 14.7%",
+                "OnTgt%: 80.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 31",
+                "PktTime: 2.4",
+                "Hits: 61",
+                "Prss%: 19.3%"
+            ]
+        },
+        "SEA": {
+            "Accuracy": [
+                "Cmp: 324",
+                "Att: 495",
+                "Yds: 3432",
+                "Drop%: 3.4%",
+                "Bad%: 17.9%",
+                "OnTgt%: 76.0%"
+            ],
+            "Air": [
+                "IAY/PA: 9.3",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 46",
+                "PktTime: 2.4",
+                "Hits: 48",
+                "Prss%: 27.1%"
+            ]
+        },
+        "SFO": {
+            "Accuracy": [
+                "Cmp: 343",
+                "Att: 514",
+                "Yds: 4221",
+                "Drop%: 5.2%",
+                "Bad%: 13.7%",
+                "OnTgt%: 80.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 6.6"
+            ],
+            "Pressure": [
+                "Sk: 33",
+                "PktTime: 2.4",
+                "Hits: 44",
+                "Prss%: 19.3%"
+            ]
+        },
+        "TAM": {
+            "Accuracy": [
+                "Cmp: 492",
+                "Att: 731",
+                "Yds: 5229",
+                "Drop%: 4.5%",
+                "Bad%: 17.7%",
+                "OnTgt%: 75.1%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 23",
+                "PktTime: 2.3",
+                "Hits: 31",
+                "Prss%: 11.1%"
+            ]
+        },
+        "WAS": {
+            "Accuracy": [
+                "Cmp: 356",
+                "Att: 550",
+                "Yds: 3441",
+                "Drop%: 4.1%",
+                "Bad%: 16.6%",
+                "OnTgt%: 75.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 43",
+                "PktTime: 2.5",
+                "Hits: 55",
+                "Prss%: 25.0%"
+            ]
+        }
+    },
+    "2022": {
+        "ATL": {
+            "Accuracy": [
+                "Cmp: 257",
+                "Att: 415",
+                "Yds: 2699",
+                "Drop%: 2.3%",
+                "Bad%: 21.3%",
+                "OnTgt%: 71.9%"
+            ],
+            "Air": [
+                "IAY/PA: 9.7",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 37",
+                "PktTime: 2.6",
+                "Hits: 41",
+                "Prss%: 18.8%"
+            ]
+        },
+        "BUF": {
+            "Accuracy": [
+                "Cmp: 361",
+                "Att: 574",
+                "Yds: 4129",
+                "Drop%: 6.8%",
+                "Bad%: 16.8%",
+                "OnTgt%: 73.3%"
+            ],
+            "Air": [
+                "IAY/PA: 9.2",
+                "CAY/PA: 4.7",
+                "YAC/Cmp: 4.4"
+            ],
+            "Pressure": [
+                "Sk: 33",
+                "PktTime: 2.5",
+                "Hits: 40",
+                "Prss%: 17.2%"
+            ]
+        },
+        "CAR": {
+            "Accuracy": [
+                "Cmp: 267",
+                "Att: 457",
+                "Yds: 2996",
+                "Drop%: 6.1%",
+                "Bad%: 17.2%",
+                "OnTgt%: 70.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 6.7"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.5",
+                "Hits: 24",
+                "Prss%: 17.4%"
+            ]
+        },
+        "CHI": {
+            "Accuracy": [
+                "Cmp: 223",
+                "Att: 377",
+                "Yds: 2219",
+                "Drop%: 5.0%",
+                "Bad%: 19.9%",
+                "OnTgt%: 70.2%"
+            ],
+            "Air": [
+                "IAY/PA: 9.1",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 58",
+                "PktTime: 2.6",
+                "Hits: 35",
+                "Prss%: 25.4%"
+            ]
+        },
+        "CIN": {
+            "Accuracy": [
+                "Cmp: 418",
+                "Att: 610",
+                "Yds: 4240",
+                "Drop%: 5.7%",
+                "Bad%: 12.8%",
+                "OnTgt%: 79.2%"
+            ],
+            "Air": [
+                "IAY/PA: 6.8",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 44",
+                "PktTime: 2.2",
+                "Hits: 48",
+                "Prss%: 16.7%"
+            ]
+        },
+        "CLE": {
+            "Accuracy": [
+                "Cmp: 335",
+                "Att: 540",
+                "Yds: 3444",
+                "Drop%: 7.3%",
+                "Bad%: 14.0%",
+                "OnTgt%: 75.1%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 44",
+                "PktTime: 2.6",
+                "Hits: 52",
+                "Prss%: 22.5%"
+            ]
+        },
+        "IND": {
+            "Accuracy": [
+                "Cmp: 398",
+                "Att: 604",
+                "Yds: 3432",
+                "Drop%: 4.6%",
+                "Bad%: 14.9%",
+                "OnTgt%: 75.5%"
+            ],
+            "Air": [
+                "IAY/PA: 6.3",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 4.5"
+            ],
+            "Pressure": [
+                "Sk: 60",
+                "PktTime: 2.3",
+                "Hits: 61",
+                "Prss%: 24.2%"
+            ]
+        },
+        "ARI": {
+            "Accuracy": [
+                "Cmp: 433",
+                "Att: 664",
+                "Yds: 3626",
+                "Drop%: 5.8%",
+                "Bad%: 15.3%",
+                "OnTgt%: 76.5%"
+            ],
+            "Air": [
+                "IAY/PA: 6.9",
+                "CAY/PA: 2.9",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 46",
+                "PktTime: 2.2",
+                "Hits: 45",
+                "Prss%: 18.8%"
+            ]
+        },
+        "DAL": {
+            "Accuracy": [
+                "Cmp: 355",
+                "Att: 556",
+                "Yds: 3736",
+                "Drop%: 6.0%",
+                "Bad%: 18.3%",
+                "OnTgt%: 73.5%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 27",
+                "PktTime: 2.4",
+                "Hits: 54",
+                "Prss%: 20.7%"
+            ]
+        },
+        "DEN": {
+            "Accuracy": [
+                "Cmp: 345",
+                "Att: 571",
+                "Yds: 3592",
+                "Drop%: 6.0%",
+                "Bad%: 16.6%",
+                "OnTgt%: 73.2%"
+            ],
+            "Air": [
+                "IAY/PA: 8.8",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.8"
+            ],
+            "Pressure": [
+                "Sk: 63",
+                "PktTime: 2.5",
+                "Hits: 74",
+                "Prss%: 27.3%"
+            ]
+        },
+        "DET": {
+            "Accuracy": [
+                "Cmp: 383",
+                "Att: 588",
+                "Yds: 4281",
+                "Drop%: 6.1%",
+                "Bad%: 16.8%",
+                "OnTgt%: 76.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.0",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 6.0"
+            ],
+            "Pressure": [
+                "Sk: 24",
+                "PktTime: 2.4",
+                "Hits: 53",
+                "Prss%: 19.2%"
+            ]
+        },
+        "GNB": {
+            "Accuracy": [
+                "Cmp: 364",
+                "Att: 563",
+                "Yds: 3632",
+                "Drop%: 7.7%",
+                "Bad%: 14.8%",
+                "OnTgt%: 80.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 5.5"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.4",
+                "Hits: 39",
+                "Prss%: 17.8%"
+            ]
+        },
+        "HOU": {
+            "Accuracy": [
+                "Cmp: 352",
+                "Att: 579",
+                "Yds: 3344",
+                "Drop%: 4.1%",
+                "Bad%: 21.9%",
+                "OnTgt%: 70.6%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.3",
+                "Hits: 68",
+                "Prss%: 22.6%"
+            ]
+        },
+        "JAX": {
+            "Accuracy": [
+                "Cmp: 394",
+                "Att: 596",
+                "Yds: 3959",
+                "Drop%: 7.1%",
+                "Bad%: 15.2%",
+                "OnTgt%: 76.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 28",
+                "PktTime: 2.2",
+                "Hits: 41",
+                "Prss%: 17.6%"
+            ]
+        },
+        "KAN": {
+            "Accuracy": [
+                "Cmp: 435",
+                "Att: 651",
+                "Yds: 5062",
+                "Drop%: 5.5%",
+                "Bad%: 15.5%",
+                "OnTgt%: 76.7%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 6.6"
+            ],
+            "Pressure": [
+                "Sk: 26",
+                "PktTime: 2.6",
+                "Hits: 56",
+                "Prss%: 19.4%"
+            ]
+        },
+        "MIA": {
+            "Accuracy": [
+                "Cmp: 368",
+                "Att: 584",
+                "Yds: 4511",
+                "Drop%: 6.4%",
+                "Bad%: 17.6%",
+                "OnTgt%: 75.1%"
+            ],
+            "Air": [
+                "IAY/PA: 9.0",
+                "CAY/PA: 5.1",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 35",
+                "PktTime: 2.4",
+                "Hits: 63",
+                "Prss%: 25.0%"
+            ]
+        },
+        "MIN": {
+            "Accuracy": [
+                "Cmp: 448",
+                "Att: 672",
+                "Yds: 4484",
+                "Drop%: 3.9%",
+                "Bad%: 14.8%",
+                "OnTgt%: 77.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 47",
+                "PktTime: 2.5",
+                "Hits: 88",
+                "Prss%: 23.3%"
+            ]
+        },
+        "NOR": {
+            "Accuracy": [
+                "Cmp: 338",
+                "Att: 512",
+                "Yds: 3692",
+                "Drop%: 5.9%",
+                "Bad%: 14.2%",
+                "OnTgt%: 76.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.9",
+                "CAY/PA: 4.6",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.4",
+                "Hits: 34",
+                "Prss%: 17.2%"
+            ]
+        },
+        "NWE": {
+            "Accuracy": [
+                "Cmp: 358",
+                "Att: 540",
+                "Yds: 3536",
+                "Drop%: 6.0%",
+                "Bad%: 13.3%",
+                "OnTgt%: 75.7%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.2",
+                "Hits: 30",
+                "Prss%: 18.3%"
+            ]
+        },
+        "NYG": {
+            "Accuracy": [
+                "Cmp: 346",
+                "Att: 520",
+                "Yds: 3157",
+                "Drop%: 6.1%",
+                "Bad%: 12.5%",
+                "OnTgt%: 79.6%"
+            ],
+            "Air": [
+                "IAY/PA: 6.4",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 49",
+                "PktTime: 2.4",
+                "Hits: 61",
+                "Prss%: 25.6%"
+            ]
+        },
+        "NYJ": {
+            "Accuracy": [
+                "Cmp: 357",
+                "Att: 627",
+                "Yds: 3723",
+                "Drop%: 4.7%",
+                "Bad%: 21.4%",
+                "OnTgt%: 67.5%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 42",
+                "PktTime: 2.4",
+                "Hits: 61",
+                "Prss%: 23.3%"
+            ]
+        },
+        "TEN": {
+            "Accuracy": [
+                "Cmp: 285",
+                "Att: 456",
+                "Yds: 2914",
+                "Drop%: 6.2%",
+                "Bad%: 14.6%",
+                "OnTgt%: 72.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 49",
+                "PktTime: 2.5",
+                "Hits: 53",
+                "Prss%: 27.5%"
+            ]
+        },
+        "PHI": {
+            "Accuracy": [
+                "Cmp: 350",
+                "Att: 536",
+                "Yds: 4105",
+                "Drop%: 4.7%",
+                "Bad%: 15.0%",
+                "OnTgt%: 77.1%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 4.4",
+                "YAC/Cmp: 5.8"
+            ],
+            "Pressure": [
+                "Sk: 44",
+                "PktTime: 2.4",
+                "Hits: 24",
+                "Prss%: 17.7%"
+            ]
+        },
+        "PIT": {
+            "Accuracy": [
+                "Cmp: 364",
+                "Att: 571",
+                "Yds: 3411",
+                "Drop%: 4.2%",
+                "Bad%: 16.8%",
+                "OnTgt%: 72.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 4.0"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.4",
+                "Hits: 43",
+                "Prss%: 19.4%"
+            ]
+        },
+        "LVR": {
+            "Accuracy": [
+                "Cmp: 359",
+                "Att: 586",
+                "Yds: 3934",
+                "Drop%: 5.4%",
+                "Bad%: 19.5%",
+                "OnTgt%: 72.3%"
+            ],
+            "Air": [
+                "IAY/PA: 9.1",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 35",
+                "PktTime: 2.6",
+                "Hits: 57",
+                "Prss%: 20.3%"
+            ]
+        },
+        "LAR": {
+            "Accuracy": [
+                "Cmp: 347",
+                "Att: 531",
+                "Yds: 3108",
+                "Drop%: 3.5%",
+                "Bad%: 18.2%",
+                "OnTgt%: 75.4%"
+            ],
+            "Air": [
+                "IAY/PA: 7.0",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 59",
+                "PktTime: 2.5",
+                "Hits: 56",
+                "Prss%: 26.5%"
+            ]
+        },
+        "BAL": {
+            "Accuracy": [
+                "Cmp: 300",
+                "Att: 488",
+                "Yds: 3040",
+                "Drop%: 6.9%",
+                "Bad%: 18.0%",
+                "OnTgt%: 74.7%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 4.5"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.4",
+                "Hits: 22",
+                "Prss%: 18.1%"
+            ]
+        },
+        "LAC": {
+            "Accuracy": [
+                "Cmp: 485",
+                "Att: 711",
+                "Yds: 4584",
+                "Drop%: 5.8%",
+                "Bad%: 13.2%",
+                "OnTgt%: 75.6%"
+            ],
+            "Air": [
+                "IAY/PA: 6.3",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 39",
+                "PktTime: 2.5",
+                "Hits: 73",
+                "Prss%: 21.0%"
+            ]
+        },
+        "SEA": {
+            "Accuracy": [
+                "Cmp: 399",
+                "Att: 573",
+                "Yds: 3934",
+                "Drop%: 3.3%",
+                "Bad%: 12.0%",
+                "OnTgt%: 78.6%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 4.4",
+                "YAC/Cmp: 4.5"
+            ],
+            "Pressure": [
+                "Sk: 46",
+                "PktTime: 2.4",
+                "Hits: 64",
+                "Prss%: 22.5%"
+            ]
+        },
+        "SFO": {
+            "Accuracy": [
+                "Cmp: 338",
+                "Att: 512",
+                "Yds: 3856",
+                "Drop%: 7.3%",
+                "Bad%: 13.7%",
+                "OnTgt%: 74.6%"
+            ],
+            "Air": [
+                "IAY/PA: 6.8",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 6.6"
+            ],
+            "Pressure": [
+                "Sk: 31",
+                "PktTime: 2.3",
+                "Hits: 41",
+                "Prss%: 16.2%"
+            ]
+        },
+        "TAM": {
+            "Accuracy": [
+                "Cmp: 499",
+                "Att: 751",
+                "Yds: 4586",
+                "Drop%: 4.6%",
+                "Bad%: 16.3%",
+                "OnTgt%: 77.1%"
+            ],
+            "Air": [
+                "IAY/PA: 6.7",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 22",
+                "PktTime: 2.2",
+                "Hits: 57",
+                "Prss%: 13.1%"
+            ]
+        },
+        "WAS": {
+            "Accuracy": [
+                "Cmp: 344",
+                "Att: 554",
+                "Yds: 3472",
+                "Drop%: 4.5%",
+                "Bad%: 19.0%",
+                "OnTgt%: 71.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.4",
+                "Hits: 69",
+                "Prss%: 24.6%"
+            ]
+        }
+    },
+    "2023": {
+        "ATL": {
+            "Accuracy": [
+                "Cmp: 327",
+                "Att: 530",
+                "Yds: 3524",
+                "Drop%: 4.9%",
+                "Bad%: 17.1%",
+                "OnTgt%: 73.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.4",
+                "Hits: 42",
+                "Prss%: 19.6%"
+            ]
+        },
+        "BUF": {
+            "Accuracy": [
+                "Cmp: 385",
+                "Att: 579",
+                "Yds: 4154",
+                "Drop%: 5.6%",
+                "Bad%: 14.2%",
+                "OnTgt%: 77.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.7",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 24",
+                "PktTime: 2.3",
+                "Hits: 51",
+                "Prss%: 19.3%"
+            ]
+        },
+        "CAR": {
+            "Accuracy": [
+                "Cmp: 350",
+                "Att: 586",
+                "Yds: 2741",
+                "Drop%: 5.2%",
+                "Bad%: 21.2%",
+                "OnTgt%: 72.9%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 4.1"
+            ],
+            "Pressure": [
+                "Sk: 65",
+                "PktTime: 2.5",
+                "Hits: 55",
+                "Prss%: 23.4%"
+            ]
+        },
+        "CHI": {
+            "Accuracy": [
+                "Cmp: 321",
+                "Att: 513",
+                "Yds: 3096",
+                "Drop%: 3.9%",
+                "Bad%: 15.9%",
+                "OnTgt%: 74.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.7",
+                "Hits: 43",
+                "Prss%: 23.9%"
+            ]
+        },
+        "CIN": {
+            "Accuracy": [
+                "Cmp: 420",
+                "Att: 615",
+                "Yds: 3895",
+                "Drop%: 5.0%",
+                "Bad%: 12.9%",
+                "OnTgt%: 77.0%"
+            ],
+            "Air": [
+                "IAY/PA: 6.3",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.3",
+                "Hits: 64",
+                "Prss%: 21.9%"
+            ]
+        },
+        "CLE": {
+            "Accuracy": [
+                "Cmp: 355",
+                "Att: 624",
+                "Yds: 3693",
+                "Drop%: 7.0%",
+                "Bad%: 21.0%",
+                "OnTgt%: 68.2%"
+            ],
+            "Air": [
+                "IAY/PA: 8.4",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 45",
+                "PktTime: 2.5",
+                "Hits: 67",
+                "Prss%: 22.7%"
+            ]
+        },
+        "IND": {
+            "Accuracy": [
+                "Cmp: 355",
+                "Att: 574",
+                "Yds: 3666",
+                "Drop%: 5.9%",
+                "Bad%: 15.9%",
+                "OnTgt%: 74.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.4",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.4",
+                "Hits: 35",
+                "Prss%: 18.3%"
+            ]
+        },
+        "ARI": {
+            "Accuracy": [
+                "Cmp: 355",
+                "Att: 555",
+                "Yds: 3144",
+                "Drop%: 3.5%",
+                "Bad%: 15.8%",
+                "OnTgt%: 70.9%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 42",
+                "PktTime: 2.4",
+                "Hits: 57",
+                "Prss%: 20.5%"
+            ]
+        },
+        "DAL": {
+            "Accuracy": [
+                "Cmp: 428",
+                "Att: 614",
+                "Yds: 4397",
+                "Drop%: 6.3%",
+                "Bad%: 12.3%",
+                "OnTgt%: 82.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.4",
+                "Hits: 47",
+                "Prss%: 16.6%"
+            ]
+        },
+        "DEN": {
+            "Accuracy": [
+                "Cmp: 337",
+                "Att: 513",
+                "Yds: 3262",
+                "Drop%: 4.0%",
+                "Bad%: 14.0%",
+                "OnTgt%: 76.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.3",
+                "CAY/PA: 2.9",
+                "YAC/Cmp: 6.1"
+            ],
+            "Pressure": [
+                "Sk: 52",
+                "PktTime: 2.7",
+                "Hits: 56",
+                "Prss%: 25.2%"
+            ]
+        },
+        "DET": {
+            "Accuracy": [
+                "Cmp: 408",
+                "Att: 606",
+                "Yds: 4401",
+                "Drop%: 6.1%",
+                "Bad%: 15.1%",
+                "OnTgt%: 80.3%"
+            ],
+            "Air": [
+                "IAY/PA: 6.7",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 31",
+                "PktTime: 2.3",
+                "Hits: 69",
+                "Prss%: 22.0%"
+            ]
+        },
+        "GNB": {
+            "Accuracy": [
+                "Cmp: 374",
+                "Att: 581",
+                "Yds: 3968",
+                "Drop%: 5.2%",
+                "Bad%: 17.5%",
+                "OnTgt%: 76.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 30",
+                "PktTime: 2.4",
+                "Hits: 42",
+                "Prss%: 18.7%"
+            ]
+        },
+        "HOU": {
+            "Accuracy": [
+                "Cmp: 372",
+                "Att: 592",
+                "Yds: 4173",
+                "Drop%: 4.2%",
+                "Bad%: 19.4%",
+                "OnTgt%: 73.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.8",
+                "CAY/PA: 4.4",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 47",
+                "PktTime: 2.5",
+                "Hits: 45",
+                "Prss%: 21.4%"
+            ]
+        },
+        "JAX": {
+            "Accuracy": [
+                "Cmp: 412",
+                "Att: 620",
+                "Yds: 4126",
+                "Drop%: 4.3%",
+                "Bad%: 18.0%",
+                "OnTgt%: 75.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.2",
+                "Hits: 47",
+                "Prss%: 18.1%"
+            ]
+        },
+        "KAN": {
+            "Accuracy": [
+                "Cmp: 421",
+                "Att: 635",
+                "Yds: 4188",
+                "Drop%: 7.3%",
+                "Bad%: 13.6%",
+                "OnTgt%: 79.9%"
+            ],
+            "Air": [
+                "IAY/PA: 6.4",
+                "CAY/PA: 2.7",
+                "YAC/Cmp: 6.4"
+            ],
+            "Pressure": [
+                "Sk: 28",
+                "PktTime: 2.5",
+                "Hits: 75",
+                "Prss%: 22.9%"
+            ]
+        },
+        "MIA": {
+            "Accuracy": [
+                "Cmp: 393",
+                "Att: 566",
+                "Yds: 4514",
+                "Drop%: 4.4%",
+                "Bad%: 14.2%",
+                "OnTgt%: 79.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 4.4",
+                "YAC/Cmp: 5.7"
+            ],
+            "Pressure": [
+                "Sk: 31",
+                "PktTime: 2.1",
+                "Hits: 27",
+                "Prss%: 15.8%"
+            ]
+        },
+        "MIN": {
+            "Accuracy": [
+                "Cmp: 424",
+                "Att: 631",
+                "Yds: 4359",
+                "Drop%: 3.9%",
+                "Bad%: 15.0%",
+                "OnTgt%: 78.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 4.4",
+                "YAC/Cmp: 4.5"
+            ],
+            "Pressure": [
+                "Sk: 47",
+                "PktTime: 2.6",
+                "Hits: 96",
+                "Prss%: 26.7%"
+            ]
+        },
+        "NOR": {
+            "Accuracy": [
+                "Cmp: 406",
+                "Att: 606",
+                "Yds: 3990",
+                "Drop%: 4.0%",
+                "Bad%: 16.0%",
+                "OnTgt%: 79.1%"
+            ],
+            "Air": [
+                "IAY/PA: 8.3",
+                "CAY/PA: 4.0",
+                "YAC/Cmp: 4.4"
+            ],
+            "Pressure": [
+                "Sk: 35",
+                "PktTime: 2.3",
+                "Hits: 37",
+                "Prss%: 15.1%"
+            ]
+        },
+        "NWE": {
+            "Accuracy": [
+                "Cmp: 351",
+                "Att: 557",
+                "Yds: 3069",
+                "Drop%: 4.2%",
+                "Bad%: 17.5%",
+                "OnTgt%: 73.6%"
+            ],
+            "Air": [
+                "IAY/PA: 7.3",
+                "CAY/PA: 2.8",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.3",
+                "Hits: 35",
+                "Prss%: 20.3%"
+            ]
+        },
+        "NYG": {
+            "Accuracy": [
+                "Cmp: 338",
+                "Att: 518",
+                "Yds: 2886",
+                "Drop%: 5.1%",
+                "Bad%: 13.6%",
+                "OnTgt%: 78.6%"
+            ],
+            "Air": [
+                "IAY/PA: 7.3",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 85",
+                "PktTime: 2.4",
+                "Hits: 41",
+                "Prss%: 26.4%"
+            ]
+        },
+        "NYJ": {
+            "Accuracy": [
+                "Cmp: 356",
+                "Att: 601",
+                "Yds: 2919",
+                "Drop%: 4.9%",
+                "Bad%: 18.7%",
+                "OnTgt%: 74.3%"
+            ],
+            "Air": [
+                "IAY/PA: 6.7",
+                "CAY/PA: 2.6",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 64",
+                "PktTime: 2.4",
+                "Hits: 64",
+                "Prss%: 27.0%"
+            ]
+        },
+        "TEN": {
+            "Accuracy": [
+                "Cmp: 304",
+                "Att: 494",
+                "Yds: 3067",
+                "Drop%: 5.0%",
+                "Bad%: 15.8%",
+                "OnTgt%: 70.8%"
+            ],
+            "Air": [
+                "IAY/PA: 9.3",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 64",
+                "PktTime: 2.5",
+                "Hits: 77",
+                "Prss%: 27.5%"
+            ]
+        },
+        "PHI": {
+            "Accuracy": [
+                "Cmp: 369",
+                "Att: 563",
+                "Yds: 3834",
+                "Drop%: 3.6%",
+                "Bad%: 14.0%",
+                "OnTgt%: 79.0%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.1",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 39",
+                "PktTime: 2.6",
+                "Hits: 30",
+                "Prss%: 20.0%"
+            ]
+        },
+        "PIT": {
+            "Accuracy": [
+                "Cmp: 323",
+                "Att: 506",
+                "Yds: 3163",
+                "Drop%: 3.3%",
+                "Bad%: 17.3%",
+                "OnTgt%: 74.6%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.4",
+                "Hits: 48",
+                "Prss%: 22.3%"
+            ]
+        },
+        "LVR": {
+            "Accuracy": [
+                "Cmp: 348",
+                "Att: 557",
+                "Yds: 3380",
+                "Drop%: 3.9%",
+                "Bad%: 18.0%",
+                "OnTgt%: 71.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 4.6"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.4",
+                "Hits: 38",
+                "Prss%: 15.0%"
+            ]
+        },
+        "LAR": {
+            "Accuracy": [
+                "Cmp: 361",
+                "Att: 583",
+                "Yds: 4063",
+                "Drop%: 6.5%",
+                "Bad%: 19.0%",
+                "OnTgt%: 74.9%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 34",
+                "PktTime: 2.5",
+                "Hits: 48",
+                "Prss%: 17.4%"
+            ]
+        },
+        "BAL": {
+            "Accuracy": [
+                "Cmp: 328",
+                "Att: 494",
+                "Yds: 3635",
+                "Drop%: 5.5%",
+                "Bad%: 16.8%",
+                "OnTgt%: 72.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.3",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 5.6"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.7",
+                "Hits: 30",
+                "Prss%: 15.3%"
+            ]
+        },
+        "LAC": {
+            "Accuracy": [
+                "Cmp: 409",
+                "Att: 632",
+                "Yds: 3957",
+                "Drop%: 4.9%",
+                "Bad%: 16.9%",
+                "OnTgt%: 74.7%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 43",
+                "PktTime: 2.4",
+                "Hits: 53",
+                "Prss%: 19.4%"
+            ]
+        },
+        "SEA": {
+            "Accuracy": [
+                "Cmp: 371",
+                "Att: 575",
+                "Yds: 3910",
+                "Drop%: 5.5%",
+                "Bad%: 14.8%",
+                "OnTgt%: 75.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.4",
+                "Hits: 47",
+                "Prss%: 24.4%"
+            ]
+        },
+        "SFO": {
+            "Accuracy": [
+                "Cmp: 336",
+                "Att: 491",
+                "Yds: 4384",
+                "Drop%: 1.9%",
+                "Bad%: 17.3%",
+                "OnTgt%: 74.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.2",
+                "CAY/PA: 4.8",
+                "YAC/Cmp: 6.6"
+            ],
+            "Pressure": [
+                "Sk: 34",
+                "PktTime: 2.7",
+                "Hits: 45",
+                "Prss%: 19.9%"
+            ]
+        },
+        "TAM": {
+            "Accuracy": [
+                "Cmp: 364",
+                "Att: 568",
+                "Yds: 3812",
+                "Drop%: 4.5%",
+                "Bad%: 14.7%",
+                "OnTgt%: 74.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.4",
+                "Hits: 35",
+                "Prss%: 17.6%"
+            ]
+        },
+        "WAS": {
+            "Accuracy": [
+                "Cmp: 407",
+                "Att: 636",
+                "Yds: 3725",
+                "Drop%: 4.3%",
+                "Bad%: 14.8%",
+                "OnTgt%: 74.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.5",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 65",
+                "PktTime: 2.4",
+                "Hits: 59",
+                "Prss%: 22.1%"
+            ]
+        }
+    },
+    "2024": {
+        "ATL": {
+            "Accuracy": [
+                "Cmp: 364",
+                "Att: 559",
+                "Yds: 4068",
+                "Drop%: 4.3%",
+                "Bad%: 13.7%",
+                "OnTgt%: 75.7%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.4",
+                "Hits: 56",
+                "Prss%: 19.6%"
+            ]
+        },
+        "BUF": {
+            "Accuracy": [
+                "Cmp: 329",
+                "Att: 520",
+                "Yds: 3875",
+                "Drop%: 4.2%",
+                "Bad%: 18.3%",
+                "OnTgt%: 74.4%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 6.6"
+            ],
+            "Pressure": [
+                "Sk: 14",
+                "PktTime: 2.3",
+                "Hits: 39",
+                "Prss%: 16.1%"
+            ]
+        },
+        "CAR": {
+            "Accuracy": [
+                "Cmp: 341",
+                "Att: 547",
+                "Yds: 3188",
+                "Drop%: 4.6%",
+                "Bad%: 19.7%",
+                "OnTgt%: 72.4%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 4.2"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.2",
+                "Hits: 49",
+                "Prss%: 23.8%"
+            ]
+        },
+        "CHI": {
+            "Accuracy": [
+                "Cmp: 353",
+                "Att: 566",
+                "Yds: 3086",
+                "Drop%: 3.8%",
+                "Bad%: 21.1%",
+                "OnTgt%: 72.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 3.0",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 68",
+                "PktTime: 2.4",
+                "Hits: 40",
+                "Prss%: 23.4%"
+            ]
+        },
+        "CIN": {
+            "Accuracy": [
+                "Cmp: 460",
+                "Att: 652",
+                "Yds: 4640",
+                "Drop%: 4.8%",
+                "Bad%: 11.6%",
+                "OnTgt%: 80.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.1",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.2",
+                "Hits: 69",
+                "Prss%: 21.5%"
+            ]
+        },
+        "CLE": {
+            "Accuracy": [
+                "Cmp: 395",
+                "Att: 661",
+                "Yds: 3506",
+                "Drop%: 7.7%",
+                "Bad%: 16.9%",
+                "OnTgt%: 74.4%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 3.3",
+                "YAC/Cmp: 4.3"
+            ],
+            "Pressure": [
+                "Sk: 66",
+                "PktTime: 2.4",
+                "Hits: 80",
+                "Prss%: 25.3%"
+            ]
+        },
+        "IND": {
+            "Accuracy": [
+                "Cmp: 289",
+                "Att: 513",
+                "Yds: 3361",
+                "Drop%: 4.7%",
+                "Bad%: 22.7%",
+                "OnTgt%: 65.7%"
+            ],
+            "Air": [
+                "IAY/PA: 10.5",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.3",
+                "Hits: 48",
+                "Prss%: 22.5%"
+            ]
+        },
+        "ARI": {
+            "Accuracy": [
+                "Cmp: 374",
+                "Att: 543",
+                "Yds: 3639",
+                "Drop%: 3.3%",
+                "Bad%: 12.6%",
+                "OnTgt%: 79.2%"
+            ],
+            "Air": [
+                "IAY/PA: 6.8",
+                "CAY/PA: 3.5",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 30",
+                "PktTime: 2.4",
+                "Hits: 23",
+                "Prss%: 16.3%"
+            ]
+        },
+        "DAL": {
+            "Accuracy": [
+                "Cmp: 398",
+                "Att: 637",
+                "Yds: 3862",
+                "Drop%: 3.2%",
+                "Bad%: 18.0%",
+                "OnTgt%: 70.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 38",
+                "PktTime: 2.3",
+                "Hits: 48",
+                "Prss%: 21.8%"
+            ]
+        },
+        "DEN": {
+            "Accuracy": [
+                "Cmp: 379",
+                "Att: 570",
+                "Yds: 3610",
+                "Drop%: 5.8%",
+                "Bad%: 15.1%",
+                "OnTgt%: 76.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.2",
+                "CAY/PA: 3.0",
+                "YAC/Cmp: 5.5"
+            ],
+            "Pressure": [
+                "Sk: 24",
+                "PktTime: 2.5",
+                "Hits: 34",
+                "Prss%: 15.8%"
+            ]
+        },
+        "DET": {
+            "Accuracy": [
+                "Cmp: 399",
+                "Att: 551",
+                "Yds: 4474",
+                "Drop%: 2.3%",
+                "Bad%: 13.4%",
+                "OnTgt%: 80.5%"
+            ],
+            "Air": [
+                "IAY/PA: 6.3",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 6.7"
+            ],
+            "Pressure": [
+                "Sk: 33",
+                "PktTime: 2.3",
+                "Hits: 57",
+                "Prss%: 21.0%"
+            ]
+        },
+        "GNB": {
+            "Accuracy": [
+                "Cmp: 308",
+                "Att: 479",
+                "Yds: 3807",
+                "Drop%: 7.1%",
+                "Bad%: 17.7%",
+                "OnTgt%: 74.1%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.2",
+                "YAC/Cmp: 6.3"
+            ],
+            "Pressure": [
+                "Sk: 22",
+                "PktTime: 2.4",
+                "Hits: 51",
+                "Prss%: 21.5%"
+            ]
+        },
+        "HOU": {
+            "Accuracy": [
+                "Cmp: 357",
+                "Att: 570",
+                "Yds: 3526",
+                "Drop%: 4.9%",
+                "Bad%: 19.4%",
+                "OnTgt%: 72.6%"
+            ],
+            "Air": [
+                "IAY/PA: 8.1",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 54",
+                "PktTime: 2.4",
+                "Hits: 58",
+                "Prss%: 27.2%"
+            ]
+        },
+        "JAX": {
+            "Accuracy": [
+                "Cmp: 343",
+                "Att: 546",
+                "Yds: 3477",
+                "Drop%: 4.2%",
+                "Bad%: 17.6%",
+                "OnTgt%: 73.7%"
+            ],
+            "Air": [
+                "IAY/PA: 8.3",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 32",
+                "PktTime: 2.4",
+                "Hits: 35",
+                "Prss%: 14.7%"
+            ]
+        },
+        "KAN": {
+            "Accuracy": [
+                "Cmp: 404",
+                "Att: 600",
+                "Yds: 3780",
+                "Drop%: 4.7%",
+                "Bad%: 16.1%",
+                "OnTgt%: 76.9%"
+            ],
+            "Air": [
+                "IAY/PA: 6.2",
+                "CAY/PA: 2.8",
+                "YAC/Cmp: 5.9"
+            ],
+            "Pressure": [
+                "Sk: 41",
+                "PktTime: 2.3",
+                "Hits: 75",
+                "Prss%: 24.0%"
+            ]
+        },
+        "MIA": {
+            "Accuracy": [
+                "Cmp: 413",
+                "Att: 591",
+                "Yds: 3737",
+                "Drop%: 4.5%",
+                "Bad%: 13.1%",
+                "OnTgt%: 81.6%"
+            ],
+            "Air": [
+                "IAY/PA: 6.3",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 43",
+                "PktTime: 2.1",
+                "Hits: 37",
+                "Prss%: 17.9%"
+            ]
+        },
+        "MIN": {
+            "Accuracy": [
+                "Cmp: 364",
+                "Att: 548",
+                "Yds: 4043",
+                "Drop%: 3.7%",
+                "Bad%: 14.9%",
+                "OnTgt%: 77.8%"
+            ],
+            "Air": [
+                "IAY/PA: 8.4",
+                "CAY/PA: 4.7",
+                "YAC/Cmp: 4.9"
+            ],
+            "Pressure": [
+                "Sk: 49",
+                "PktTime: 2.6",
+                "Hits: 53",
+                "Prss%: 24.6%"
+            ]
+        },
+        "NOR": {
+            "Accuracy": [
+                "Cmp: 340",
+                "Att: 551",
+                "Yds: 3488",
+                "Drop%: 6.0%",
+                "Bad%: 16.2%",
+                "OnTgt%: 73.7%"
+            ],
+            "Air": [
+                "IAY/PA: 8.0",
+                "CAY/PA: 3.4",
+                "YAC/Cmp: 5.4"
+            ],
+            "Pressure": [
+                "Sk: 37",
+                "PktTime: 2.4",
+                "Hits: 47",
+                "Prss%: 23.7%"
+            ]
+        },
+        "NWE": {
+            "Accuracy": [
+                "Cmp: 342",
+                "Att: 529",
+                "Yds: 2995",
+                "Drop%: 5.0%",
+                "Bad%: 16.9%",
+                "OnTgt%: 77.2%"
+            ],
+            "Air": [
+                "IAY/PA: 7.1",
+                "CAY/PA: 3.1",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 52",
+                "PktTime: 2.4",
+                "Hits: 56",
+                "Prss%: 23.7%"
+            ]
+        },
+        "NYG": {
+            "Accuracy": [
+                "Cmp: 366",
+                "Att: 591",
+                "Yds: 3228",
+                "Drop%: 5.9%",
+                "Bad%: 15.0%",
+                "OnTgt%: 75.9%"
+            ],
+            "Air": [
+                "IAY/PA: 6.8",
+                "CAY/PA: 3.0",
+                "YAC/Cmp: 4.7"
+            ],
+            "Pressure": [
+                "Sk: 48",
+                "PktTime: 2.4",
+                "Hits: 76",
+                "Prss%: 26.1%"
+            ]
+        },
+        "NYJ": {
+            "Accuracy": [
+                "Cmp: 385",
+                "Att: 607",
+                "Yds: 3714",
+                "Drop%: 6.8%",
+                "Bad%: 17.0%",
+                "OnTgt%: 76.1%"
+            ],
+            "Air": [
+                "IAY/PA: 6.8",
+                "CAY/PA: 3.0",
+                "YAC/Cmp: 5.7"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.3",
+                "Hits: 54",
+                "Prss%: 19.8%"
+            ]
+        },
+        "TEN": {
+            "Accuracy": [
+                "Cmp: 336",
+                "Att: 530",
+                "Yds: 3317",
+                "Drop%: 5.5%",
+                "Bad%: 18.7%",
+                "OnTgt%: 73.5%"
+            ],
+            "Air": [
+                "IAY/PA: 7.9",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 4.8"
+            ],
+            "Pressure": [
+                "Sk: 52",
+                "PktTime: 2.5",
+                "Hits: 57",
+                "Prss%: 22.7%"
+            ]
+        },
+        "PHI": {
+            "Accuracy": [
+                "Cmp: 303",
+                "Att: 448",
+                "Yds: 3194",
+                "Drop%: 1.7%",
+                "Bad%: 14.3%",
+                "OnTgt%: 76.4%"
+            ],
+            "Air": [
+                "IAY/PA: 7.7",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 45",
+                "PktTime: 2.6",
+                "Hits: 34",
+                "Prss%: 20.6%"
+            ]
+        },
+        "PIT": {
+            "Accuracy": [
+                "Cmp: 321",
+                "Att: 499",
+                "Yds: 3264",
+                "Drop%: 4.8%",
+                "Bad%: 16.4%",
+                "OnTgt%: 76.0%"
+            ],
+            "Air": [
+                "IAY/PA: 7.8",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 49",
+                "PktTime: 2.4",
+                "Hits: 61",
+                "Prss%: 25.3%"
+            ]
+        },
+        "LVR": {
+            "Accuracy": [
+                "Cmp: 410",
+                "Att: 635",
+                "Yds: 3797",
+                "Drop%: 2.7%",
+                "Bad%: 17.1%",
+                "OnTgt%: 73.3%"
+            ],
+            "Air": [
+                "IAY/PA: 7.0",
+                "CAY/PA: 3.2",
+                "YAC/Cmp: 5.0"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.3",
+                "Hits: 55",
+                "Prss%: 23.1%"
+            ]
+        },
+        "LAR": {
+            "Accuracy": [
+                "Cmp: 367",
+                "Att: 559",
+                "Yds: 3868",
+                "Drop%: 2.8%",
+                "Bad%: 17.7%",
+                "OnTgt%: 73.8%"
+            ],
+            "Air": [
+                "IAY/PA: 7.1",
+                "CAY/PA: 3.8",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 31",
+                "PktTime: 2.3",
+                "Hits: 68",
+                "Prss%: 21.9%"
+            ]
+        },
+        "BAL": {
+            "Accuracy": [
+                "Cmp: 318",
+                "Att: 477",
+                "Yds: 4035",
+                "Drop%: 6.1%",
+                "Bad%: 15.0%",
+                "OnTgt%: 78.9%"
+            ],
+            "Air": [
+                "IAY/PA: 8.6",
+                "CAY/PA: 4.4",
+                "YAC/Cmp: 6.6"
+            ],
+            "Pressure": [
+                "Sk: 24",
+                "PktTime: 2.5",
+                "Hits: 32",
+                "Prss%: 20.1%"
+            ]
+        },
+        "LAC": {
+            "Accuracy": [
+                "Cmp: 336",
+                "Att: 510",
+                "Yds: 3629",
+                "Drop%: 6.7%",
+                "Bad%: 13.8%",
+                "OnTgt%: 79.7%"
+            ],
+            "Air": [
+                "IAY/PA: 8.5",
+                "CAY/PA: 4.3",
+                "YAC/Cmp: 5.1"
+            ],
+            "Pressure": [
+                "Sk: 44",
+                "PktTime: 2.5",
+                "Hits: 62",
+                "Prss%: 21.5%"
+            ]
+        },
+        "SEA": {
+            "Accuracy": [
+                "Cmp: 413",
+                "Att: 593",
+                "Yds: 4020",
+                "Drop%: 3.7%",
+                "Bad%: 11.0%",
+                "OnTgt%: 80.9%"
+            ],
+            "Air": [
+                "IAY/PA: 6.8",
+                "CAY/PA: 3.7",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 54",
+                "PktTime: 2.4",
+                "Hits: 59",
+                "Prss%: 22.5%"
+            ]
+        },
+        "SFO": {
+            "Accuracy": [
+                "Cmp: 349",
+                "Att: 533",
+                "Yds: 4234",
+                "Drop%: 4.7%",
+                "Bad%: 14.8%",
+                "OnTgt%: 78.2%"
+            ],
+            "Air": [
+                "IAY/PA: 8.3",
+                "CAY/PA: 4.8",
+                "YAC/Cmp: 5.3"
+            ],
+            "Pressure": [
+                "Sk: 36",
+                "PktTime: 2.4",
+                "Hits: 42",
+                "Prss%: 19.4%"
+            ]
+        },
+        "TAM": {
+            "Accuracy": [
+                "Cmp: 408",
+                "Att: 571",
+                "Yds: 4257",
+                "Drop%: 4.8%",
+                "Bad%: 11.2%",
+                "OnTgt%: 78.7%"
+            ],
+            "Air": [
+                "IAY/PA: 6.9",
+                "CAY/PA: 3.6",
+                "YAC/Cmp: 6.0"
+            ],
+            "Pressure": [
+                "Sk: 40",
+                "PktTime: 2.2",
+                "Hits: 20",
+                "Prss%: 16.6%"
+            ]
+        },
+        "WAS": {
+            "Accuracy": [
+                "Cmp: 365",
+                "Att: 525",
+                "Yds: 3665",
+                "Drop%: 4.5%",
+                "Bad%: 13.8%",
+                "OnTgt%: 79.1%"
+            ],
+            "Air": [
+                "IAY/PA: 7.6",
+                "CAY/PA: 3.9",
+                "YAC/Cmp: 5.2"
+            ],
+            "Pressure": [
+                "Sk: 50",
+                "PktTime: 2.4",
+                "Hits: 30",
+                "Prss%: 18.6%"
+            ]
+        }
+    }
+}

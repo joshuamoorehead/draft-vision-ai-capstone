@@ -375,7 +375,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 353,DJ Chark,28,LAC,WR,7,0,10,4,31,7.8,1,1,30.0,12,0.6,4.4,40.0,3.1,0,,CharDJ00
 354,Jacob Cowing,23,SFO,WR,15,0,6,4,80,20.0,0,3,66.7,41,0.3,5.3,66.7,13.3,2,,CowiJa00
 355,Will Mallory,25,IND,TE,10,0,8,4,29,7.3,0,1,12.5,10,0.4,2.9,50.0,3.6,0,,MallWi00
-356,Scott Matlock,24,LAC,DL,17,11,5,4,28,7.0,0,1,60.0,10,0.2,1.6,80.0,5.6,0,,MatlSc00
+356,Scott Matlock,24,LAC,DE,17,11,5,4,28,7.0,0,1,60.0,10,0.2,1.6,80.0,5.6,0,,MatlSc00
 357,Will Shipley,22,PHI,RB,16,1,4,4,35,8.8,0,2,75.0,13,0.3,2.2,100.0,8.8,0,,ShipWi00
 358,Ben Sims,24,GNB,TE,17,5,5,4,42,10.5,0,1,60.0,28,0.2,2.5,80.0,8.4,0,,SimsBe00
 359,Deven Thompkins,25,CAR,WR,7,0,4,4,20,5.0,0,2,50.0,12,0.6,2.9,100.0,5.0,0,,ThomDe07
@@ -537,7 +537,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 509,Matthew Hayball,27,NOR,P,17,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HaybMa00
 510,Taylor Heinicke,31,LAC,QB,4,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HeinTa00
 511,Justin Herbert,26,LAC,QB,17,17,0,0,0,,0,0,,,0.0,0.0,,,6,,HerbJu00
-512,Jaden Hicks,22,KAN,DB,17,1,0,0,0,,0,0,,,0.0,0.0,,,0,,HickJa01
+512,Jaden Hicks,22,KAN,CB,17,1,0,0,0,,0,0,,,0.0,0.0,,,0,,HickJa01
 513,Hendon Hooker,26,DET,QB,3,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HookHe00
 514,Sam Howell,24,SEA,QB,2,0,0,0,0,,0,0,,,0.0,0.0,,,0,,HoweSa00
 515,Tyler Huntley,26,MIA,QB,5,5,0,0,0,,0,0,,,0.0,0.0,,,6,,HuntTy01
@@ -558,7 +558,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,
 530,Will Levis,25,TEN,QB,12,12,0,0,0,,0,0,,,0.0,0.0,,,10,,LeviWi00
 531,Drew Lock,28,NYG,QB,8,5,0,0,0,,0,0,,,0.0,0.0,,,5,,LockDr00
 532,Jordan Love,26,GNB,QB,15,15,0,0,0,,0,0,,,0.0,0.0,,,4,,LoveJo03
-533,Julian Love,26,SEA,FS,17,17,0,0,0,,0,0,,,0.0,0.0,,,0,,LoveJu00
+533,Julian Love,26,SEA,S,17,17,0,0,0,,0,0,,,0.0,0.0,,,0,,LoveJu00
 534,Marcus Mariota,31,WAS,QB,3,0,0,0,0,,0,0,,,0.0,0.0,,,0,,MariMa01
 535,Jordan Matthews,32,CAR,TE,4,1,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,MattJo00
 536,Drake Maye,22,NWE,QB,13,12,0,0,0,,0,0,,,0.0,0.0,,,9,PB,MayeDr00

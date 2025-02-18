@@ -304,7 +304,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 295,Chris Godwin,28,TAM,WR,7,7,1,2,1,1,1.0,1,1.0,0,,,GodwCh00
 296,Noah Gray,25,KAN,TE,17,10,1,-4,0,-4,-4.0,0,0.0,0,,,GrayNo00
 297,Matthew Hayball,27,NOR,P,17,0,1,11,1,11,11.0,0,0.0,0,,,HaybMa00
-298,Jaden Hicks,22,KAN,DB,17,1,1,1,0,0,0.0,1,1.0,0,,,HickJa01
+298,Jaden Hicks,22,KAN,CB,17,1,1,1,0,0,0.0,1,1.0,0,,,HickJa01
 299,Sam Howell,24,SEA,QB,2,0,1,2,0,0,0.0,2,2.0,1,1.0,,HoweSa00
 300,Tanner Hudson,30,CIN,TE,11,0,1,1,1,0,0.0,1,1.0,0,,,HudsTa00
 301,Jermaine Jackson,24,NOR,WR,4,0,1,-1,0,-1,-1.0,0,0.0,0,,,JackJe01
@@ -316,7 +316,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,1D,YBC,YBC/Att,YAC,YAC/Att,BrkTkl,Att/Br,Awa
 307,Charlie Kolar,25,BAL,TE,13,3,1,2,1,2,2.0,0,0.0,0,,,KolaCh00
 308,Dylan Laube,25,LVR,RB,10,0,1,0,0,0,0.0,0,0.0,0,,,LaubDy00
 309,Drake London,23,ATL,WR,17,17,1,-3,0,-3,-3.0,0,0.0,0,,,LondDr00
-310,Julian Love,26,SEA,FS,17,17,1,2,1,0,0.0,2,2.0,0,,,LoveJu00
+310,Julian Love,26,SEA,S,17,17,1,2,1,0,0.0,2,2.0,0,,,LoveJu00
 311,Trey McBride,25,ARI,TE,16,16,1,2,1,0,0.0,2,2.0,0,,PB,McBrTr01
 312,David Moore,29,CAR,WR,17,5,1,0,0,0,0.0,0,0.0,0,,,MoorDa03
 313,Elijah Moore,24,CLE,WR,17,13,1,1,0,1,1.0,0,0.0,0,,,MoorEl00

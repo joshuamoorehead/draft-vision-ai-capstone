@@ -490,7 +490,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,1D,YBC,YBC/R,YAC,YAC/R,ADOT,BrkTkl,Rec/B
 475,Gardner Minshew II,24,JAX,QB,9,8,1,1,0,0,-8,-8.0,8,8.0,-8.0,0,,0,0.0,0,79.2,,MinsGa00
 476,Donte Moncrief,27,NWE,WR,6,0,2,1,15,1,1,1.0,14,14.0,2.5,0,,0,0.0,0,75.0,,MoncDo00
 477,Isaac Nauta,23,DET,TE,7,0,2,1,3,0,3,3.0,0,0.0,1.5,0,,0,0.0,0,56.2,,NautIs00
-478,Siran Neal,26,BUF,DB,16,0,1,1,13,1,10,10.0,3,3.0,10.0,0,,0,0.0,0,118.7,,NealSi00
+478,Siran Neal,26,BUF,CB,16,0,1,1,13,1,10,10.0,3,3.0,10.0,0,,0,0.0,0,118.7,,NealSi00
 479,Scottie Phillips,23,HOU,RB,8,0,1,1,7,0,3,3.0,4,4.0,3.0,0,,0,0.0,0,95.8,,PhilSc01
 480,Dak Prescott,27,DAL,QB,5,5,1,1,11,1,10,10.0,1,1.0,10.0,0,,0,0.0,0,152.1,,PresDa01
 481,James Proche,24,BAL,WR,14,0,3,1,14,1,6,6.0,8,8.0,4.0,0,,0,0.0,2,9.7,,ProcJa00
@@ -506,7 +506,7 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,1D,YBC,YBC/R,YAC,YAC/R,ADOT,BrkTkl,Rec/B
 490,Jordan Thomas,24,ARI,TE,4,0,1,1,3,1,3,3.0,0,0.0,3.0,0,,0,0.0,0,118.7,,ThomJo05
 490,Jordan Thomas,24,NWE,TE,2,0,1,0,0,0,0,,0,,12.0,0,,0,0.0,0,39.6,,ThomJo05
 491,Colin Thompson,27,CAR,TE,15,4,2,1,7,1,7,7.0,0,0.0,3.0,0,,0,0.0,0,97.9,,ThomCo03
-492,Zeke Turner,24,ARI,DB,16,0,1,1,26,1,14,14.0,12,12.0,14.0,0,,0,0.0,0,118.7,,TurnZe00
+492,Zeke Turner,24,ARI,CB,16,0,1,1,26,1,14,14.0,12,12.0,14.0,0,,0,0.0,0,118.7,,TurnZe00
 493,Austin Walter,24,SFO,RB,4,0,1,1,27,1,-6,-6.0,33,33.0,-6.0,0,,0,0.0,0,118.7,,WaltAu00
 494,Jonathan Ward,23,ARI,RB,14,0,1,1,11,1,-4,-4.0,15,15.0,-4.0,0,,0,0.0,0,152.1,,WardJo00
 495,Trevon Wesco,25,NYJ,TE,12,4,2,1,5,0,5,5.0,0,0.0,3.5,0,,0,0.0,0,56.2,,WescTr00
@@ -522,9 +522,9 @@ Rk,Player,Age,Team,Pos,G,GS,Tgt,Rec,Yds,1D,YBC,YBC/R,YAC,YAC/R,ADOT,BrkTkl,Rec/B
 505,Hakeem Butler,24,PHI,WR,2,0,1,0,0,0,0,,0,,3.0,0,,0,0.0,0,39.6,,ButlHa00
 506,Tyler Davis,23,JAX,TE,8,0,2,0,0,0,0,,0,,13.5,0,,0,0.0,0,39.6,,DaviTy02
 507,Seth Devalve,27,ARI,TE,4,0,1,0,0,0,0,,0,,35.0,0,,0,0.0,0,39.6,,DevaSe00
-508,Rico Gafford,24,LVR,DB,3,0,2,0,0,0,0,,0,,32.0,0,,0,0.0,0,39.6,,GaffRi00
+508,Rico Gafford,24,LVR,CB,3,0,2,0,0,0,0,,0,,32.0,0,,0,0.0,0,39.6,,GaffRi00
 509,Nick Gates,25,NYG,C,16,16,1,0,0,0,0,,0,,8.0,0,,0,0.0,0,39.6,,GateNi00
-510,C.J. Goodwin,30,DAL,DB,16,0,1,0,0,0,0,,0,,9.0,0,,0,0.0,0,39.6,,GoodC.00
+510,C.J. Goodwin,30,DAL,CB,16,0,1,0,0,0,0,,0,,9.0,0,,0,0.0,0,39.6,,GoodC.00
 511,Cyril Grayson,27,TAM,WR,3,0,3,0,0,0,0,,0,,23.7,0,,2,66.7,0,39.6,,GrayCy01
 512,Jerald Hawkins,27,PIT,T,13,0,1,0,0,0,0,,0,,0.0,0,,0,0.0,0,39.6,,HawkJe00
 513,Charlie Heck,24,HOU,T,3,1,0,0,8,0,0,,8,,,0,,0,,0,,,HeckCh00

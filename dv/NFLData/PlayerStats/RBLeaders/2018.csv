@@ -19,7 +19,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 18,Phillip Lindsay,24,DEN,RB,15,8,192,1037,9,49,49.5,65,5.4,69.1,12.8,0,PB,LindPh00
 19,Kareem Hunt,23,KAN,RB,11,11,181,824,7,46,51.9,45,4.6,74.9,16.5,0,,HuntKa00
 20,Melvin Gordon,25,LAC,RB,12,12,175,885,10,47,51.4,34,5.1,73.8,14.6,1,PB,GordMe00
-21,Doug Martin,29,OAK,RB,16,9,172,723,4,37,52.3,29,4.2,45.2,10.8,3,,MartDo00
+21,Doug Martin,29,LVR,RB,16,9,172,723,4,37,52.3,29,4.2,45.2,10.8,3,,MartDo00
 22,Carlos Hyde,28,2TM,RB,14,7,172,571,5,27,38.4,22,3.3,40.8,12.3,2,,HydeCa00
 22,Carlos Hyde,28,CLE,RB,6,5,114,382,5,20,36.8,22,3.4,63.7,19.0,1,,HydeCa00
 22,Carlos Hyde,28,JAX,RB,8,2,58,189,0,7,41.4,19,3.3,23.6,7.3,1,,HydeCa00
@@ -54,7 +54,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 51,Deshaun Watson,23,HOU,QB,16,16,99,551,5,33,52.5,34,5.6,34.4,6.2,9,PB,WatsDe00
 52,James White,26,NWE,RB,16,3,94,425,5,22,44.7,27,4.5,26.6,5.9,0,,WhitJa02
 53,Elijah McGuire,24,NYJ,RB,8,3,92,276,3,15,35.9,34,3.0,34.5,11.5,2,,McGuEl00
-54,Marshawn Lynch,32,OAK,RB,6,6,90,376,3,20,53.3,52,4.2,62.7,15.0,0,,LyncMa00
+54,Marshawn Lynch,32,LVR,RB,6,6,90,376,3,20,53.3,52,4.2,62.7,15.0,0,,LyncMa00
 55,Ito Smith,23,ATL,RB,14,0,90,315,4,18,47.8,18,3.5,22.5,6.4,1,,SmitIt00
 56,Josh Allen,22,BUF,QB,12,11,89,631,8,41,59.6,45,7.1,52.6,7.4,8,,AlleJo02
 57,Wendell Smallwood,24,PHI,RB,16,6,87,364,3,22,49.4,15,4.2,22.8,5.4,2,,SmalWe00
@@ -78,7 +78,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 73,Rex Burkhead,28,NWE,RB,8,4,57,186,0,11,38.6,12,3.3,23.3,7.1,2,,BurkRe00
 74,Giovani Bernard,27,CIN,RB,12,4,56,211,3,14,37.5,23,3.8,17.6,4.7,0,,BernGi00
 75,Jaylen Samuels,22,PIT,RB,14,3,56,256,0,13,51.8,25,4.6,18.3,4.0,1,,SamuJa00
-76,Jalen Richard,25,OAK,RB,16,1,55,259,1,11,45.5,30,4.7,16.2,3.4,3,,RichJa01
+76,Jalen Richard,25,LVR,RB,16,1,55,259,1,11,45.5,30,4.7,16.2,3.4,3,,RichJa01
 77,Zach Zenner,27,DET,RB,8,1,55,265,3,14,54.5,29,4.8,33.1,6.9,0,,ZennZa00
 78,Marcus Murphy,27,BUF,RB,11,1,52,250,0,7,42.3,30,4.8,22.7,4.7,1,,MurpMa03
 79,Wayne Gallman,24,NYG,RB,15,1,51,176,1,7,41.2,9,3.5,11.7,3.4,2,,GallWa00
@@ -116,7 +116,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 109,Ryan Tannehill,30,MIA,QB,11,11,32,145,0,9,40.6,20,4.5,13.2,2.9,5,,TannRy00
 110,Drew Brees,39,NOR,QB,15,15,31,22,4,11,38.7,11,0.7,1.5,2.1,5,PBAP-2AP MVP-2AP OPoY-2,BreeDr00
 111,Ben Roethlisberger,36,PIT,QB,16,16,31,98,3,13,51.6,18,3.2,6.1,1.9,7,,RoetBe00
-112,DeAndre Washington,25,OAK,RB,10,0,30,115,0,8,56.7,13,3.8,11.5,3.0,1,,WashDe00
+112,DeAndre Washington,25,LVR,RB,10,0,30,115,0,8,56.7,13,3.8,11.5,3.0,1,,WashDe00
 113,Stevan Ridley,29,PIT,RB,10,0,29,80,1,3,27.6,12,2.8,8.0,2.9,2,,RidlSt00
 114,Darren Sproles,35,PHI,RB,6,2,29,120,1,6,41.4,17,4.1,20.0,4.8,0,,SproDa00
 115,John Kelly,22,LAR,RB,4,0,27,74,0,6,40.7,7,2.7,18.5,6.8,0,,KellJo00
@@ -124,7 +124,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 117,Case Keenum,30,DEN,QB,16,16,26,93,2,11,46.2,17,3.6,5.8,1.6,11,,KeenCa00
 118,Jeff Driskel,25,CIN,QB,9,5,25,130,2,7,44.0,27,5.2,14.4,2.8,4,,DrisJe00
 119,Matthew Stafford,30,DET,QB,16,16,25,71,0,8,44.0,10,2.8,4.4,1.6,6,,StafMa00
-120,Derek Carr,27,OAK,QB,16,16,24,47,1,5,29.2,15,2.0,2.9,1.5,12,,CarrDe02
+120,Derek Carr,27,LVR,QB,16,16,24,47,1,5,29.2,15,2.0,2.9,1.5,12,,CarrDe02
 121,Tom Brady,41,NWE,QB,16,16,23,35,2,10,43.5,10,1.5,2.2,1.4,4,PB,BradTo00
 122,Josh Johnson,32,WAS,QB,4,3,23,120,1,7,56.5,16,5.2,30.0,5.8,2,,JohnJo05
 123,Ronald Jones II,21,TAM,RB,9,0,23,44,1,2,39.1,9,1.9,4.9,2.6,0,,JoneRo01
@@ -235,7 +235,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 222,Nelson Agholor,25,PHI,WR,16,16,3,32,0,2,66.7,16,10.7,2.0,0.2,1,,AghoNe00
 223,Matt Barkley,28,BUF,QB,1,1,3,-2,0,0,0.0,,-0.7,-2.0,3.0,0,,BarkMa00
 224,John Brown,28,BAL,WR,16,15,3,4,0,0,0.0,3,1.3,0.3,0.2,0,,BrowJo02
-225,Martavis Bryant,27,OAK,WR,8,2,3,23,0,1,33.3,17,7.7,2.9,0.4,1,,BryaMa00
+225,Martavis Bryant,27,LVR,WR,8,2,3,23,0,1,33.3,17,7.7,2.9,0.4,1,,BryaMa00
 226,Keke Coutee,21,HOU,WR,6,2,3,0,0,0,33.3,,0.0,0.0,0.5,0,,CoutKe00
 227,Eric Ebron,25,IND,TE,16,8,3,-8,1,1,33.3,2,-2.7,-0.5,0.2,1,PB,EbroEr00
 228,Evan Engram,24,NYG,TE,11,8,3,36,0,3,100.0,14,12.0,3.3,0.3,0,,EngrEv00
@@ -245,10 +245,10 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 232,Jarvis Landry,26,CLE,WR,16,14,3,60,1,2,100.0,51,20.0,3.8,0.2,1,PB,LandJa00
 233,Tre Madden,25,SEA,RB,14,3,3,3,0,1,33.3,2,1.0,0.2,0.2,0,,MaddTr01
 234,Byron Marshall,24,WAS,RB,6,0,3,9,0,0,66.7,4,3.0,1.5,0.5,0,,MarsBy01
-235,A.J. McCarron,28,OAK,QB,2,0,3,-2,0,0,0.0,,-0.7,-1.0,1.5,1,,McCaA.00
+235,A.J. McCarron,28,LVR,QB,2,0,3,-2,0,0,0.0,,-0.7,-1.0,1.5,1,,McCaA.00
 236,J.D. McKissic,25,SEA,RB,5,0,3,8,0,0,33.3,6,2.7,1.6,0.6,0,,McKiJ.00
 237,Tim Patrick,25,DEN,WR,16,4,3,17,0,2,66.7,13,5.7,1.1,0.2,2,,PatrTi00
-238,Seth Roberts,27,OAK,WR,15,7,3,5,0,1,33.3,11,1.7,0.3,0.2,0,,RobeSe00
+238,Seth Roberts,27,LVR,WR,15,7,3,5,0,1,33.3,11,1.7,0.3,0.2,0,,RobeSe00
 239,Sterling Shepard,25,NYG,WR,16,16,3,33,0,1,66.7,27,11.0,2.1,0.2,1,,ShepSt00
 240,Jonathan Williams,24,NOR,RB,3,0,3,0,0,0,0.0,,0.0,0.0,1.0,0,,WillJo07
 241,Maxx Williams,24,BAL,TE,13,6,3,8,0,2,66.7,7,2.7,0.6,0.2,0,,WillMa04
@@ -260,15 +260,15 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 247,Derrick Coleman,28,ARI,RB,16,4,2,3,0,0,0.0,2,1.5,0.2,0.1,0,,ColeDe00
 248,Justin Davis,23,LAR,RB,11,0,2,19,0,1,50.0,19,9.5,1.7,0.2,0,,DaviJu00
 249,Gerald Everett,24,LAR,TE,16,0,2,16,0,1,100.0,12,8.0,1.0,0.1,0,,EverGe00
-250,Clayton Fejedelem,25,CIN,DB,16,1,2,6,0,1,0.0,6,3.0,0.4,0.1,1,,FejeCl00
+250,Clayton Fejedelem,25,CIN,CB,16,1,2,6,0,1,0.0,6,3.0,0.4,0.1,1,,FejeCl00
 251,Marvin Hall,25,ATL,WR,16,0,2,0,0,0,0.0,,0.0,0.0,0.1,0,,HallMa02
-252,Dwayne Harris,31,OAK,WR,15,1,2,12,0,1,50.0,13,6.0,0.8,0.1,2,,HarrDw00
+252,Dwayne Harris,31,LVR,WR,15,1,2,12,0,1,50.0,13,6.0,0.8,0.1,2,,HarrDw00
 253,Maurice Harris,26,WAS,WR,12,7,2,10,0,1,100.0,6,5.0,0.8,0.2,1,,HarrMa05
 254,De'Angelo Henderson,26,NYJ,RB,3,0,2,19,0,0,100.0,13,9.5,6.3,0.7,1,,HendDe01
 255,Adam Humphries,25,TAM,WR,16,10,2,11,0,0,100.0,7,5.5,0.7,0.1,2,,HumpAd00
 256,Andy Janovich,25,DEN,FB,16,7,2,5,0,2,100.0,3,2.5,0.3,0.1,0,,JanoAn00
 257,Julio Jones,29,ATL,WR,16,16,2,12,0,1,50.0,11,6.0,0.8,0.1,2,PBAP-2,JoneJu02
-258,Jourdan Lewis,23,DAL,DB,15,1,2,12,0,0,100.0,7,6.0,0.8,0.1,0,,LewiJo01
+258,Jourdan Lewis,23,DAL,CB,15,1,2,12,0,0,100.0,7,6.0,0.8,0.1,0,,LewiJo01
 259,Tommylee Lewis,26,NOR,WR,7,3,2,10,0,0,50.0,6,5.0,1.4,0.3,1,,LewiTo00
 260,T.J. Logan,24,ARI,FB,10,0,2,2,0,0,0.0,5,1.0,0.2,0.2,0,,LogaT.00
 261,Ray-Ray McCloud,22,BUF,WR,10,1,2,4,0,0,50.0,7,2.0,0.4,0.2,2,,McClRa00
@@ -284,12 +284,12 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 271,Tyrell Williams,26,LAC,WR,16,10,2,15,0,1,50.0,14,7.5,0.9,0.1,2,,WillTy00
 272,Jarius Wright,29,CAR,WR,16,6,2,39,0,1,100.0,34,19.5,2.4,0.1,3,,WrigJa02
 273,Amari Cooper,24,2TM,WR,15,15,2,20,0,1,100.0,11,10.0,1.3,0.1,2,PB,CoopAm00
-273,Amari Cooper,24,OAK,WR,6,6,1,9,0,0,100.0,9,9.0,1.5,0.2,0,,CoopAm00
+273,Amari Cooper,24,LVR,WR,6,6,1,9,0,0,100.0,9,9.0,1.5,0.2,0,,CoopAm00
 273,Amari Cooper,24,DAL,WR,9,9,1,11,0,1,100.0,11,11.0,1.2,0.1,2,,CoopAm00
 274,Ameer Abdullah,25,2TM,RB,10,0,1,1,0,0,0.0,1,1.0,0.1,0.1,1,,AbduAm00
 274,Ameer Abdullah,25,DET,RB,3,0,1,1,0,0,0.0,1,1.0,0.3,0.3,1,,AbduAm00
 274,Ameer Abdullah,25,MIN,RB,7,0,0,0,0,0,,,,0.0,0.0,0,,AbduAm00
-275,Jamal Agnew,23,DET,DB,6,0,1,17,0,1,100.0,17,17.0,2.8,0.2,1,,AgneJa00
+275,Jamal Agnew,23,DET,CB,6,0,1,17,0,1,100.0,17,17.0,2.8,0.2,1,,AgneJa00
 276,Danny Amendola,33,MIA,WR,15,15,1,-2,0,0,0.0,-2,-2.0,-0.1,0.1,2,,AmenDa00
 277,Derek Anderson,35,BUF,QB,2,2,1,-1,0,0,0.0,-1,-1.0,-0.5,0.5,3,,AndeDe00
 278,Cameron Batson,23,TEN,WR,11,2,1,1,0,1,100.0,1,1.0,0.1,0.1,1,,BatsCa00
@@ -313,15 +313,15 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 292,Quincy Enunwa,26,NYJ,WR,11,10,1,0,0,0,0.0,,0.0,0.0,0.1,2,,EnunQu00
 293,Kenny Golladay,25,DET,WR,15,13,1,8,0,0,100.0,8,8.0,0.5,0.1,1,,GollKe00
 294,Jakeem Grant,26,MIA,WR,10,2,1,5,0,0,100.0,5,5.0,0.5,0.1,0,,GranJa00
-295,Raven Greene,23,GNB,DB,8,0,1,26,0,0,0.0,26,26.0,3.3,0.1,0,,GreeRa02
-296,Jeff Heath,27,DAL,SS,16,16,1,3,0,1,0.0,3,3.0,0.2,0.1,0,,HeatJe00
+295,Raven Greene,23,GNB,CB,8,0,1,26,0,0,0.0,26,26.0,3.3,0.1,0,,GreeRa02
+296,Jeff Heath,27,DAL,S,16,16,1,3,0,1,0.0,3,3.0,0.2,0.1,0,,HeatJe00
 297,Johnny Hekker,28,LAR,P,16,0,1,3,0,0,0.0,3,3.0,0.2,0.1,0,AP-2,HekkJo00
 298,Chad Henne,33,KAN,QB,1,0,1,3,0,0,0.0,3,3.0,3.0,1.0,0,,HennCh01
 299,Darrius Heyward-Bey,31,PIT,WR,14,2,1,-7,0,0,0.0,-7,-7.0,-0.5,0.1,0,,HeywDa00
-300,Akiem Hicks,29,CHI,LDE,16,16,1,1,1,1,100.0,1,1.0,0.1,0.1,0,PB,HickAk00
+300,Akiem Hicks,29,CHI,DE,16,16,1,1,1,1,100.0,1,1.0,0.1,0.1,0,PB,HickAk00
 301,DeAndre Hopkins,26,HOU,WR,16,16,1,-7,0,0,0.0,-7,-7.0,-0.4,0.1,2,PBAP-1AP OPoY-3,HopkDe00
 302,Hayden Hurst,25,BAL,TE,12,0,1,0,0,0,0.0,,0.0,0.0,0.1,0,,HursHa00
-303,Melvin Ingram,29,LAC,RDE,16,16,1,0,0,0,0.0,,0.0,0.0,0.1,1,PB,IngrMe00
+303,Melvin Ingram,29,LAC,DE,16,16,1,0,0,0,0.0,,0.0,0.0,0.1,1,PB,IngrMe00
 304,Darius Jennings,26,TEN,WR,16,0,1,2,0,0,0.0,2,2.0,0.1,0.1,0,,JennDa00
 305,Marcus Johnson,24,IND,WR,5,0,1,-2,0,0,0.0,-2,-2.0,-0.4,0.2,0,,JohnMa07
 306,JJ Jones,26,2TM,WR,4,0,1,0,0,0,0.0,,0.0,0.0,0.3,2,,JoneJJ00
@@ -331,9 +331,9 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 308,Chad Kelly,24,DEN,QB,1,0,1,-1,0,0,0.0,-1,-1.0,-1.0,1.0,0,,KellCh00
 309,George Kittle,25,SFO,TE,16,16,1,10,0,1,100.0,10,10.0,0.6,0.1,0,PBAP-2,KittGe00
 310,Kyle Lauletta,23,NYG,QB,2,0,1,-2,0,0,0.0,-2,-2.0,-1.0,0.5,0,,LaulKy00
-311,Rontez Miles,30,NYJ,DB,8,1,1,4,0,1,0.0,4,4.0,0.5,0.1,1,,MileRo00
+311,Rontez Miles,30,NYJ,CB,8,1,1,4,0,1,0.0,4,4.0,0.5,0.1,1,,MileRo00
 312,David Moore,23,SEA,WR,16,7,1,5,0,0,100.0,5,5.0,0.3,0.1,2,,MoorDa03
-313,Jordy Nelson,33,OAK,WR,15,14,1,-2,0,0,0.0,-2,-2.0,-0.1,0.1,1,,NelsJo00
+313,Jordy Nelson,33,LVR,WR,15,14,1,-2,0,0,0.0,-2,-2.0,-0.1,0.1,1,,NelsJo00
 314,Roosevelt Nix,26,PIT,RB,16,0,1,4,0,0,0.0,4,4.0,0.3,0.1,0,,NixxRo01
 315,Niles Paul,29,JAX,WR,6,1,1,-3,0,0,0.0,-3,-3.0,-0.5,0.2,0,,PaulNi00
 316,Dante Pettis,23,SFO,WR,12,7,1,-2,0,0,0.0,-2,-2.0,-0.2,0.1,2,,PettDa00
@@ -350,7 +350,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 325,Matt Schaub,37,ATL,QB,3,0,1,0,0,0,0.0,,0.0,0.0,0.3,1,,SchaMa00
 326,Tajae Sharpe,24,TEN,WR,16,13,1,16,0,1,100.0,16,16.0,1.0,0.1,0,,SharTa00
 327,Anthony Sherman,30,KAN,RB,16,1,1,2,0,1,100.0,2,2.0,0.1,0.1,0,PB,SherAn00
-328,Keith Smith,26,OAK,DB,16,3,1,0,0,0,0.0,,0.0,0.0,0.1,0,,SmitKe03
+328,Keith Smith,26,LVR,CB,16,3,1,0,0,0,0.0,,0.0,0.0,0.1,0,,SmitKe03
 329,JuJu Smith-Schuster,22,PIT,WR,16,13,1,13,0,1,100.0,13,13.0,0.8,0.1,1,PB,SmitJu00
 330,Willie Snead,26,BAL,WR,16,10,1,13,0,1,100.0,13,13.0,0.8,0.1,0,,SneaWi00
 331,Equanimeous St. Brown,22,GNB,WR,12,7,1,5,0,0,100.0,5,5.0,0.4,0.1,0,,St.BEq00
@@ -358,12 +358,12 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 333,Rod Streater,30,CLE,WR,3,0,1,-11,0,0,0.0,-11,-11.0,-3.7,0.3,0,,StreRo00
 334,Courtland Sutton,23,DEN,WR,16,9,1,-1,0,0,0.0,-1,-1.0,-0.1,0.1,0,,SuttCo00
 335,De'Anthony Thomas,25,KAN,RB,5,0,1,6,0,0,100.0,6,6.0,1.2,0.2,1,,ThomDe05
-336,Johnny Townsend,23,OAK,P,16,0,1,42,0,1,0.0,42,42.0,2.6,0.1,0,,TownJo01
+336,Johnny Townsend,23,LVR,P,16,0,1,42,0,1,0.0,42,42.0,2.6,0.1,0,,TownJo01
 337,De'Lance Turner,23,BAL,RB,4,0,1,4,0,0,100.0,4,4.0,1.0,0.3,0,,TurnDe01
-338,Darren Waller,26,OAK,WR,4,0,1,21,0,1,100.0,21,21.0,5.3,0.3,0,,WallDa01
+338,Darren Waller,26,LVR,WR,4,0,1,21,0,1,100.0,21,21.0,5.3,0.3,0,,WallDa01
 339,Brandon Weeden,35,HOU,QB,1,0,1,-1,0,0,0.0,-1,-1.0,-1.0,1.0,0,,WeedBr00
 340,Chad Williams,24,ARI,WR,10,7,1,9,0,0,100.0,9,9.0,0.9,0.1,0,,WillCh05
-341,Tavon Wilson,28,DET,DB,15,3,1,7,0,1,0.0,7,7.0,0.5,0.1,0,,WilsTa00
+341,Tavon Wilson,28,DET,CB,15,3,1,7,0,1,0.0,7,7.0,0.5,0.1,0,,WilsTa00
 342,Davante Adams,26,GNB,WR,15,15,0,0,0,0,,,,0.0,0.0,0,PB,AdamDa01
 343,Kamar Aiken,29,PHI,WR,5,1,0,0,0,0,,,,0.0,0.0,0,,AikeKa00
 344,Jordan Akins,26,HOU,TE,16,6,0,0,0,0,,,,0.0,0.0,0,,AkinJo00
@@ -372,7 +372,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 347,Geronimo Allison,24,GNB,WR,5,4,0,0,0,0,,,,0.0,0.0,1,,AlliGe01
 348,Mark Andrews,23,BAL,TE,16,3,0,0,0,0,,,,0.0,0.0,0,,AndrMa00
 349,Dan Arnold,23,NOR,WR,10,1,0,0,0,0,,,,0.0,0.0,1,,ArnoDa00
-350,Marcell Ateman,24,OAK,WR,7,6,0,0,0,0,,,,0.0,0.0,0,,AtemMa00
+350,Marcell Ateman,24,LVR,WR,7,6,0,0,0,0,,,,0.0,0.0,0,,AtemMa00
 351,Antony Auclair,25,TAM,TE,16,10,0,0,0,0,,,,0.0,0.0,0,,AuclAn00
 352,Doug Baldwin,30,SEA,WR,13,13,0,0,0,0,,,,0.0,0.0,0,,BaldDo00
 353,Cole Beasley,29,DAL,WR,16,4,0,0,0,0,,,,0.0,0.0,0,,BeasCo00
@@ -398,7 +398,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 369,Jake Butt,23,DEN,TE,3,3,0,0,0,0,,,,0.0,0.0,0,,ButtJa00
 370,Damiere Byrd,25,CAR,WR,8,0,0,0,0,0,,,,0.0,0.0,0,,ByrdDa00
 371,Austin Carr,25,NOR,WR,14,2,0,0,0,0,,,,0.0,0.0,0,,CarrAu00
-372,Derek Carrier,28,OAK,TE,16,2,0,0,0,0,,,,0.0,0.0,0,,CarrDe00
+372,Derek Carrier,28,LVR,TE,16,2,0,0,0,0,,,,0.0,0.0,0,,CarrDe00
 373,Garrett Celek,30,SFO,TE,15,1,0,0,0,0,,,,0.0,0.0,0,,CeleGa00
 374,DJ Chark,22,JAX,WR,11,0,0,0,0,0,,,,0.0,0.0,1,,CharDJ00
 375,Orson Charles,27,CLE,TE,13,2,0,0,0,0,,,,0.0,0.0,0,,CharOr00
@@ -409,7 +409,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 380,Stacy Coley,24,MIN,WR,2,0,0,0,0,0,,,,0.0,0.0,0,,ColeSt00
 381,Tyler Conklin,23,MIN,TE,16,3,0,0,0,0,,,,0.0,0.0,0,,ConkTy00
 382,Chris Conley,26,KAN,WR,16,13,0,0,0,0,,,,0.0,0.0,2,,ConlCh00
-383,Jared Cook,31,OAK,TE,16,14,0,0,0,0,,,,0.0,0.0,0,PB,CookJa02
+383,Jared Cook,31,LVR,TE,16,14,0,0,0,0,,,,0.0,0.0,0,PB,CookJa02
 384,Pharoh Cooper,23,LAR,WR,5,0,0,0,0,0,,,,0.0,0.0,0,,CoopPh00
 385,Cody Core,24,CIN,WR,14,3,0,0,0,0,,,,0.0,0.0,0,,CoreCo00
 386,Michael Crabtree,31,BAL,WR,16,16,0,0,0,0,,,,0.0,0.0,0,,CrabMi00
@@ -417,7 +417,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 388,Jason Croom,24,BUF,TE,15,3,0,0,0,0,,,,0.0,0.0,2,,CrooJa00
 389,Mason Crosby,34,GNB,K,16,0,0,0,0,0,,,,0.0,0.0,0,,CrosMa20
 390,Alan Cross,25,TAM,TE,14,3,0,0,0,0,,,,0.0,0.0,0,,CrosAl00
-391,Dane Cruikshank,23,TEN,DB,12,0,0,0,0,0,,,,0.0,0.0,0,,CruiDa00
+391,Dane Cruikshank,23,TEN,CB,12,0,0,0,0,0,,,,0.0,0.0,0,,CruiDa00
 392,Sean Culkin,25,LAC,TE,13,10,0,0,0,0,,,,0.0,0.0,0,,CulkSe00
 393,Jerome Cunningham,27,DET,TE,3,0,0,0,0,0,,,,0.0,0.0,0,,CunnJe00
 394,Darrell Daniels,24,2TM,TE,11,3,0,0,0,0,,,,0.0,0.0,0,,DaniDa02
@@ -478,7 +478,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 445,Justin Hardee,24,NOR,WR,16,0,0,0,0,0,,,,0.0,0.0,0,,HardJu01
 446,Justin Hardy,27,ATL,WR,16,0,0,0,0,0,,,,0.0,0.0,1,,HardJu00
 447,Demetrius Harris,27,KAN,TE,15,3,0,0,0,0,,,,0.0,0.0,0,,HarrDe03
-448,Keon Hatcher,24,OAK,WR,3,0,0,0,0,0,,,,0.0,0.0,0,,HatcKe00
+448,Keon Hatcher,24,LVR,WR,3,0,0,0,0,0,,,,0.0,0.0,0,,HatcKe00
 449,Stephen Hauschka,33,BUF,K,16,0,0,0,0,0,,,,0.0,0.0,0,,HausSt00
 450,Chris Herndon,22,NYJ,TE,16,12,0,0,0,0,,,,0.0,0.0,2,,HernCh00
 451,Jeff Heuerman,26,DEN,TE,11,10,0,0,0,0,,,,0.0,0.0,0,,HeueJe00
@@ -494,7 +494,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 461,Andre Holmes,30,2TM,WR,15,3,0,0,0,0,,,,0.0,0.0,0,,HolmAn00
 461,Andre Holmes,30,BUF,WR,12,3,0,0,0,0,,,,0.0,0.0,0,,HolmAn00
 461,Andre Holmes,30,DEN,WR,3,0,0,0,0,0,,,,0.0,0.0,0,,HolmAn00
-462,Johnny Holton,28,OAK,WR,1,0,0,0,0,0,,,,0.0,0.0,0,,HoltJo00
+462,Johnny Holton,28,LVR,WR,1,0,0,0,0,0,,,,0.0,0.0,0,,HoltJo00
 463,Austin Hooper,24,ATL,TE,16,7,0,0,0,0,,,,0.0,0.0,0,PB,HoopAu00
 464,O.J. Howard,24,TAM,TE,10,8,0,0,0,0,,,,0.0,0.0,0,,HowaO.00
 465,Sam Hubbard,23,CIN,DE,16,0,0,0,0,0,,,,0.0,0.0,0,,HubbSa00
@@ -521,7 +521,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 486,Jake Kumerow,26,GNB,WR,5,2,0,0,0,0,,,,0.0,0.0,0,,KumeJa00
 487,Matt LaCosse,26,DEN,TE,15,5,0,0,0,0,,,,0.0,0.0,0,,LaCoMa00
 488,Chris Lacy,22,DET,WR,1,0,0,0,0,0,,,,0.0,0.0,0,,LacyCh00
-489,Brandon LaFell,32,OAK,WR,6,5,0,0,0,0,,,,0.0,0.0,0,,LaFeBr00
+489,Brandon LaFell,32,LVR,WR,6,5,0,0,0,0,,,,0.0,0.0,0,,LaFeBr00
 490,Cody Latimer,26,NYG,WR,6,2,0,0,0,0,,,,0.0,0.0,0,,LatiCo00
 491,Allen Lazard,23,GNB,WR,1,0,0,0,0,0,,,,0.0,0.0,0,,LazaAl00
 492,Khari Lee,26,BUF,TE,2,0,0,0,0,0,,,,0.0,0.0,0,,LeexKh00
@@ -573,12 +573,12 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 536,Adam Shaheen,24,CHI,TE,6,4,0,0,0,0,,,,0.0,0.0,0,,ShahAd00
 537,Russell Shepard,28,NYG,WR,12,0,0,0,0,0,,,,0.0,0.0,0,,ShepRu00
 538,Trent Sherfield,22,ARI,WR,13,2,0,0,0,0,,,,0.0,0.0,0,,SherTr00
-539,Sam Shields,31,LAR,DB,16,2,0,0,0,0,,,,0.0,0.0,0,,ShieSa00
+539,Sam Shields,31,LAR,CB,16,2,0,0,0,0,,,,0.0,0.0,0,,ShieSa00
 540,Scott Simonson,26,NYG,TE,16,4,0,0,0,0,,,,0.0,0.0,0,,SimoSc00
 541,Dion Sims,27,CHI,TE,8,4,0,0,0,0,,,,0.0,0.0,0,,SimsDi00
-542,Jacquies Smith,28,OAK,LB,3,0,0,0,0,0,,,,0.0,0.0,0,,SmitJa01
+542,Jacquies Smith,28,LVR,LB,3,0,0,0,0,0,,,,0.0,0.0,0,,SmitJa01
 543,Jonnu Smith,23,TEN,TE,13,12,0,0,0,0,,,,0.0,0.0,1,,SmitJo01
-544,Lee Smith,31,OAK,TE,16,4,0,0,0,0,,,,0.0,0.0,0,,SmitLe00
+544,Lee Smith,31,LVR,TE,16,4,0,0,0,0,,,,0.0,0.0,0,,SmitLe00
 545,Torrey Smith,29,CAR,WR,11,6,0,0,0,0,,,,0.0,0.0,0,,SmitTo02
 546,Tre'Quan Smith,22,NOR,WR,15,7,0,0,0,0,,,,0.0,0.0,0,,SmitTr03
 547,Vyncint Smith,22,HOU,WR,7,1,0,0,0,0,,,,0.0,0.0,0,,SmitVy00
@@ -624,7 +624,7 @@ Rk,Player,Age,Team,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Fmb,Awards,-9999
 583,Kevin White,26,CHI,WR,9,0,0,0,0,0,,,,0.0,0.0,0,,WhitKe00
 584,Tim White,24,BAL,WR,3,0,0,0,0,0,,,,0.0,0.0,1,,WhitTi00
 585,Cole Wick,25,SFO,TE,5,0,0,0,0,0,,,,0.0,0.0,0,,WickCo00
-586,Kyle Williams,35,BUF,LDT,16,16,0,0,0,0,,,,0.0,0.0,0,PB,WillKy20
+586,Kyle Williams,35,BUF,DT,16,16,0,0,0,0,,,,0.0,0.0,0,PB,WillKy20
 587,Nick Williams,28,2TM,WR,4,0,0,0,0,0,,,,0.0,0.0,0,,WillNi02
 587,Nick Williams,28,TEN,WR,2,0,0,0,0,0,,,,0.0,0.0,0,,WillNi02
 587,Nick Williams,28,LAR,WR,2,0,0,0,0,0,,,,0.0,0.0,0,,WillNi02
