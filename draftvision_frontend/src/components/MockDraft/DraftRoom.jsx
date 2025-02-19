@@ -163,7 +163,6 @@ const DraftRoom = () => {
       return;
     }
     if (isPaused) return;
-
     console.log(currentRoundOrdersState);
     const order = currentRoundOrdersState[index];
     console.log("processNextPick => order:", order);
@@ -395,7 +394,6 @@ const DraftRoom = () => {
               </div>
             </div>
           ))}
-
           {/* NEW: An invisible anchor to scroll into view */}
           <div ref={picksEndRef} />
         </section>
@@ -446,13 +444,10 @@ const DraftRoom = () => {
 function getPickLabelById(id, allDraftOrders) {
   const order = allDraftOrders.find((o) => o.id === id);
   if (!order) return `Pick #${id} (not found)`;
-
   const { round, team } = order;
-  // find which pickNumber in that round
   const ordersInRound = allDraftOrders.filter((o) => Number(o.round) === Number(round));
   const pickIndex = ordersInRound.findIndex((o) => o.id === id);
   const pickNum = pickIndex + 1;
-
   return `Round ${round} Pick ${pickNum} - ${team}`;
 }
 
@@ -506,79 +501,71 @@ const UserPickModal = ({
     return () => clearInterval(interval);
   }, [timer, onTimeout]);
 
-  // Generate CPU trade proposals
+  // NEW: Generate CPU trade proposals
+  // This code will generate between 1 and 3 proposals.
+  // For each proposal, we select a random trade partner (from those other than the current user)
+  // and choose multiple picks from each side (if available).
   useEffect(() => {
     if (!currentTeam || !allDraftOrders || !currentRoundOrders || currentPickIndex === undefined)
       return;
 
+    // Get user's future picks (exclude the picks before the current pick)
+    const userFuturePicks = allDraftOrders.filter((order) => {
+      return (
+        order.team === currentTeam.team &&
+        (Number(order.round) > currentRound ||
+          (Number(order.round) === currentRound &&
+            currentRoundOrders.findIndex((o) => o.id === order.id) >= currentPickIndex))
+      );
+    });
+
+    // Get available trade partners (exclude the current team)
     const tradePartnerSet = new Set(allDraftOrders.map((o) => o.team));
     tradePartnerSet.delete(currentTeam.team);
     const tradePartners = Array.from(tradePartnerSet);
 
-    const proposalCount = Math.floor(Math.random() * 4); // up to 3 proposals
-    let proposals = [];
+    // We'll propose between 1 and 3 proposals.
+    const proposalCount = Math.min(Math.floor(Math.random() * 3) + 1, tradePartners.length);
+    const proposals = [];
+    // Shuffle trade partners and select the first proposalCount
+    const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
+    const selectedPartners = shuffleArray([...tradePartners]).slice(0, proposalCount);
 
-    // user’s future picks (exclude the current pick)
-    const availableUserPicks = allDraftOrders.filter((order) => {
-      return (
-        order.team === currentTeam.team &&
-        (
-          Number(order.round) > currentRound ||
-          (
-            Number(order.round) === currentRound &&
-            currentRoundOrders.findIndex((o) => o.id === order.id) >= currentPickIndex
-          )
-        )
-      );
-    });
-
-    for (let i = 0; i < proposalCount; i++) {
-      if (tradePartners.length === 0) break;
-      const partner = tradePartners[Math.floor(Math.random() * tradePartners.length)];
-
-      // partner's picks
-      const availablePartnerPicks = allDraftOrders.filter((order) => {
+    selectedPartners.forEach((partner) => {
+      // Get partner's future picks:
+      const partnerFuturePicks = allDraftOrders.filter((order) => {
         return (
           order.team === partner &&
-          (
-            Number(order.round) > currentRound ||
-            (
-              Number(order.round) === currentRound &&
-              currentRoundOrders.findIndex((o) => o.id === order.id) >= currentPickIndex
-            )
-          )
+          (Number(order.round) > currentRound ||
+            (Number(order.round) === currentRound &&
+              currentRoundOrders.findIndex((o) => o.id === order.id) >= currentPickIndex))
         );
       });
-      if (availablePartnerPicks.length === 0) continue;
 
-      let userPicks = [];
-      let partnerPicks = [];
+      if (userFuturePicks.length === 0 || partnerFuturePicks.length === 0) return;
 
-      // CPU wants user's current pick => add that pick ID to partnerPicks
-      partnerPicks.push(currentTeam.id);
+      // Choose multiple picks when possible.
+      // We'll pick a random number between 2 and 3 if available, else 1.
+      const getCount = (arr) =>
+        arr.length >= 2 ? Math.floor(Math.random() * Math.min(2, arr.length - 1)) + 2 : 1;
 
-      // from availableUserPicks, exclude the current pick
-      const nonCurrentUserPicks = availableUserPicks.filter((o) => o.id !== currentTeam.id);
-      if (nonCurrentUserPicks.length > 0) {
-        const randomUserPick =
-          nonCurrentUserPicks[Math.floor(Math.random() * nonCurrentUserPicks.length)].id;
-        console.log("CPU Trade Proposal => adding future pick", randomUserPick, "to userPicks");
-        userPicks.push(randomUserPick);
-      }
+      const userCount = getCount(userFuturePicks);
+      const partnerCount = getCount(partnerFuturePicks);
 
-      // Possibly add an extra partner pick
-      const numAdditional = Math.floor(Math.random() * 2); // 0 or 1
-      const shuffled = [...availablePartnerPicks].sort(() => 0.5 - Math.random());
-      const additionalPartnerPicks = shuffled.slice(0, numAdditional).map((o) => o.id);
-      partnerPicks = partnerPicks.concat(additionalPartnerPicks);
+      const userPicksSelected = shuffleArray([...userFuturePicks])
+        .slice(0, userCount)
+        .map((order) => order.id);
+      const partnerPicksSelected = shuffleArray([...partnerFuturePicks])
+        .slice(0, partnerCount)
+        .map((order) => order.id);
 
       proposals.push({
-        id: i,
         tradePartner: partner,
-        userPicks,
-        partnerPicks,
+        userPicks: userPicksSelected,
+        partnerPicks: partnerPicksSelected,
       });
-    }
+    });
+
     console.log("Generated CPU trade proposals:", proposals);
     setCpuTradeProposals(proposals);
   }, [currentTeam, allDraftOrders, currentRound, currentPickIndex, currentRoundOrders]);
@@ -643,21 +630,19 @@ const UserPickModal = ({
           )}
         </div>
         <div className="cpu-trade-proposals border-t pt-2">
-          <h3 className="font-semibold text-lg mb-2">CPU Trade Proposals:</h3>
+          <h3 className="font-semibold text-lg mb-2">Trade Proposals:</h3>
           {cpuTradeProposals.length > 0 ? (
-            cpuTradeProposals.map((proposal) => {
+            cpuTradeProposals.map((proposal, idx) => {
               const userPicksFormatted = formatPicks(proposal.userPicks);
               const partnerPicksFormatted = formatPicks(proposal.partnerPicks);
-
               return (
-                <div
-                  key={proposal.id}
-                  className="trade-proposal border p-2 my-2 rounded bg-gray-600"
-                >
+                <div key={idx} className="trade-proposal border p-2 my-2 rounded bg-gray-600">
                   <p>
-                    CPU wants to trade **your** pick(s): [{userPicksFormatted}]
+                    {proposal.tradePartner} has proposed a trade.
                     <br />
-                    for CPU's pick(s): [{partnerPicksFormatted}] ({proposal.tradePartner}).
+                    <strong>You receive:</strong> {partnerPicksFormatted}
+                    <br />
+                    <strong>You give up:</strong> {userPicksFormatted}
                   </p>
                   <div className="mt-2 space-x-2">
                     <button
@@ -675,7 +660,7 @@ const UserPickModal = ({
                     <button
                       className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                       onClick={() =>
-                        setCpuTradeProposals((prev) => prev.filter((p) => p.id !== proposal.id))
+                        setCpuTradeProposals((prev) => prev.filter((p) => p !== proposal))
                       }
                     >
                       Decline
@@ -761,11 +746,7 @@ const TradeModal = ({
       alert("Must select at least one pick from both sides.");
       return;
     }
-    console.log("Submitting trade with:", {
-      selectedTradePartner,
-      selectedUserPicks,
-      selectedPartnerPicks,
-    });
+    console.log("Submitting trade with:", { selectedTradePartner, selectedUserPicks, selectedPartnerPicks });
     onSubmitTrade(selectedTradePartner, selectedUserPicks, selectedPartnerPicks);
   };
 
