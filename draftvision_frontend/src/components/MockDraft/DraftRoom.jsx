@@ -1,468 +1,876 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+// Declare a global variable outside the component
 
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
+import "../../styles/main.css";
+
+let globalUpdatedOrders = []; // global reference (though not strictly necessary)
+
+// Initialize Supabase client
+const supabaseUrl = "https://pvuzvnemuhutrdmpchmi.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY";
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// -------------------------------------
+// MAIN DraftRoom COMPONENT
+// -------------------------------------
 const DraftRoom = () => {
+  // 1) Retrieve navigation state
   const location = useLocation();
   const navigate = useNavigate();
-  const { state } = location || {};
-  const {
-    selectedTeams = [],
-    locations = [],
-    timePerPick = 30,
-    rounds = 1,
-  } = state || {};
+  const { selectedTeams, locations, rounds, timePerPick, draftYear } = location.state;
 
-  // Full 7-Round Draft Order
-  const draftOrder = [
-    // Round 1
-    { team: "Carolina Panthers", round: 1 },
-    { team: "Houston Texans", round: 1 },
-    { team: "Arizona Cardinals", round: 1 },
-    { team: "Indianapolis Colts", round: 1 },
-    { team: "Seattle Seahawks", round: 1 },
-    { team: "Detroit Lions", round: 1 },
-    { team: "Las Vegas Raiders", round: 1 },
-    { team: "Atlanta Falcons", round: 1 },
-    { team: "Chicago Bears", round: 1 },
-    { team: "Philadelphia Eagles", round: 1 },
-    { team: "Tennessee Titans", round: 1 },
-    { team: "Houston Texans", round: 1 },
-    { team: "Green Bay Packers", round: 1 },
-    { team: "New England Patriots", round: 1 },
-    { team: "New York Jets", round: 1 },
-    { team: "Washington Commanders", round: 1 },
-    { team: "Pittsburgh Steelers", round: 1 },
-    { team: "Detroit Lions", round: 1 },
-    { team: "Tampa Bay Buccaneers", round: 1 },
-    { team: "Seattle Seahawks", round: 1 },
-    { team: "Los Angeles Chargers", round: 1 },
-    { team: "Baltimore Ravens", round: 1 },
-    { team: "Minnesota Vikings", round: 1 },
-    { team: "Jacksonville Jaguars", round: 1 },
-    { team: "New York Giants", round: 1 },
-    { team: "Dallas Cowboys", round: 1 },
-    { team: "Buffalo Bills", round: 1 },
-    { team: "Cincinnati Bengals", round: 1 },
-    { team: "New Orleans Saints", round: 1 },
-    { team: "Philadelphia Eagles", round: 1 },
-    { team: "Kansas City Chiefs", round: 1 },
-  
-    // Round 2
-    { team: "Pittsburgh Steelers", round: 2 },
-    { team: "Houston Texans", round: 2 },
-    { team: "Arizona Cardinals", round: 2 },
-    { team: "Indianapolis Colts", round: 2 },
-    { team: "Seattle Seahawks", round: 2 },
-    { team: "Las Vegas Raiders", round: 2 },
-    { team: "Carolina Panthers", round: 2 },
-    { team: "New Orleans Saints", round: 2 },
-    { team: "Tennessee Titans", round: 2 },
-    { team: "Green Bay Packers", round: 2 },
-    { team: "New York Jets", round: 2 },
-    { team: "Atlanta Falcons", round: 2 },
-    { team: "Green Bay Packers", round: 2 },
-    { team: "New England Patriots", round: 2 },
-    { team: "Washington Commanders", round: 2 },
-    { team: "Detroit Lions", round: 2 },
-    { team: "Pittsburgh Steelers", round: 2 },
-    { team: "Tampa Bay Buccaneers", round: 2 },
-    { team: "Seattle Seahawks", round: 2 },
-    { team: "Miami Dolphins", round: 2 },
-    { team: "Los Angeles Chargers", round: 2 },
-    { team: "Chicago Bears", round: 2 },
-    { team: "Kansas City Chiefs", round: 2 },
-    { team: "Jacksonville Jaguars", round: 2 },
-    { team: "New York Giants", round: 2 },
-    { team: "Dallas Cowboys", round: 2 },
-    { team: "Buffalo Bills", round: 2 },
-    { team: "Cincinnati Bengals", round: 2 },
-    { team: "Chicago Bears", round: 2 },
-    { team: "Philadelphia Eagles", round: 2 },
-    { team: "Kansas City Chiefs", round: 2 },
-  
-    // Round 3
-    { team: "Chicago Bears", round: 3 },
-    { team: "Houston Texans", round: 3 },
-    { team: "Arizona Cardinals", round: 3 },
-    { team: "Denver Broncos", round: 3 },
-    { team: "Los Angeles Rams", round: 3 },
-    { team: "Indianapolis Colts", round: 3 },
-    { team: "Los Angeles Rams", round: 3 },
-    { team: "Seattle Seahawks", round: 3 },
-    { team: "Las Vegas Raiders", round: 3 },
-    { team: "Carolina Panthers", round: 3 },
-    { team: "New Orleans Saints", round: 3 },
-    { team: "Tennessee Titans", round: 3 },
-    { team: "Green Bay Packers", round: 3 },
-    { team: "Miami Dolphins", round: 3 },
-    { team: "New York Jets", round: 3 },
-    { team: "Atlanta Falcons", round: 3 },
-    { team: "New England Patriots", round: 3 },
-    { team: "Washington Commanders", round: 3 },
-    { team: "Detroit Lions", round: 3 },
-    { team: "Tampa Bay Buccaneers", round: 3 },
-    { team: "Seattle Seahawks", round: 3 },
-    { team: "Miami Dolphins", round: 3 },
-    { team: "Los Angeles Chargers", round: 3 },
-    { team: "Baltimore Ravens", round: 3 },
-    { team: "Dallas Cowboys", round: 3 },
-    { team: "Jacksonville Jaguars", round: 3 },
-    { team: "New York Giants", round: 3 },
-    { team: "Buffalo Bills", round: 3 },
-    { team: "Cincinnati Bengals", round: 3 },
-    { team: "Carolina Panthers", round: 3 },
-    { team: "Philadelphia Eagles", round: 3 },
-    { team: "Kansas City Chiefs", round: 3 },
-  
-    // Round 4
-    { team: "Chicago Bears", round: 4 },
-    { team: "Houston Texans", round: 4 },
-    { team: "Indianapolis Colts", round: 4 },
-    { team: "Arizona Cardinals", round: 4 },
-    { team: "Cleveland Browns", round: 4 },
-    { team: "Seattle Seahawks", round: 4 },
-    { team: "Baltimore Ravens", round: 4 },
-    { team: "Los Angeles Chargers", round: 4 },
-    { team: "Cleveland Browns", round: 4 },
-    { team: "New England Patriots", round: 4 },
-    { team: "New York Jets", round: 4 },
-    { team: "Las Vegas Raiders", round: 4 },
-    { team: "Atlanta Falcons", round: 4 },
-    { team: "Carolina Panthers", round: 4 },
-    { team: "New Orleans Saints", round: 4 },
-    { team: "Green Bay Packers", round: 4 },
-    { team: "Washington Commanders", round: 4 },
-    { team: "Minnesota Vikings", round: 4 },
-    { team: "Jacksonville Jaguars", round: 4 },
-    { team: "New York Giants", round: 4 },
-    { team: "Dallas Cowboys", round: 4 },
-    { team: "Buffalo Bills", round: 4 },
-    { team: "Cincinnati Bengals", round: 4 },
-    { team: "Pittsburgh Steelers", round: 4 },
-    { team: "Detroit Lions", round: 4 },
-    { team: "Tampa Bay Buccaneers", round: 4 },
-    { team: "Seattle Seahawks", round: 4 },
-    { team: "Miami Dolphins", round: 4 },
-    { team: "Los Angeles Chargers", round: 4 },
-    { team: "Baltimore Ravens", round: 4 },
-    { team: "San Francisco 49ers", round: 4 },
-  
-  // Round 5
-  { team: "Chicago Bears", round: 5 },
-  { team: "Buffalo Bills", round: 5 },
-  { team: "Indianapolis Colts", round: 5 },
-  { team: "Arizona Cardinals", round: 5 },
-  { team: "Denver Broncos", round: 5 },
-  { team: "Cleveland Browns", round: 5 },
-  { team: "Seattle Seahawks", round: 5 },
-  { team: "Los Angeles Chargers", round: 5 },
-  { team: "Baltimore Ravens", round: 5 },
-  { team: "Los Angeles Rams", round: 5 },
-  { team: "New England Patriots", round: 5 },
-  { team: "New York Jets", round: 5 },
-  { team: "Las Vegas Raiders", round: 5 },
-  { team: "Atlanta Falcons", round: 5 },
-  { team: "Carolina Panthers", round: 5 },
-  { team: "New Orleans Saints", round: 5 },
-  { team: "Green Bay Packers", round: 5 },
-  { team: "Washington Commanders", round: 5 },
-  { team: "Minnesota Vikings", round: 5 },
-  { team: "Jacksonville Jaguars", round: 5 },
-  { team: "New York Giants", round: 5 },
-  { team: "Dallas Cowboys", round: 5 },
-  { team: "Buffalo Bills", round: 5 },
-  { team: "Cincinnati Bengals", round: 5 },
-  { team: "San Francisco 49ers", round: 5 },
-  { team: "Pittsburgh Steelers", round: 5 },
-  { team: "Detroit Lions", round: 5 },
-  { team: "Tampa Bay Buccaneers", round: 5 },
-  { team: "Seattle Seahawks", round: 5 },
-  { team: "Miami Dolphins", round: 5 },
-  { team: "Green Bay Packers", round: 5 },
-  
-  // Round 6
-  { team: "Chicago Bears", round: 6 },
-  { team: "Buffalo Bills", round: 6 },
-  { team: "Indianapolis Colts", round: 6 },
-  { team: "Arizona Cardinals", round: 6 },
-  { team: "Denver Broncos", round: 6 },
-  { team: "Cleveland Browns", round: 6 },
-  { team: "Seattle Seahawks", round: 6 },
-  { team: "Los Angeles Chargers", round: 6 },
-  { team: "Baltimore Ravens", round: 6 },
-  { team: "Kansas City Chiefs", round: 6 },
-  { team: "New England Patriots", round: 6 },
-  { team: "New York Jets", round: 6 },
-  { team: "Las Vegas Raiders", round: 6 },
-  { team: "Atlanta Falcons", round: 6 },
-  { team: "Carolina Panthers", round: 6 },
-  { team: "New Orleans Saints", round: 6 },
-  { team: "Green Bay Packers", round: 6 },
-  { team: "Washington Commanders", round: 6 },
-  { team: "Minnesota Vikings", round: 6 },
-  { team: "Jacksonville Jaguars", round: 6 },
-  { team: "New York Giants", round: 6 },
-  { team: "Dallas Cowboys", round: 6 },
-  { team: "Buffalo Bills", round: 6 },
-  { team: "Cincinnati Bengals", round: 6 },
-  { team: "San Francisco 49ers", round: 6 },
-  { team: "Pittsburgh Steelers", round: 6 },
-  { team: "Detroit Lions", round: 6 },
-  { team: "Tampa Bay Buccaneers", round: 6 },
-  { team: "Seattle Seahawks", round: 6 },
-  { team: "Miami Dolphins", round: 6 },
-  { team: "Green Bay Packers", round: 6 },
-  
-  // Round 7
-  { team: "Chicago Bears", round: 7 },
-  { team: "Arizona Cardinals", round: 7 },
-  { team: "Indianapolis Colts", round: 7 },
-  { team: "Buffalo Bills", round: 7 },
-  { team: "Denver Broncos", round: 7 },
-  { team: "Cleveland Browns", round: 7 },
-  { team: "Seattle Seahawks", round: 7 },
-  { team: "Los Angeles Chargers", round: 7 },
-  { team: "Baltimore Ravens", round: 7 },
-  { team: "Los Angeles Rams", round: 7 },
-  { team: "New England Patriots", round: 7 },
-  { team: "New York Jets", round: 7 },
-  { team: "Las Vegas Raiders", round: 7 },
-  { team: "Atlanta Falcons", round: 7 },
-  { team: "Carolina Panthers", round: 7 },
-  { team: "New Orleans Saints", round: 7 },
-  { team: "Green Bay Packers", round: 7 },
-  { team: "Minnesota Vikings", round: 7 },
-  { team: "Jacksonville Jaguars", round: 7 },
-  { team: "New York Giants", round: 7 },
-  { team: "Dallas Cowboys", round: 7 },
-  { team: "Buffalo Bills", round: 7 },
-  { team: "Cincinnati Bengals", round: 7 },
-  { team: "San Francisco 49ers", round: 7 },
-  { team: "Kansas City Chiefs", round: 7 },
-  { team: "Los Angeles Rams", round: 7 },
-  { team: "Detroit Lions", round: 7 },
-  { team: "Tampa Bay Buccaneers", round: 7 },
-  { team: "Miami Dolphins", round: 7 },
-  { team: "Seattle Seahawks", round: 7 },
-  { team: "Los Angeles Chargers", round: 7 },
-  { team: "Green Bay Packers", round: 7 },
-  ];
+  // 2) Determine user teams
+  const userTeams = selectedTeams.map((i) => locations[i]);
+  const primaryUserTeam = userTeams[0]; // The first is “owner” for acquired picks
 
-  const filteredDraftOrder = draftOrder.filter((pick) => pick.round <= rounds);
+  // 3) Refs
+  const globalPickRef = useRef(1); // global pick counter
+  const timerRef = useRef(null);
+  const availablePlayersRef = useRef([]); // for quick picking
 
+  // NEW: Auto-scroll logic => reference to the bottom of the drafted picks
+  const picksEndRef = useRef(null);
+
+  // 4) Basic states
+  const [currentRound, setCurrentRound] = useState(1);
   const [currentPickIndex, setCurrentPickIndex] = useState(0);
-  const [draftClass, setDraftClass] = useState([
-      {'name': 'Bryce Young', 'position': 'QB', 'college': 'Alabama'}, {'name': 'C.J. Stroud', 'position': 'QB', 'college': 'Ohio St.'}, {'name': 'Will Anderson', 'position': 'LB', 'college': 'Alabama'}, {'name': 'Anthony Richardson', 'position': 'QB', 'college': 'Florida'}, {'name': 'Devon Witherspoon', 'position': 'DB', 'college': 'Illinois'}, {'name': 'Paris Johnson', 'position': 'OL', 'college': 'Ohio St.'}, {'name': 'Tyree Wilson', 'position': 'OLB', 'college': 'Texas Tech'}, {'name': 'Bijan Robinson', 'position': 'RB', 'college': 'Texas'}, {'name': 'Jalen Carter', 'position': 'DL', 'college': 'Georgia'}, {'name': 'Darnell Wright', 'position': 'OL', 'college': 'Tennessee'}, {'name': 'Peter Skoronski', 'position': 'OL', 'college': 'Northwestern'}, {'name': 'Jahmyr Gibbs', 'position': 'RB', 'college': 'Alabama'}, {'name': 'Lukas Van Ness', 'position': 'DL', 'college': 'Iowa'}, {'name': 'Broderick Jones', 'position': 'OL', 'college': 'Georgia'}, {'name': 'Will McDonald', 'position': 'DE', 'college': 'Iowa St.'}, {'name': 'Emmanuel Forbes', 'position': 'CB', 'college': 'Mississippi St.'}, {'name': 'Christian Gonzalez', 'position': 'DB', 'college': 'Oregon'}, {'name': 'Jack Campbell', 'position': 'LB', 'college': 'Iowa'}, {'name': 'Calijah Kancey', 'position': 'DL', 'college': 'Pittsburgh'}, {'name': 'Jaxon Smith-Njigba', 'position': 'WR', 'college': 'Ohio St.'}, {'name': 'Quentin Johnston', 'position': 'WR', 'college': 'TCU'}, {'name': 'Zay Flowers', 'position': 'WR', 'college': 'Boston Col.'}, {'name': 'Jordan Addison', 'position': 'WR', 'college': 'USC'}, {'name': 'Deonte Banks', 'position': 'DB', 'college': 'Maryland'}, {'name': 'Dalton Kincaid', 'position': 'TE', 'college': 'Utah'}, {'name': 'Mazi Smith', 'position': 'DL', 'college': 'Michigan'}, {'name': 'Anton Harrison', 'position': 'OL', 'college': 'Oklahoma'}, {'name': 'Myles Murphy', 'position': 'DE', 'college': 'Clemson'}, {'name': 'Bryan Bresee', 'position': 'DT', 'college': 'Clemson'}, {'name': 'Nolan Smith', 'position': 'OLB', 'college': 'Georgia'}, {'name': 'Felix Anudike-Uzomah', 'position': 'DE', 'college': 'Kansas St.'}, {'name': 'Joey Porter Jr.', 'position': 'CB', 'college': 'Penn St.'}, {'name': 'Will Levis', 'position': 'QB', 'college': 'Kentucky'}, {'name': 'Sam LaPorta', 'position': 'TE', 'college': 'Iowa'}, {'name': 'Michael Mayer', 'position': 'TE', 'college': 'Notre Dame'}, {'name': 'Steve Avila', 'position': 'C', 'college': 'TCU'}, {'name': 'Derick Hall', 'position': 'DE', 'college': 'Auburn'}, {'name': 'Matthew Bergeron', 'position': 'OL', 'college': 'Syracuse'}, {'name': 'Jonathan Mingo', 'position': 'WR', 'college': 'Mississippi'}, {'name': 'Isaiah Foskey', 'position': 'DL', 'college': 'Notre Dame'}, {'name': 'BJ Ojulari', 'position': 'DE', 'college': 'LSU'}, {'name': 'Luke Musgrave', 'position': 'TE', 'college': 'Oregon St.'}, {'name': 'Joe Tippmann', 'position': 'OL', 'college': 'Wisconsin'}, {'name': 'Julius Brents', 'position': 'DB', 'college': 'Kansas St.'}, {'name': 'Brian Branch', 'position': 'DB', 'college': 'Alabama'}, {'name': 'Keion White', 'position': 'DL', 'college': 'Georgia Tech'}, {'name': 'Quan Martin', 'position': 'DB', 'college': 'Illinois'}, {'name': 'Cody Mauch', 'position': 'T', 'college': 'North Dakota St.'}, {'name': 'Keeanu Benton', 'position': 'NT', 'college': 'Wisconsin'}, {'name': 'Jayden Reed', 'position': 'WR', 'college': 'Michigan St.'}, {'name': 'Cam Smith', 'position': 'DB', 'college': 'South Carolina'}, {'name': 'Zach Charbonnet', 'position': 'RB', 'college': 'UCLA'}, {'name': 'Gervon Dexter', 'position': 'DL', 'college': 'Florida'}, {'name': 'Tuli Tuipulotu', 'position': 'DL', 'college': 'USC'}, {'name': 'Rashee Rice', 'position': 'WR', 'college': 'SMU'}, {'name': 'Tyrique Stevenson', 'position': 'CB', 'college': 'Miami (FL)'}, {'name': 'John Michael Schmitz', 'position': 'OL', 'college': 'Minnesota'}, {'name': 'Luke Schoonmaker', 'position': 'TE', 'college': 'Michigan'}, {'name': "O'Cyrus Torrence", 'position': 'OL', 'college': 'Florida'}, {'name': 'DJ Turner', 'position': 'DB', 'college': 'Michigan'}, {'name': 'Brenton Strange', 'position': 'TE', 'college': 'Penn St.'}, {'name': 'Juice Scruggs', 'position': 'OL', 'college': 'Penn St.'}, {'name': 'Marvin Mims', 'position': 'WR', 'college': 'Oklahoma'}, {'name': 'Zacch Pickens', 'position': 'DL', 'college': 'South Carolina'}, {'name': 'Tyler Steen', 'position': 'OL', 'college': 'Alabama'}, {'name': 'Sydney Brown', 'position': 'DB', 'college': 'Illinois'}, {'name': 'Drew Sanders', 'position': 'LB', 'college': 'Arkansas'}, {'name': 'Hendon Hooker', 'position': 'QB', 'college': 'Tennessee'}, {'name': 'Tank Dell', 'position': 'WR', 'college': 'Houston'}, {'name': 'Byron Young', 'position': 'DL', 'college': 'Alabama'}, {'name': 'Kendre Miller', 'position': 'RB', 'college': 'TCU'}, {'name': 'Garrett Williams', 'position': 'DB', 'college': 'Syracuse'}, {'name': 'Jalin Hyatt', 'position': 'WR', 'college': 'Tennessee'}, {'name': 'Cedric Tillman', 'position': 'WR', 'college': 'Tennessee'}, {'name': 'Zach Harrison', 'position': 'DE', 'college': 'Ohio St.'}, {'name': 'Marte Mapu', 'position': 'DB', 'college': 'Sacramento St.'}, {'name': 'Byron Young', 'position': 'LB', 'college': 'Tennessee'}, {'name': 'Tucker Kraft', 'position': 'TE', 'college': 'South Dakota St.'}, {'name': 'Josh Downs', 'position': 'WR', 'college': 'North Carolina'}, {'name': 'DJ Johnson', 'position': 'OLB', 'college': 'Oregon'}, {'name': 'Tyjae Spears', 'position': 'RB', 'college': 'Tulane'}, {'name': 'YaYa Diaby', 'position': 'DL', 'college': 'Louisville'}, {'name': 'Riley Moss', 'position': 'DB', 'college': 'Iowa'}, {'name': "De'Von Achane", 'position': 'RB', 'college': 'Texas A&M'}, {'name': 'Daiyan Henley', 'position': 'LB', 'college': 'Washington St.'}, {'name': 'Trenton Simpson', 'position': 'LB', 'college': 'Clemson'}, {'name': "Ji'Ayir Brown", 'position': 'S', 'college': 'Penn St.'}, {'name': 'Tank Bigsby', 'position': 'RB', 'college': 'Auburn'}, {'name': 'Kobie Turner', 'position': 'DT', 'college': 'Wake Forest'}, {'name': 'DeMarvion Overshown', 'position': 'LB', 'college': 'Texas'}, {'name': 'Dorian Williams', 'position': 'LB', 'college': 'Tulane'}, {'name': 'Wanya Morris', 'position': 'OL', 'college': 'Oklahoma'}, {'name': 'Darnell Washington', 'position': 'TE', 'college': 'Georgia'}, {'name': 'Michael Wilson', 'position': 'WR', 'college': 'Stanford'}, {'name': 'Jordan Battle', 'position': 'DB', 'college': 'Alabama'}, {'name': 'Brodric Martin', 'position': 'DT', 'college': 'Western Kentucky'}, {'name': 'Ricky Stromberg', 'position': 'OL', 'college': 'Arkansas'}, {'name': 'Siaki Ika', 'position': 'DL', 'college': 'Baylor'}, {'name': 'Jake Moody', 'position': 'K', 'college': 'Michigan'}, {'name': 'Tre Tucker', 'position': 'WR', 'college': 'Cincinnati'}, {'name': 'Cameron Latu', 'position': 'TE', 'college': 'Alabama'}, {'name': 'Mekhi Blackmon', 'position': 'CB', 'college': 'USC'}, {'name': 'Nick Saldiveri', 'position': 'OL', 'college': 'Old Dominion'}, {'name': 'Jakorian Bennett', 'position': 'DB', 'college': 'Maryland'}, {'name': 'Kelee Ringo', 'position': 'DB', 'college': 'Georgia'}, {'name': 'Blake Freeland', 'position': 'OL', 'college': 'BYU'}, {'name': 'Jake Andrews', 'position': 'OL', 'college': 'Troy'}, {'name': 'Anthony Bradford', 'position': 'OL', 'college': 'LSU'}, {'name': 'Dylan Horton', 'position': 'DL', 'college': 'TCU'}, {'name': 'Adetomiwa Adebawore', 'position': 'DL', 'college': 'Northwestern'}, {'name': 'Dawand Jones', 'position': 'OL', 'college': 'Ohio St.'}, {'name': 'Chad Ryland', 'position': 'K', 'college': 'Maryland'}, {'name': 'Clark Phillips', 'position': 'CB', 'college': 'Utah'}, {'name': 'Chandler Zavala', 'position': 'G', 'college': 'North Carolina St.'}, {'name': 'Roschon Johnson', 'position': 'RB', 'college': 'Texas'}, {'name': 'Colby Wooden', 'position': 'DE', 'college': 'Auburn'}, {'name': 'Sidy Sow', 'position': 'OL', 'college': 'Eastern Michigan'}, {'name': 'Braeden Daniels', 'position': 'OL', 'college': 'Utah'}, {'name': 'Chamarri Conner', 'position': 'DB', 'college': 'Virginia Tech'}, {'name': 'Carter Warren', 'position': 'OL', 'college': 'Pittsburgh'}, {'name': 'Ventrell Miller', 'position': 'LB', 'college': 'Florida'}, {'name': 'Jon Gaines', 'position': 'OL', 'college': 'UCLA'}, {'name': 'Cameron Young', 'position': 'DT', 'college': 'Mississippi St.'}, {'name': 'Tavius Robinson', 'position': 'DE', 'college': 'Mississippi'}, {'name': 'Derius Davis', 'position': 'WR', 'college': 'TCU'}, {'name': 'Isaiah McGuire', 'position': 'DL', 'college': 'Missouri'}, {'name': 'Jake Haener', 'position': 'QB', 'college': 'Fresno St.'}, {'name': 'Stetson Bennett', 'position': 'QB', 'college': 'Georgia'}, {'name': 'Viliami Fehoko', 'position': 'DL', 'college': 'San Jose St.'}, {'name': 'Tyler Lacy', 'position': 'DE', 'college': 'Oklahoma St.'}, {'name': 'Charlie Jones', 'position': 'WR', 'college': 'Purdue'}, {'name': 'Nick Herbig', 'position': 'OLB', 'college': 'Wisconsin'}, {'name': 'Tyler Scott', 'position': 'WR', 'college': 'Cincinnati'}, {'name': 'Jay Ward', 'position': 'S', 'college': 'LSU'}, {'name': "Aidan O'Connell", 'position': 'QB', 'college': 'Purdue'}, {'name': 'Yasir Abdullah', 'position': 'LB', 'college': 'Louisville'}, {'name': 'K.J. Henry', 'position': 'DE', 'college': 'Clemson'}, {'name': 'Darius Rush', 'position': 'DB', 'college': 'South Carolina'}, {'name': 'Clayton Tune', 'position': 'QB', 'college': 'Houston'}, {'name': 'Dorian Thompson-Robinson', 'position': 'QB', 'college': 'UCLA'}, {'name': 'Jaquelin Roy', 'position': 'DT', 'college': 'LSU'}, {'name': 'Cameron Mitchell', 'position': 'DB', 'college': 'Northwestern'}, {'name': 'Israel Abanikanda', 'position': 'RB', 'college': 'Pittsburgh'}, {'name': 'Atonio Mafi', 'position': 'OL', 'college': 'UCLA'}, {'name': 'Jammie Robinson', 'position': 'DB', 'college': 'Florida St.'}, {'name': 'Jordan Howden', 'position': 'DB', 'college': 'Minnesota'}, {'name': 'Josh Whyle', 'position': 'TE', 'college': 'Cincinnati'}, {'name': 'Noah Sewell', 'position': 'LB', 'college': 'Oregon'}, {'name': 'Sean Clifford', 'position': 'QB', 'college': 'Penn St.'}, {'name': 'Justin Shorter', 'position': 'WR', 'college': 'Florida'}, {'name': 'Mike Morris', 'position': 'DE', 'college': 'Michigan'}, {'name': 'Colby Sorsdal', 'position': 'OL', 'college': 'William & Mary'}, {'name': 'SirVocea Dennis', 'position': 'LB', 'college': 'Pittsburgh'}, {'name': 'Olusegun Oluwatimi', 'position': 'C', 'college': 'Michigan'}, {'name': 'Darrell Luter', 'position': 'CB', 'college': 'South Alabama'}, {'name': 'Jordan McFadden', 'position': 'OL', 'college': 'Clemson'}, {'name': 'Kyu Blu Kelly', 'position': 'CB', 'college': 'Stanford'}, {'name': 'Daniel Scott', 'position': 'S', 'college': 'California'}, {'name': 'Dontayvion Wicks', 'position': 'WR', 'college': 'Virginia'}, {'name': 'Antonio Johnson', 'position': 'DB', 'college': 'Texas A&M'}, {'name': 'Nick Hampton', 'position': 'OLB', 'college': 'Appalachian St.'}, {'name': 'Will Mallory', 'position': 'TE', 'college': 'Miami (FL)'}, {'name': 'Chase Brown', 'position': 'RB', 'college': 'Illinois'}, {'name': 'Jaren Hall', 'position': 'QB', 'college': 'BYU'}, {'name': 'Terell Smith', 'position': 'DB', 'college': 'Minnesota'}, {'name': 'BJ Thompson', 'position': 'DE', 'college': 'S.F. Austin'}, {'name': "Henry To'oTo'o", 'position': 'LB', 'college': 'Alabama'}, {'name': 'Owen Pappoe', 'position': 'LB', 'college': 'Auburn'}, {'name': 'Asim Richards', 'position': 'OL', 'college': 'North Carolina'}, {'name': 'Christopher Smith', 'position': 'DB', 'college': 'Georgia'}, {'name': 'Payne Durham', 'position': 'TE', 'college': 'Purdue'}, {'name': 'Eric Gray', 'position': 'RB', 'college': 'Oklahoma'}, {'name': 'Robert Beal', 'position': 'OLB', 'college': 'Georgia'}, {'name': 'Warren McClendon', 'position': 'OL', 'college': 'Georgia'}, {'name': 'Davis Allen', 'position': 'TE', 'college': 'Clemson'}, {'name': 'Evan Hull', 'position': 'RB', 'college': 'Northwestern'}, {'name': 'Puka Nacua', 'position': 'WR', 'college': 'BYU'}, {'name': 'Eric Scott', 'position': 'DB', 'college': 'Southern Miss'}, {'name': 'Karl Brooks', 'position': 'DT', 'college': 'Bowling Green'}, {'name': "Kei'Trel Clark", 'position': 'DB', 'college': 'Louisville'}, {'name': 'Josh Hayes', 'position': 'CB', 'college': 'Kansas St.'}, {'name': "Tre'Vius Tomlinson", 'position': 'CB', 'college': 'TCU'}, {'name': 'JL Skinner', 'position': 'S', 'college': 'Boise St.'}, {'name': 'Zaire Barnes', 'position': 'LB', 'college': 'Western Michigan'}, {'name': 'Parker Washington', 'position': 'WR', 'college': 'Penn St.'}, {'name': 'Jaelyn Duncan', 'position': 'OL', 'college': 'Maryland'}, {'name': 'Kayshon Boutte', 'position': 'WR', 'college': 'LSU'}, {'name': 'Tanner McKee', 'position': 'QB', 'college': 'Stanford'}, {'name': 'Ochaun Mathis', 'position': 'DE', 'college': 'Nebraska'}, {'name': 'Luke Wypler', 'position': 'OL', 'college': 'Ohio St.'}, {'name': 'Trey Palmer', 'position': 'WR', 'college': 'Nebraska'}, {'name': 'Bryce Baringer', 'position': 'P', 'college': 'Michigan St.'}, {'name': 'Chris Rodriguez', 'position': 'RB', 'college': 'Kentucky'}, {'name': 'Keondre Coburn', 'position': 'DT', 'college': 'Texas'}, {'name': 'A.T. Perry', 'position': 'WR', 'college': 'Wake Forest'}, {'name': 'Jose Ramirez', 'position': 'DL', 'college': 'Eastern Michigan'}, {'name': 'Elijah Higgins', 'position': 'WR', 'college': 'Stanford'}, {'name': 'Jerrick Reed', 'position': 'S', 'college': 'New Mexico'}, {'name': 'Malaesala Aumavae-Laulu', 'position': 'OL', 'college': 'Oregon'}, {'name': 'Scott Matlock', 'position': 'DT', 'college': 'Boise St.'}, {'name': 'Jarrett Patterson', 'position': 'OL', 'college': 'Notre Dame'}, {'name': 'Christian Braswell', 'position': 'DB', 'college': 'Rutgers'}, {'name': 'Amari Burney', 'position': 'LB', 'college': 'Florida'}, {'name': 'Jarrick Bernard-Converse', 'position': 'CB', 'college': 'LSU'}, {'name': 'Xavier Hutchinson', 'position': 'WR', 'college': 'Iowa St.'}, {'name': 'Andrei Iosivas', 'position': 'WR', 'college': 'Princeton'}, {'name': 'Anders Carlson', 'position': 'K', 'college': 'Auburn'}, {'name': 'Erick Hallett', 'position': 'DB', 'college': 'Pittsburgh'}, {'name': 'Tre Hawkins', 'position': 'CB', 'college': 'Old Dominion'}, {'name': 'Demario Douglas', 'position': 'WR', 'college': 'Liberty'}, {'name': 'Titus Leo', 'position': 'LB', 'college': 'Wagner'}, {'name': 'Deuce Vaughn', 'position': 'RB', 'college': 'Kansas St.'}, {'name': 'Dante Stills', 'position': 'DT', 'college': 'West Virginia'}, {'name': 'Ameer Speed', 'position': 'CB', 'college': 'Michigan St.'}, {'name': 'Zach Evans', 'position': 'RB', 'college': 'Mississippi'}, {'name': 'Dee Winters', 'position': 'LB', 'college': 'TCU'}, {'name': 'Brad Robbins', 'position': 'P', 'college': 'Michigan'}, {'name': 'Travis Bell', 'position': 'DL', 'college': 'Kennesaw St.'}, {'name': 'Antoine Green', 'position': 'WR', 'college': 'North Carolina'}, {'name': 'Zack Kuntz', 'position': 'TE', 'college': 'Old Dominion'}, {'name': 'Jaylon Jones', 'position': 'DB', 'college': 'Texas A&M'}, {'name': 'DeWayne McBride', 'position': 'RB', 'college': 'Ala-Birmingham'}, {'name': 'Ethan Evans', 'position': 'P', 'college': 'Wingate'}, {'name': 'DeMarcco Hellams', 'position': 'DB', 'college': 'Alabama'}, {'name': 'Jovaughn Gwyn', 'position': 'OL', 'college': 'South Carolina'}
-    
-  ]);
-  const [draftResults, setDraftResults] = useState([...filteredDraftOrder]);
-  const [isDraftRunning, setIsDraftRunning] = useState(false);
-  const [isUserPicking, setIsUserPicking] = useState(false);
+  const [isDraftStarted, setIsDraftStarted] = useState(false);
+  const [userPickModalOpen, setUserPickModalOpen] = useState(false);
+  const [currentTeam, setCurrentTeam] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isRoundPaused, setIsRoundPaused] = useState(false);
   const [isDraftComplete, setIsDraftComplete] = useState(false);
-  const [userPickTimeLeft, setUserPickTimeLeft] = useState(timePerPick);
+  const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
 
-  const userTeams = new Set(selectedTeams.map((index) => locations[index]));
+  // 5) Orders and players
+  const [allDraftOrders, setAllDraftOrders] = useState([]);
+  const [currentRoundOrdersState, setCurrentRoundOrdersState] = useState([]);
+  const [availablePlayers, setAvailablePlayers] = useState([]);
+  const [draftedPicks, setDraftedPicks] = useState([]);
 
-  const handleStartDraft = () => {
+  // Build positions dropdown
+  const positions = useMemo(() => {
+    if (!availablePlayers || availablePlayers.length === 0) return ["All"];
+    const posSet = new Set(availablePlayers.map((p) => p.position));
+    return ["All", ...Array.from(posSet)];
+  }, [availablePlayers]);
+
+  // Group picks by round for display
+  const groupedPicks = useMemo(() => {
+    return draftedPicks.reduce((acc, pick) => {
+      const rStr = String(pick.round);
+      if (!acc[rStr]) acc[rStr] = [];
+      acc[rStr].push(pick);
+      return acc;
+    }, {});
+  }, [draftedPicks]);
+
+  // Sync availablePlayersRef with availablePlayers
+  useEffect(() => {
+    availablePlayersRef.current = availablePlayers;
+  }, [availablePlayers]);
+
+  // NEW: Auto-scroll whenever draftedPicks changes
+  useEffect(() => {
+    if (picksEndRef.current) {
+      picksEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [draftedPicks]);
+
+  // On mount, fetch from Supabase
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // fetch players
+        const { data: players, error: playersErr } = await supabase
+          .from("db_draftclasses")
+          .select("*")
+          .eq("year", draftYear);
+        if (playersErr) {
+          console.error("Players fetch error:", playersErr);
+        } else {
+          setAvailablePlayers(players);
+        }
+
+        // fetch draft orders
+        const { data: orders, error: ordersErr } = await supabase
+          .from("db_draftorders")
+          .select("*")
+          .eq("year", draftYear);
+        if (ordersErr) {
+          console.error("Draft order fetch error:", ordersErr);
+        } else {
+          const filteredOrders = orders.filter((o) => Number(o.round) <= rounds);
+          console.log("Fetched Orders:", filteredOrders);
+          setAllDraftOrders(filteredOrders);
+          console.log("Draft order state updated with fetched orders:", filteredOrders);
+        }
+      } catch (err) {
+        console.error("Fetch error:", err);
+      }
+    };
+    fetchData();
+  }, [draftYear, rounds]);
+
+  // Group orders by round once fetched so that switching rounds is just a matter of switching reference.
+  const ordersByRound = useMemo(() => {
+    const grouped = {};
+    allDraftOrders.forEach((order) => {
+      const roundNum = Number(order.round);
+      if (!grouped[roundNum]) grouped[roundNum] = [];
+      grouped[roundNum].push(order);
+    });
+    return grouped;
+  }, [allDraftOrders]);
+
+  // Whenever currentRound changes, update the current round orders and reset the pick index.
+  useEffect(() => {
+    setCurrentRoundOrdersState(ordersByRound[currentRound] || []);
     setCurrentPickIndex(0);
-    setDraftResults([...filteredDraftOrder]);
-    setIsDraftRunning(true);
-    setIsUserPicking(false);
-    setIsDraftComplete(false);
+  }, [ordersByRound, currentRound]);
+
+  // When currentRound changes, automatically pause for 100ms and then resume processing the first pick.
+  useEffect(() => {
+    if (isDraftStarted) {
+      setIsPaused(true);
+      setTimeout(() => {
+        setIsPaused(false);
+        processNextPick(0);
+      }, 100);
+    }
+    // eslint-disable-next-line
+  }, [currentRound]);
+
+  // Resume processing when unpausing (if not in a paused round)
+  useEffect(() => {
+    if (isDraftStarted && !isPaused && !isRoundPaused) {
+      processNextPick(currentPickIndex);
+    }
+    // eslint-disable-next-line
+  }, [isPaused]);
+
+  // Helper for displaying colored squares
+  const getTeamClass = (order, idx) => {
+    if (userTeams.includes(order.team)) return "bg-blue-500";
+    if (idx < currentPickIndex) return "bg-green-500";
+    if (idx === currentPickIndex) return "bg-orange-500";
+    return "bg-gray-800";
   };
 
-  const simulateNextPick = () => {
-    if (currentPickIndex >= draftResults.length) {
-      setIsDraftRunning(false);
-      setIsDraftComplete(true);
+  // Start the draft
+  const startDraft = () => {
+    setIsDraftStarted(true);
+    processNextPick(0);
+  };
+
+  // Main pick logic.
+  const processNextPick = (index = currentPickIndex) => {
+    if (index >= currentRoundOrdersState.length) {
+      if (currentRound < rounds) {
+        setIsRoundPaused(true);
+      } else {
+        setTimeout(() => setIsDraftComplete(true), 3000);
+      }
       return;
     }
+    if (isPaused) return;
+    console.log(currentRoundOrdersState);
+    const order = currentRoundOrdersState[index];
+    console.log("processNextPick => order:", order);
+    setCurrentTeam(order);
 
-    const currentTeam = draftResults[currentPickIndex].team;
-
-    if (userTeams.has(currentTeam)) {
-      setIsUserPicking(true);
+    if (userTeams.includes(order.team)) {
+      console.log("User controlled pick. Opening user pick modal.");
+      setUserPickModalOpen(false);
+      setUserPickModalOpen(true);
     } else {
-      makeCpuPick(() => {
-        if (currentPickIndex === draftResults.length - 1) {
-          setIsDraftRunning(false);
-          setIsDraftComplete(true);
-        }
-      });
-    }
-  };
-
-  const makeCpuPick = (callback) => {
-    const topPlayer = draftClass[0];
-    if (topPlayer) {
-      const updatedDraftClass = draftClass.slice(1);
-      const updatedDraftResults = [...draftResults];
-      updatedDraftResults[currentPickIndex] = {
-        ...draftResults[currentPickIndex],
-        player: `${topPlayer.name} (${topPlayer.position})`,
-      };
-
-      setDraftClass(updatedDraftClass);
-      setDraftResults(updatedDraftResults);
-
-      // Move to the next pick after 1 second
-      setTimeout(() => {
-        setCurrentPickIndex((prevIndex) => prevIndex + 1);
-        if (callback) callback(); // Trigger the callback after the pick
-      }, 500);
-    }
-  };
-
-  const handleUserPick = (player) => {
-    const updatedDraftClass = draftClass.filter((p) => p.name !== player.name);
-    const updatedDraftResults = [...draftResults];
-    updatedDraftResults[currentPickIndex] = {
-      ...draftResults[currentPickIndex],
-      player: `${player.name} (${player.position})`,
-    };
-
-    setDraftClass(updatedDraftClass);
-    setDraftResults(updatedDraftResults);
-
-    setIsUserPicking(false);
-    setCurrentPickIndex((prevIndex) => prevIndex + 1);
-  };
-
-  useEffect(() => {
-    let timer;
-
-    if (isUserPicking && userPickTimeLeft > 0) {
-      timer = setInterval(() => {
-        setUserPickTimeLeft((prevTime) => prevTime - 1);
+      setUserPickModalOpen(false);
+      timerRef.current = setTimeout(() => {
+        
+        if (isPaused) return;
+        const cpuPlayer = pickBestAvailable();
+        console.log("CPU picked:", cpuPlayer);
+        recordPick(order.team, cpuPlayer, currentRound);
+        const nextIdx = index + 1;
+        setCurrentPickIndex(nextIdx);
+        processNextPick(nextIdx);
       }, 1000);
     }
+  };
 
-    if (userPickTimeLeft === 0 && isUserPicking) {
-      handleUserPick(draftClass[0]); // Auto-pick for the user when time runs out
+  // pickBestAvailable
+  const pickBestAvailable = () => {
+    
+    const players = availablePlayersRef.current;
+    if (!players || players.length === 0) return { name: "No Available Player" };
+    const best = players.reduce((prev, curr) =>
+      Number(prev.id) < Number(curr.id) ? prev : curr
+    );
+    const remaining = players.filter((p) => p.id !== best.id);
+    availablePlayersRef.current = remaining;
+    setAvailablePlayers(remaining);
+    return best;
+  };
+
+  // recordPick
+  const recordPick = (team, player, roundNum) => {
+    const pickNumber = globalPickRef.current;
+    const newPick = {
+      round: roundNum,
+      pickNumber,
+      team,
+      playerName: player ? player.name : "No Pick",
+      id: player?.id || pickNumber,
+    };
+    setDraftedPicks((prev) => [...prev, newPick]);
+    console.log(`Recorded pick ${pickNumber}: ${team} selects ${player?.name || "No Pick"}`, newPick);
+    globalPickRef.current = pickNumber + 1;
+  };
+
+  // When user makes a pick
+  const handleUserPick = (player) => {
+    console.log("User selected player:", player);
+    recordPick(currentTeam.team, player, currentRound);
+    setAvailablePlayers((prev) => prev.filter((p) => p.id !== player.id));
+    availablePlayersRef.current = availablePlayersRef.current.filter((p) => p.id !== player.id);
+    setUserPickModalOpen(false);
+    const nextIdx = currentPickIndex + 1;
+    setCurrentPickIndex(nextIdx);
+    processNextPick(nextIdx);
+  };
+
+  // Auto pick on timeout
+  const handleUserAutoPick = () => {
+    const autoPlayer = pickBestAvailable();
+    console.log("Auto pick triggered. Selected:", autoPlayer);
+    recordPick(currentTeam.team, autoPlayer, currentRound);
+    setUserPickModalOpen(false);
+    const nextIdx = currentPickIndex + 1;
+    setCurrentPickIndex(nextIdx);
+    processNextPick(nextIdx);
+  };
+
+  // Pause/resume draft
+  const togglePause = () => {
+    setIsPaused((prev) => {
+      const newVal = !prev;
+      if (newVal && timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      console.log("Draft pause toggled. New pause state:", newVal);
+      return newVal;
+    });
+  };
+
+  // Begin next round: simply increment the round.
+  const beginNextRound = () => {
+    setIsRoundPaused(true);
+    setCurrentRound((prev) => prev + 1);
+    setIsRoundPaused(false);
+  };
+
+  //------------------------------------
+  // TRADE LOGIC (No CPU picks inside handleTradeSubmit)
+  //------------------------------------
+  const handleTradeSubmit = (tradePartner, userPicks, partnerPicks) => {
+    console.log("handleTradeSubmit =>", { tradePartner, userPicks, partnerPicks });
+
+    // 1) Build updated orders
+    const updatedOrders = allDraftOrders.map((order) => {
+      if (partnerPicks.includes(order.id)) {
+        console.log(`Order ${order.id} => from ${order.team} => ${primaryUserTeam}`);
+        return { ...order, team: primaryUserTeam };
+      } else if (userPicks.includes(order.id)) {
+        console.log(`Order ${order.id} => from ${order.team} => ${tradePartner}`);
+        return { ...order, team: tradePartner };
+      }
+      return order;
+    });
+    console.log("Updated Orders =>", updatedOrders);
+
+    // 2) Update state
+    setAllDraftOrders(updatedOrders);
+    setIsTradeModalOpen(false);
+    setUserPickModalOpen(false);
+
+    // 3) Update current round orders from our pre-grouped lookup
+    setCurrentRoundOrdersState(updatedOrders.filter((o) => Number(o.round) === currentRound));
+
+    // 4) Clear leftover CPU pick timer
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
 
-    return () => clearInterval(timer);
-  }, [isUserPicking, userPickTimeLeft]);
+    // 5) Pause so the newly updated ownership “commits”
+    setIsPaused(true);
+    console.log("Draft is now paused after trade—auto-resuming in 100ms...");
 
-  useEffect(() => {
-    if (isDraftRunning && !isUserPicking && currentPickIndex < draftResults.length) {
-      simulateNextPick();
-    }
-  }, [isDraftRunning, isUserPicking, currentPickIndex]);
+    // 6) Auto-resume after 100ms
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 100);
+  };
 
   return (
-    <div className="min-h-screen bg-[#5A6BB0] text-white">
-      {/* Header */}
-      <div className="w-full h-32 bg-black">
-        <div className="container mx-auto px-4 h-full flex items-center">
-          <h1 className="text-4xl font-bold text-white">Draft Room</h1>
-          <div className="ml-auto">
-            <Link to="/mockdraft" className="text-xl text-white underline">
-              Back to Mock Draft
-            </Link>
+    <div className="draft-room-container min-h-screen bg-gray-900 text-white p-6">
+      <header className="mb-6 flex flex-col sm:flex-row items-center justify-between">
+        <div>
+          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+            Draft Room – {draftYear}
+          </h1>
+          <p className="mt-2 text-xl">Current Round: {currentRound}</p>
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold">Round {currentRound} Order:</h2>
+            <ul className="flex flex-wrap gap-2 mt-2">
+              {currentRoundOrdersState.map((order, idx) => (
+                <li key={order.id} className={`${getTeamClass(order, idx)} px-3 py-1 rounded shadow`}>
+                  {order.team}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
+        {isDraftStarted && (
+          <div className="fixed top-4 right-4 z-50 flex items-center">
+            {!isRoundPaused && (
+              <button
+                onClick={togglePause}
+                className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black rounded-lg shadow hover:from-yellow-500 hover:to-orange-600 transition duration-300"
+              >
+                {isPaused ? "Resume Draft" : "Pause Draft"}
+              </button>
+            )}
+            <button
+              onClick={() => navigate("/mockdraft")}
+              className="ml-2 px-4 py-2 bg-red-500 text-black rounded-lg shadow hover:bg-red-600 transition duration-300"
+            >
+              Exit Draft
+            </button>
+          </div>
+        )}
+      </header>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 mt-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-semibold mb-4">Draft Information</h2>
-          <p className="text-lg">
-            <strong>Selected Teams:</strong>{" "}
-            {selectedTeams.length > 0
-              ? selectedTeams.map((index) => locations[index]).join(", ")
-              : "No teams selected"}
-          </p>
-          <p className="text-lg">
-            <strong>Time Per Pick:</strong> {timePerPick} seconds
-          </p>
-          <p className="text-lg">
-            <strong>Number of Rounds:</strong> {rounds}
-          </p>
-        </div>
-
-        {/* Start Draft Button */}
-        {!isDraftRunning && !isDraftComplete && (
+      <div className="mb-6 text-center">
+        {!isDraftStarted && (
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={startDraft}
+              className="px-8 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-black rounded-lg shadow-lg hover:from-green-500 hover:to-blue-600 transition duration-300"
+            >
+              Enter Draft
+            </button>
+            <button
+              onClick={() => navigate("/mockdraft")}
+              className="px-8 py-3 bg-red-500 text-black rounded-lg shadow-lg hover:bg-red-600 transition duration-300"
+            >
+              Exit Draft
+            </button>
+          </div>
+        )}
+        {isRoundPaused && currentRound < rounds && (
           <button
-            onClick={handleStartDraft}
-            className="mt-8 mb-8 px-6 py-2 bg-white text-black text-lg font-semibold rounded hover:bg-gray-200"
+            onClick={beginNextRound}
+            className="px-8 py-3 bg-gradient-to-r from-blue-400 to-green-500 text-black rounded-lg shadow-lg hover:from-blue-500 hover:to-green-600 transition duration-300"
           >
-            Start Draft
+            Begin Round {currentRound + 1}
           </button>
         )}
+      </div>
 
-        <h2 className="text-3xl font-semibold mb-4">Draft Order</h2>
-        <ol className="list-decimal ml-6">
-          {draftResults.map((pick, index) => (
-            <React.Fragment key={index}>
-              {index === 0 || pick.round !== draftResults[index - 1].round ? (
-                <h3 className="text-2xl font-bold mt-4 mb-2">Round {pick.round}</h3>
-              ) : null}
-              <li className="text-lg">
-                {pick.team} {pick.player ? `- ${pick.player}` : ""}
-              </li>
-            </React.Fragment>
+      {isDraftStarted && (
+        <section className="mt-8">
+          <h2 className="text-3xl font-bold mb-4">Drafted Picks</h2>
+          {Array.from({ length: currentRound }, (_, i) => i + 1).map((round) => (
+            <div key={round} className="mb-6">
+              <h3 className="text-2xl font-semibold mb-2">Round {round}:</h3>
+              <div className="grid grid-cols-4 gap-2">
+                {groupedPicks[String(round)] && groupedPicks[String(round)].length > 0 ? (
+                  groupedPicks[String(round)].map((pick) => (
+                    <div
+                      key={pick.pickNumber}
+                      className="p-1 h-9 bg-gray-800 rounded shadow-sm text-sm flex items-center"
+                    >
+                      <span className="mr-1">{pick.pickNumber}.</span>
+                      <strong>{pick.team}:</strong>
+                      <span>&nbsp;</span>
+                      {pick.playerName}
+                    </div>
+                  ))
+                ) : (
+                  <p className="col-span-4 text-gray-400">No picks yet.</p>
+                )}
+              </div>
+            </div>
           ))}
-        </ol>
+          {/* NEW: An invisible anchor to scroll into view */}
+          <div ref={picksEndRef} />
+        </section>
+      )}
 
-        {/* User Pick Modal */}
-        {isUserPicking && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-4 rounded-lg text-black max-w-lg w-full">
-              <h2 className="text-xl font-bold mb-4">
-                {draftResults[currentPickIndex].team} is on the clock! Make your selection!
-              </h2>
-              <p className="text-red-500 font-semibold mb-4">
-                Time Remaining: {userPickTimeLeft} seconds
-              </p>
+      {userPickModalOpen && (
+        <UserPickModal
+          availablePlayers={availablePlayers}
+          timePerPick={timePerPick}
+          onPick={handleUserPick}
+          onTimeout={handleUserAutoPick}
+          currentTeam={currentTeam}
+          allDraftOrders={allDraftOrders}
+          currentRound={currentRound}
+          currentPickIndex={currentPickIndex}
+          currentRoundOrders={currentRoundOrdersState}
+          openTradeModal={() => setIsTradeModalOpen(true)}
+          onAcceptCpuTradeProposal={handleTradeSubmit}
+        />
+      )}
+
+      {isTradeModalOpen && currentTeam && (
+        <TradeModal
+          currentTeam={currentTeam}
+          allDraftOrders={allDraftOrders}
+          currentRound={currentRound}
+          currentPickIndex={currentPickIndex}
+          currentRoundOrders={currentRoundOrdersState}
+          onSubmitTrade={handleTradeSubmit}
+          onCancelTrade={() => setIsTradeModalOpen(false)}
+        />
+      )}
+
+      {isDraftComplete && (
+        <DraftCompletedModal
+          onSave={() => alert("Mock draft saved!")}
+          onReturnDraft={() => setIsDraftComplete(false)}
+          onReturnHome={() => navigate("/mockdraft")}
+        />
+      )}
+    </div>
+  );
+};
+
+// -------------------------------------
+// Helper: Get a "Round X Pick Y" label from an ID
+// -------------------------------------
+function getPickLabelById(id, allDraftOrders) {
+  const order = allDraftOrders.find((o) => o.id === id);
+  if (!order) return `Pick #${id} (not found)`;
+  const { round, team } = order;
+  const ordersInRound = allDraftOrders.filter((o) => Number(o.round) === Number(round));
+  const pickIndex = ordersInRound.findIndex((o) => o.id === id);
+  const pickNum = pickIndex + 1;
+  return `Round ${round} Pick ${pickNum} - ${team}`;
+}
+
+// -------------------------------------
+// USER PICK MODAL
+// -------------------------------------
+const UserPickModal = ({
+  availablePlayers,
+  timePerPick,
+  onPick,
+  onTimeout,
+  currentTeam,
+  openTradeModal,
+  allDraftOrders,
+  currentRound,
+  currentPickIndex,
+  currentRoundOrders,
+  onAcceptCpuTradeProposal,
+}) => {
+  const [timer, setTimer] = useState(timePerPick);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPosition, setSelectedPosition] = useState("All");
+  const [filteredPlayers, setFilteredPlayers] = useState(availablePlayers);
+  const [cpuTradeProposals, setCpuTradeProposals] = useState([]);
+
+  // Build positions dropdown
+  const positions = useMemo(() => {
+    if (!availablePlayers || availablePlayers.length === 0) return ["All"];
+    const posSet = new Set(availablePlayers.map((p) => p.position));
+    return ["All", ...Array.from(posSet)];
+  }, [availablePlayers]);
+
+  // Filter player list
+  useEffect(() => {
+    let players = availablePlayers.filter((p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    if (selectedPosition !== "All") {
+      players = players.filter((p) => p.position === selectedPosition);
+    }
+    setFilteredPlayers(players);
+  }, [searchTerm, selectedPosition, availablePlayers]);
+
+  // Timer for user picks
+  useEffect(() => {
+    if (timer <= 0) {
+      onTimeout();
+      return;
+    }
+    const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+    return () => clearInterval(interval);
+  }, [timer, onTimeout]);
+
+  // NEW: Generate CPU trade proposals
+  // This code will generate between 1 and 3 proposals.
+  // For each proposal, we select a random trade partner (from those other than the current user)
+  // and choose multiple picks from each side (if available).
+  useEffect(() => {
+    if (!currentTeam || !allDraftOrders || !currentRoundOrders || currentPickIndex === undefined)
+      return;
+
+    // Get user's future picks (exclude the picks before the current pick)
+    const userFuturePicks = allDraftOrders.filter((order) => {
+      return (
+        order.team === currentTeam.team &&
+        (Number(order.round) > currentRound ||
+          (Number(order.round) === currentRound &&
+            currentRoundOrders.findIndex((o) => o.id === order.id) >= currentPickIndex))
+      );
+    });
+
+    // Get available trade partners (exclude the current team)
+    const tradePartnerSet = new Set(allDraftOrders.map((o) => o.team));
+    tradePartnerSet.delete(currentTeam.team);
+    const tradePartners = Array.from(tradePartnerSet);
+
+    // We'll propose between 1 and 3 proposals.
+    const proposalCount = Math.min(Math.floor(Math.random() * 3) + 1, tradePartners.length);
+    const proposals = [];
+    // Shuffle trade partners and select the first proposalCount
+    const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
+    const selectedPartners = shuffleArray([...tradePartners]).slice(0, proposalCount);
+
+    selectedPartners.forEach((partner) => {
+      // Get partner's future picks:
+      const partnerFuturePicks = allDraftOrders.filter((order) => {
+        return (
+          order.team === partner &&
+          (Number(order.round) > currentRound ||
+            (Number(order.round) === currentRound &&
+              currentRoundOrders.findIndex((o) => o.id === order.id) >= currentPickIndex))
+        );
+      });
+
+      if (userFuturePicks.length === 0 || partnerFuturePicks.length === 0) return;
+
+      // Choose multiple picks when possible.
+      // We'll pick a random number between 2 and 3 if available, else 1.
+      const getCount = (arr) =>
+        arr.length >= 2 ? Math.floor(Math.random() * Math.min(2, arr.length - 1)) + 2 : 1;
+
+      const userCount = getCount(userFuturePicks);
+      const partnerCount = getCount(partnerFuturePicks);
+
+      const userPicksSelected = shuffleArray([...userFuturePicks])
+        .slice(0, userCount)
+        .map((order) => order.id);
+      const partnerPicksSelected = shuffleArray([...partnerFuturePicks])
+        .slice(0, partnerCount)
+        .map((order) => order.id);
+
+      proposals.push({
+        tradePartner: partner,
+        userPicks: userPicksSelected,
+        partnerPicks: partnerPicksSelected,
+      });
+    });
+
+    console.log("Generated CPU trade proposals:", proposals);
+    setCpuTradeProposals(proposals);
+  }, [currentTeam, allDraftOrders, currentRound, currentPickIndex, currentRoundOrders]);
+
+  // NEW: For printing picks as "Round X Pick Y" in proposals
+  function formatPicks(ids) {
+    if (!ids || ids.length === 0) return "";
+    return ids.map((id) => getPickLabelById(id, allDraftOrders)).join("; ");
+  }
+
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
+      <div className="modal-content bg-gray-800 p-4 rounded-lg shadow-xl w-11/12 max-w-[150vh] max-h-[95vh] overflow-y-scroll">
+        <h2 className="text-2xl font-bold mb-2 text-center">
+          {currentTeam && currentTeam.team} – Your Pick
+        </h2>
+        <p className="mb-4 text-center">Time remaining: {timer} sec</p>
+        <div className="flex justify-center mb-4">
+          <button
+            className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+            onClick={openTradeModal}
+          >
+            Propose Trade
+          </button>
+        </div>
+        <div className="flex flex-col md:flex-row md:items-center md:space-x-4 mb-4">
+          <input
+            type="text"
+            placeholder="Search by name..."
+            className="flex-grow border p-2 rounded-lg bg-gray-700 text-white"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div className="mt-2 md:mt-0">
+            <label className="mr-2">Position:</label>
+            <select
+              className="border p-2 rounded-lg bg-gray-700 text-white"
+              value={selectedPosition}
+              onChange={(e) => setSelectedPosition(e.target.value)}
+            >
+              {positions.map((pos) => (
+                <option key={pos} value={pos}>
+                  {pos}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="player-list mb-4 max-h-64 overflow-y-auto border p-4 rounded-lg bg-gray-700">
+          {filteredPlayers.length > 0 ? (
+            filteredPlayers.map((player) => (
               <div
-                className="overflow-y-auto"
-                style={{ maxHeight: "300px", border: "1px solid #ccc", padding: "8px" }}
+                key={player.id}
+                className="player-item p-2 border-b cursor-pointer hover:bg-gray-600"
+                onClick={() => onPick(player)}
               >
-                <ul>
-                  {draftClass.map((player) => (
-                    <li key={player.name} className="mb-2">
-                      {player.name} ({player.position}, {player.college}){" "}
-                      <button
-                        onClick={() => handleUserPick(player)}
-                        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded"
-                      >
-                        Pick
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                {player.name} – {player.position} – Rating: {player.rating}
               </div>
-            </div>
-          </div>
-        )}
+            ))
+          ) : (
+            <p className="text-center">No players found.</p>
+          )}
+        </div>
+        <div className="cpu-trade-proposals border-t pt-2">
+          <h3 className="font-semibold text-lg mb-2">Trade Proposals:</h3>
+          {cpuTradeProposals.length > 0 ? (
+            cpuTradeProposals.map((proposal, idx) => {
+              const userPicksFormatted = formatPicks(proposal.userPicks);
+              const partnerPicksFormatted = formatPicks(proposal.partnerPicks);
+              return (
+                <div key={idx} className="trade-proposal border p-2 my-2 rounded bg-gray-600">
+                  <p>
+                    {proposal.tradePartner} has proposed a trade.
+                    <br />
+                    <strong>You receive:</strong> {partnerPicksFormatted}
+                    <br />
+                    <strong>You give up:</strong> {userPicksFormatted}
+                  </p>
+                  <div className="mt-2 space-x-2">
+                    <button
+                      className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                      onClick={() =>
+                        onAcceptCpuTradeProposal(
+                          proposal.tradePartner,
+                          proposal.userPicks,
+                          proposal.partnerPicks
+                        )
+                      }
+                    >
+                      Accept Proposal
+                    </button>
+                    <button
+                      className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                      onClick={() =>
+                        setCpuTradeProposals((prev) => prev.filter((p) => p !== proposal))
+                      }
+                    >
+                      Decline
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <p className="text-center">No trade proposals.</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-        {/* Draft Complete Modal */}
-        {isDraftComplete && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-4 rounded-lg text-black max-w-lg w-full">
-              <h2 className="text-xl font-bold mb-4">Draft Complete!</h2>
-              <div className="flex justify-between">
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">
-                  Save Draft
-                </button>
-                <button
-                  onClick={() => navigate("/mockdraft")}
-                  className="px-4 py-2 bg-green-500 text-white rounded"
-                >
-                  Return to Mock Draft Home
-                </button>
-                <button
-                  onClick={() => setIsDraftComplete(false)}
-                  className="px-4 py-2 bg-gray-500 text-white rounded"
-                >
-                  Return to Draft Room
-                </button>
-              </div>
-            </div>
+// -------------------------------------
+// TRADE MODAL
+// -------------------------------------
+const TradeModal = ({
+  currentTeam,
+  allDraftOrders,
+  currentRound,
+  currentPickIndex,
+  currentRoundOrders,
+  onSubmitTrade,
+  onCancelTrade,
+}) => {
+  const getPickLabel = (order) => {
+    const ordersInRound = allDraftOrders.filter((o) => Number(o.round) === Number(order.round));
+    const pickNumber = ordersInRound.findIndex((o) => o.id === order.id) + 1;
+    return `Round ${order.round} Pick ${pickNumber} - ${order.team}`;
+  };
+
+  const tradePartnerOptions = useMemo(() => {
+    const teams = new Set(allDraftOrders.map((o) => o.team));
+    teams.delete(currentTeam.team);
+    return Array.from(teams);
+  }, [allDraftOrders, currentTeam.team]);
+
+  const [selectedUserPicks, setSelectedUserPicks] = useState([]);
+  const [selectedPartnerPicks, setSelectedPartnerPicks] = useState([]);
+  const [selectedTradePartner, setSelectedTradePartner] = useState(tradePartnerOptions[0] || "");
+
+  const availableUserPicks = useMemo(() => {
+    return allDraftOrders.filter((order) => {
+      if (order.team !== currentTeam.team) return false;
+      const orderRound = Number(order.round);
+      if (orderRound === currentRound) {
+        const idx = currentRoundOrders.findIndex((o) => o.id === order.id);
+        return idx >= currentPickIndex;
+      }
+      return orderRound > currentRound;
+    });
+  }, [allDraftOrders, currentTeam.team, currentRound, currentPickIndex, currentRoundOrders]);
+
+  const availablePartnerPicks = useMemo(() => {
+    return allDraftOrders.filter((order) => {
+      if (order.team !== selectedTradePartner) return false;
+      const orderRound = Number(order.round);
+      if (orderRound === currentRound) {
+        const idx = currentRoundOrders.findIndex((o) => o.id === order.id);
+        return idx >= currentPickIndex;
+      }
+      return orderRound > currentRound;
+    });
+  }, [allDraftOrders, selectedTradePartner, currentRound, currentPickIndex, currentRoundOrders]);
+
+  const toggleUserPick = (orderId) => {
+    setSelectedUserPicks((prev) =>
+      prev.includes(orderId) ? prev.filter((id) => id !== orderId) : [...prev, orderId]
+    );
+  };
+  const togglePartnerPick = (orderId) => {
+    setSelectedPartnerPicks((prev) =>
+      prev.includes(orderId) ? prev.filter((id) => id !== orderId) : [...prev, orderId]
+    );
+  };
+
+  const handleSubmitTrade = () => {
+    if (selectedUserPicks.length === 0 || selectedPartnerPicks.length === 0) {
+      alert("Must select at least one pick from both sides.");
+      return;
+    }
+    console.log("Submitting trade with:", { selectedTradePartner, selectedUserPicks, selectedPartnerPicks });
+    onSubmitTrade(selectedTradePartner, selectedUserPicks, selectedPartnerPicks);
+  };
+
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
+      <div className="modal-content bg-gray-800 p-4 rounded-lg shadow-xl w-11/12 max-w-2xl max-h-[80vh] overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-4 text-center">Propose Trade</h2>
+        <div className="mb-4">
+          <label className="mr-2">Team to trade with:</label>
+          <select
+            value={selectedTradePartner}
+            onChange={(e) => setSelectedTradePartner(e.target.value)}
+            className="border p-2 rounded-lg bg-gray-700 text-white"
+          >
+            {tradePartnerOptions.map((team) => (
+              <option key={team} value={team}>
+                {team}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* USER AVAILABLE PICKS */}
+          <div className="flex-1">
+            <h3 className="text-xl font-semibold mb-2">Your Available Picks</h3>
+            {availableUserPicks.length > 0 ? (
+              <ul>
+                {availableUserPicks.map((order) => (
+                  <li key={order.id} className="border p-2 mb-1 flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedUserPicks.includes(order.id)}
+                      onChange={() => toggleUserPick(order.id)}
+                      className="mr-2"
+                    />
+                    <span>{getPickLabel(order)}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No available picks.</p>
+            )}
           </div>
-        )}
+          {/* PARTNER AVAILABLE PICKS */}
+          <div className="flex-1">
+            <h3 className="text-xl font-semibold mb-2">Partner's Available Picks</h3>
+            {availablePartnerPicks.length > 0 ? (
+              <ul>
+                {availablePartnerPicks.map((order) => (
+                  <li key={order.id} className="border p-2 mb-1 flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedPartnerPicks.includes(order.id)}
+                      onChange={() => togglePartnerPick(order.id)}
+                      className="mr-2"
+                    />
+                    <span>{getPickLabel(order)}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No available picks from partner.</p>
+            )}
+          </div>
+        </div>
+        <div className="mt-4 flex justify-center gap-4">
+          <button
+            onClick={handleSubmitTrade}
+            className="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-600"
+          >
+            Submit Trade
+          </button>
+          <button
+            onClick={onCancelTrade}
+            className="px-4 py-2 bg-red-500 text-black rounded hover:bg-red-600"
+          >
+            Cancel Trade
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// -------------------------------------
+// DRAFT COMPLETED MODAL
+// -------------------------------------
+const DraftCompletedModal = ({ onSave, onReturnDraft, onReturnHome }) => {
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center z-50">
+      <div className="modal-content bg-gradient-to-br from-purple-600 to-blue-500 p-4 rounded-lg shadow-2xl w-11/12 max-w-md text-center">
+        <h2 className="text-4xl font-bold mb-4">DRAFT COMPLETED!</h2>
+        <div className="space-x-4 flex flex-wrap justify-center">
+          <button
+            className="px-4 py-2 bg-green-400 text-black rounded-lg shadow hover:bg-green-500"
+            onClick={onSave}
+          >
+            Save Mock Draft
+          </button>
+          <button
+            className="px-4 py-2 bg-yellow-400 text-black rounded-lg shadow hover:bg-yellow-500"
+            onClick={onReturnDraft}
+          >
+            Return to Draft
+          </button>
+          <button
+            className="px-4 py-2 bg-red-400 text-black rounded-lg shadow hover:bg-red-500"
+            onClick={onReturnHome}
+          >
+            Return to Mock Draft Home
+          </button>
+        </div>
       </div>
     </div>
   );
