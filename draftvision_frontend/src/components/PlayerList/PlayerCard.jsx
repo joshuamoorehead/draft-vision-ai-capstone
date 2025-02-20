@@ -51,13 +51,7 @@ const PlayerCard = ({ player, stats, onBioGenerated }) => {
         <span className="font-semibold">Year Drafted:</span> {player.year_drafted || 'N/A'}
       </p>
       <p className="text-lg mb-2">
-        <span className="font-semibold">Draft Round:</span> {player.draft_round || 'N/A'}
-      </p>
-      <p className="text-lg mb-2">
-        <span className="font-semibold">Draft Pick Age:</span> {player.draft_pick_age || 'N/A'}
-      </p>
-      <p className="text-lg mb-2">
-        <span className="font-semibold">Value at Draft:</span> {player.draft_av || 'N/A'}
+  <   span className="font-semibold">Drafted:</span> Round {player.draft_round || 'N/A'} Pick {player.draft_pick || 'N/A'}
       </p>
     </div>
   );
