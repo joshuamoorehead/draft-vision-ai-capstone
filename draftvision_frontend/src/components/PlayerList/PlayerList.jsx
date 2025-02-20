@@ -182,21 +182,14 @@ const PlayerList = () => {
         <div className="container mx-auto px-4 h-full flex items-center">
           <img src={dvailogo} alt="Draft Vision AI Logo" className="h-32 w-32" />
           <div className="flex space-x-8 text-white ml-12">
-            <Link to="/" className="text-2xl font-roboto-condensed underline">
-              Player List
-            </Link>
-            <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">
-              About Us
-            </Link>
-            <Link to="/mockdraft" className="text-2xl font-roboto-condensed opacity-50">
-              Mock Draft
-            </Link>
-            <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">
-              Large List
-            </Link>
-            <Link to="/PlayerCompare" className="text-2xl font-roboto-condensed opacity-50">
-              Player Comparison
-            </Link>
+
+            <Link to="/" className="text-2xl font-roboto-condensed underline">Player List</Link>
+            <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">About Us</Link>
+            <Link to="/mockdraft" className="text-2xl font-roboto-condensed opacity-50">Mock Draft</Link>
+            <Link to="/largelist" className="text-2xl font-roboto-condensed opacity-50">Large List</Link>
+            <Link to="/playercompare" className="text-2xl font-roboto-condensed opacity-50">Player Comparison</Link>
+            <Link to="/playerinput" className="text-2xl font-roboto-condensed opacity-50">Player Input</Link>
+
           </div>
         </div>
       </div>
