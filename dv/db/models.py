@@ -1,19 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class PlayerProfile(models.Model):
-    name = models.CharField(max_length=50)
-    position = models.CharField(max_length=5)
-    school = models.CharField(max_length=50)
-    nfl_team = models.CharField(max_length=50, null=True, blank=True)
-    age_drafted = models.IntegerField(null=True, blank=True)
-    years_ncaa = models.JSONField(null=True, blank=True)
-    year_drafted = models.IntegerField(null=True, blank=True)
-    draft_round = models.IntegerField(null=True, blank=True)
-    draft_pick = models.IntegerField(null=True, blank=True)
-    career_av = models.FloatField(null=True, blank=True)
-    draft_av = models.FloatField(null=True, blank=True)
-
 
 class Conferences(models.Model):
     conference = models.CharField(max_length=50)
@@ -34,6 +21,23 @@ class Conferences(models.Model):
 class NCAATeams(models.Model):
     team_name = models.CharField(max_length=50)
     conference_id = models.ForeignKey(Conferences, on_delete=models.CASCADE, null=True)
+
+
+class PlayerProfile(models.Model):
+    name = models.CharField(max_length=50)
+    position = models.CharField(max_length=5)
+    school = models.CharField(max_length=50)
+    schoolid = models.ForeignKey(NCAATeams, on_delete=models.CASCADE, null=True)
+    nfl_team = models.CharField(max_length=50, null=True, blank=True)
+    age_drafted = models.IntegerField(null=True, blank=True)
+    years_ncaa = models.JSONField(null=True, blank=True)
+    year_drafted = models.IntegerField(null=True, blank=True)
+    draft_round = models.IntegerField(null=True, blank=True)
+    draft_pick = models.IntegerField(null=True, blank=True)
+    career_av = models.FloatField(null=True, blank=True)
+    draft_av = models.FloatField(null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+
 
 
 
@@ -439,3 +443,17 @@ class NFLSTeam(models.Model):
     prss_pct = models.FloatField(null=True, blank=True)
     missed_tkl = models.FloatField(null=True, blank=True)
     offseasoninvestment = models.FloatField(null=True, blank=True)
+
+class TeamNeeds(models.Model):
+    team = models.CharField(max_length=5)
+    year = models.IntegerField()
+    qb_sop = models.FloatField(null=True, blank=True)
+    rb_sop = models.FloatField(null=True, blank=True)
+    wr_sop = models.FloatField(null=True, blank=True)
+    te_sop = models.FloatField(null=True, blank=True)
+    ol_sop = models.FloatField(null=True, blank=True)
+    de_sop = models.FloatField(null=True, blank=True)
+    dt_sop = models.FloatField(null=True, blank=True)
+    lb_sop = models.FloatField(null=True, blank=True)
+    cb_sop = models.FloatField(null=True, blank=True)
+    s_sop = models.FloatField(null=True, blank=True)

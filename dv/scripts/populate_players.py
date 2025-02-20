@@ -1005,5 +1005,5 @@ def push_NFL():
 # add_te()
 # fix_defensive()
 # upload_combine()
-# fix_profile()
-push_NFL()
+fix_profile()
+# push_NFL()
