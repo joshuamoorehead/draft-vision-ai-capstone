@@ -115,22 +115,36 @@ const DraftRoom = () => {
     fetchData();
   }, [draftYear, rounds]);
 
-  // Update currentRoundOrdersState when allDraftOrders or currentRound changes
-  useEffect(() => {
-    const roundOrders = allDraftOrders.filter((o) => Number(o.round) === currentRound);
-    console.log("Recalc currentRoundOrdersState =>", roundOrders);
-    setCurrentRoundOrdersState(roundOrders);
-  }, [allDraftOrders, currentRound]);
+  // Group orders by round once fetched so that switching rounds is just a matter of switching reference.
+  const ordersByRound = useMemo(() => {
+    const grouped = {};
+    allDraftOrders.forEach((order) => {
+      const roundNum = Number(order.round);
+      if (!grouped[roundNum]) grouped[roundNum] = [];
+      grouped[roundNum].push(order);
+    });
+    return grouped;
+  }, [allDraftOrders]);
 
-  // When a new round starts, process from index 0
+  // Whenever currentRound changes, update the current round orders and reset the pick index.
   useEffect(() => {
-    if (isDraftStarted && !isPaused && !isRoundPaused) {
-      processNextPick(0);
+    setCurrentRoundOrdersState(ordersByRound[currentRound] || []);
+    setCurrentPickIndex(0);
+  }, [ordersByRound, currentRound]);
+
+  // When currentRound changes, automatically pause for 100ms and then resume processing the first pick.
+  useEffect(() => {
+    if (isDraftStarted) {
+      setIsPaused(true);
+      setTimeout(() => {
+        setIsPaused(false);
+        processNextPick(0);
+      }, 100);
     }
     // eslint-disable-next-line
   }, [currentRound]);
 
-  // Resume processing when unpausing
+  // Resume processing when unpausing (if not in a paused round)
   useEffect(() => {
     if (isDraftStarted && !isPaused && !isRoundPaused) {
       processNextPick(currentPickIndex);
@@ -152,7 +166,7 @@ const DraftRoom = () => {
     processNextPick(0);
   };
 
-  // Main pick logic
+  // Main pick logic.
   const processNextPick = (index = currentPickIndex) => {
     if (index >= currentRoundOrdersState.length) {
       if (currentRound < rounds) {
@@ -170,9 +184,12 @@ const DraftRoom = () => {
 
     if (userTeams.includes(order.team)) {
       console.log("User controlled pick. Opening user pick modal.");
+      setUserPickModalOpen(false);
       setUserPickModalOpen(true);
     } else {
+      setUserPickModalOpen(false);
       timerRef.current = setTimeout(() => {
+        
         if (isPaused) return;
         const cpuPlayer = pickBestAvailable();
         console.log("CPU picked:", cpuPlayer);
@@ -186,6 +203,7 @@ const DraftRoom = () => {
 
   // pickBestAvailable
   const pickBestAvailable = () => {
+    
     const players = availablePlayersRef.current;
     if (!players || players.length === 0) return { name: "No Available Player" };
     const best = players.reduce((prev, curr) =>
@@ -247,10 +265,10 @@ const DraftRoom = () => {
     });
   };
 
-  // Begin next round
+  // Begin next round: simply increment the round.
   const beginNextRound = () => {
+    setIsRoundPaused(true);
     setCurrentRound((prev) => prev + 1);
-    setCurrentPickIndex(0);
     setIsRoundPaused(false);
   };
 
@@ -278,9 +296,8 @@ const DraftRoom = () => {
     setIsTradeModalOpen(false);
     setUserPickModalOpen(false);
 
-    // 3) Update current round
-    const updatedRoundOrders = updatedOrders.filter((o) => Number(o.round) === currentRound);
-    setCurrentRoundOrdersState(updatedRoundOrders);
+    // 3) Update current round orders from our pre-grouped lookup
+    setCurrentRoundOrdersState(updatedOrders.filter((o) => Number(o.round) === currentRound));
 
     // 4) Clear leftover CPU pick timer
     if (timerRef.current) {
@@ -318,18 +335,18 @@ const DraftRoom = () => {
           </div>
         </div>
         {isDraftStarted && (
-          <div className="flex items-center">
+          <div className="fixed top-4 right-4 z-50 flex items-center">
             {!isRoundPaused && (
               <button
                 onClick={togglePause}
-                className="mt-2 sm:mt-0 px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black rounded-lg shadow hover:from-yellow-500 hover:to-orange-600 transition duration-300"
+                className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black rounded-lg shadow hover:from-yellow-500 hover:to-orange-600 transition duration-300"
               >
                 {isPaused ? "Resume Draft" : "Pause Draft"}
               </button>
             )}
             <button
               onClick={() => navigate("/mockdraft")}
-              className="ml-2 mt-2 sm:mt-0 px-4 py-2 bg-red-500 text-black rounded-lg shadow hover:bg-red-600 transition duration-300"
+              className="ml-2 px-4 py-2 bg-red-500 text-black rounded-lg shadow hover:bg-red-600 transition duration-300"
             >
               Exit Draft
             </button>
@@ -356,12 +373,7 @@ const DraftRoom = () => {
         )}
         {isRoundPaused && currentRound < rounds && (
           <button
-            onClick={() => {
-              setCurrentRound((prev) => prev + 1);
-              setCurrentPickIndex(0);
-              setIsRoundPaused(false);
-              console.log("Beginning Round", currentRound + 1);
-            }}
+            onClick={beginNextRound}
             className="px-8 py-3 bg-gradient-to-r from-blue-400 to-green-500 text-black rounded-lg shadow-lg hover:from-blue-500 hover:to-green-600 transition duration-300"
           >
             Begin Round {currentRound + 1}
