@@ -20,15 +20,19 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const PlayerComparison = () => {
     const [players, setPlayers] = useState([]);
+    const [rbstats, setRBs] = useState([]);
+    const [rb1, setRB1] = useState(null);
     const [player1, setPlayer1] = useState(null);
     const [player2, setPlayer2] = useState(null);
     const [search1, setSearch1] = useState("");
     const [search2, setSearch2] = useState("");
+    const [stats1, setStats1] = useState([]);
+    const [stats2, setStats2] = useState("");
     const [dropdown1, setDropdown1] = useState(false);
     const maxVisiblePlayers = 20;
 
     useEffect(() => {
-        const loadPlayers = async () => {
+        /*const loadPlayers = async () => {
             try {
               const data = await fetchPlayers();
               const fetchedPlayers = data.results || data;
@@ -41,7 +45,91 @@ const PlayerComparison = () => {
             }
           };
           loadPlayers();
-      }, []);
+      }, []);*/
+
+      const fetchData = async () => {
+        try {
+          // fetch players
+          const { data: players, error: playersErr } = await supabase
+            .from("db_playerprofile")
+            .select("*")
+          if (playersErr) {
+            console.error("Players fetch error:", playersErr);
+          } else {
+            setPlayers(players);
+          }
+        } catch (err) {
+            console.error("Fetch error:", err);
+          }
+        };
+        fetchData();
+
+    }, []);
+
+    const fetchPlayerInfo = async (playerId) => {
+        const { data, error } = await supabase
+            .from("db_playerprofile")
+            .select("id, name, position, school, height, weight") 
+            .eq("id", playerId)
+            .single(); // Get one player
+    
+        if (error) {
+            console.error("Error fetching player info:", error);
+            return null;
+        }
+    
+        return data; // Returns player object with position
+    };
+
+    const fetchPlayerStats = async (player) => {
+        let statsTable = "";
+    
+        switch (player.position) {
+            case "QB":
+                statsTable = "db_passingleaders";
+                break;
+            case "RB":
+                statsTable = "db_rbstats";
+                break;
+            case "WR":
+                statsTable = "db_recstats";
+                break;
+            default:
+                console.error("No stats table found for position:", player.position);
+                return null;
+        }
+    
+        const { data, error } = await supabase
+            .from(statsTable)
+            .select("*")
+            .eq("playerid_id", player.id)
+            .single(); // Get stats for the specific player
+    
+        if (error) {
+            console.error(`Error fetching stats from ${statsTable}:`, error);
+            return null;
+        }
+    
+        return data;
+    };
+
+    const handlePlayerSelect = async (playerId, setPlayer) => {
+        const player = await fetchPlayerInfo(playerId);
+        if (!player) return;
+    
+        const stats = await fetchPlayerStats(player);
+        setPlayer({ ...player, stats }); // Merge player info with stats
+    };
+
+    const playerStatSelect1 = async (player) => {
+        const stats1 = await fetchPlayerStats(player);
+    }
+
+    const playerStatSelect2 = async (player) => {
+        const stats2 = await fetchPlayerStats(player);
+    }
+    
+    
 
       // TODO something not working with fetching players, cant see some players, can only see up to drafted in 2021 inclusive
 
@@ -91,7 +179,10 @@ const PlayerComparison = () => {
                                 onClick={() => {
                                     setPlayer1(player);
                                     setSearch1(player.name);
-                                    setDropdown1(false);
+                                    //const stats1 = fetchPlayerStats(player);
+                                    setStats1(fetchPlayerStats(player));
+                                    //handlePlayerSelect(player.id, setPlayer1); // or setPlayer2 based on selection
+                                    //setSearch1(player.name); // Show chosen player in input field
                                 }}
                             >
                                 {player.name}
@@ -124,6 +215,9 @@ const PlayerComparison = () => {
                                 onClick={() => {
                                     setPlayer2(player);
                                     setSearch2(player.name);
+                                    setStats2(fetchPlayerStats(player));
+                                    //handlePlayerSelect(player.id, setPlayer2); // or setPlayer2 based on selection
+                                    //setSearch2(player.name); // Show chosen player in input field
                                 }}
                             >
                                 {player.name}
@@ -137,43 +231,46 @@ const PlayerComparison = () => {
             </div>
         </div>
 
-        
+            {/*When both players picked*/}
             {player1 && player2 && (
-                <div>
-                    <h2>{player1.name} vs {player2.name}</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Stat</th>
-                                <th>{player1.name}</th>
-                                <th>{player2.name}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Position</td>
-                                <td>{player1.position}</td>
-                                <td>{player2.position}</td>
-                            </tr>
-                            <tr>
-                                <td>School</td>
-                                <td>{player1.school}</td>
-                                <td>{player2.school}</td>
-                            </tr>
-                            <tr>
-                                <td>Height</td>
-                                <td>{player1.height}</td>
-                                <td>{player2.height}</td>
-                            </tr>
-                            <tr>
-                                <td>Weight</td>
-                                <td>{player1.weight}</td>
-                                <td>{player2.weight}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            )}
+    <div className="mt-16 bg-gray-900 p-6 rounded-lg text-white">
+        <h2 className="text-center text-2xl font-bold mb-4">{player1.name} vs {player2.name}</h2>
+
+        {/* Stats Table */}
+        <div className="grid grid-cols-1 gap-4 text-lg mt-1">
+            {[
+                { label: "Position", key: "position" },
+                { label: "School", key: "school" },
+                { label: "NFL Team", key: "nfl_team"},
+                { label: "Total Yards", key: "yds"},
+            ].map(({ label, key }) => {
+                //const stat1 = stats1[key];
+                //const stat2 = stats2[key];
+                const stat1 = player1[key];
+                const stat2 = player2[key];
+
+
+                return (
+                    <div key={key} className="flex items-center justify-between bg-gray-800 p-3 rounded-lg mt-1">
+                        {/* Player 1 Stat */}
+                        <div className={`w-1/3 text-left ${stat1 > stat2 ? "font-bold text-green-400" : "opacity-70"}`}>
+                            {stat1}
+                        </div>
+
+                        {/* Centered Stat Label */}
+                        <div className="w-1/3 text-center font-semibold">{label}</div>
+
+                        {/* Player 2 Stat */}
+                        <div className={`w-1/3 text-right ${stat2 > stat1 ? "font-bold text-green-400" : "opacity-70"}`}>
+                            {stat2}
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    </div>
+)}
+
         </div>
         
     );
