@@ -36,8 +36,6 @@ class PlayerProfile(models.Model):
     draft_pick = models.IntegerField(null=True, blank=True)
     career_av = models.FloatField(null=True, blank=True)
     draft_av = models.FloatField(null=True, blank=True)
-    bio = models.TextField(null=True, blank=True)
-
 
 
 
