@@ -197,7 +197,7 @@ const MockDraft = () => {
         </div>
 
         {/* Draft Settings */}
-        <div className="text-white text-left mb-6 mt-8">
+        <div className="text-black text-left mb-6 mt-8">
           <h3 className="text-xl font-semibold mb-2">Draft Settings:</h3>
           {/* Draft Year */}
           <label className="block mb-2">
