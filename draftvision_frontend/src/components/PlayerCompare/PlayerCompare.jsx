@@ -31,6 +31,11 @@ const PlayerComparison = () => {
     const [dropdown1, setDropdown1] = useState(false);
     const maxVisiblePlayers = 20;
 
+    const statKeyMap = {
+        QB: { td: "td", yards: "yds" },
+        default: { td: "tot_td", yards: "tot_yds"}
+    };
+    
     useEffect(() => {
         /*const loadPlayers = async () => {
             try {
@@ -52,7 +57,8 @@ const PlayerComparison = () => {
           // fetch players
           const { data: players, error: playersErr } = await supabase
             .from("db_playerprofile")
-            .select("*")
+            .select("*, db_combine(*), db_rbstats(*), db_passingleaders(*), db_recstats(*)")
+            .in("position", ["QB", "TE", "WR", "RB"])
           if (playersErr) {
             console.error("Players fetch error:", playersErr);
           } else {
@@ -128,6 +134,24 @@ const PlayerComparison = () => {
     const playerStatSelect2 = async (player) => {
         const stats2 = await fetchPlayerStats(player);
     }
+
+    const resolveStatKey = (key, position) => {
+        const mapping = statKeyMap[position] || statKeyMap.default;
+        return mapping[key] || key;
+    };
+
+    const getPlayerStat = (player, key, position) => {
+        const resolvedKey = resolveStatKey(key, position);
+    
+        return player?.[resolvedKey] 
+            ?? player?.db_combine?.[0]?.[resolvedKey] 
+            ?? player?.db_passingleaders?.[0]?.[resolvedKey] 
+            ?? player?.db_rbstats?.[0]?.[resolvedKey]
+            ?? player?.db_recstats?.[0]?.[resolvedKey]
+            ?? "N/A";
+    };
+    
+    
     
     
 
@@ -153,7 +177,10 @@ const PlayerComparison = () => {
                 </div>
               </div>
 
-        <h1 className="text-2xl text-white">Player Comparison</h1>
+        <h1 className="text-4xl text-white font-bold mb-4 mt-8 text-center">Player Comparison</h1>
+        <p className="text-white text-lg mb-4 text-center">
+          A tool to help compare seasons of football players
+        </p>
         <div className="mt-4 flex justify-between">
 
             {/* Search for player 1*/}
@@ -232,9 +259,18 @@ const PlayerComparison = () => {
         </div>
 
             {/*When both players picked*/}
+            {/*TODO database picks earliest year on file need to change for best year on file*/}
             {player1 && player2 && (
     <div className="mt-16 bg-gray-900 p-6 rounded-lg text-white">
-        <h2 className="text-center text-2xl font-bold mb-4">{player1.name} vs {player2.name}</h2>
+        <h2 className="text-center text-2xl font-bold mb-4">
+            {`${player1.db_passingleaders?.[0]?.year 
+            ?? player1.db_rbstats?.[0]?.year
+            ?? player1.db_recstats?.[0]?.year
+            ?? ""} ${player1.name} `} 
+            vs {`${player2.db_passingleaders?.[0]?.year 
+            ?? player2.db_rbstats?.[0]?.year
+            ?? player2.db_recstats?.[0]?.year
+            ?? ""} ${player2.name}`}</h2>
 
         {/* Stats Table */}
         <div className="grid grid-cols-1 gap-4 text-lg mt-1">
@@ -242,12 +278,33 @@ const PlayerComparison = () => {
                 { label: "Position", key: "position" },
                 { label: "School", key: "school" },
                 { label: "NFL Team", key: "nfl_team"},
+                { label: "Height", key: "height"},
+                { label: "Weight", key: "weight"},
                 { label: "Total Yards", key: "yds"},
+                { label: "Total Touchdowns", key: "td"},
+
             ].map(({ label, key }) => {
                 //const stat1 = stats1[key];
                 //const stat2 = stats2[key];
-                const stat1 = player1[key];
-                const stat2 = player2[key];
+
+                //const stat1 = player1?.db_combine[key] ?? "N/A";
+                //const stat2 = player2?.db_combine[key] ?? "N/A";
+
+                //const stat1 = player1?.db_combine?.[0]?.[key] ?? "N/A";
+                //const stat2 = player2?.db_combine?.[0]?.[key] ?? "N/A";
+
+                //const stat1 = player1?.[key] ?? player1?.db_combine?.[0]?.[key] ?? player1?.db_rbstats?.[0]?.[key]
+                // ?? player1?.db_passingleaders?.[0]?.[key] ?? player1?.db_recstats?.[0]?.[key] ?? "N/A";
+
+                //const stat2 = player2?.[key] ?? player2?.db_combine?.[0]?.[key] ?? player2?.db_rbstats?.[0]?.[key] ?? 
+                //player2?.db_passingleaders?.[0]?.[key] ?? player2?.db_recstats?.[0]?.[key] ?? "N/A";
+
+                const stat1 = getPlayerStat(player1, key, player1?.position);
+                const stat2 = getPlayerStat(player2, key, player2?.position);
+
+
+                const isNumeric = !isNaN(stat1) && !isNaN(stat2);
+
 
 
                 return (
