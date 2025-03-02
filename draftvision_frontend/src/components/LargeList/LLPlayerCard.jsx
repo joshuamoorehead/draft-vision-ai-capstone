@@ -65,7 +65,7 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
   // the "stats" tab of the card. custom-made for each position group 
   const renderStatsView = () => {
     if (!stats || stats.length === 0) {
-      return <p className="text-lg">No stats available for this position.</p>;
+      return <p className="text-lg">No stats available for this player.</p>;
     }
     return (
       <div>
@@ -190,7 +190,7 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
       </ResponsiveContainer>
     );
   };
-  
+
   const renderViewToggles = () => (
     <div className="flex flex-col space-y-4 bg-gray-100 p-4">
       <button
