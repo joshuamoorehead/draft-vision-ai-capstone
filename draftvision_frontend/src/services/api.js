@@ -23,6 +23,45 @@ export const fetchPlayers = async () => {
   }
 };
 
+// returns all players from 2024 (made for the large list)
+// joins players with their xAV rating in the predictions_2024 table. 
+export const fetch2024Players = async(position = null) => {
+  try {
+    const playersQuery = supabase.from('db_playerprofile').select('*').eq('year_drafted', 2024).range(0,9999);
+
+    const predictionsQuery = supabase.from('db_predictions_2024').select("*").range(0,9999); 
+
+    const [{data: players, error: playerError}, { data: predictions, error: predictionsError }] = await Promise.all([
+      playersQuery, predictionsQuery
+    ])
+
+    if (playerError) throw playerError; 
+    if (predictionsError) throw predictionsError; 
+
+    const data = players.map(player => ({
+      ...player, 
+      predictions: predictions.find(prediction => prediction.player_id === player.id) || {xAV: parseFloat(( 11.31 / (player.draft_round + 0.5) + 1.51).toFixed(2))} 
+    }));
+    return data; 
+  } catch (error) {
+    console.error('Error fetching players: ', error.message);
+    throw error; 
+  }
+}
+
+export const getPredictions = async (position = null) => {
+  try {
+    const query = supabase.from('db_predictions_2024').select('*').range(0,99999);
+    if (position) query.eq('position', position); 
+    const { data, error } = await query; 
+    if (error) throw error; 
+    return data; 
+  } catch (error) {
+    console.error("Error fetching predictions: ", error.message); 
+    throw error; 
+  }
+}
+
 export const getRankings = async (position = null) => {
   try {
     const query = supabase.from('db_prospect_rankings').select('*');
@@ -58,9 +97,16 @@ export const fetchPlayerStats = async (playerId, position) => {
     tableName = 'db_passingleaders';
   } else if (position.toLowerCase() === 'rb') {
     tableName = 'db_rbstats';
-  } else if (position.toLowerCase() === 'wr') {
+  } else if (['wr', 'te'].includes(position.toLowerCase())) {
     tableName = 'db_recstats';
-  } else {
+  } else if (['dl', 'de', 'dt', 'nt'].includes(position.toLowerCase())) {
+    tableName = 'db_defensivepositionalstats';
+  } else if (['lb', 'ilb', 'olb'].includes(position.toLowerCase())) {
+    tableName = 'db_defensivepositionalstats';
+  } else if (['db', 'cb', 's'].includes(position.toLowerCase())) {
+    tableName = 'db_defensivepositionalstats';
+  } 
+  else {
     // For other positions (like TE), return null or handle accordingly.
     return null;
   }
@@ -84,8 +130,8 @@ export const generatePlayerBio = async (player) => {
   if (player.bio && player.bio.trim() != null) {
     return player.bio;
   }
-
-  const genAI = new GoogleGenerativeAI("AIzaSyAzCxuWZ8jrggVUZjRGbZ7EKPjbrn2dtOA");
+  const apikey = "AIzaSyAzCxuWZ8jrggVUZjRGbZ7EKPjbrn2dtOA";
+  const genAI = new GoogleGenerativeAI(apikey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
   const prompt = `Generate a 1000-character biography about the college football career of a player named ${player.name}. He played as a ${player.position} for ${player.school} Mention key aspects of his career. Write as if you are a sports journalist. Focus on stats, acheivements, and big moments from their college career. ONLY TALK ABOUT THEIR COLLEGE CAREER. Use as many of the 1000 characters as you can.`;

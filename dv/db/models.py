@@ -455,3 +455,8 @@ class TeamNeeds(models.Model):
     lb_sop = models.FloatField(null=True, blank=True)
     cb_sop = models.FloatField(null=True, blank=True)
     s_sop = models.FloatField(null=True, blank=True)
+
+
+class predictions_2024(models.Model):
+    player = models.ForeignKey(PlayerProfile, on_delete=models.CASCADE)
+    xAV = models.FloatField(null=True, blank=True)
