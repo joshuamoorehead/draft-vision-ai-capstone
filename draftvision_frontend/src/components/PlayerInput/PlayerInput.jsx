@@ -7,6 +7,7 @@ const PlayerInput = () => {
   const [name, setName] = useState('');
   const [position, setPosition] = useState(''); // Selected position
   const [year, setYear] = useState('2024'); // Selected draft year
+  const [stat1, setStat1] = useState('');
   const navigate = useNavigate();
 
   const renderPositionSpecificFields = () => {
@@ -123,6 +124,7 @@ const PlayerInput = () => {
   const handleNewPlayer = () => {
     switch(position) {
       case 'QB':
+
       case 'RB':
       case 'WR':
       case 'TE':
@@ -131,11 +133,18 @@ const PlayerInput = () => {
       case 'CB':
       case 'S':
       case 'OL':
-        navigate("/newplayercomp", { state: { name } });
+        navigate("/newplayercomp", { state: { name, position } });
+        break;
       default:
+        navigate("/newplayercomp", { state: { name, position } })
         return;
     }
   };
+
+  const handleSimplePlayer = () => {
+    navigate("/newplayercomp", { state: { name, position, year } })
+    return;
+  }
 
   return (
     <div className="min-h-screen bg-[#5A6BB0]">
@@ -153,7 +162,10 @@ const PlayerInput = () => {
         </div>
       </div>
       <div className="container px-8 mt-8 space-y-3">
-        <h1 className="text-2xl text-white">Create a Player</h1>
+      <h1 className="text-4xl text-white font-bold mb-4 mt-8 text-center">Player Input</h1>
+        <p className="text-white text-lg mb-4 text-center">
+          Create your own player with inputted stats and see where they would get drafted in a draft class.
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="text-sm text-white font-medium">Name</label>
@@ -191,7 +203,7 @@ const PlayerInput = () => {
       <div className="container mx-auto px-4 mt-8 text-center">
         {/* Generate New Player */}
         <button
-          onClick={handleNewPlayer}
+          onClick={handleSimplePlayer}
           className="mt-8 px-6 py-2 bg-white text-black text-lg font-semibold rounded hover:bg-gray-200"
         >
           Create
