@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-# 🚨 Fill these values with your Supabase project details
+
 SUPABASE_URL = "https://pvuzvnemuhutrdmpchmi.supabase.co"  
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY"  
 SUPABASE_SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczMzQwNzA3OCwiZXhwIjoyMDQ4OTgzMDc4fQ.CacO6QreEEqWY4oAeMMVu4agV0Xit54Hzoh2JLMRzSE"  # service role key
