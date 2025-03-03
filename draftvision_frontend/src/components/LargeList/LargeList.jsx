@@ -4,6 +4,7 @@ import { fetch2024Players, fetchPlayers, fetchPlayerStats, generatePlayerBio, ge
 import { dvailogo } from '../Logos';
 import '../../styles/main.css';
 import PlayerCard from './LLPlayerCard';
+import PageTransition from '../Common/PageTransition';
 
 
 // creating variables
@@ -116,22 +117,9 @@ const LargeList = () => {
 
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-[#5A6BB0]">
-      {/* Header */}
-      <div className="w-full h-32 bg-black">
-        <div className="container mx-auto px-4 h-full flex items-center">
-          <img src={dvailogo} alt="Draft Vision AI Logo" className="h-32 w-32" />
-          <div className="flex space-x-8 text-white ml-12">
-            <Link to="/" className="text-2xl font-roboto-condensed opacity-50">Player List</Link>
-            <Link to="/about" className="text-2xl font-roboto-condensed opacity-50">About Us</Link>
-            <Link to="/mockdraft" className="text-2xl font-roboto-condensed opacity-50">Mock Draft</Link>
-            <Link to="/largelist" className="text-2xl font-roboto-condensed underline">Large List</Link>
-            <Link to="/playercompare" className="text-2xl font-roboto-condensed opacity-50">Player Comparison</Link>
-            <Link to="/playerinput" className="text-2xl font-roboto-condensed opacity-50">Player Input</Link>
-          </div>
-        </div>
-      </div>
-
+      
       {/* Main Content */}
       <div className="container mx-auto px-4 mt-8">
         <div className="mb-8">
@@ -237,6 +225,7 @@ const LargeList = () => {
         </div>
       )}
     </div>
+  </PageTransition>
   );
 
 
