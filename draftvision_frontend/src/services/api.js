@@ -240,7 +240,7 @@ export const generatePlayerBio = async (player) => {
   if (player.bio && player.bio.trim() != null) {
     return player.bio;
   }
-  const apikey = "AIzaSyAzCxuWZ8jrggVUZjRGbZ7EKPjbrn2dtOA";
+  const apikey = "AIzaSyAIrlwh2le-bIiXYlReNoCFHaqfb3LMkw0";
   const genAI = new GoogleGenerativeAI(apikey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
