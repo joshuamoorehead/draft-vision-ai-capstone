@@ -14,7 +14,7 @@ from .serializers import (
 
 SUPABASE_AUTH_URL = f"{settings.SUPABASE_URL}/auth/v1"
 
-# ✅ Supabase Signup API
+# Supabase Signup API
 class SignupAPIView(APIView):
     def post(self, request):
         email = request.data.get("email")
@@ -37,7 +37,7 @@ class SignupAPIView(APIView):
         else:
             return JsonResponse(response.json(), status=response.status_code)
 
-# ✅ Supabase Login API
+# Supabase Login API
 class LoginAPIView(APIView):
     def post(self, request):
         email = request.data.get("email")
@@ -60,7 +60,7 @@ class LoginAPIView(APIView):
         else:
             return JsonResponse(response.json(), status=response.status_code)
 
-# ✅ Player List API (Original)
+# Player List API (Original)
 class PlayerList(APIView):
     def get(self, request):
         players = PlayerProfile.objects.all()
@@ -74,7 +74,7 @@ class PlayerList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
-# ✅ NCAA Teams API (Original)
+# NCAA Teams API (Original)
 class NCAATeamsList(APIView):
     def get(self, request):
         teams = NCAATeams.objects.all()
@@ -88,7 +88,7 @@ class NCAATeamsList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
-# ✅ Yearly NCAA Team Data API (Original)
+# Yearly NCAA Team Data API (Original)
 class YearlyNCAATeamDataList(APIView):
     def get(self, request):
         data = TeamSuccess.objects.all()
@@ -102,7 +102,7 @@ class YearlyNCAATeamDataList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
-# ✅ Passing Leaders API (Fixed `req` to `request`)
+# Passing Leaders API (Fixed `req` to `request`)
 class PassingLeadersList(APIView):
     def get(self, request):  # Fixed parameter name
         data = PassingLeaders.objects.all()
@@ -116,7 +116,7 @@ class PassingLeadersList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
-# ✅ MockDraft API (Restored)
+# MockDraft API (Restored)
 class MockDraftView(APIView):
     """
     Handles MockDraft data
