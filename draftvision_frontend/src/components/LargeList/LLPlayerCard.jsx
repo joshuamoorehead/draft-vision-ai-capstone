@@ -223,17 +223,26 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
       >
         Impact Graph
       </button>
+      <button
+        className={`py-2 px-4 rounded transition-colors ${
+          activeView === 'biography'
+            ? 'bg-blue-600 text-white'
+            : 'bg-gray-300 text-gray-800'
+        }`}
+        onClick={() => setActiveView('biography')}
+      >
+        Biography
+      </button>
     </div>
   );
 
   return (
     <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-xl overflow-hidden w-[800px] h-[400px]">
       <div className="flex-1 p-6 overflow-y-auto">
-        {activeView === 'profile'
-          ? renderProfileView()
-          : activeView === 'stats'
-          ? renderStatsView()
-          : renderImpactGraph()}
+        {activeView === 'profile' ? renderProfileView()
+        : activeView === 'stats' ? renderStatsView()
+        : activeView === 'impact' ? renderImpactGraph()
+        : renderBiographyView()}
       </div>
       <div className="md:w-32">{renderViewToggles()}</div>
     </div>

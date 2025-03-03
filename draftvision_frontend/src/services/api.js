@@ -5,18 +5,12 @@ const prevPlayer = "";
 const prevBio = "";
 
 // Supabase credentials
-const SUPABASE_URL = 'https://pvuzvnemuhutrdmpchmi.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY';
+const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL;
+const SUPABASE_KEY = process.env.REACT_APP_SUPABASE_API_KEY;
 
 // Initialize Supabase client with explicit storage options
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true,
-    storage: localStorage
-  }
-});
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+// export {supabase}
 
 // Auth functions - simplifies working with Supabase auth
 export const signUp = async (email, password) => {
@@ -240,7 +234,7 @@ export const generatePlayerBio = async (player) => {
   if (player.bio && player.bio.trim() != null) {
     return player.bio;
   }
-  const apikey = "AIzaSyAzCxuWZ8jrggVUZjRGbZ7EKPjbrn2dtOA";
+  const apikey = process.env.REACT_APP_GOOGLE_API_KEY;
   const genAI = new GoogleGenerativeAI(apikey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
