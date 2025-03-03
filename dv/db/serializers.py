@@ -1,12 +1,14 @@
-from rest_framework import serializers 
-import pandas as pd 
-from .models import PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders, Conferences, Coaches, DefensivePositionalStats, RBStats, RECStats, TeamOffense, TeamDefense, TeamRatings, HistoricalTeamSuccess
+from rest_framework import serializers
+from .models import (
+    PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders, 
+    Conferences, Coaches, DefensivePositionalStats, RBStats, 
+    RECStats, TeamOffense, TeamDefense, TeamRatings, HistoricalTeamSuccess
+)
 
 class PlayerProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlayerProfile
         fields = '__all__'
-
 
 class NCAATeamsSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -23,48 +25,47 @@ class PassingLeadersSerializer(serializers.ModelSerializer):
         model = PassingLeaders
         fields = '__all__'
 
-class ConferencesSerializer(serializers.ModelSerializer):
+class ConferencesSerializer(serializers.ModelSerializer):  # Fixed typo
     class Meta: 
-        models = Conferences
+        model = Conferences
         fields = '__all__'
 
 class CoachesSerializer(serializers.ModelSerializer):
     class Meta: 
-        models = Coaches
+        model = Coaches
         fields = '__all__'
 
 class DefensivePositionalStatsSerializer(serializers.ModelSerializer):
     class Meta: 
-        models = DefensivePositionalStats
+        model = DefensivePositionalStats
         fields = '__all__'
 
 class RBStatsSerializer(serializers.ModelSerializer):
     class Meta: 
-        models = RBStats
+        model = RBStats
         fields = '__all__'
 
-class RECStatsSerializers(serializers.ModelSerializer):
+class RECStatsSerializer(serializers.ModelSerializer):  # Fixed typo
     class Meta: 
-        models = RECStats
+        model = RECStats
         fields = '__all__'
 
 class TeamOffenseSerializer(serializers.ModelSerializer):
     class Meta: 
-        models = TeamOffense
+        model = TeamOffense
         fields = '__all__'
 
 class TeamDefenseSerializer(serializers.ModelSerializer):
     class Meta: 
-        models = TeamDefense
+        model = TeamDefense
         fields = '__all__'
 
-class TeamRatingsSerializer(serializers.ModelSerializer):
+class TeamRatingsSerializer(serializers.ModelSerializer):  # Fixed typo
     class Meta:
-        models = TeamRatings
+        model = TeamRatings
         fields = '__all__'
 
-class HistoricalTeamSuccessSerailizer(serializers.ModelSerializer):
+class HistoricalTeamSuccessSerializer(serializers.ModelSerializer):  # Fixed typo
     class Meta:
-        models = HistoricalTeamSuccess
+        model = HistoricalTeamSuccess
         fields = '__all__'
-

@@ -3,11 +3,67 @@ import { createClient } from '@supabase/supabase-js';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const prevPlayer = "";
 const prevBio = "";
+
+// Supabase credentials
 const SUPABASE_URL = 'https://pvuzvnemuhutrdmpchmi.supabase.co';
-const SUPABASE_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY';
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-export { supabase };
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY';
+
+// Initialize Supabase client with explicit storage options
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+    storage: localStorage
+  }
+});
+
+// Auth functions - simplifies working with Supabase auth
+export const signUp = async (email, password) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+  
+  if (!error && data?.user) {
+    // Create user profile record
+    await supabase.from('user_profiles').upsert({
+      user_id: data.user.id,
+      email: email,
+      updated_at: new Date().toISOString(),
+    });
+  }
+  
+  return { data, error };
+};
+
+export const signIn = async (email, password) => {
+  return await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+};
+
+export const signInWithGoogle = async () => {
+  return await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin
+    }
+  });
+};
+
+export const signOut = async () => {
+  return await supabase.auth.signOut();
+};
+
+export const resetPassword = async (email) => {
+  return await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/reset-password`,
+  });
+};
+
+// Data fetching functions
 export const fetchPlayers = async () => {
   try {
     const { data, error } = await supabase
@@ -124,6 +180,60 @@ export const fetchPlayerStats = async (playerId, position) => {
   }
 };
 
+// Save a user's draft
+export const saveDraft = async (draftData) => {
+  try {
+    const { data: userData } = await supabase.auth.getUser();
+    
+    if (!userData?.user) {
+      throw new Error('User not authenticated');
+    }
+    
+    const { data, error } = await supabase
+      .from('saved_drafts')
+      .insert([
+        { 
+          user_id: userData.user.id,
+          draft_name: draftData.name || `Draft ${new Date().toLocaleDateString()}`,
+          rounds: draftData.rounds || 3,
+          selected_teams: draftData.selectedTeams || [],
+          draft_results: draftData.results || [],
+          is_public: draftData.isPublic || false,
+          created_at: new Date().toISOString()
+        }
+      ]);
+      
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error saving draft:', error.message);
+    throw error;
+  }
+};
+
+// Get user's saved drafts
+export const fetchUserDrafts = async () => {
+  try {
+    const { data: userData } = await supabase.auth.getUser();
+    
+    if (!userData?.user) {
+      throw new Error('User not authenticated');
+    }
+    
+    const { data, error } = await supabase
+      .from('saved_drafts')
+      .select('*')
+      .eq('user_id', userData.user.id)
+      .order('created_at', { ascending: false });
+      
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error fetching saved drafts:', error.message);
+    return [];
+  }
+};
+
 export const generatePlayerBio = async (player) => {
  
   // If a bio already exists, return it.
@@ -154,3 +264,5 @@ export const generatePlayerBio = async (player) => {
     return null;
   }
 };
+
+export { supabase };
