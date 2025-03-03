@@ -9,7 +9,7 @@ const NewPlayerComp = () => {
   const playerName = location.state?.name || 'Unknown Player';
   const playerPosition = location.state?.position || "Unknown Position";
   const playerYear = location.state?.year || "Unknown Year";
-  const [draftRound, setDraftRound] = useState(null);
+  const draftRound = location.state?.draftRound || "Unknown Round";
   const navigate = useNavigate();
 
   const returnToPage = () => { 
@@ -32,10 +32,6 @@ const NewPlayerComp = () => {
     }
 };
 
-  useEffect(() => {
-    const randomRound = Math.floor(Math.random() * 7) + 1;
-    setDraftRound(randomRound);
-    }, []);
   
   return(
     <div className="min-h-screen bg-[#5A6BB0]">
