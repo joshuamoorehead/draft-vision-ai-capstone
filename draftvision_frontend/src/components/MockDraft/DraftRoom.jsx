@@ -1,13 +1,16 @@
-// Declare a global variable outside the component
-
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { createClient } from "@supabase/supabase-js";
 import "../../styles/main.css";
+import { useAuth } from '../../context/AuthContext';
 
-let globalUpdatedOrders = []; // global reference (though not strictly necessary)
+// Import extracted components
+import DraftCompletedModal from "./DraftCompletedModal";
+import UserPickModal from "./UserPickModal";
+import TradeModal from "./TradeModal";
 
-// Initialize Supabase client
+// Supabase client setup
 const supabaseUrl = "https://pvuzvnemuhutrdmpchmi.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY";
@@ -17,24 +20,18 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // MAIN DraftRoom COMPONENT
 // -------------------------------------
 const DraftRoom = () => {
-  // 1) Retrieve navigation state
+  // Navigation and authentication
   const location = useLocation();
   const navigate = useNavigate();
-  const { selectedTeams, locations, rounds, timePerPick, draftYear } = location.state;
+  const { user } = useAuth();
 
-  // 2) Determine user teams
-  const userTeams = selectedTeams.map((i) => locations[i]);
-  const primaryUserTeam = userTeams[0]; // The first is “owner” for acquired picks
-
-  // 3) Refs
+  // Refs
   const globalPickRef = useRef(1); // global pick counter
   const timerRef = useRef(null);
   const availablePlayersRef = useRef([]); // for quick picking
+  const picksEndRef = useRef(null); // for auto-scrolling
 
-  // NEW: Auto-scroll logic => reference to the bottom of the drafted picks
-  const picksEndRef = useRef(null);
-
-  // 4) Basic states
+  // Basic states
   const [currentRound, setCurrentRound] = useState(1);
   const [currentPickIndex, setCurrentPickIndex] = useState(0);
   const [isDraftStarted, setIsDraftStarted] = useState(false);
@@ -44,12 +41,56 @@ const DraftRoom = () => {
   const [isRoundPaused, setIsRoundPaused] = useState(false);
   const [isDraftComplete, setIsDraftComplete] = useState(false);
   const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
+  const { draftId } = useParams();
+  const [isViewingDetails, setIsViewingDetails] = useState(false);
 
-  // 5) Orders and players
+  // Draft data states
   const [allDraftOrders, setAllDraftOrders] = useState([]);
   const [currentRoundOrdersState, setCurrentRoundOrdersState] = useState([]);
   const [availablePlayers, setAvailablePlayers] = useState([]);
   const [draftedPicks, setDraftedPicks] = useState([]);
+  
+  // Configuration state
+  const [draftConfig, setDraftConfig] = useState({
+    selectedTeams: [],
+    locations: [],
+    rounds: 3,
+    timePerPick: 30,
+    draftYear: 2024
+  });
+  
+  // User teams based on config
+  const [userTeams, setUserTeams] = useState([]);
+  const [primaryUserTeam, setPrimaryUserTeam] = useState('');
+
+  // Check for required state and redirect if missing
+  useEffect(() => {
+    if (!location.state || !location.state.selectedTeams) {
+      console.warn("Missing required state, redirecting to mock draft setup");
+      navigate("/mockdraft");
+      return;
+    }
+    
+    // If we have valid state, update our configuration
+    if (location.state) {
+      const { selectedTeams, locations, rounds = 3, timePerPick = 30, draftYear = 2024 } = location.state;
+      
+      setDraftConfig({
+        selectedTeams,
+        locations,
+        rounds,
+        timePerPick,
+        draftYear
+      });
+      
+      // Set user teams
+      const teams = selectedTeams.map((i) => locations[i]);
+      setUserTeams(teams);
+      setPrimaryUserTeam(teams[0]);
+    }
+  }, [location.state, navigate]);
 
   // Build positions dropdown
   const positions = useMemo(() => {
@@ -73,49 +114,72 @@ const DraftRoom = () => {
     availablePlayersRef.current = availablePlayers;
   }, [availablePlayers]);
 
-  // NEW: Auto-scroll whenever draftedPicks changes
-  useEffect(() => {
-    if (picksEndRef.current) {
-      picksEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [draftedPicks]);
-
-  // On mount, fetch from Supabase
+  // Fetch draft data
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setFetchError(null);
       try {
-        // fetch players
+        const { draftYear } = draftConfig;
+        console.log("Fetching draft data for year:", draftYear);
+        
+        // fetch players with error handling
         const { data: players, error: playersErr } = await supabase
           .from("db_draftclasses")
           .select("*")
           .eq("year", draftYear);
+          
         if (playersErr) {
           console.error("Players fetch error:", playersErr);
-        } else {
-          setAvailablePlayers(players);
+          setFetchError("Failed to load players data. Please try again.");
+          return;
         }
-
-        // fetch draft orders
+        
+        if (!players || players.length === 0) {
+          console.warn("No players found for year:", draftYear);
+          setFetchError(`No players found for draft year ${draftYear}.`);
+          return;
+        }
+        
+        setAvailablePlayers(players);
+        console.log(`Loaded ${players.length} players for year ${draftYear}`);
+  
+        // fetch draft orders with error handling
         const { data: orders, error: ordersErr } = await supabase
           .from("db_draftorders")
           .select("*")
           .eq("year", draftYear);
+          
         if (ordersErr) {
           console.error("Draft order fetch error:", ordersErr);
-        } else {
-          const filteredOrders = orders.filter((o) => Number(o.round) <= rounds);
-          console.log("Fetched Orders:", filteredOrders);
-          setAllDraftOrders(filteredOrders);
-          console.log("Draft order state updated with fetched orders:", filteredOrders);
+          setFetchError("Failed to load draft order data. Please try again.");
+          return;
         }
+        
+        if (!orders || orders.length === 0) {
+          console.warn("No draft orders found for year:", draftYear);
+          setFetchError(`No draft order data found for year ${draftYear}.`);
+          return;
+        }
+        
+        const filteredOrders = orders.filter((o) => Number(o.round) <= draftConfig.rounds);
+        console.log(`Loaded ${filteredOrders.length} draft order entries for ${draftConfig.rounds} rounds`);
+        setAllDraftOrders(filteredOrders);
+        
       } catch (err) {
-        console.error("Fetch error:", err);
+        console.error("Unexpected fetch error:", err);
+        setFetchError("An unexpected error occurred. Please try again.");
+      } finally {
+        setIsLoading(false);
       }
     };
-    fetchData();
-  }, [draftYear, rounds]);
+    
+    if (draftConfig.draftYear) {
+      fetchData();
+    }
+  }, [draftConfig]);
 
-  // Group orders by round once fetched so that switching rounds is just a matter of switching reference.
+  // Group orders by round
   const ordersByRound = useMemo(() => {
     const grouped = {};
     allDraftOrders.forEach((order) => {
@@ -126,13 +190,13 @@ const DraftRoom = () => {
     return grouped;
   }, [allDraftOrders]);
 
-  // Whenever currentRound changes, update the current round orders and reset the pick index.
+  // Update current round orders when round changes
   useEffect(() => {
     setCurrentRoundOrdersState(ordersByRound[currentRound] || []);
     setCurrentPickIndex(0);
   }, [ordersByRound, currentRound]);
 
-  // When currentRound changes, automatically pause for 100ms and then resume processing the first pick.
+  // Auto-pause and resume when round changes
   useEffect(() => {
     if (isDraftStarted) {
       setIsPaused(true);
@@ -144,13 +208,75 @@ const DraftRoom = () => {
     // eslint-disable-next-line
   }, [currentRound]);
 
-  // Resume processing when unpausing (if not in a paused round)
+  // Resume processing when unpausing
   useEffect(() => {
     if (isDraftStarted && !isPaused && !isRoundPaused) {
       processNextPick(currentPickIndex);
     }
     // eslint-disable-next-line
   }, [isPaused]);
+
+  // Cleanup timeouts
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, []);
+
+  // Check if draft is complete
+  useEffect(() => {
+    if (currentRound > draftConfig.rounds && isDraftStarted) {
+      console.log("Draft is now complete - all rounds finished");
+      setIsDraftComplete(true);
+    }
+  }, [currentRound, draftConfig.rounds, isDraftStarted]);
+
+  useEffect(() => {
+    if (draftId) {
+      const fetchSavedDraft = async () => {
+        setIsLoading(true);
+        try {
+          const { data, error } = await supabase
+            .from('user_drafts')
+            .select('*')
+            .eq('id', draftId)
+            .single();
+            
+          if (error) throw error;
+          
+          if (data) {
+            // Populate the draft data from the saved draft
+            setDraftedPicks(data.draft_results || []);
+            setDraftConfig({
+              selectedTeams: data.selected_teams || [],
+              locations: data.locations || [],
+              rounds: data.rounds || 3,
+              timePerPick: 30,
+              draftYear: data.draft_year || 2024
+            });
+            
+            // Set user teams
+            setUserTeams(data.selected_teams || []);
+            
+            // When in details view, mark draft as started and complete
+            setIsDraftStarted(true);
+            setIsDraftComplete(true);
+            setIsViewingDetails(true);
+          }
+        } catch (error) {
+          console.error('Error fetching saved draft:', error);
+          setFetchError('This draft could not be loaded. It may have been deleted.');
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      
+      fetchSavedDraft();
+    }
+  }, [draftId]);
 
   // Helper for displaying colored squares
   const getTeamClass = (order, idx) => {
@@ -162,14 +288,26 @@ const DraftRoom = () => {
 
   // Start the draft
   const startDraft = () => {
+    // Don't start if we don't have draft orders or players
+    if (allDraftOrders.length === 0 || availablePlayers.length === 0) {
+      console.error("Cannot start draft - missing data");
+      setFetchError("Cannot start draft. Missing required data. Please try again.");
+      return;
+    }
+  
+    console.log("Starting draft");
     setIsDraftStarted(true);
+    setIsDraftComplete(false);  // Explicitly set to false when starting
+    setIsRoundPaused(false);
+    setIsPaused(false);
+    globalPickRef.current = 1;  // Reset global pick counter
     processNextPick(0);
   };
 
-  // Main pick logic.
+  // Main pick logic
   const processNextPick = (index = currentPickIndex) => {
     if (index >= currentRoundOrdersState.length) {
-      if (currentRound < rounds) {
+      if (currentRound < draftConfig.rounds) {
         setIsRoundPaused(true);
       } else {
         setTimeout(() => setIsDraftComplete(true), 3000);
@@ -177,7 +315,7 @@ const DraftRoom = () => {
       return;
     }
     if (isPaused) return;
-    console.log(currentRoundOrdersState);
+    
     const order = currentRoundOrdersState[index];
     console.log("processNextPick => order:", order);
     setCurrentTeam(order);
@@ -201,9 +339,8 @@ const DraftRoom = () => {
     }
   };
 
-  // pickBestAvailable
+  // Pick best available player
   const pickBestAvailable = () => {
-    
     const players = availablePlayersRef.current;
     if (!players || players.length === 0) return { name: "No Available Player" };
     const best = players.reduce((prev, curr) =>
@@ -215,7 +352,7 @@ const DraftRoom = () => {
     return best;
   };
 
-  // recordPick
+  // Record pick
   const recordPick = (team, player, roundNum) => {
     const pickNumber = globalPickRef.current;
     const newPick = {
@@ -272,9 +409,7 @@ const DraftRoom = () => {
     setIsRoundPaused(false);
   };
 
-  //------------------------------------
-  // TRADE LOGIC (No CPU picks inside handleTradeSubmit)
-  //------------------------------------
+  // Handle trade submission
   const handleTradeSubmit = (tradePartner, userPicks, partnerPicks) => {
     console.log("handleTradeSubmit =>", { tradePartner, userPicks, partnerPicks });
 
@@ -305,7 +440,7 @@ const DraftRoom = () => {
       timerRef.current = null;
     }
 
-    // 5) Pause so the newly updated ownership “commits”
+    // 5) Pause so the newly updated ownership "commits"
     setIsPaused(true);
     console.log("Draft is now paused after trade—auto-resuming in 100ms...");
 
@@ -315,562 +450,211 @@ const DraftRoom = () => {
     }, 100);
   };
 
-  return (
-    <div className="draft-room-container min-h-screen bg-gray-900 text-white p-6">
-      <header className="mb-6 flex flex-col sm:flex-row items-center justify-between">
-        <div>
-          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-            Draft Room – {draftYear}
-          </h1>
-          <p className="mt-2 text-xl">Current Round: {currentRound}</p>
-          <div className="mt-4">
-            <h2 className="text-xl font-semibold">Round {currentRound} Order:</h2>
-            <ul className="flex flex-wrap gap-2 mt-2">
-              {currentRoundOrdersState.map((order, idx) => (
-                <li key={order.id} className={`${getTeamClass(order, idx)} px-3 py-1 rounded shadow`}>
-                  {order.team}
-                </li>
-              ))}
-            </ul>
-          </div>
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+        <div className="text-center">
+          <svg className="animate-spin h-10 w-10 mx-auto mb-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p className="text-xl">Loading draft data...</p>
         </div>
-        {isDraftStarted && (
-          <div className="fixed top-4 right-4 z-50 flex items-center">
-            {!isRoundPaused && (
-              <button
-                onClick={togglePause}
-                className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black rounded-lg shadow hover:from-yellow-500 hover:to-orange-600 transition duration-300"
-              >
-                {isPaused ? "Resume Draft" : "Pause Draft"}
-              </button>
-            )}
-            <button
-              onClick={() => navigate("/mockdraft")}
-              className="ml-2 px-4 py-2 bg-red-500 text-black rounded-lg shadow hover:bg-red-600 transition duration-300"
-            >
-              Exit Draft
-            </button>
-          </div>
-        )}
-      </header>
-
-      <div className="mb-6 text-center">
-        {!isDraftStarted && (
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={startDraft}
-              className="px-8 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-black rounded-lg shadow-lg hover:from-green-500 hover:to-blue-600 transition duration-300"
-            >
-              Enter Draft
-            </button>
-            <button
-              onClick={() => navigate("/mockdraft")}
-              className="px-8 py-3 bg-red-500 text-black rounded-lg shadow-lg hover:bg-red-600 transition duration-300"
-            >
-              Exit Draft
-            </button>
-          </div>
-        )}
-        {isRoundPaused && currentRound < rounds && (
-          <button
-            onClick={beginNextRound}
-            className="px-8 py-3 bg-gradient-to-r from-blue-400 to-green-500 text-black rounded-lg shadow-lg hover:from-blue-500 hover:to-green-600 transition duration-300"
-          >
-            Begin Round {currentRound + 1}
-          </button>
-        )}
       </div>
-
-      {isDraftStarted && (
-        <section className="mt-8">
-          <h2 className="text-3xl font-bold mb-4">Drafted Picks</h2>
-          {Array.from({ length: currentRound }, (_, i) => i + 1).map((round) => (
-            <div key={round} className="mb-6">
-              <h3 className="text-2xl font-semibold mb-2">Round {round}:</h3>
-              <div className="grid grid-cols-4 gap-2">
-                {groupedPicks[String(round)] && groupedPicks[String(round)].length > 0 ? (
-                  groupedPicks[String(round)].map((pick) => (
-                    <div
-                      key={pick.pickNumber}
-                      className="p-1 h-9 bg-gray-800 rounded shadow-sm text-sm flex items-center"
-                    >
-                      <span className="mr-1">{pick.pickNumber}.</span>
-                      <strong>{pick.team}:</strong>
-                      <span>&nbsp;</span>
-                      {pick.playerName}
-                    </div>
-                  ))
-                ) : (
-                  <p className="col-span-4 text-gray-400">No picks yet.</p>
-                )}
-              </div>
-            </div>
-          ))}
-          {/* NEW: An invisible anchor to scroll into view */}
-          <div ref={picksEndRef} />
-        </section>
-      )}
-
-      {userPickModalOpen && (
-        <UserPickModal
-          availablePlayers={availablePlayers}
-          timePerPick={timePerPick}
-          onPick={handleUserPick}
-          onTimeout={handleUserAutoPick}
-          currentTeam={currentTeam}
-          allDraftOrders={allDraftOrders}
-          currentRound={currentRound}
-          currentPickIndex={currentPickIndex}
-          currentRoundOrders={currentRoundOrdersState}
-          openTradeModal={() => setIsTradeModalOpen(true)}
-          onAcceptCpuTradeProposal={handleTradeSubmit}
-        />
-      )}
-
-      {isTradeModalOpen && currentTeam && (
-        <TradeModal
-          currentTeam={currentTeam}
-          allDraftOrders={allDraftOrders}
-          currentRound={currentRound}
-          currentPickIndex={currentPickIndex}
-          currentRoundOrders={currentRoundOrdersState}
-          onSubmitTrade={handleTradeSubmit}
-          onCancelTrade={() => setIsTradeModalOpen(false)}
-        />
-      )}
-
-      {isDraftComplete && (
-        <DraftCompletedModal
-          onSave={() => alert("Mock draft saved!")}
-          onReturnDraft={() => setIsDraftComplete(false)}
-          onReturnHome={() => navigate("/mockdraft")}
-        />
-      )}
-    </div>
-  );
-};
-
-// -------------------------------------
-// Helper: Get a "Round X Pick Y" label from an ID
-// -------------------------------------
-function getPickLabelById(id, allDraftOrders) {
-  const order = allDraftOrders.find((o) => o.id === id);
-  if (!order) return `Pick #${id} (not found)`;
-  const { round, team } = order;
-  const ordersInRound = allDraftOrders.filter((o) => Number(o.round) === Number(round));
-  const pickIndex = ordersInRound.findIndex((o) => o.id === id);
-  const pickNum = pickIndex + 1;
-  return `Round ${round} Pick ${pickNum} - ${team}`;
-}
-
-// -------------------------------------
-// USER PICK MODAL
-// -------------------------------------
-const UserPickModal = ({
-  availablePlayers,
-  timePerPick,
-  onPick,
-  onTimeout,
-  currentTeam,
-  openTradeModal,
-  allDraftOrders,
-  currentRound,
-  currentPickIndex,
-  currentRoundOrders,
-  onAcceptCpuTradeProposal,
-}) => {
-  const [timer, setTimer] = useState(timePerPick);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedPosition, setSelectedPosition] = useState("All");
-  const [filteredPlayers, setFilteredPlayers] = useState(availablePlayers);
-  const [cpuTradeProposals, setCpuTradeProposals] = useState([]);
-
-  // Build positions dropdown
-  const positions = useMemo(() => {
-    if (!availablePlayers || availablePlayers.length === 0) return ["All"];
-    const posSet = new Set(availablePlayers.map((p) => p.position));
-    return ["All", ...Array.from(posSet)];
-  }, [availablePlayers]);
-
-  // Filter player list
-  useEffect(() => {
-    let players = availablePlayers.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    if (selectedPosition !== "All") {
-      players = players.filter((p) => p.position === selectedPosition);
-    }
-    setFilteredPlayers(players);
-  }, [searchTerm, selectedPosition, availablePlayers]);
-
-  // Timer for user picks
-  useEffect(() => {
-    if (timer <= 0) {
-      onTimeout();
-      return;
-    }
-    const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
-    return () => clearInterval(interval);
-  }, [timer, onTimeout]);
-
-  // NEW: Generate CPU trade proposals
-  // This code will generate between 1 and 3 proposals.
-  // For each proposal, we select a random trade partner (from those other than the current user)
-  // and choose multiple picks from each side (if available).
-  useEffect(() => {
-    if (!currentTeam || !allDraftOrders || !currentRoundOrders || currentPickIndex === undefined)
-      return;
-
-    // Get user's future picks (exclude the picks before the current pick)
-    const userFuturePicks = allDraftOrders.filter((order) => {
-      return (
-        order.team === currentTeam.team &&
-        (Number(order.round) > currentRound ||
-          (Number(order.round) === currentRound &&
-            currentRoundOrders.findIndex((o) => o.id === order.id) >= currentPickIndex))
-      );
-    });
-
-    // Get available trade partners (exclude the current team)
-    const tradePartnerSet = new Set(allDraftOrders.map((o) => o.team));
-    tradePartnerSet.delete(currentTeam.team);
-    const tradePartners = Array.from(tradePartnerSet);
-
-    // We'll propose between 1 and 3 proposals.
-    const proposalCount = Math.min(Math.floor(Math.random() * 3) + 1, tradePartners.length);
-    const proposals = [];
-    // Shuffle trade partners and select the first proposalCount
-    const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
-    const selectedPartners = shuffleArray([...tradePartners]).slice(0, proposalCount);
-
-    selectedPartners.forEach((partner) => {
-      // Get partner's future picks:
-      const partnerFuturePicks = allDraftOrders.filter((order) => {
-        return (
-          order.team === partner &&
-          (Number(order.round) > currentRound ||
-            (Number(order.round) === currentRound &&
-              currentRoundOrders.findIndex((o) => o.id === order.id) >= currentPickIndex))
-        );
-      });
-
-      if (userFuturePicks.length === 0 || partnerFuturePicks.length === 0) return;
-
-      // Choose multiple picks when possible.
-      // We'll pick a random number between 2 and 3 if available, else 1.
-      const getCount = (arr) =>
-        arr.length >= 2 ? Math.floor(Math.random() * Math.min(2, arr.length - 1)) + 2 : 1;
-
-      const userCount = getCount(userFuturePicks);
-      const partnerCount = getCount(partnerFuturePicks);
-
-      const userPicksSelected = shuffleArray([...userFuturePicks])
-        .slice(0, userCount)
-        .map((order) => order.id);
-      const partnerPicksSelected = shuffleArray([...partnerFuturePicks])
-        .slice(0, partnerCount)
-        .map((order) => order.id);
-
-      proposals.push({
-        tradePartner: partner,
-        userPicks: userPicksSelected,
-        partnerPicks: partnerPicksSelected,
-      });
-    });
-
-    console.log("Generated CPU trade proposals:", proposals);
-    setCpuTradeProposals(proposals);
-  }, [currentTeam, allDraftOrders, currentRound, currentPickIndex, currentRoundOrders]);
-
-  // NEW: For printing picks as "Round X Pick Y" in proposals
-  function formatPicks(ids) {
-    if (!ids || ids.length === 0) return "";
-    return ids.map((id) => getPickLabelById(id, allDraftOrders)).join("; ");
   }
 
-  return (
-    <div className="modal-overlay fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
-      <div className="modal-content bg-gray-800 p-4 rounded-lg shadow-xl w-11/12 max-w-[150vh] max-h-[95vh] overflow-y-scroll">
-        <h2 className="text-2xl font-bold mb-2 text-center">
-          {currentTeam && currentTeam.team} – Your Pick
-        </h2>
-        <p className="mb-4 text-center">Time remaining: {timer} sec</p>
-        <div className="flex justify-center mb-4">
+  // Error state
+  if (fetchError) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+        <div className="bg-red-900 p-6 rounded-lg max-w-md">
+          <h2 className="text-2xl font-bold mb-4">Error Loading Draft</h2>
+          <p className="mb-6">{fetchError}</p>
           <button
-            className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-            onClick={openTradeModal}
+            onClick={() => navigate("/mockdraft")}
+            className="px-6 py-2 bg-red-700 hover:bg-red-800 rounded-lg transition"
           >
-            Propose Trade
+            Return to Mock Draft
           </button>
         </div>
-        <div className="flex flex-col md:flex-row md:items-center md:space-x-4 mb-4">
-          <input
-            type="text"
-            placeholder="Search by name..."
-            className="flex-grow border p-2 rounded-lg bg-gray-700 text-white"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <div className="mt-2 md:mt-0">
-            <label className="mr-2">Position:</label>
-            <select
-              className="border p-2 rounded-lg bg-gray-700 text-white"
-              value={selectedPosition}
-              onChange={(e) => setSelectedPosition(e.target.value)}
-            >
-              {positions.map((pos) => (
-                <option key={pos} value={pos}>
-                  {pos}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="player-list mb-4 max-h-64 overflow-y-auto border p-4 rounded-lg bg-gray-700">
-          {filteredPlayers.length > 0 ? (
-            filteredPlayers.map((player) => (
-              <div
-                key={player.id}
-                className="player-item p-2 border-b cursor-pointer hover:bg-gray-600"
-                onClick={() => onPick(player)}
+      </div>
+    );
+  }
+  
+  // Main draft room UI
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-blue-900 text-white">
+      <div className="container mx-auto px-4 py-6">
+        {/* Header section with controls */}
+        <header className="mb-8">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                Draft Room – {draftConfig.draftYear}
+              </h1>
+              <p className="mt-2 text-xl text-gray-200">Current Round: {currentRound}</p>
+            </div>
+            
+            <div className="flex gap-3">
+              {isDraftStarted && !isRoundPaused && (
+                <button
+                  onClick={togglePause}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    isPaused 
+                      ? "bg-green-500 hover:bg-green-600 text-white" 
+                      : "bg-yellow-500 hover:bg-yellow-600 text-black"
+                  }`}
+                >
+                  {isPaused ? "Resume Draft" : "Pause Draft"}
+                </button>
+              )}
+              <button
+                onClick={() => navigate("/mockdraft")}
+                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all"
               >
-                {player.name} – {player.position} – Rating: {player.rating}
-              </div>
-            ))
-          ) : (
-            <p className="text-center">No players found.</p>
-          )}
-        </div>
-        <div className="cpu-trade-proposals border-t pt-2">
-          <h3 className="font-semibold text-lg mb-2">Trade Proposals:</h3>
-          {cpuTradeProposals.length > 0 ? (
-            cpuTradeProposals.map((proposal, idx) => {
-              const userPicksFormatted = formatPicks(proposal.userPicks);
-              const partnerPicksFormatted = formatPicks(proposal.partnerPicks);
-              return (
-                <div key={idx} className="trade-proposal border p-2 my-2 rounded bg-gray-600">
-                  <p>
-                    {proposal.tradePartner} has proposed a trade.
-                    <br />
-                    <strong>You receive:</strong> {partnerPicksFormatted}
-                    <br />
-                    <strong>You give up:</strong> {userPicksFormatted}
-                  </p>
-                  <div className="mt-2 space-x-2">
-                    <button
-                      className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                      onClick={() =>
-                        onAcceptCpuTradeProposal(
-                          proposal.tradePartner,
-                          proposal.userPicks,
-                          proposal.partnerPicks
-                        )
-                      }
-                    >
-                      Accept Proposal
-                    </button>
-                    <button
-                      className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                      onClick={() =>
-                        setCpuTradeProposals((prev) => prev.filter((p) => p !== proposal))
-                      }
-                    >
-                      Decline
-                    </button>
-                  </div>
+                Exit Draft
+              </button>
+            </div>
+          </div>
+          
+          {/* Round order indicator */}
+          <div className="mt-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg border border-gray-700">
+            <h2 className="text-xl font-semibold mb-3">Round {currentRound} Order:</h2>
+            <div className="flex flex-wrap gap-2">
+              {currentRoundOrdersState.map((order, idx) => (
+                <div 
+                  key={order.id} 
+                  className={`px-3 py-2 rounded-md font-medium flex items-center ${
+                    userTeams.includes(order.team) 
+                      ? "bg-blue-600" 
+                      : idx < currentPickIndex 
+                        ? "bg-green-600"
+                        : idx === currentPickIndex
+                          ? "bg-amber-500 text-black"
+                          : "bg-gray-700"
+                  }`}
+                >
+                  <span className="mr-1">{idx + 1}.</span>
+                  {order.team}
                 </div>
-              );
-            })
-          ) : (
-            <p className="text-center">No trade proposals.</p>
+              ))}
+            </div>
+          </div>
+        </header>
+
+        {/* Draft start/next round controls */}
+        <div className="mb-8 text-center">
+          {!isDraftStarted && (
+            <div className="bg-gray-800 bg-opacity-40 rounded-xl p-8 border border-gray-700">
+              <h2 className="text-2xl font-bold mb-6">Ready to start the draft?</h2>
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={startDraft}
+                  className="px-8 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg shadow-lg hover:from-green-600 hover:to-blue-600 font-bold transition-all"
+                >
+                  Start Draft
+                </button>
+                <button
+                  onClick={() => navigate("/mockdraft")}
+                  className="px-8 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-lg transition-all"
+                >
+                  Return to Setup
+                </button>
+              </div>
+            </div>
+          )}
+          
+          {isRoundPaused && currentRound < draftConfig.rounds && (
+            <div className="bg-gray-800 bg-opacity-40 rounded-xl p-8 border border-gray-700">
+              <h2 className="text-2xl font-bold mb-6">Round {currentRound} Complete</h2>
+              <button
+                onClick={beginNextRound}
+                className="px-8 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-600 font-bold transition-all"
+              >
+                Begin Round {currentRound + 1}
+              </button>
+            </div>
           )}
         </div>
-      </div>
-    </div>
-  );
-};
 
-// -------------------------------------
-// TRADE MODAL
-// -------------------------------------
-const TradeModal = ({
-  currentTeam,
-  allDraftOrders,
-  currentRound,
-  currentPickIndex,
-  currentRoundOrders,
-  onSubmitTrade,
-  onCancelTrade,
-}) => {
-  const getPickLabel = (order) => {
-    const ordersInRound = allDraftOrders.filter((o) => Number(o.round) === Number(order.round));
-    const pickNumber = ordersInRound.findIndex((o) => o.id === order.id) + 1;
-    return `Round ${order.round} Pick ${pickNumber} - ${order.team}`;
-  };
-
-  const tradePartnerOptions = useMemo(() => {
-    const teams = new Set(allDraftOrders.map((o) => o.team));
-    teams.delete(currentTeam.team);
-    return Array.from(teams);
-  }, [allDraftOrders, currentTeam.team]);
-
-  const [selectedUserPicks, setSelectedUserPicks] = useState([]);
-  const [selectedPartnerPicks, setSelectedPartnerPicks] = useState([]);
-  const [selectedTradePartner, setSelectedTradePartner] = useState(tradePartnerOptions[0] || "");
-
-  const availableUserPicks = useMemo(() => {
-    return allDraftOrders.filter((order) => {
-      if (order.team !== currentTeam.team) return false;
-      const orderRound = Number(order.round);
-      if (orderRound === currentRound) {
-        const idx = currentRoundOrders.findIndex((o) => o.id === order.id);
-        return idx >= currentPickIndex;
-      }
-      return orderRound > currentRound;
-    });
-  }, [allDraftOrders, currentTeam.team, currentRound, currentPickIndex, currentRoundOrders]);
-
-  const availablePartnerPicks = useMemo(() => {
-    return allDraftOrders.filter((order) => {
-      if (order.team !== selectedTradePartner) return false;
-      const orderRound = Number(order.round);
-      if (orderRound === currentRound) {
-        const idx = currentRoundOrders.findIndex((o) => o.id === order.id);
-        return idx >= currentPickIndex;
-      }
-      return orderRound > currentRound;
-    });
-  }, [allDraftOrders, selectedTradePartner, currentRound, currentPickIndex, currentRoundOrders]);
-
-  const toggleUserPick = (orderId) => {
-    setSelectedUserPicks((prev) =>
-      prev.includes(orderId) ? prev.filter((id) => id !== orderId) : [...prev, orderId]
-    );
-  };
-  const togglePartnerPick = (orderId) => {
-    setSelectedPartnerPicks((prev) =>
-      prev.includes(orderId) ? prev.filter((id) => id !== orderId) : [...prev, orderId]
-    );
-  };
-
-  const handleSubmitTrade = () => {
-    if (selectedUserPicks.length === 0 || selectedPartnerPicks.length === 0) {
-      alert("Must select at least one pick from both sides.");
-      return;
-    }
-    console.log("Submitting trade with:", { selectedTradePartner, selectedUserPicks, selectedPartnerPicks });
-    onSubmitTrade(selectedTradePartner, selectedUserPicks, selectedPartnerPicks);
-  };
-
-  return (
-    <div className="modal-overlay fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
-      <div className="modal-content bg-gray-800 p-4 rounded-lg shadow-xl w-11/12 max-w-2xl max-h-[80vh] overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4 text-center">Propose Trade</h2>
-        <div className="mb-4">
-          <label className="mr-2">Team to trade with:</label>
-          <select
-            value={selectedTradePartner}
-            onChange={(e) => setSelectedTradePartner(e.target.value)}
-            className="border p-2 rounded-lg bg-gray-700 text-white"
-          >
-            {tradePartnerOptions.map((team) => (
-              <option key={team} value={team}>
-                {team}
-              </option>
+        {/* Drafted picks section */}
+        {isDraftStarted && (
+          <section className="mt-8">
+            <h2 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2">Draft Results</h2>
+            
+            {Array.from({ length: currentRound }, (_, i) => i + 1).map((round) => (
+              <div key={round} className="mb-8">
+                <h3 className="text-2xl font-semibold mb-4 text-blue-300">Round {round}</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {groupedPicks[String(round)] && groupedPicks[String(round)].length > 0 ? (
+                    groupedPicks[String(round)].map((pick) => (
+                      <div
+                        key={pick.pickNumber}
+                        className={`p-3 rounded-lg shadow-md text-sm ${
+                          userTeams.includes(pick.team) 
+                            ? "bg-blue-900 bg-opacity-60" 
+                            : "bg-gray-800"
+                        }`}
+                      >
+                        <div className="flex items-center">
+                          <span className="font-bold text-lg mr-2">{pick.pickNumber}.</span>
+                          <span className="text-gray-400 mr-2">{pick.team}:</span>
+                          <span className="font-medium">{pick.playerName}</span>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="col-span-4 text-gray-400">No picks yet in round {round}.</p>
+                  )}
+                </div>
+              </div>
             ))}
-          </select>
-        </div>
-        <div className="flex flex-col md:flex-row gap-4">
-          {/* USER AVAILABLE PICKS */}
-          <div className="flex-1">
-            <h3 className="text-xl font-semibold mb-2">Your Available Picks</h3>
-            {availableUserPicks.length > 0 ? (
-              <ul>
-                {availableUserPicks.map((order) => (
-                  <li key={order.id} className="border p-2 mb-1 flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={selectedUserPicks.includes(order.id)}
-                      onChange={() => toggleUserPick(order.id)}
-                      className="mr-2"
-                    />
-                    <span>{getPickLabel(order)}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No available picks.</p>
-            )}
-          </div>
-          {/* PARTNER AVAILABLE PICKS */}
-          <div className="flex-1">
-            <h3 className="text-xl font-semibold mb-2">Partner's Available Picks</h3>
-            {availablePartnerPicks.length > 0 ? (
-              <ul>
-                {availablePartnerPicks.map((order) => (
-                  <li key={order.id} className="border p-2 mb-1 flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={selectedPartnerPicks.includes(order.id)}
-                      onChange={() => togglePartnerPick(order.id)}
-                      className="mr-2"
-                    />
-                    <span>{getPickLabel(order)}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No available picks from partner.</p>
-            )}
-          </div>
-        </div>
-        <div className="mt-4 flex justify-center gap-4">
-          <button
-            onClick={handleSubmitTrade}
-            className="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-600"
-          >
-            Submit Trade
-          </button>
-          <button
-            onClick={onCancelTrade}
-            className="px-4 py-2 bg-red-500 text-black rounded hover:bg-red-600"
-          >
-            Cancel Trade
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+            
+            {/* An invisible anchor to scroll into view */}
+            <div ref={picksEndRef} />
+          </section>
+        )}
 
-// -------------------------------------
-// DRAFT COMPLETED MODAL
-// -------------------------------------
-const DraftCompletedModal = ({ onSave, onReturnDraft, onReturnHome }) => {
-  return (
-    <div className="modal-overlay fixed inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center z-50">
-      <div className="modal-content bg-gradient-to-br from-purple-600 to-blue-500 p-4 rounded-lg shadow-2xl w-11/12 max-w-md text-center">
-        <h2 className="text-4xl font-bold mb-4">DRAFT COMPLETED!</h2>
-        <div className="space-x-4 flex flex-wrap justify-center">
-          <button
-            className="px-4 py-2 bg-green-400 text-black rounded-lg shadow hover:bg-green-500"
-            onClick={onSave}
-          >
-            Save Mock Draft
-          </button>
-          <button
-            className="px-4 py-2 bg-yellow-400 text-black rounded-lg shadow hover:bg-yellow-500"
-            onClick={onReturnDraft}
-          >
-            Return to Draft
-          </button>
-          <button
-            className="px-4 py-2 bg-red-400 text-black rounded-lg shadow hover:bg-red-500"
-            onClick={onReturnHome}
-          >
-            Return to Mock Draft Home
-          </button>
-        </div>
+        {/* Modals - using our extracted components */}
+        {userPickModalOpen && (
+          <UserPickModal
+            availablePlayers={availablePlayers}
+            timePerPick={draftConfig.timePerPick}
+            onPick={handleUserPick}
+            onTimeout={handleUserAutoPick}
+            currentTeam={currentTeam}
+            allDraftOrders={allDraftOrders}
+            currentRound={currentRound}
+            currentPickIndex={currentPickIndex}
+            currentRoundOrders={currentRoundOrdersState}
+            openTradeModal={() => setIsTradeModalOpen(true)}
+            onAcceptCpuTradeProposal={handleTradeSubmit}
+          />
+        )}
+
+        {isTradeModalOpen && currentTeam && (
+          <TradeModal
+            currentTeam={currentTeam}
+            allDraftOrders={allDraftOrders}
+            currentRound={currentRound}
+            currentPickIndex={currentPickIndex}
+            currentRoundOrders={currentRoundOrdersState}
+            onSubmitTrade={handleTradeSubmit}
+            onCancelTrade={() => setIsTradeModalOpen(false)}
+          />
+        )}
+
+        {isDraftComplete && (
+          <DraftCompletedModal
+            onReturnDraft={() => setIsDraftComplete(false)}
+            onReturnHome={() => navigate("/mockdraft")}
+            draftedPicks={draftedPicks}
+            userTeams={userTeams}
+            rounds={draftConfig.rounds}
+          />
+        )}
       </div>
     </div>
   );
