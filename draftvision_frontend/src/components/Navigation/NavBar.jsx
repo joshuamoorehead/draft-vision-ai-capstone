@@ -4,7 +4,7 @@ import { dvailogo } from '../Logos';
 import { useAuth } from '../../context/AuthContext';
 import Auth from '../Auth/Auth';
 
-// Icons (you may need to install react-icons: npm install react-icons)
+// Icons
 import { FaChevronDown, FaTools, FaUsers, FaSave, FaClipboardList } from 'react-icons/fa';
 
 const NavBar = () => {
@@ -69,6 +69,7 @@ const NavBar = () => {
   const handleSignOut = async () => {
     try {
       await signOut();
+      // No need for additional navigation, handled in AuthContext
       setShowUserDropdown(false);
     } catch (error) {
       console.error('Error signing out:', error);

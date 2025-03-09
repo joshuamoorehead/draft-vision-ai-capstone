@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-
 SUPABASE_URL = "https://pvuzvnemuhutrdmpchmi.supabase.co"  
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY"  
 SUPABASE_SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczMzQwNzA3OCwiZXhwIjoyMDQ4OTgzMDc4fQ.CacO6QreEEqWY4oAeMMVu4agV0Xit54Hzoh2JLMRzSE"  # service role key
@@ -109,3 +108,11 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 🔹 Session & Expiry Configurations
+SESSION_COOKIE_AGE = 86400  # 1 Day
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Keep session active on tab switch
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+
+# 🔹 Debug JWT Expiry
+SUPABASE_JWT_EXPIRY = 3600  # 1-hour expiration

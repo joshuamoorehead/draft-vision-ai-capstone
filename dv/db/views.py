@@ -37,7 +37,11 @@ class SignupAPIView(APIView):
         else:
             return JsonResponse(response.json(), status=response.status_code)
 
+<<<<<<< HEAD
 # Supabase Login API
+=======
+#  Supabase Login API
+>>>>>>> User
 class LoginAPIView(APIView):
     def post(self, request):
         email = request.data.get("email")
@@ -60,7 +64,11 @@ class LoginAPIView(APIView):
         else:
             return JsonResponse(response.json(), status=response.status_code)
 
+<<<<<<< HEAD
 # Player List API (Original)
+=======
+#  Player List API (Original)
+>>>>>>> User
 class PlayerList(APIView):
     def get(self, request):
         players = PlayerProfile.objects.all()
@@ -74,7 +82,11 @@ class PlayerList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
+<<<<<<< HEAD
 # NCAA Teams API (Original)
+=======
+#  NCAA Teams API (Original)
+>>>>>>> User
 class NCAATeamsList(APIView):
     def get(self, request):
         teams = NCAATeams.objects.all()
@@ -88,7 +100,11 @@ class NCAATeamsList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
+<<<<<<< HEAD
 # Yearly NCAA Team Data API (Original)
+=======
+#  Yearly NCAA Team Data API (Original)
+>>>>>>> User
 class YearlyNCAATeamDataList(APIView):
     def get(self, request):
         data = TeamSuccess.objects.all()
@@ -102,7 +118,11 @@ class YearlyNCAATeamDataList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
+<<<<<<< HEAD
 # Passing Leaders API (Fixed `req` to `request`)
+=======
+#  Passing Leaders API (Fixed `req` to `request`)
+>>>>>>> User
 class PassingLeadersList(APIView):
     def get(self, request):  # Fixed parameter name
         data = PassingLeaders.objects.all()
@@ -116,7 +136,11 @@ class PassingLeadersList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
+<<<<<<< HEAD
 # MockDraft API (Restored)
+=======
+#  MockDraft API (Restored)
+>>>>>>> User
 class MockDraftView(APIView):
     """
     Handles MockDraft data
