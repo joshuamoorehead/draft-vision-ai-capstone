@@ -9,9 +9,12 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-SUPABASE_URL = 'https://pvuzvnemuhutrdmpchmi.supabase.co'
-SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY'
+from dotenv import load_dotenv
+import os 
+load_dotenv()
 
+SUPABASE_URL = os.getenv('REACT_APP_SUPABASE_URL')
+SUPABASE_KEY = os.getenv('REACT_APP_SUPABASE_KEY')
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 pd.set_option('future.no_silent_downcasting', True)
 

@@ -2,10 +2,6 @@ import React, { useState, useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
 
 // LoginModal component - Renders a modal dialog for user login
-// Props:
-// - isOpen: boolean to control visibility of modal
-// - onClose: function to call when modal is closed
-// - switchToSignup: function to switch to signup modal
 const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
   // State for form fields
   const [email, setEmail] = useState('');
@@ -14,7 +10,7 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   
   // Get auth functions and state from context
-  const { signIn, resetPassword, error, setError } = useAuth();
+  const { signIn, resetPassword, signInWithGoogle, error, setError } = useAuth();
   
   // Refs for form elements (for potential focus management)
   const emailRef = useRef();
@@ -54,6 +50,16 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
     }
   };
 
+  // Handler for Google sign in
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      // The redirect will happen automatically
+    } catch (err) {
+      setError('Failed to sign in with Google');
+    }
+  };
+
   // Handler for password reset form submission
   const handleForgotPassword = async (e) => {
     e.preventDefault();
@@ -89,6 +95,33 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
         
         {/* Error message display */}
         {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">{error}</div>}
+        
+        {/* Google Sign In Button - Show only on login screen, not password reset */}
+        {!showForgotPassword && (
+          <button
+            onClick={handleGoogleSignIn}
+            className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 mb-4"
+          >
+            <img 
+              className="h-5 w-5 mr-2" 
+              src="https://www.svgrepo.com/show/475656/google-color.svg" 
+              alt="Google logo"
+            />
+            Continue with Google
+          </button>
+        )}
+        
+        {/* Divider between Google and email login - Only show on login screen */}
+        {!showForgotPassword && (
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">Or continue with email</span>
+            </div>
+          </div>
+        )}
         
         {/* Conditional rendering based on whether user is resetting password or logging in */}
         {showForgotPassword ? (
@@ -194,6 +227,16 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
             </div>
           </form>
         )}
+        
+        {/* Close button in top-right corner */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
     </div>
   );

@@ -1,11 +1,13 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { supabase, signUp, signIn, signInWithGoogle, signOut, resetPassword } from '../services/api';
+import { supabase, signUp, signIn, signInWithGoogle, resetPassword } from '../services/api';
 
 // Create the Auth Context
 const AuthContext = createContext();
 
 // Custom hook to use the auth context
 export const useAuth = () => useContext(AuthContext);
+
+
 
 // Provider component
 export const AuthProvider = ({ children }) => {
@@ -15,83 +17,91 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   // State to track any authentication errors
   const [error, setError] = useState('');
+  // State to control auth modals display
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isLoginModal, setIsLoginModal] = useState(true);
+  
 
-  // Check for existing session on component mount
+  // Check for existing session and set up auth listener on component mount
   useEffect(() => {
-    // Log when the auth provider initializes
     console.log("AuthProvider initializing");
-    
-    // Function to check if user has an active session
+  
     const checkSession = async () => {
       try {
-        // Get current session from Supabase
-        const { data, error } = await supabase.auth.getSession();
-        
-        console.log("Session check result:", data?.session?.user || "No session");
-        
-        if (error) {
-          throw error;
+        const storedSession = JSON.parse(localStorage.getItem("supabase.auth.token"));
+        if (storedSession) {
+          setUser(storedSession.user);
         }
+  
+        const { data, error } = await supabase.auth.getSession();
+        console.log("Session check result:", data?.session?.user || "No session");
+  
+        if (error) throw error;
         
-        // Set user from session if it exists, otherwise null
-        setUser(data?.session?.user || null);
+        if (data?.session) {
+          setUser(data.session.user);
+          localStorage.setItem("supabase.auth.token", JSON.stringify(data.session));
+        }
       } catch (err) {
         console.error('Error checking session:', err);
         setError(err.message);
       } finally {
-        // Mark loading as complete regardless of outcome
         setLoading(false);
       }
     };
-
-    // Check for existing session when component mounts
+  
     checkSession();
-
-    // Subscribe to auth changes
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log("Auth state changed:", event, session?.user?.email);
-        
-        // Update user state when auth state changes
-        setUser(session?.user || null);
-        setLoading(false);
-        
-        // If user logs in, create or update their profile
-        if (event === 'SIGNED_IN' && session?.user) {
-          try {
-            // Check if user profile exists
-            const { data: profile } = await supabase
-              .from('user_profiles')
-              .select('*')
-              .eq('user_id', session.user.id)
-              .single();
-              
-            // If profile doesn't exist, create one
-            if (!profile) {
-              await supabase.from('user_profiles').insert({
-                user_id: session.user.id,
-                email: session.user.email,
-                updated_at: new Date().toISOString()
-              });
-            }
-          } catch (err) {
-            console.error('Error managing user profile:', err);
-          }
-        }
+  
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("Auth state changed:", event, session?.user?.email);
+      
+      if (session) {
+        setUser(session.user);
+        localStorage.setItem("supabase.auth.token", JSON.stringify(session));
+      } else {
+        setUser(null);
+        localStorage.removeItem("supabase.auth.token");
       }
-    );
-
-    // Cleanup: unsubscribe when component unmounts
+    });
+  
     return () => {
-      authListener.subscription.unsubscribe();
+      authListener?.subscription?.unsubscribe();
     };
   }, []);
+  
 
+  // Set up a periodic session refresh
+  useEffect(() => {
+    const refreshInterval = setInterval(async () => {
+      if (user) {
+        try {
+          console.log("Attempting session refresh...");
+          const { data, error } = await supabase.auth.refreshSession();
+          if (error) {
+            console.warn("Session refresh error:", error);
+            if (error.message.includes('expired')) {
+              await supabase.auth.signOut();
+              window.location.reload();
+            }
+          } else if (data?.session) {
+            setUser(data.session.user);
+            localStorage.setItem("supabase.auth.token", JSON.stringify(data.session));
+          }
+        } catch (err) {
+          console.error("Error during session refresh:", err);
+        }
+      }
+    }, 60000); // Every 1 minute instead of 4 minutes
+  
+    return () => clearInterval(refreshInterval);
+  }, [user]);
+  
   // Create a wrapper for the signUp function with error handling
   const handleSignUp = async (email, password) => {
     try {
       // Clear any previous errors
       setError('');
+      setLoading(true);
       console.log("Signing up:", email);
       
       // Call signUp function from api.js
@@ -107,6 +117,8 @@ export const AuthProvider = ({ children }) => {
       console.error("Signup error:", err);
       setError(err.message);
       return { data: null, error: err };
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -115,6 +127,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Clear any previous errors
       setError('');
+      setLoading(true);
       console.log("Signing in:", email);
       
       // Call signIn function from api.js
@@ -124,12 +137,16 @@ export const AuthProvider = ({ children }) => {
       if (error) throw error;
       
       console.log("Signin successful");
+      // Close modal on successful login
+      setShowAuthModal(false);
       return { data, error: null };
     } catch (err) {
       // Set error state and return error for component handling
       console.error("Signin error:", err);
       setError(err.message);
       return { data: null, error: err };
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -138,6 +155,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Clear any previous errors
       setError('');
+      setLoading(true);
       console.log("Signing in with Google");
       
       // Call signInWithGoogle function from api.js
@@ -152,37 +170,42 @@ export const AuthProvider = ({ children }) => {
       console.error("Google signin error:", err);
       setError(err.message);
       return { data: null, error: err };
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Create a wrapper for the signOut function with error handling
   const handleSignOut = async () => {
     try {
-      // Clear any previous errors
       setError('');
-      console.log("Signing out");
+      setLoading(true);
       
-      // Call signOut function from api.js
-      const { error } = await signOut();
+      console.log("Signing out user");
       
-      // If there was an error, throw it to be caught
-      if (error) throw error;
+      // Properly sign out from Supabase first
+      await supabase.auth.signOut();
+  
+      // Clear storage
+      localStorage.removeItem('supabase.auth.token');
+      sessionStorage.removeItem('supabase.auth.token');
       
-      console.log("Signout successful");
-      return { error: null };
+      // Redirect to login page
+      window.location.replace('/about');
     } catch (err) {
-      // Set error state and return error for component handling
-      console.error("Signout error:", err);
+      console.error("Sign out error:", err);
       setError(err.message);
-      return { error: err };
+    } finally {
+      setLoading(false);
     }
   };
+  
 
   // Create a wrapper for the resetPassword function with error handling
   const handleResetPassword = async (email) => {
     try {
       // Clear any previous errors
       setError('');
+      setLoading(true);
       console.log("Resetting password for:", email);
       
       // Call resetPassword function from api.js
@@ -198,20 +221,61 @@ export const AuthProvider = ({ children }) => {
       console.error("Password reset error:", err);
       setError(err.message);
       return { error: err };
+    } finally {
+      setLoading(false);
     }
+  };
+
+  // Refresh the session data
+  const refreshSession = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase.auth.getSession();
+      if (error) throw error;
+      setUser(data?.session?.user || null);
+      return { data, error: null };
+    } catch (err) {
+      console.error("Session refresh error:", err);
+      return { data: null, error: err };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Modal control functions
+  const openLoginModal = () => {
+    setIsLoginModal(true);
+    setShowAuthModal(true);
+  };
+
+  const openSignupModal = () => {
+    setIsLoginModal(false);
+    setShowAuthModal(true);
+  };
+
+  const closeAuthModals = () => {
+    setShowAuthModal(false);
   };
 
   // Create value object with all auth functions and state to be provided by context
   const value = {
-    user,                 // Current authenticated user
+    user,                  // Current authenticated user
+    setUser,
     signUp: handleSignUp, // Function to register new users
     signIn: handleSignIn, // Function to login existing users
     signInWithGoogle: handleSignInWithGoogle, // Function to login with Google
     signOut: handleSignOut, // Function to logout
     resetPassword: handleResetPassword, // Function to reset password
+    refreshSession,       // Function to refresh session data
     error,                // Any auth errors
     setError,             // Function to set/clear errors
-    loading               // Loading state
+    loading,              // Loading state
+    // Modal control
+    showAuthModal,        // Whether auth modal is showing
+    isLoginModal,         // Whether in login or signup mode
+    openLoginModal,       // Function to open login modal
+    openSignupModal,      // Function to open signup modal
+    closeAuthModals       // Function to close auth modals
   };
 
   // Provide the auth context value to children components

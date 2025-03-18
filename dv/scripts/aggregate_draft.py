@@ -1,6 +1,8 @@
 import os
 import json
 import pandas as pd
+from dotenv import load_dotenv
+load_dotenv()
 # from db.models import PlayerProfile
 
 # this will see the player, draft round, and draft pick taken by each 
@@ -21,9 +23,9 @@ def upload_draft():
         300: 15
     }
 
-    SUPABASE_URL = 'https://pvuzvnemuhutrdmpchmi.supabase.co'
-    SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY'
 
+    SUPABASE_URL = os.getenv('REACT_APP_SUPABASE_URL')
+    SUPABASE_KEY = os.getenv('REACT_APP_SUPABASE_KEY')
     supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
     years = [2019, 2020, 2021, 2022, 2023, 2024]
