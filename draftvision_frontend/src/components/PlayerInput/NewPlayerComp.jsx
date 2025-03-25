@@ -89,14 +89,14 @@ const NewPlayerComp = () => {
                     {playerPosition}
                   </div>
                 </div>
-                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-1 rounded-full text-sm font-bold shadow-lg">
+                <div className="absolute -bottom-9 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-1 rounded-full text-sm font-bold shadow-lg">
                   {playerYear}
                 </div>
               </div>
             </div>
             
             {/* Player Name */}
-            <h2 className="text-3xl font-bold text-white text-center mb-6">
+            <h2 className="text-3xl relative -bottom-3 font-bold text-white text-center mb-6">
               {playerName}
             </h2>
             
