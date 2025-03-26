@@ -10,6 +10,8 @@ const NewPlayerComp = () => {
   const playerPosition = location.state?.position || "Unknown Position";
   const playerYear = location.state?.year || "Unknown Year";
   const draftRound = location.state?.draftRound || "Unknown Round";
+  const proCompName = location.state?.proCompName;
+  const proCompTeam = location.state?.proCompTeam || "Unkown Pro Comp Team";
   const navigate = useNavigate();
   
   const returnToPage = () => {
@@ -114,13 +116,14 @@ const NewPlayerComp = () => {
             {/* Draft Analysis */}
             <div className="bg-gray-800 bg-opacity-50 rounded-lg p-6 mb-8">
               <h3 className="text-xl font-bold text-white mb-3">Draft Analysis</h3>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed mb-3">
                 Based on the player's stats and our prediction model, {playerName} shows the qualities of a {getRoundSuffix(draftRound)} round prospect. 
                 {draftRound <= 3 ? 
                   ` As an early-round talent, they demonstrate exceptional ability at the ${playerPosition} position and could make an immediate impact in the NFL.` :
                   ` While not projected as an early pick, they show promising potential and could develop into a valuable contributor with the right coaching and system fit.`
                 }
               </p>
+              <h3 className="text-xl font-bold text-white mb-3">Pro Comp: {proCompName}, {proCompTeam}</h3>
             </div>
             
             {/* Button */}
