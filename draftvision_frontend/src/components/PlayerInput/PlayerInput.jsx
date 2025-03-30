@@ -11,7 +11,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const PlayerInput = () => {
   const [name, setName] = useState('');
-  const [position, setPosition] = useState(''); 
+  const [position, setPosition] = useState('');
   const [year, setYear] = useState('2024');
   const [draftRound, setDraftRound] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -465,7 +465,7 @@ const PlayerInput = () => {
       console.log("Calculated score:", score);
       const round = getDraftRound(score);
       setDraftRound(round);
-      await handleProComp();
+      //await handleProComp();
       console.log("Pro Comparison player: ", proCompName);
       navigate("/newplayercomp", { 
         state: { name, position, year, draftRound: round, proCompName, proCompTeam} 
