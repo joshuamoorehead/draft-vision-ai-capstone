@@ -3,9 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/main.css';
 import PageTransition from '../Common/PageTransition';
 
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 const PlayerInput = () => {
   const [name, setName] = useState('');
-  const [position, setPosition] = useState(''); 
+  const [position, setPosition] = useState('');
   const [year, setYear] = useState('2024');
   const [draftRound, setDraftRound] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -37,6 +43,9 @@ const PlayerInput = () => {
 
   const [statDefTackles, setStatDefTackles] = useState('');
   const [statDefInt, setStatDefInt] = useState('');
+
+  const [proCompName, setProCompName] = useState('');
+  const [proCompTeam, setProCompTeam] = useState('');
 
   // Get position color
   const getPositionColor = (pos) => {
@@ -445,7 +454,7 @@ const PlayerInput = () => {
   };
 
   // Handle creating a player with simplified stats and calculate draft round
-  const handleSimplePlayer = () => {
+  const handleSimplePlayer = async () => {
     if (!validateInputs()) return;
     
     setSubmitting(true);
@@ -456,14 +465,150 @@ const PlayerInput = () => {
       console.log("Calculated score:", score);
       const round = getDraftRound(score);
       setDraftRound(round);
+      //await handleProComp();
+      console.log("Pro Comparison player: ", proCompName);
       navigate("/newplayercomp", { 
-        state: { name, position, year, draftRound: round } 
+        state: { name, position, year, draftRound: round, proCompName, proCompTeam} 
       });
     } catch (err) {
       setError("Error creating player: " + err.message);
       setSubmitting(false);
     }
   };
+
+  const getProComparison = async (position) => {
+    try {
+        // Fetch all players of the same position
+        /*const { data: players, error } = await supabase
+            .from("db_playerprofile")
+            .select(`
+                name, position, draft_round, nfl_team, 
+                db_combine(*),
+                db_rbstats(*),
+                db_passingleaders(*),
+                db_recstats(*)
+            `)
+            .eq("position", position);*/
+
+        const {data : players, error} = await supabase
+              .from("db_playerprofile")
+              .select('name, position, draft_round, nfl_team')
+              .eq("position", position);
+
+        if (error) {
+            console.error("Error fetching players:", error);
+            return null;
+        }
+
+        if (!players || players.length === 0) {
+            console.warn("No players found for position:", position);
+            return null;
+        }
+
+        let bestMatch = null;
+        let bestScore = Infinity;
+        let score = 0;
+
+        console.log("Fetched Players:", players);
+
+
+        players.forEach(player => {
+            switch(position) {
+              case "QB1":
+                let proPassingYards = player.db_passingleaders?.passing_yards || 0;
+                let proRushingYards = player.db_passingleaders?.rushing_yards || 0;
+                let proTouchdowns = player.db_passingleaders?.touchdowns || 0;
+                let proInterceptions = player.db_passingleaders?.interceptions || 0;
+
+                score = 0;
+                score += Math.pow(statQBPassYds - proPassingYards, 2);
+                score += Math.pow(statQBRushYds - proRushingYards, 2);
+                score += Math.pow(statQBTds - proTouchdowns, 2);
+                score += Math.pow(statQBInt - proInterceptions, 2);
+                score = Math.sqrt(score);
+                break;
+              case "RB1":
+                let proRBRushYards = player.db_rbstats?.rushing_yards || 0;
+                let proRBCarries = player.db_rbstats?.carries || 0;
+                let proRBTouchdowns = player.db_rbstats?.touchdowns || 0;
+
+                score = 0;
+                score += Math.pow(statRBRushYds - proRBRushYards, 2);
+                score += Math.pow(statRBCarries - proRBCarries, 2);
+                score += Math.pow(statRBTds - proRBTouchdowns, 2);
+                score = Math.sqrt(score);
+                break;
+
+              case "WR1":
+                let proWRReceivingYards = player.db_recstats?.receiving_yards || 0;
+                let proWRReceptions =  player.db_recstats?.receptions || 0;
+                let proWRRecTouchdowns =  player.db_recstats?.touchdowns || 0;
+
+                score = 0;
+                score += Math.pow(statTERecYds - proWRReceivingYards, 2);
+                score += Math.pow(statTERec - proWRReceptions, 2);
+                score += Math.pow(statTETds - proWRRecTouchdowns, 2);
+                score = Math.sqrt(score);
+                break;
+              case "TE1":
+                let proReceivingYards = player.db_recstats?.receiving_yards || 0;
+                let proReceptions =  player.db_recstats?.receptions || 0;
+                let proRecTouchdowns =  player.db_recstats?.touchdowns || 0;
+
+                score = 0;
+                score += Math.pow(statTERecYds - proReceivingYards, 2);
+                score += Math.pow(statTERec - proReceptions, 2);
+                score += Math.pow(statTETds - proRecTouchdowns, 2);
+                score = Math.sqrt(score);
+                break;
+              case "OL1":
+
+                let proOL40 = player.db_combine?.forty || 0;
+                let proOLCone = player.db_combine?.threecone || 0;
+                let proOLShuttle = player.db_combine?.shuttle || 0;
+                let proOLBench = player.db_combine?.bench || 0;
+
+                score = 0;
+                score += Math.pow(statOL40 - proOL40, 2);
+                score += Math.pow(statOLCone - proOLCone, 2);
+                score += Math.pow(statOLShuttle - proOLShuttle, 2);
+                score += Math.pow(statOLBench - proOLBench, 2);
+                score = Math.sqrt(score);
+                break;
+
+              default:
+                score = 10;
+                let proDefRound = player.draft_round || 0;
+                //console.log("New Player Name: ", player.name);
+                if(proDefRound === draftRound) {
+                  score = 0;
+                }
+            }
+
+            if (score < bestScore) {
+                bestScore = score;
+                bestMatch = player;
+                //setProCompName(bestMatch.name);
+                //setProCompTeam(bestMatch.nfl_team);
+                //console.log("ProComped: ", proCompName);
+            }
+            
+        }
+      );
+        //setProCompName(bestMatch.name);
+        //setProCompTeam(bestMatch.nfl_team);
+        return bestMatch;
+    } catch (err) {
+        console.error("Error in getProComparison:", err);
+        return null;
+    }
+};
+
+const handleProComp = async () => {
+  const proPlayer = await getProComparison(position);
+  setProCompName(proPlayer.name);
+  setProCompTeam(proPlayer.nfl_team);
+}
 
   // Calculate raw score based on position and stats
   const getRawScore = () => {
@@ -501,7 +646,7 @@ const PlayerInput = () => {
           score = (parseFloat(statOL40) * -0.5) + 
                   (parseFloat(statOLCone) * -0.5) + 
                   (parseFloat(statOLShuttle) * -0.5) + 
-                  (parseFloat(statOLBench) * 2); 
+                  (parseFloat(statOLBench) * 2);
           break;
         default: 
           score = 0;
