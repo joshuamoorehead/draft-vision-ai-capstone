@@ -351,7 +351,20 @@ export const fetchPlayerDetails = async (playerId) => {
     throw error;
   }
 };
-
+export const fetchPlayerDetails2 = async (playerName) => {
+  try {
+    const { data, error } = await supabase
+      .from('db_playerprofile')
+      .select('*')
+      .eq('name', playerName)
+      .single();
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error fetching player details:', error.message);
+    throw error;
+  }
+};
 // Fetch stats based on player position.
 export const fetchPlayerStats = async (playerId, position) => {
   let tableName = '';
@@ -467,7 +480,7 @@ export const generatePlayerBio = async (player) => {
   if (player.bio && player.bio.trim() != null) {
     return player.bio;
   }
-  const apikey = process.env.REACT_APP_GOOGLE_API_KEY;
+  const apikey = 'AIzaSyBTiyxfxwVQ2UU3vVuGvCF_AQbEMoC2ziY';
   const genAI = new GoogleGenerativeAI(apikey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 

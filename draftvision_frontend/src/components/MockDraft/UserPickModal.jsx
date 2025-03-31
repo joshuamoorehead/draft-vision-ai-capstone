@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import PlayerCard from "../../components/LargeList/LLPlayerCard"; // Adjust the path if necessary
+import { fetchPlayerStats, fetchPlayerDetails2, fetch2024Players, supabase } from '../../services/api';
 
 // Helper function to format picks 
 const formatPicks = (ids, allDraftOrders) => {
@@ -19,6 +21,8 @@ function getPickLabelById(id, allDraftOrders) {
 
 const UserPickModal = ({
   availablePlayers,
+  // Parent may pass a full list of players as allPlayers.
+  allPlayers,
   timePerPick,
   onPick,
   onTimeout,
@@ -35,6 +39,23 @@ const UserPickModal = ({
   const [selectedPosition, setSelectedPosition] = useState("All");
   const [filteredPlayers, setFilteredPlayers] = useState(availablePlayers);
   const [cpuTradeProposals, setCpuTradeProposals] = useState([]);
+  const [playerCard, setPlayerCard] = useState(null); // For the player card modal
+
+  // New state: full list of players for impact graphs
+  const [fullPlayers, setFullPlayers] = useState(allPlayers || []);
+
+  // If the full list is not provided, fetch it from the API.
+  useEffect(() => {
+    if (!allPlayers || allPlayers.length === 0) {
+      fetch2024Players()
+        .then((data) => {
+          setFullPlayers(data);
+        })
+        .catch((err) => console.error("Error fetching full players list:", err));
+    } else {
+      setFullPlayers(allPlayers);
+    }
+  }, [allPlayers]);
 
   // Build positions dropdown
   const positions = useMemo(() => {
@@ -43,7 +64,7 @@ const UserPickModal = ({
     return ["All", ...Array.from(posSet)];
   }, [availablePlayers]);
 
-  // Filter player list
+  // Filter player list based on search term and position
   useEffect(() => {
     let players = availablePlayers.filter((p) =>
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -54,22 +75,52 @@ const UserPickModal = ({
     setFilteredPlayers(players);
   }, [searchTerm, selectedPosition, availablePlayers]);
 
-  // Timer for user picks
+  // Timer effect: if timer runs out, trigger onTimeout and close any open player card modal
   useEffect(() => {
     if (timer <= 0) {
+      console.log("Timer reached zero. Triggering onTimeout and closing player card modal.");
       onTimeout();
+      setPlayerCard(null);
       return;
     }
     const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
     return () => clearInterval(interval);
   }, [timer, onTimeout]);
 
+  // When a player card is requested, fetch the full player details by name,
+  // then fetch predictions and stats.
+  const handlePlayerCardOpen = async (player) => {
+    console.log("View button clicked for player:", player);
+    try {
+      // Get full player details using the player's name
+      const fullPlayer = await fetchPlayerDetails2(player.name);
+      console.log("Fetched full player details for", player.name, ":", fullPlayer);
+      // Fetch predictions for that player
+      const { data: predData, error: predError } = await supabase
+        .from('db_predictions_2024')
+        .select('*')
+        .eq('player_id', fullPlayer.id)
+        .maybeSingle();
+      if (predError) {
+        console.error("Error fetching predictions for player", fullPlayer.id, predError.message);
+      }
+      fullPlayer.predictions = predData || { 
+        xAV: parseFloat((11.31 / (fullPlayer.draft_round + 0.5) + 1.51).toFixed(2)) 
+      };
+      const stats = await fetchPlayerStats(fullPlayer.id, fullPlayer.position);
+      console.log("Fetched stats for player", fullPlayer.id, ":", stats);
+      setPlayerCard({ ...fullPlayer, stats });
+    } catch (err) {
+      console.error("Error fetching player details or stats:", err.message);
+      setPlayerCard({ ...player, stats: [] });
+    }
+  };
+
   // Generate CPU trade proposals
   useEffect(() => {
     if (!currentTeam || !allDraftOrders || !currentRoundOrders || currentPickIndex === undefined)
       return;
 
-    // Get user's future picks (exclude the picks before the current pick)
     const userFuturePicks = allDraftOrders.filter((order) => {
       return (
         order.team === currentTeam.team &&
@@ -79,20 +130,16 @@ const UserPickModal = ({
       );
     });
 
-    // Get available trade partners (exclude the current team)
     const tradePartnerSet = new Set(allDraftOrders.map((o) => o.team));
     tradePartnerSet.delete(currentTeam.team);
     const tradePartners = Array.from(tradePartnerSet);
 
-    // We'll propose between 1 and 3 proposals.
     const proposalCount = Math.min(Math.floor(Math.random() * 3) + 1, tradePartners.length);
     const proposals = [];
-    // Shuffle trade partners and select the first proposalCount
     const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
     const selectedPartners = shuffleArray([...tradePartners]).slice(0, proposalCount);
 
     selectedPartners.forEach((partner) => {
-      // Get partner's future picks:
       const partnerFuturePicks = allDraftOrders.filter((order) => {
         return (
           order.team === partner &&
@@ -104,8 +151,6 @@ const UserPickModal = ({
 
       if (userFuturePicks.length === 0 || partnerFuturePicks.length === 0) return;
 
-      // Choose multiple picks when possible.
-      // We'll pick a random number between 2 and 3 if available, else 1.
       const getCount = (arr) =>
         arr.length >= 2 ? Math.floor(Math.random() * Math.min(2, arr.length - 1)) + 2 : 1;
 
@@ -144,7 +189,9 @@ const UserPickModal = ({
         <h2 className="text-3xl font-bold mb-2 text-center text-white">
           {currentTeam && currentTeam.team} – <span className="text-blue-400">Your Pick</span>
         </h2>
-        <p className="mb-6 text-center text-gray-300">Time remaining: <span className="text-yellow-400 font-semibold">{timer}</span> sec</p>
+        <p className="mb-6 text-center text-gray-300">
+          Time remaining: <span className="text-yellow-400 font-semibold">{timer}</span> sec
+        </p>
         
         {/* Trade button */}
         <div className="flex justify-center mb-6">
@@ -207,8 +254,7 @@ const UserPickModal = ({
             filteredPlayers.map((player) => (
               <div
                 key={player.id}
-                className="player-item p-3 border-b border-gray-700 cursor-pointer hover:bg-gray-700 hover:bg-opacity-70 transition-all duration-150 flex justify-between items-center"
-                onClick={() => onPick(player)}
+                className="player-item p-3 border-b border-gray-700 flex justify-between items-center"
               >
                 <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center mr-3 text-xs font-bold">
@@ -216,10 +262,21 @@ const UserPickModal = ({
                   </div>
                   <span className="font-medium">{player.name}</span>
                 </div>
-                <div className="text-gray-300">
-                  Rating: <span className={`font-semibold ${player.rating >= 85 ? 'text-green-400' : player.rating >= 75 ? 'text-yellow-400' : 'text-gray-400'}`}>
-                    {player.rating}
-                  </span>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => onPick(player)}
+                    className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition"
+                  >
+                    Draft
+                  </button>
+                  <button
+                    onClick={() => handlePlayerCardOpen(player)}
+                    className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             ))
@@ -286,10 +343,35 @@ const UserPickModal = ({
               })}
             </div>
           ) : (
-            <p className="text-center p-4 text-gray-400 italic bg-gray-800 bg-opacity-30 rounded-lg">No trade proposals at this time.</p>
+            <p className="text-center p-4 text-gray-400 italic bg-gray-800 bg-opacity-30 rounded-lg">
+              No trade proposals at this time.
+            </p>
           )}
         </div>
       </div>
+      
+      {/* Player Card Modal */}
+      {playerCard && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="bg-gray-900 p-4 rounded-lg relative max-w-3xl w-full">
+            <button
+              className="absolute top-2 right-2 text-white text-xl font-bold"
+              onClick={() => {
+                setPlayerCard(null);
+              }}
+            >
+              &times;
+            </button>
+            <PlayerCard 
+              player={playerCard} 
+              stats={playerCard.stats || []} 
+              onBioGenerated={() => {}} 
+              // Pass the full players list for impact graphs; if not available, fallback to availablePlayers.
+              players={fullPlayers.length > 0 ? fullPlayers : availablePlayers} 
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -46,6 +46,9 @@ const DraftRoom = () => {
   const { draftId } = useParams();
   const [isViewingDetails, setIsViewingDetails] = useState(false);
 
+  // New state to track when the current pick started
+  const [pickStartTime, setPickStartTime] = useState(Date.now());
+
   // Draft data states
   const [allDraftOrders, setAllDraftOrders] = useState([]);
   const [currentRoundOrdersState, setCurrentRoundOrdersState] = useState([]);
@@ -193,7 +196,9 @@ const DraftRoom = () => {
   // Update current round orders when round changes
   useEffect(() => {
     setCurrentRoundOrdersState(ordersByRound[currentRound] || []);
-    setCurrentPickIndex(0);
+    if (currentPickIndex !== 0) {
+      setCurrentPickIndex(currentPickIndex);
+    }
   }, [ordersByRound, currentRound]);
 
   // Auto-pause and resume when round changes
@@ -202,12 +207,10 @@ const DraftRoom = () => {
       setIsPaused(true);
       setTimeout(() => {
         setIsPaused(false);
-        processNextPick(0);
       }, 100);
     }
-    // eslint-disable-next-line
   }, [currentRound]);
-
+  
   // Resume processing when unpausing
   useEffect(() => {
     if (isDraftStarted && !isPaused && !isRoundPaused) {
@@ -320,14 +323,15 @@ const DraftRoom = () => {
     console.log("processNextPick => order:", order);
     setCurrentTeam(order);
 
+    // When starting a new pick, update pickStartTime so that the timer remains in sync
     if (userTeams.includes(order.team)) {
+      setPickStartTime(Date.now());
       console.log("User controlled pick. Opening user pick modal.");
       setUserPickModalOpen(false);
       setUserPickModalOpen(true);
     } else {
       setUserPickModalOpen(false);
       timerRef.current = setTimeout(() => {
-        
         if (isPaused) return;
         const cpuPlayer = pickBestAvailable();
         console.log("CPU picked:", cpuPlayer);
@@ -404,6 +408,7 @@ const DraftRoom = () => {
 
   // Begin next round: simply increment the round.
   const beginNextRound = () => {
+    setCurrentPickIndex(0);
     setIsRoundPaused(true);
     setCurrentRound((prev) => prev + 1);
     setIsRoundPaused(false);
@@ -412,12 +417,12 @@ const DraftRoom = () => {
   // Handle trade submission
   const handleTradeSubmit = (tradePartner, userPicks, partnerPicks) => {
     console.log("handleTradeSubmit =>", { tradePartner, userPicks, partnerPicks });
-
-    // 1) Build updated orders
+  
+    // Update orders: assign partner picks to currentTeam and user picks to tradePartner
     const updatedOrders = allDraftOrders.map((order) => {
       if (partnerPicks.includes(order.id)) {
-        console.log(`Order ${order.id} => from ${order.team} => ${primaryUserTeam}`);
-        return { ...order, team: primaryUserTeam };
+        console.log(`Order ${order.id} => from ${order.team} => ${currentTeam.team}`);
+        return { ...order, team: currentTeam.team };
       } else if (userPicks.includes(order.id)) {
         console.log(`Order ${order.id} => from ${order.team} => ${tradePartner}`);
         return { ...order, team: tradePartner };
@@ -425,31 +430,31 @@ const DraftRoom = () => {
       return order;
     });
     console.log("Updated Orders =>", updatedOrders);
-
-    // 2) Update state
+  
+    // Update state
     setAllDraftOrders(updatedOrders);
     setIsTradeModalOpen(false);
     setUserPickModalOpen(false);
-
-    // 3) Update current round orders from our pre-grouped lookup
-    setCurrentRoundOrdersState(updatedOrders.filter((o) => Number(o.round) === currentRound));
-
-    // 4) Clear leftover CPU pick timer
+  
+    // Update current round orders
+    setCurrentRoundOrdersState(
+      updatedOrders.filter((o) => Number(o.round) === currentRound)
+    );
+  
+    // Clear any CPU pick timer
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
-
-    // 5) Pause so the newly updated ownership "commits"
+  
+    // Pause then auto-resume to allow the updated ownership to commit
     setIsPaused(true);
     console.log("Draft is now paused after trade—auto-resuming in 100ms...");
-
-    // 6) Auto-resume after 100ms
     setTimeout(() => {
       setIsPaused(false);
     }, 100);
   };
-
+  
   // Loading state
   if (isLoading) {
     return (
@@ -482,6 +487,12 @@ const DraftRoom = () => {
       </div>
     );
   }
+  
+  // Compute remaining time for the current pick so that the TradeModal timer stays in sync
+  const computedRemainingTime = Math.max(
+    draftConfig.timePerPick - Math.floor((Date.now() - pickStartTime) / 1000),
+    0
+  );
   
   // Main draft room UI
   return (
@@ -541,6 +552,13 @@ const DraftRoom = () => {
                 </div>
               ))}
             </div>
+            {/* Conditional messages for any user team with no picks this round */}
+            {userTeams
+              .filter(team => !currentRoundOrdersState.some(order => order.team === team))
+              .map(team => (
+                <p key={team} className="mt-2 text-gray-400">{team} has no picks this round.</p>
+              ))
+            }
           </div>
         </header>
 
@@ -643,6 +661,8 @@ const DraftRoom = () => {
             currentRoundOrders={currentRoundOrdersState}
             onSubmitTrade={handleTradeSubmit}
             onCancelTrade={() => setIsTradeModalOpen(false)}
+            timePerPick={draftConfig.timePerPick}
+            remainingTime={computedRemainingTime}
           />
         )}
 

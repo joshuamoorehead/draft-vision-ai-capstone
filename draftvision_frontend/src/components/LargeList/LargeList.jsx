@@ -5,15 +5,22 @@ import PageTransition from '../Common/PageTransition';
 import { useAuth } from '../../context/AuthContext';
 import PlayerCard from './LLPlayerCard';
 
+// Import logo images for the first five players
+import calebwilliams from '../Logos/CalebWilliams.png';
+import drakemaye from '../Logos/DrakeMaye.jpg';
+import joealt from '../Logos/JoeAlt.png';
+import jadendaniels from '../Logos/JaydenDaniels.png';
+import marvinharrison from '../Logos/MarvinHarrison.png';
+
 const LargeList = () => {
   const { user } = useAuth();
-  const [position, setPosition] = useState(''); 
-  const [team, setTeam] = useState(''); 
-  const [nflteam, setNflTeam] = useState(''); 
-  const [allPlayers, setAllPlayers] = useState([]); 
-  const [players, setPlayers] = useState([]); 
+  const [position, setPosition] = useState('');
+  const [team, setTeam] = useState('');
+  const [nflteam, setNflTeam] = useState('');
+  const [allPlayers, setAllPlayers] = useState([]);
+  const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedPlayerStats, setSelectedPlayerStats] = useState(null);
 
@@ -76,6 +83,16 @@ const LargeList = () => {
     },
   ];
 
+  // Array of logos corresponding to the first five players
+  // Order is: CalebWilliams, DrakeMaye, JoeAlt, JaydenDaniels, MarvinHarrison
+  const playerLogos = [
+    calebwilliams,
+    jadendaniels,
+    drakemaye,
+    marvinharrison,
+    joealt,
+  ];
+
   // Load players on component mount
   useEffect(() => {
     const loadPlayers = async () => {
@@ -83,12 +100,9 @@ const LargeList = () => {
       setError(null);
       
       try {
-        // Try to load players from API
         console.log('Fetching 2024 players...');
         let fetchedPlayers = [];
-
         try {
-          // First attempt: use the fetch2024Players function
           const data = await fetch2024Players();
           if (data && data.length > 0) {
             fetchedPlayers = data;
@@ -98,8 +112,6 @@ const LargeList = () => {
           }
         } catch (apiError) {
           console.warn('Could not fetch from fetch2024Players:', apiError);
-          
-          // Second attempt: try direct Supabase query
           try {
             const { data, error } = await supabase
               .from('db_playerprofile')
@@ -113,7 +125,9 @@ const LargeList = () => {
             if (data && data.length > 0) {
               fetchedPlayers = data.map(player => ({
                 ...player,
-                predictions: player.db_predictions_2024 || { xAV: parseFloat((11.31 / (player.draft_round + 0.5) + 1.51).toFixed(2)) }
+                predictions: player.db_predictions_2024 || {
+                  xAV: parseFloat((11.31 / (player.draft_round + 0.5) + 1.51).toFixed(2))
+                }
               }));
               console.log('Players fetched successfully using direct Supabase query');
             } else {
@@ -124,13 +138,12 @@ const LargeList = () => {
             throw new Error('Failed to fetch player data from all sources');
           }
         }
-
-        // If we have no data after all attempts, use dummy data
+  
         if (!fetchedPlayers || fetchedPlayers.length === 0) {
           console.warn('No player data received from any source, using dummy data');
           fetchedPlayers = dummyPlayers;
         }
-
+  
         // Sort by draft order
         fetchedPlayers.sort((a, b) => {
           if (a.draft_round !== b.draft_round) {
@@ -138,23 +151,22 @@ const LargeList = () => {
           }
           return a.draft_pick - b.draft_pick;
         });
-
+  
         setAllPlayers(fetchedPlayers);
         setPlayers(fetchedPlayers);
       } catch (err) {
         console.error('Error loading players:', err);
         setError(err.message || 'Failed to load player data');
-        // Fall back to dummy data
         setAllPlayers(dummyPlayers);
         setPlayers(dummyPlayers);
       } finally {
         setLoading(false);
       }
     };
-
+  
     loadPlayers();
   }, []);
-
+  
   // Filter players when filters change
   useEffect(() => {
     let filteredPlayers = allPlayers;
@@ -181,8 +193,8 @@ const LargeList = () => {
     
     setPlayers(filteredPlayers);
   }, [position, team, nflteam, allPlayers]);
-
-  // Handle player selection
+  
+  // Handle player selection (to open modal)
   const handlePlayerSelect = async (playerId) => {
     const playerData = allPlayers.find((player) => player.id === playerId);
     if (playerData) {
@@ -198,7 +210,7 @@ const LargeList = () => {
       console.error('Player not found:', playerId);
     }
   };
-
+  
   // Callback to update a player's bio when it is generated
   const handleBioGenerated = (playerId, generatedBio) => {
     setAllPlayers(prev =>
@@ -212,14 +224,14 @@ const LargeList = () => {
       )
     );
   };
-
+  
   // Close player popup
   const closePopup = () => {
     setSelectedPlayer(null);
     setSelectedPlayerStats(null);
   };
-
-  // Get position color
+  
+  // Get position color based on position string
   const getPositionColor = (pos) => {
     const positionColors = {
       'QB': 'from-red-500 to-red-600',
@@ -239,8 +251,8 @@ const LargeList = () => {
     }
     return 'from-gray-500 to-gray-600';
   };
-
-  // Get NFL team color
+  
+  // Get NFL team color based on team string
   const getNFLTeamColor = (team) => {
     const teamColors = {
       'ARI': 'from-red-600 to-red-800',
@@ -286,8 +298,8 @@ const LargeList = () => {
     }
     return 'from-gray-600 to-gray-800';
   };
-
-  // Get rating color class
+  
+  // Get rating color class based on a numeric rating
   const getRatingColorClass = (rating) => {
     if (!rating) return 'text-gray-600';
     if (rating >= 10) return 'text-green-600';
@@ -295,7 +307,7 @@ const LargeList = () => {
     if (rating >= 4) return 'text-yellow-600';
     return 'text-red-600';
   };
-
+  
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 flex items-center justify-center">
@@ -310,7 +322,7 @@ const LargeList = () => {
       </div>
     );
   }
-
+  
   if (error && (!players || players.length === 0)) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 flex items-center justify-center">
@@ -331,7 +343,7 @@ const LargeList = () => {
       </div>
     );
   }
-
+  
   return (
     <PageTransition>
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 relative">
@@ -343,7 +355,7 @@ const LargeList = () => {
           {/* Grid pattern overlay */}
           <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
         </div>
-
+  
         {/* Main Content */}
         <div className="container mx-auto px-4 py-12 relative z-10">
           <div className="text-center mb-10">
@@ -433,7 +445,7 @@ const LargeList = () => {
                 </div>
               </div>
             </div>
-
+  
             {/* Players List */}
             <div className="flex-1">
               {players.length > 0 ? (
@@ -450,6 +462,14 @@ const LargeList = () => {
                         </div>
                         <div>
                           <h3 className="text-xl font-bold text-white">{player.name}</h3>
+                          {/* Show logo image for the first five players */}
+                          {index < 5 && (
+                            <img
+                              src={playerLogos[index]}
+                              alt={`${player.name} logo`}
+                              className="w-48 h-64 my-2"
+                            />
+                          )}
                           <div className="flex flex-wrap gap-2 mt-1">
                             <span className="text-sm bg-gray-700 bg-opacity-70 px-2 py-1 rounded-lg text-gray-200">
                               {player.school}
@@ -518,7 +538,7 @@ const LargeList = () => {
             <div className="bg-gray-800 bg-opacity-70 p-6 rounded-2xl shadow-2xl border border-indigo-500 border-opacity-30 w-full max-w-4xl max-h-[85vh] overflow-y-auto relative">
               <button
                 className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200 bg-gray-800 bg-opacity-70 rounded-full p-2"
-                onClick={closePopup}
+                onClick={() => closePopup()}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -533,7 +553,7 @@ const LargeList = () => {
             </div>
           </div>
         )}
-        
+  
         {/* Custom styling for animations */}
         <style jsx>{`
           @keyframes blob {
