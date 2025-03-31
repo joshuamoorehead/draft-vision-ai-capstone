@@ -7,9 +7,8 @@ import PageTransition from '../Common/PageTransition';
 import { dvailogo } from '../Logos';
 
 // Initialize Supabase client
-const supabaseUrl = "https://pvuzvnemuhutrdmpchmi.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY";
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const PlayerComparison = () => {
@@ -22,13 +21,14 @@ const PlayerComparison = () => {
     const [search2, setSearch2] = useState("");
     const [stats1, setStats1] = useState(null);
     const [stats2, setStats2] = useState(null);
-    const [dropdown1, setDropdown1] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [loadingStats, setLoadingStats] = useState(false);
     const timeoutRef = useRef(null);
     const maxVisiblePlayers = 20;
     
+    //Both dropdowns now working
+    const [dropdown1, setDropdown1] = useState(false);
     const [dropdown2, setDropdown2] = useState(false);
     
 
@@ -169,12 +169,6 @@ const handlePlayerSelect = async (player, setPlayerState, setStatsState, isFirst
         const stats = await fetchPlayerStats(player);
         setStatsState(stats);
         
-        // Close the appropriate dropdown
-        if (isFirstPlayer) {
-            setDropdown1(false);
-        } else {
-            setDropdown2(false);
-        }
     } catch (err) {
         console.error("Error selecting player:", err);
     } finally {
@@ -352,7 +346,7 @@ const handlePlayerSelect = async (player, setPlayerState, setStatsState, isFirst
                                         />
                                     </div>
                                     
-                                    {search1 && (
+                                    {search1 && dropdown1 && (
                                         <ul className="absolute z-10 mt-2 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-60 overflow-y-auto">
                                             {filteredPlayers1.length > 0 ? (
                                                 filteredPlayers1.map((player) => (
@@ -362,6 +356,7 @@ const handlePlayerSelect = async (player, setPlayerState, setStatsState, isFirst
                                                         onClick={() => {
                                                             handlePlayerSelect(player, setPlayer1, setStats1);
                                                             setSearch1(player.name);
+                                                            setDropdown1(false);
                                                         }}
                                                     >
                                                         <button className="w-full text-left px-4 py-3 hover:bg-gray-700 focus:bg-gray-700 focus:outline-none">
@@ -416,11 +411,13 @@ const handlePlayerSelect = async (player, setPlayerState, setStatsState, isFirst
                                             className="w-full pl-10 pr-4 py-3 bg-gray-800 bg-opacity-50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
                                             placeholder="Search for a player..."
                                             value={search2}
-                                            onChange={(e) => setSearch2(e.target.value)}
+                                            onChange={(e) => {
+                                                setSearch2(e.target.value); 
+                                                setDropdown2(true);}}
                                         />
                                     </div>
                                     
-                                    {search2 && (
+                                    {search2 && dropdown2 && (
                                         <ul className="absolute z-10 mt-2 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-60 overflow-y-auto">
                                             {filteredPlayers2.length > 0 ? (
                                                 filteredPlayers2.map((player) => (
@@ -430,6 +427,7 @@ const handlePlayerSelect = async (player, setPlayerState, setStatsState, isFirst
                                                         onClick={() => {
                                                             handlePlayerSelect(player, setPlayer2, setStats2);
                                                             setSearch2(player.name);
+                                                            setDropdown2(false);
                                                         }}
                                                     >
                                                         <button className="w-full text-left px-4 py-3 hover:bg-gray-700 focus:bg-gray-700 focus:outline-none">
@@ -550,8 +548,9 @@ const handlePlayerSelect = async (player, setPlayerState, setStatsState, isFirst
         const isNumeric = !isNaN(parseFloat(stat1)) && !isNaN(parseFloat(stat2));
         const stat1Value = isNumeric ? parseFloat(stat1) : stat1;
         const stat2Value = isNumeric ? parseFloat(stat2) : stat2;
-        const isStat1Better = isNumeric ? stat1Value > stat2Value : false;
-        const isStat2Better = isNumeric ? stat2Value > stat1Value : false;
+        const isStat1Better = isNumeric || label.toLowerCase().includes("height") ? stat1Value > stat2Value : false;
+        //const isStat2Better = isNumeric ? stat2Value > stat1Value : false;
+        const isStat2Better = isNumeric || label.toLowerCase().includes("height") ? stat2Value > stat1Value : false;
 
         return (
             <div key={key} className="bg-gray-800 bg-opacity-50 rounded-lg p-2">

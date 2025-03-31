@@ -9,8 +9,8 @@ const prevPlayer = "";
 const prevBio = "";
 
 // Supabase credentials
-const SUPABASE_URL = 'https://pvuzvnemuhutrdmpchmi.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2dXp2bmVtdWh1dHJkbXBjaG1pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDcwNzgsImV4cCI6MjA0ODk4MzA3OH0.fB_b1Oe_2ckp9FGh6vmEs2jIRHjdDoaqzHVsM8NRZRY';
+const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL;
+const SUPABASE_KEY = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
 // Initialize Supabase client with explicit storage options
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -99,7 +99,7 @@ export const signUp = async (email, password, username = '') => {
       password,
       options: {
         // For development, you can enable auto-confirm to bypass email verification
-        emailRedirectTo: 'https://draftvision-ai-cfd79.web.app/auth/callback',
+        emailRedirectTo: `${process.env.REACT_APP_APP_URL}/auth/callback`,
         data: {
           // Additional user metadata if needed
           username: defaultUsername,
@@ -176,7 +176,7 @@ export const signInWithGoogle = async () => {
   return await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: 'https://draftvision-ai-cfd79.web.app/auth/callback',
+      redirectTo: `${process.env.REACT_APP_APP_URL}/auth/callback`,
       // Enable auto-confirm to bypass email verification
       // This is useful for development, can be removed in production
       skipBrowserRedirect: false
