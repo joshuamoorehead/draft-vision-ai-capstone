@@ -99,6 +99,9 @@ const TradeModal = ({
     onSubmitTrade(selectedTradePartner, selectedUserPicks, selectedPartnerPicks);
   };
 
+  // Determine if the trade submission is enabled.
+  const isSubmitEnabled = selectedUserPicks.length > 0 && selectedPartnerPicks.length > 0;
+
   return (
     <div className="modal-overlay fixed inset-0 bg-gradient-to-br from-gray-900 via-indigo-900 to-black bg-opacity-95 backdrop-filter backdrop-blur-sm flex justify-center items-center z-50">
       <div className="modal-content relative bg-gray-800 bg-opacity-70 p-6 rounded-2xl shadow-2xl border border-indigo-500 border-opacity-30 w-11/12 max-w-3xl max-h-[85vh] overflow-y-auto">
@@ -313,7 +316,10 @@ const TradeModal = ({
         <div className="mt-6 flex justify-center gap-4">
           <button
             onClick={handleSubmitTrade}
-            className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-medium rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+            disabled={!isSubmitEnabled}
+            className={`px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-medium rounded-lg shadow-lg transition-all duration-200 transform focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 ${
+              !isSubmitEnabled ? "opacity-50 cursor-not-allowed" : "hover:from-green-600 hover:to-emerald-700 hover:scale-105"
+            }`}
           >
             <div className="flex items-center">
               <svg
