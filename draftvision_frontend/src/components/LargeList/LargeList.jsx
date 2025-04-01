@@ -17,6 +17,88 @@ import michaelpenix from '../Logos/MichaelPenix.png';
 import romeodunze from '../Logos/RomeOdunze.png';
 import jjmccarthy from '../Logos/JJMcCarthy.png';
 
+// FlipCard Component
+const FlipCard = ({ front, back }) => {
+  const [flipped, setFlipped] = useState(false);
+
+  // Prevent event propagation so clicking the image doesn't trigger the player box's onClick
+  const handleFlip = (e) => {
+    e.stopPropagation();
+    setFlipped(!flipped);
+  };
+
+  return (
+    <div className="flip-card" onClick={handleFlip}>
+      <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
+        <div className="flip-card-front">
+          {front}
+        </div>
+        <div className="flip-card-back flex items-center justify-center">
+          {back}
+        </div>
+      </div>
+      <style jsx>{`
+        .flip-card {
+          perspective: 1000px;
+          cursor: pointer;
+          width: 12rem; /* Tailwind's w-48 */
+          height: 16rem; /* Tailwind's h-64 */
+        }
+        .flip-card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+        }
+        .flip-card-inner.flipped {
+          transform: rotateY(180deg);
+        }
+        .flip-card-front,
+        .flip-card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+        }
+        .flip-card-back {
+          transform: rotateY(180deg);
+          background: white;
+          color: black;
+          padding: 1rem;
+        }
+        /* Remove transform transition from the image so the animation can take over */
+        .flip-card-front img {
+          transition: box-shadow 0.3s ease;
+        }
+        /* On hover, animate the image with a pop-out and shake effect */
+        .flip-card-front img:hover {
+          animation: popShake 0.5s infinite ease-in-out;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        @keyframes popShake {
+          0% {
+            transform: translateZ(30px) scale(1.1) translateX(0);
+          }
+          25% {
+            transform: translateZ(30px) scale(1.1) translateX(-3px);
+          }
+          50% {
+            transform: translateZ(30px) scale(1.1) translateX(3px);
+          }
+          75% {
+            transform: translateZ(30px) scale(1.1) translateX(-3px);
+          }
+          100% {
+            transform: translateZ(30px) scale(1.1) translateX(0);
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 const LargeList = () => {
   const { user } = useAuth();
   const [position, setPosition] = useState('');
@@ -29,7 +111,7 @@ const LargeList = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedPlayerStats, setSelectedPlayerStats] = useState(null);
 
-  // Dummy data as fallback
+  // Dummy data as fallback (including a one-sentence description for each player)
   const dummyPlayers = [
     {
       id: 1,
@@ -41,6 +123,7 @@ const LargeList = () => {
       nfl_team: 'ARI',
       predictions: { xAV: 12.5 },
       biography: 'Travis Hunter is a highly regarded American football player known for his exceptional skills as both a wide receiver and cornerback.',
+      description: 'Travis Hunter is an elite WR/CB from Colorado with remarkable versatility.',
     },
     {
       id: 2,
@@ -52,6 +135,7 @@ const LargeList = () => {
       nfl_team: 'TEN',
       predictions: { xAV: 8.6 },
       biography: 'Explosive running back known for his combination of speed and power.',
+      description: 'Raheim Sanders is a dynamic RB from South Carolina known for his speed.',
     },
     {
       id: 3,
@@ -63,6 +147,7 @@ const LargeList = () => {
       nfl_team: 'DAL',
       predictions: { xAV: 7.2 },
       biography: 'Former Ohio State quarterback known for his strong arm and pocket presence.',
+      description: 'Kyle McCord is a poised QB from Syracuse with a powerful arm.',
     },
     {
       id: 4,
@@ -74,6 +159,7 @@ const LargeList = () => {
       nfl_team: 'MIA',
       predictions: { xAV: 3.8 },
       biography: 'Dynamic playmaker with exceptional speed and agility.',
+      description: 'Seven McGee is a fast and agile WR from Albany.',
     },
     {
       id: 5,
@@ -85,6 +171,7 @@ const LargeList = () => {
       nfl_team: 'CHI',
       predictions: { xAV: 15.3 },
       biography: 'Talented quarterback who has shown exceptional leadership and passing ability.',
+      description: 'Shedeur Sanders is a standout QB from Colorado with top-tier leadership.',
     },
   ];
 
@@ -472,13 +559,24 @@ const LargeList = () => {
                         </div>
                         <div>
                           <h3 className="text-xl font-bold text-white">{player.name}</h3>
-                          {/* Show logo image for the first 10 players */}
+                          {/* Wrap the FlipCard in a container with margin-bottom for separation */}
                           {index < 10 && (
-                            <img
-                              src={playerLogos[index]}
-                              alt={`${player.name} logo`}
-                              className="w-48 h-64 my-2"
-                            />
+                            <div className="mb-4">
+                              <FlipCard
+                                front={
+                                  <img
+                                    src={playerLogos[index]}
+                                    alt={`${player.name} logo`}
+                                    className="w-48 h-64 my-2"
+                                  />
+                                }
+                                back={
+                                  <div className="p-4">
+                                    <p className="text-sm">{player.description}</p>
+                                  </div>
+                                }
+                              />
+                            </div>
                           )}
                           <div className="flex flex-wrap gap-2 mt-1">
                             <span className="text-sm bg-gray-700 bg-opacity-70 px-2 py-1 rounded-lg text-gray-200">
