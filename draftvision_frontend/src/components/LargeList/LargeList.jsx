@@ -5,12 +5,17 @@ import PageTransition from '../Common/PageTransition';
 import { useAuth } from '../../context/AuthContext';
 import PlayerCard from './LLPlayerCard';
 
-// Import logo images for the first five players
+// Import logo images for the first ten players
 import calebwilliams from '../Logos/CalebWilliams.png';
 import drakemaye from '../Logos/DrakeMaye.jpg';
 import joealt from '../Logos/JoeAlt.png';
 import jadendaniels from '../Logos/JaydenDaniels.png';
 import marvinharrison from '../Logos/MarvinHarrison.png';
+import maliknabers from '../Logos/MalikNabers.png';
+import jclatham from '../Logos/JCLatham.png';
+import michaelpenix from '../Logos/MichaelPenix.png';
+import romeodunze from '../Logos/RomeOdunze.png';
+import jjmccarthy from '../Logos/JJMcCarthy.png';
 
 const LargeList = () => {
   const { user } = useAuth();
@@ -83,14 +88,19 @@ const LargeList = () => {
     },
   ];
 
-  // Array of logos corresponding to the first five players
-  // Order is: CalebWilliams, DrakeMaye, JoeAlt, JaydenDaniels, MarvinHarrison
+  // Array of logos corresponding to the first ten players
+  // Order: CalebWilliams, JaydenDaniels, DrakeMaye, MarvinHarrison, JoeAlt, MalikNabers, JCLatham, MichaelPenix, RomeOdunze, JJMcCarthy
   const playerLogos = [
     calebwilliams,
     jadendaniels,
     drakemaye,
     marvinharrison,
     joealt,
+    maliknabers,
+    jclatham,
+    michaelpenix,
+    romeodunze,
+    jjmccarthy,
   ];
 
   // Load players on component mount
@@ -462,8 +472,8 @@ const LargeList = () => {
                         </div>
                         <div>
                           <h3 className="text-xl font-bold text-white">{player.name}</h3>
-                          {/* Show logo image for the first five players */}
-                          {index < 5 && (
+                          {/* Show logo image for the first 10 players */}
+                          {index < 10 && (
                             <img
                               src={playerLogos[index]}
                               alt={`${player.name} logo`}
