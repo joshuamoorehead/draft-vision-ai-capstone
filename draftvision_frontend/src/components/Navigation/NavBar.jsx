@@ -89,7 +89,11 @@ const NavBar = () => {
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo - Links to Home/About */}
         <Link to="/about" className="flex items-center">
-          <img src={dvailogo} alt="Draft Vision AI Logo" className="h-16 w-auto mr-4" />
+        <img
+  src={dvailogo}
+  alt="Draft Vision AI Logo"
+  className="h-48 w-auto mr-4"  // Changed from h-16 to h-24 for a larger logo
+/>
         </Link>
 
         {/* Main Navigation */}
