@@ -18,7 +18,16 @@ import AccountSettings from './components/Account/AccountSettings';
 import Community from './components/Community/Community';
 import { reconnectRealtimeClient } from './services/api';
 
-// Recovery button component
+/**
+ * Context to track when a user is in the signup process.
+ * This prevents the loading screen from showing during registration.
+ */
+const SignupContext = React.createContext(false);
+
+/**
+ * Recovery button component that allows users to manually reconnect
+ * when they experience connection issues.
+ */
 const RecoveryButton = () => {
   const [isRecovering, setIsRecovering] = useState(false);
   
@@ -55,12 +64,18 @@ const RecoveryButton = () => {
   );
 };
 
-// Wrapper to conditionally display the NavBar
+/**
+ * Main application content component that handles routing and conditional rendering
+ * based on authentication state and current route.
+ */
 const AppContent = () => {
   const location = useLocation();
-  const { loading, setUser } = useAuth(); // Only use loading from auth context
+  const { loading, setUser } = useAuth();
   const [showRecoveryButton, setShowRecoveryButton] = useState(false);
   const [loadingTimeout, setLoadingTimeout] = useState(false);
+  
+  // Access the signup context to avoid showing loading screen during registration
+  const isSigningUp = React.useContext(SignupContext);
   
   // Routes where the NavBar should be hidden
   const hideNavbarRoutes = ['/draftroom', '/auth/callback'];
@@ -70,7 +85,7 @@ const AppContent = () => {
     location.pathname.startsWith(route)
   );
 
-  // Initialize visibility change handler
+  // Refresh authentication when tab becomes visible again
   useEffect(() => {
     const handleVisibilityChange = async () => {
       if (document.visibilityState === 'visible') {
@@ -85,7 +100,7 @@ const AppContent = () => {
             window.location.reload();
           }
         } else if (data?.session) {
-          setUser(data.session.user); // ✅ Ensure setUser is correctly updated
+          setUser(data.session.user);
           localStorage.setItem("supabase.auth.token", JSON.stringify(data.session));
         }
   
@@ -97,10 +112,9 @@ const AppContent = () => {
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [setUser]); // ✅ Add setUser to dependency array
+  }, [setUser]);
   
-
-  // Show recovery button after extended loading
+  // Show recovery button after extended loading time
   useEffect(() => {
     let timer;
     
@@ -121,8 +135,8 @@ const AppContent = () => {
     return () => clearTimeout(timer);
   }, [loading]);
 
-  // Standard loading indicator with timeout detection
-  if (loading) {
+  // Only show loading screen if not in the middle of signing up
+  if (loading && !isSigningUp) {
     return (
       <div className="min-h-screen bg-indigo-900 flex flex-col items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
@@ -147,7 +161,6 @@ const AppContent = () => {
           )}
         </div>
         
-        {/* Always show the recovery button during loading */}
         {showRecoveryButton && <RecoveryButton />}
       </div>
     );
@@ -191,13 +204,21 @@ const AppContent = () => {
   );
 };
 
+/**
+ * Main App component that sets up the authentication context and routing
+ */
 function App() {
+  // State to track if user is currently in signup process
+  const [isSigningUp, setIsSigningUp] = useState(false);
+
   return (
-    <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </AuthProvider>
+    <SignupContext.Provider value={isSigningUp}>
+      <AuthProvider signupStateHandler={setIsSigningUp}>
+        <Router>
+          <AppContent />
+        </Router>
+      </AuthProvider>
+    </SignupContext.Provider>
   );
 }
 

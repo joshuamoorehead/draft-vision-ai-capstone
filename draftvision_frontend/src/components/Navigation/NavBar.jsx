@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { dvailogo } from '../Logos';
 import { useAuth } from '../../context/AuthContext';
 import Auth from '../Auth/Auth';
+import ModalPortal from '../Common/ModalPortal';
 
 // Icons
 import { FaChevronDown, FaTools, FaUsers, FaSave, FaClipboardList } from 'react-icons/fa';
@@ -15,6 +16,7 @@ const NavBar = () => {
   // States for dropdowns and auth modals
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(true);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [showToolsDropdown, setShowToolsDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   
@@ -43,15 +45,31 @@ const NavBar = () => {
   const openLoginModal = () => {
     setIsLoginModal(true);
     setShowAuthModal(true);
+    setRegistrationSuccess(false);
   };
 
   const openSignupModal = () => {
     setIsLoginModal(false);
     setShowAuthModal(true);
+    setRegistrationSuccess(false);
   };
 
   const closeAuthModals = () => {
-    setShowAuthModal(false);
+    // Only close if not in registration success state
+    if (!registrationSuccess) {
+      setShowAuthModal(false);
+    }
+  };
+
+  // Handler for successful registration
+  const handleRegistrationSuccess = () => {
+    setRegistrationSuccess(true);
+  };
+
+  // Handler for completed registration flow
+  const handleRegistrationComplete = () => {
+    setRegistrationSuccess(false);
+    setIsLoginModal(true);
   };
 
   // Toggle dropdown menus
@@ -89,7 +107,11 @@ const NavBar = () => {
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo - Links to Home/About */}
         <Link to="/about" className="flex items-center">
-          <img src={dvailogo} alt="Draft Vision AI Logo" className="h-16 w-auto mr-4" />
+        <img
+  src={dvailogo}
+  alt="Draft Vision AI Logo"
+  className="h-48 w-auto mr-4"  // Changed from h-16 to h-24 for a larger logo
+/>
         </Link>
 
         {/* Main Navigation */}
@@ -265,11 +287,18 @@ const NavBar = () => {
 
       {/* Auth modals */}
       {showAuthModal && (
-        <Auth
-          isLoginOpen={isLoginModal}
-          isSignupOpen={!isLoginModal}
-          closeModals={closeAuthModals}
-        />
+        <ModalPortal>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]">
+            <Auth
+              isLoginOpen={isLoginModal}
+              isSignupOpen={!isLoginModal}
+              closeModals={closeAuthModals}
+              onRegistrationSuccess={handleRegistrationSuccess}
+              onRegistrationComplete={handleRegistrationComplete}
+              registrationSuccess={registrationSuccess}
+            />
+          </div>
+        </ModalPortal>
       )}
     </nav>
   );

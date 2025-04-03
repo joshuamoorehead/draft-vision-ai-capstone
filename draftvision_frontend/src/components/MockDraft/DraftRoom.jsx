@@ -44,6 +44,7 @@ const DraftRoom = () => {
   const [fetchError, setFetchError] = useState(null);
   const { draftId } = useParams();
   const [isViewingDetails, setIsViewingDetails] = useState(false);
+  const [hasPendingDraft, setHasPendingDraft] = useState(false);
 
   // New state to track when the current pick started
   const [pickStartTime, setPickStartTime] = useState(Date.now());
@@ -67,8 +68,46 @@ const DraftRoom = () => {
   const [userTeams, setUserTeams] = useState([]);
   const [primaryUserTeam, setPrimaryUserTeam] = useState('');
 
+  // Check for pending draft in localStorage
+  useEffect(() => {
+    const checkForPendingDraft = () => {
+      try {
+        const pendingDraftStr = localStorage.getItem('pendingDraftData');
+        if (pendingDraftStr) {
+          const pendingDraft = JSON.parse(pendingDraftStr);
+          
+          // Only restore if we have actual draft results
+          if (pendingDraft && pendingDraft.results && pendingDraft.results.length > 0) {
+            console.log("Found pending draft in localStorage:", pendingDraft);
+            
+            // If we're coming from a new login, restore the draft
+            if (user && !hasPendingDraft) {
+              setDraftedPicks(pendingDraft.results);
+              setUserTeams(pendingDraft.selectedTeams);
+              
+              // We need to make sure the draft is marked as completed
+              setIsDraftStarted(true);
+              setIsDraftComplete(true);
+              
+              setHasPendingDraft(true);
+              
+              console.log("Restored pending draft after login");
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Error checking for pending draft:", err);
+      }
+    };
+    
+    checkForPendingDraft();
+  }, [user]);
+
   // Check for required state and redirect if missing
   useEffect(() => {
+    // Skip this check if we're viewing a draft ID or have a pending draft
+    if (draftId || hasPendingDraft) return;
+    
     if (!location.state || !location.state.selectedTeams) {
       console.warn("Missing required state, redirecting to mock draft setup");
       navigate("/mockdraft");
@@ -92,7 +131,7 @@ const DraftRoom = () => {
       setUserTeams(teams);
       setPrimaryUserTeam(teams[0]);
     }
-  }, [location.state, navigate]);
+  }, [location.state, navigate, draftId, hasPendingDraft]);
 
   // Build positions dropdown
   const positions = useMemo(() => {
@@ -119,6 +158,12 @@ const DraftRoom = () => {
   // Fetch draft data
   useEffect(() => {
     const fetchData = async () => {
+      // Skip fetching if we have a pending draft
+      if (hasPendingDraft) {
+        setIsLoading(false);
+        return;
+      }
+      
       setIsLoading(true);
       setFetchError(null);
       try {
@@ -176,10 +221,10 @@ const DraftRoom = () => {
       }
     };
     
-    if (draftConfig.draftYear) {
+    if (draftConfig.draftYear && !hasPendingDraft) {
       fetchData();
     }
-  }, [draftConfig]);
+  }, [draftConfig, hasPendingDraft]);
 
   // Group orders by round
   const ordersByRound = useMemo(() => {

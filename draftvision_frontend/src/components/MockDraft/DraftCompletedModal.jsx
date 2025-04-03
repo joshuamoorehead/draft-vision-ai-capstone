@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Auth from '../Auth/Auth';
 import { supabase } from '../../services/api';
+import { getDraftGrade } from '../../utils/DraftAnalysis';
 
 const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTeams, rounds }) => {
   const [draftName, setDraftName] = useState(`Draft ${new Date().toLocaleDateString()}`);
@@ -11,6 +12,43 @@ const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTe
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user } = useAuth();
 
+  // Store draft data when component mounts
+  useEffect(() => {
+    // Save the current draft data in localStorage
+    const draftData = {
+      name: draftName,
+      rounds: rounds,
+      selectedTeams: userTeams,
+      results: draftedPicks
+    };
+    localStorage.setItem('pendingDraftData', JSON.stringify(draftData));
+    
+    return () => {
+      // Only remove when explicitly navigating away or after successful save
+      if (success) {
+        localStorage.removeItem('pendingDraftData');
+      }
+    };
+  }, [draftName, rounds, userTeams, draftedPicks, success]);
+
+  // Check for user login changes
+  useEffect(() => {
+    // If user just logged in and we have pending data, close auth modal
+    if (user && showAuthModal) {
+      setShowAuthModal(false);
+      // Try to auto-save after login if we have draft data
+      const pendingData = localStorage.getItem('pendingDraftData');
+      if (pendingData && user) {
+        // Wait a moment for auth to settle
+        setTimeout(() => {
+          if (!saving) {
+            handleSaveDraft();
+          }
+        }, 500);
+      }
+    }
+  }, [user, showAuthModal]);
+
   const saveDraft = async (draftData) => {
     try {
       console.log("Saving draft with data:", draftData);
@@ -18,22 +56,31 @@ const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTe
       if (!user?.id) {
         throw new Error("You must be logged in to save drafts");
       }
-
-      // Format data exactly as per our new table structure
+  
+      // Calculate draft score using the utility function
+      const draftForGrading = {
+        id: Date.now().toString(), // Temporary ID for grading if real ID not available yet
+        results: draftData.results
+      };
+      const { score, letter } = getDraftGrade(draftForGrading);
+  
+      // Format data exactly as per our table structure
       const dataToInsert = {
         user_id: user.id,
         name: draftData.name,
         rounds: draftData.rounds,
         selected_teams: draftData.selectedTeams, 
         results: draftData.results,
-        is_public: false
+        is_public: false,
+        score: score, // Add the score
+        grade: letter  // Add the letter grade
       };
       
       console.log("Formatted data to insert:", dataToInsert);
       
-      // Insert into the NEW table we created
+      // Insert into the table
       const { data, error } = await supabase
-        .from('user_drafts') // Using the new table name
+        .from('user_drafts')
         .insert([dataToInsert]);
         
       if (error) {
@@ -82,6 +129,8 @@ const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTe
       
       // Wait a moment before returning to show success message
       setTimeout(() => {
+        // Clean up stored draft data
+        localStorage.removeItem('pendingDraftData');
         onReturnHome();
       }, 2000);
     } catch (err) {
@@ -93,6 +142,13 @@ const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTe
   };
 
   const closeAuthModal = () => {
+    setShowAuthModal(false);
+  };
+
+  const handleAuthSuccess = () => {
+    // This will be called when user successfully logs in
+    // DraftCompletedModal will detect the login in the useEffect
+    console.log("Auth successful, user can now save the draft");
     setShowAuthModal(false);
   };
 
@@ -248,6 +304,7 @@ const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTe
           isLoginOpen={true} 
           isSignupOpen={false} 
           closeModals={closeAuthModal}
+          onAuthSuccess={handleAuthSuccess}
         />
       )}
       
