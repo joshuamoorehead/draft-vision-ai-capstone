@@ -14,9 +14,11 @@ const SUPABASE_KEY = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
 // Initialize Supabase client with explicit storage options
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-// export {supabase}
 
-// Function to reconnect the realtime client
+/**
+ * Reconnects the realtime client to ensure live data updates work properly
+ * @returns {Promise<boolean>} Success status of reconnection attempt
+ */
 export const reconnectRealtimeClient = async () => {
   try {
     console.log("Attempting to reconnect realtime client...");
@@ -52,7 +54,11 @@ export const reconnectRealtimeClient = async () => {
   }
 };
 
-// Helper function to check if a username is already taken
+/**
+ * Checks if a username is already taken
+ * @param {string} username - The username to check
+ * @returns {Promise<Object>} Object containing availability status
+ */
 export const checkUsernameAvailability = async (username) => {
   try {
     const { data, error } = await supabase
@@ -76,60 +82,87 @@ export const checkUsernameAvailability = async (username) => {
   }
 };
 
-// Auth functions - simplifies working with Supabase auth
-export const signUp = async (email, password, username = '') => {
+/**
+ * Registers a new user in the system
+ * @param {string} email - User's email
+ * @param {string} password - User's password
+ * @param {string} username - User's username
+ * @returns {Promise<Object>} Registration result with data or error
+ */
+export const signUp = async (email, password, username) => {
   try {
-    // Generate a default username if none provided
-    const defaultUsername = username || email.split('@')[0];
+    // Check if email already exists
+    const { data: existingEmailData } = await supabase
+      .from('user_profiles')
+      .select('email')
+      .eq('email', email);
     
-    // Check if username is already taken
-    if (username) {
-      const { available, error: checkError } = await checkUsernameAvailability(username);
-      if (checkError) throw checkError;
-      if (!available) {
-        return { 
-          data: null, 
-          error: { message: 'Username is already taken. Please choose another.' }
-        };
-      }
+    if (existingEmailData && existingEmailData.length > 0) {
+      return { 
+        data: null, 
+        error: { message: 'Email already registered. Please login instead.' }
+      };
     }
     
+    // Check if username is already taken
+    const { data: existingUsernameData } = await supabase
+      .from('user_profiles')
+      .select('username')
+      .eq('username', username);
+    
+    if (existingUsernameData && existingUsernameData.length > 0) {
+      return { 
+        data: null, 
+        error: { message: 'Username is already taken. Please choose another.' }
+      };
+    }
+    
+    // Sign up the user through Supabase Auth
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        // For development, you can enable auto-confirm to bypass email verification
-        emailRedirectTo: `${process.env.REACT_APP_APP_URL}/auth/callback`,
         data: {
-          // Additional user metadata if needed
-          username: defaultUsername,
-          registered_at: new Date().toISOString(),
+          username: username,
         }
       }
     });
     
-    if (!error && data?.user) {
-      // Create user profile record
-      await supabase.from('user_profiles').upsert({
-        user_id: data.user.id,
-        email: email,
-        username: defaultUsername,
-        updated_at: new Date().toISOString(),
-        created_at: new Date().toISOString(),
-        notification_preferences: {
-          draft_reminders: true,
-          draft_results: true
-        }
-      });
+    if (error) {
+      return { data: null, error };
     }
     
-    return { data, error };
+    // Create user profile in the database
+    if (data?.user) {
+      const { error: profileError } = await supabase
+        .from('user_profiles')
+        .insert({
+          user_id: data.user.id,
+          email: email,
+          username: username,
+          updated_at: new Date().toISOString(),
+          created_at: new Date().toISOString(),
+        });
+      
+      if (profileError) {
+        console.error("Error creating user profile:", profileError);
+        return { data, error: profileError };
+      }
+    }
+    
+    return { data, error: null };
   } catch (e) {
     console.error("Error in signUp function:", e);
-    return { data: null, error: e };
+    return { data: null, error: { message: e.message || 'Unknown error' } };
   }
 };
 
+/**
+ * Signs in an existing user
+ * @param {string} email - User's email
+ * @param {string} password - User's password
+ * @returns {Promise<Object>} Sign-in result with data or error
+ */
 export const signIn = async (email, password) => {
   const result = await supabase.auth.signInWithPassword({
     email,
@@ -172,19 +205,24 @@ export const signIn = async (email, password) => {
   return result;
 };
 
+/**
+ * Initiates Google OAuth sign-in
+ * @returns {Promise<Object>} OAuth redirect response
+ */
 export const signInWithGoogle = async () => {
   return await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
       redirectTo: `${process.env.REACT_APP_APP_URL}/auth/callback`,
-      // Enable auto-confirm to bypass email verification
-      // This is useful for development, can be removed in production
       skipBrowserRedirect: false
     }
   });
 };
 
-// Sign Out
+/**
+ * Signs out the current user
+ * @returns {Promise<Object>} Sign-out result
+ */
 export const signOut = async () => {
   try {
     // Call Supabase signOut
@@ -192,7 +230,6 @@ export const signOut = async () => {
     if (error) throw error;
     
     // Clear any local storage items related to auth
-    // This is important to ensure the UI updates properly
     localStorage.removeItem('supabase.auth.token');
     
     // Return success
@@ -203,6 +240,11 @@ export const signOut = async () => {
   }
 };
 
+/**
+ * Sends a password reset email
+ * @param {string} email - User's email
+ * @returns {Promise<Object>} Result of password reset request
+ */
 export const resetPassword = async (email) => {
   try {
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -217,7 +259,11 @@ export const resetPassword = async (email) => {
   }
 };
 
-// Get user profile by ID
+/**
+ * Retrieves a user's profile by ID
+ * @param {string} userId - User ID to fetch profile for
+ * @returns {Promise<Object|null>} User profile or null if not found
+ */
 export const getUserProfile = async (userId) => {
   try {
     if (!userId) return null;
@@ -243,7 +289,11 @@ export const getUserProfile = async (userId) => {
   }
 };
 
-// Get username by user ID
+/**
+ * Gets username for a user by their ID
+ * @param {string} userId - User ID to fetch username for
+ * @returns {Promise<string|null>} Username or null if not found
+ */
 export const getUsernameById = async (userId) => {
   try {
     if (!userId) return null;
@@ -269,7 +319,10 @@ export const getUsernameById = async (userId) => {
   }
 };
 
-// Data fetching functions
+/**
+ * Fetches all player data from the database
+ * @returns {Promise<Array>} Array of player objects
+ */
 export const fetchPlayers = async () => {
   try {
     const { data, error } = await supabase
@@ -285,8 +338,11 @@ export const fetchPlayers = async () => {
   }
 };
 
-// returns all players from 2024 (made for the large list)
-// joins players with their xAV rating in the predictions_2024 table. 
+/**
+ * Fetches 2024 draft players with predictions
+ * @param {string|null} position - Optional position filter
+ * @returns {Promise<Array>} Array of player objects with predictions
+ */
 export const fetch2024Players = async(position = null) => {
   try {
     const playersQuery = supabase.from('db_playerprofile').select('*').eq('year_drafted', 2024).range(0,9999);
@@ -311,6 +367,11 @@ export const fetch2024Players = async(position = null) => {
   }
 }
 
+/**
+ * Fetches player predictions for 2024 draft
+ * @param {string|null} position - Optional position filter
+ * @returns {Promise<Array>} Array of prediction objects
+ */
 export const getPredictions = async (position = null) => {
   try {
     const query = supabase.from('db_predictions_2024').select('*').range(0,99999);
@@ -324,6 +385,11 @@ export const getPredictions = async (position = null) => {
   }
 }
 
+/**
+ * Fetches player rankings
+ * @param {string|null} position - Optional position filter
+ * @returns {Promise<Array>} Array of ranking objects
+ */
 export const getRankings = async (position = null) => {
   try {
     const query = supabase.from('db_prospect_rankings').select('*');
@@ -337,6 +403,11 @@ export const getRankings = async (position = null) => {
   }
 };
 
+/**
+ * Fetches detailed information for a specific player by ID
+ * @param {number} playerId - Player ID to fetch
+ * @returns {Promise<Object>} Player details
+ */
 export const fetchPlayerDetails = async (playerId) => {
   try {
     const { data, error } = await supabase
@@ -351,6 +422,12 @@ export const fetchPlayerDetails = async (playerId) => {
     throw error;
   }
 };
+
+/**
+ * Fetches detailed information for a specific player by name
+ * @param {string} playerName - Player name to fetch
+ * @returns {Promise<Object>} Player details
+ */
 export const fetchPlayerDetails2 = async (playerName) => {
   try {
     const { data, error } = await supabase
@@ -365,7 +442,13 @@ export const fetchPlayerDetails2 = async (playerName) => {
     throw error;
   }
 };
-// Fetch stats based on player position.
+
+/**
+ * Fetches player statistics based on position
+ * @param {number} playerId - Player ID to fetch stats for
+ * @param {string} position - Player position to determine table
+ * @returns {Promise<Array|null>} Player stats or null if position not supported
+ */
 export const fetchPlayerStats = async (playerId, position) => {
   let tableName = '';
   if (position.toLowerCase() === 'qb') {
@@ -382,7 +465,7 @@ export const fetchPlayerStats = async (playerId, position) => {
     tableName = 'db_defensivepositionalstats';
   } 
   else {
-    // For other positions (like TE), return null or handle accordingly.
+    // For positions without specific stat tables
     return null;
   }
 
@@ -399,7 +482,11 @@ export const fetchPlayerStats = async (playerId, position) => {
   }
 };
 
-// Save a user's draft
+/**
+ * Saves a user's mock draft
+ * @param {Object} draftData - Draft data to save
+ * @returns {Promise<Object>} Saved draft result
+ */
 export const saveDraft = async (draftData) => {
   try {
     const { data: userData } = await supabase.auth.getUser();
@@ -434,7 +521,10 @@ export const saveDraft = async (draftData) => {
   }
 };
 
-// Get user's saved drafts
+/**
+ * Fetches drafts saved by the current user
+ * @returns {Promise<Array>} User's saved drafts
+ */
 export const fetchUserDrafts = async () => {
   try {
     const { data: userData } = await supabase.auth.getUser();
@@ -444,7 +534,7 @@ export const fetchUserDrafts = async () => {
     }
     
     const { data, error } = await supabase
-      .from('saved_drafts')
+      .from('user_drafts')
       .select('*')
       .eq('user_id', userData.user.id)
       .order('created_at', { ascending: false });
@@ -457,7 +547,10 @@ export const fetchUserDrafts = async () => {
   }
 };
 
-// Fetch community drafts (public drafts from all users)
+/**
+ * Fetches public drafts from all users
+ * @returns {Promise<Array>} Public drafts from community
+ */
 export const fetchCommunityDrafts = async () => {
   try {
     const { data, error } = await supabase
@@ -474,12 +567,17 @@ export const fetchCommunityDrafts = async () => {
   }
 };
 
+/**
+ * Generates an AI-powered player biography if one doesn't exist
+ * @param {Object} player - Player object to generate bio for
+ * @returns {Promise<string|null>} Generated biography or null
+ */
 export const generatePlayerBio = async (player) => {
- 
-  // If a bio already exists, return it.
+  // If a bio already exists, return it
   if (player.bio && player.bio.trim() != null) {
     return player.bio;
   }
+  
   const apikey = 'AIzaSyBTiyxfxwVQ2UU3vVuGvCF_AQbEMoC2ziY';
   const genAI = new GoogleGenerativeAI(apikey);
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
@@ -489,7 +587,8 @@ export const generatePlayerBio = async (player) => {
   const result = await model.generateContent(prompt);
   console.log(result.response.text());
   const generatedBio = result.response.text();
-  // Only update the database if a non-empty bio is generated.
+  
+  // Only update the database if a non-empty bio is generated
   if (generatedBio) {
     const { error } = await supabase
       .from('db_playerprofile')
@@ -500,7 +599,7 @@ export const generatePlayerBio = async (player) => {
     }
     return generatedBio;
   } else {
-    // If nothing was generated, return null so that the bio remains unset.
+    // If nothing was generated, return null so that the bio remains unset
     return null;
   }
 };

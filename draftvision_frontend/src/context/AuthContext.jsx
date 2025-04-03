@@ -7,10 +7,8 @@ const AuthContext = createContext();
 // Custom hook to use the auth context
 export const useAuth = () => useContext(AuthContext);
 
-
-
 // Provider component
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children, signupStateHandler }) => {
   // State to track the current authenticated user
   const [user, setUser] = useState(null);
   // State to track loading status while checking if a user is already logged in
@@ -20,7 +18,8 @@ export const AuthProvider = ({ children }) => {
   // State to control auth modals display
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(true);
-  
+  // State to track if we're in a signup process
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
   // Check for existing session and set up auth listener on component mount
   useEffect(() => {
@@ -69,7 +68,6 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
   
-
   // Set up a periodic session refresh
   useEffect(() => {
     const refreshInterval = setInterval(async () => {
@@ -97,15 +95,20 @@ export const AuthProvider = ({ children }) => {
   }, [user]);
   
   // Create a wrapper for the signUp function with error handling
-  const handleSignUp = async (email, password) => {
+  const handleSignUp = async (email, password, username) => {
     try {
+      // Track signup state locally
+      setIsSigningUp(true);
+      
+      // Also update parent component if handler exists
+      if (signupStateHandler) signupStateHandler(true);
+      
       // Clear any previous errors
       setError('');
-      setLoading(true);
       console.log("Signing up:", email);
       
       // Call signUp function from api.js
-      const { data, error } = await signUp(email, password);
+      const { data, error } = await signUp(email, password, username);
       
       // If there was an error, throw it to be caught
       if (error) throw error;
@@ -118,7 +121,9 @@ export const AuthProvider = ({ children }) => {
       setError(err.message);
       return { data: null, error: err };
     } finally {
-      setLoading(false);
+      // Reset signup tracking
+      setIsSigningUp(false);
+      if (signupStateHandler) signupStateHandler(false);
     }
   };
 
@@ -199,7 +204,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
   
-
   // Create a wrapper for the resetPassword function with error handling
   const handleResetPassword = async (email) => {
     try {
@@ -229,7 +233,11 @@ export const AuthProvider = ({ children }) => {
   // Refresh the session data
   const refreshSession = async () => {
     try {
-      setLoading(true);
+      // Don't set loading state if we're in a signup process
+      if (!isSigningUp) {
+        setLoading(true);
+      }
+      
       const { data, error } = await supabase.auth.getSession();
       if (error) throw error;
       setUser(data?.session?.user || null);
@@ -238,7 +246,10 @@ export const AuthProvider = ({ children }) => {
       console.error("Session refresh error:", err);
       return { data: null, error: err };
     } finally {
-      setLoading(false);
+      // Only reset loading if we set it earlier
+      if (!isSigningUp) {
+        setLoading(false);
+      }
     }
   };
 
@@ -270,6 +281,7 @@ export const AuthProvider = ({ children }) => {
     error,                // Any auth errors
     setError,             // Function to set/clear errors
     loading,              // Loading state
+    isSigningUp,          // Whether signup is in progress
     // Modal control
     showAuthModal,        // Whether auth modal is showing
     isLoginModal,         // Whether in login or signup mode
