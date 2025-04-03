@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { supabase } from '../../services/api';
 import PageTransition from '../Common/PageTransition';
+import { fetchUserDrafts } from '../../services/api';
 
 const AccountSettings = () => {
   const { user, refreshSession } = useAuth();
@@ -9,18 +10,25 @@ const AccountSettings = () => {
   const [updating, setUpdating] = useState(false);
   const [message, setMessage] = useState(null);
   const [retryAttempt, setRetryAttempt] = useState(0);
+  const [resetPasswordSent, setResetPasswordSent] = useState(false);
+  
+  // Draft statistics
+  const [draftStats, setDraftStats] = useState({
+    totalDrafts: 0,
+    highestGrade: null,
+    highestScore: null
+  });
+  
+  // Profile state
   const [profile, setProfile] = useState({
     email: '',
     username: '',
-    favorite_team: '',
-    notification_preferences: {
-      draft_reminders: true,
-      draft_results: true,
-    }
+    favorite_team: ''
   });
 
+  // Load user profile and draft statistics
   useEffect(() => {
-    const loadProfile = async () => {
+    const loadProfileAndStats = async () => {
       if (!user) {
         setLoading(false);
         return;
@@ -33,7 +41,7 @@ const AccountSettings = () => {
           email: user.email || '',
         }));
 
-        console.log('Fetching profile for user:', user.id);
+        // Load profile data
         const { data, error } = await supabase
           .from('user_profiles')
           .select('*')
@@ -44,7 +52,7 @@ const AccountSettings = () => {
           console.error('Error fetching profile:', error);
           
           // If profile doesn't exist, create one
-          if (error.code === 'PGRST116') { // "Row not found" error code
+          if (error.code === 'PGRST116') {
             console.log('Profile not found, creating one...');
             await createProfile();
           } else {
@@ -68,13 +76,45 @@ const AccountSettings = () => {
           setProfile(prev => ({
             ...prev,
             username: data.username || '',
-            favorite_team: data.favorite_team || '',
-            notification_preferences: {
-              ...prev.notification_preferences,
-              ...(data.notification_preferences || {})
-            }
+            favorite_team: data.favorite_team || ''
           }));
           setMessage(null);
+        }
+
+        // Load draft statistics
+        try {
+          const drafts = await fetchUserDrafts();
+          
+          // Calculate draft statistics
+          const totalDrafts = drafts.length;
+          
+          // Find the highest grade
+          let highestGrade = null;
+          let highestScore = null;
+          
+          if (drafts.length > 0) {
+            // Find the draft with the highest score
+            const draftWithHighestScore = drafts.reduce((highest, current) => {
+              // If current draft has a score and it's higher than our current highest
+              if (current.score && (!highest || current.score > highest.score)) {
+                return current;
+              }
+              return highest;
+            }, null);
+            
+            if (draftWithHighestScore) {
+              highestGrade = draftWithHighestScore.grade || '';
+              highestScore = draftWithHighestScore.score?.toFixed(1) || '';
+            }
+          }
+          
+          setDraftStats({
+            totalDrafts,
+            highestGrade,
+            highestScore
+          });
+        } catch (statsError) {
+          console.error('Error loading draft statistics:', statsError);
         }
       } catch (error) {
         console.error('Error loading profile:', error);
@@ -96,10 +136,6 @@ const AccountSettings = () => {
             email: user.email,
             username: defaultUsername,
             favorite_team: '',
-            notification_preferences: {
-              draft_reminders: true,
-              draft_results: true
-            },
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString()
           }]);
@@ -115,7 +151,7 @@ const AccountSettings = () => {
             username: defaultUsername
           }));
           // Reload profile after creation
-          loadProfile();
+          loadProfileAndStats();
         }
       } catch (err) {
         console.error('Unexpected error creating profile:', err);
@@ -123,7 +159,7 @@ const AccountSettings = () => {
       }
     };
 
-    loadProfile();
+    loadProfileAndStats();
   }, [user, retryAttempt, refreshSession]);
 
   const handleUpdateProfile = async (e) => {
@@ -133,21 +169,21 @@ const AccountSettings = () => {
     
     setUpdating(true);
     setMessage(null);
-
+  
     // Validate username
     if (!profile.username || profile.username.trim() === '') {
       setMessage({ type: 'error', text: 'Username cannot be empty' });
       setUpdating(false);
       return;
     }
-
+  
     // Check username format (only allow letters, numbers, underscores)
     if (!/^[a-zA-Z0-9_]+$/.test(profile.username)) {
       setMessage({ type: 'error', text: 'Username can only contain letters, numbers, and underscores' });
       setUpdating(false);
       return;
     }
-
+  
     try {
       // First check if username is taken (if changed)
       const { data: existingUser, error: checkError } = await supabase
@@ -156,46 +192,73 @@ const AccountSettings = () => {
         .eq('username', profile.username)
         .neq('user_id', user.id)
         .single();
-
+  
       if (checkError && checkError.code !== 'PGRST116') {
         throw checkError;
       }
-
+  
       if (existingUser) {
         setMessage({ type: 'error', text: 'Username is already taken. Please choose another.' });
         setUpdating(false);
         return;
       }
-
-      console.log('Updating profile with:', {
-        user_id: user.id,
-        username: profile.username,
-        favorite_team: profile.favorite_team,
-        notification_preferences: profile.notification_preferences
-      });
-      
-      const { error } = await supabase
+  
+      // Get the profile record to get the actual row id (primary key)
+      const { data: existingProfile, error: fetchError } = await supabase
         .from('user_profiles')
-        .upsert({
-          user_id: user.id,
-          email: profile.email,
+        .select('id, username, email, favorite_team')
+        .eq('user_id', user.id)
+        .single();
+        
+      if (fetchError) {
+        console.error('Error fetching existing profile:', fetchError);
+        throw fetchError;
+      }
+      
+      if (!existingProfile || !existingProfile.id) {
+        throw new Error('Could not find your profile in the database');
+      }
+      
+      console.log('Updating profile with primary key id:', existingProfile.id);
+      
+      // Update the record using the actual primary key 'id'
+      const { error: updateError } = await supabase
+        .from('user_profiles')
+        .update({
           username: profile.username,
           favorite_team: profile.favorite_team,
-          notification_preferences: profile.notification_preferences,
           updated_at: new Date().toISOString()
-        });
-
-      if (error) {
-        console.error('Error from Supabase:', error);
-        throw error;
+        })
+        .eq('id', existingProfile.id); // Using the actual primary key 'id'
+        
+      if (updateError) {
+        console.error('Error updating profile:', updateError);
+        throw updateError;
       }
       
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
     } catch (error) {
-      console.error('Error updating profile:', error);
-      setMessage({ type: 'error', text: 'Error updating profile. Please try again.' });
+      console.error('Error in profile update process:', error);
+      setMessage({ type: 'error', text: `Error updating profile: ${error.message || 'Please try again.'}` });
     } finally {
       setUpdating(false);
+    }
+  };
+
+  const handleSendPasswordReset = async () => {
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(
+        profile.email,
+        { redirectTo: `${window.location.origin}/reset-password` }
+      );
+      
+      if (error) throw error;
+      
+      setResetPasswordSent(true);
+      setMessage({ type: 'success', text: 'Password reset link has been sent to your email.' });
+    } catch (error) {
+      console.error('Error sending password reset:', error);
+      setMessage({ type: 'error', text: 'Failed to send reset password email. Please try again.' });
     }
   };
 
@@ -240,15 +303,29 @@ const AccountSettings = () => {
     setRetryAttempt(prev => prev + 1);
   };
 
+  // Function to get color class based on grade
+  const getGradeColorClass = (grade) => {
+    if (!grade) return 'from-gray-500 to-gray-600';
+    
+    const firstChar = grade.charAt(0);
+    switch(firstChar) {
+      case 'A': return 'from-green-500 to-emerald-600';
+      case 'B': return 'from-blue-500 to-indigo-600';
+      case 'C': return 'from-yellow-500 to-amber-600';
+      case 'D': return 'from-orange-500 to-orange-600';
+      default: return 'from-red-500 to-red-600';
+    }
+  };
+
   if (!user) {
     return (
-      <div className="min-h-screen bg-[#5A6BB0] flex items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md w-full">
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 flex items-center justify-center p-4">
+        <div className="bg-white bg-opacity-95 backdrop-filter backdrop-blur-sm p-8 rounded-xl shadow-2xl text-center max-w-md w-full">
           <h2 className="text-2xl font-bold mb-4">Sign In Required</h2>
-          <p className="mb-4">Please sign in to access your account settings.</p>
+          <p className="mb-6 text-gray-600">Please sign in to access your account settings.</p>
           <button 
-            onClick={() => window.location.href = '/about'}
-            className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            onClick={() => window.location.href = '/'}
+            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105"
           >
             Return to Home
           </button>
@@ -259,158 +336,274 @@ const AccountSettings = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[#5A6BB0] py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="p-8">
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-2xl font-bold text-gray-900">Account Settings</h1>
-              {loading && (
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500"></div>
-              )}
-            </div>
-            
-            {message && (
-              <div className={`p-4 mb-6 rounded flex items-start ${
-                message.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'
-              }`}>
-                {message.type === 'success' ? (
-                  <svg className="h-5 w-5 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                ) : (
-                  <svg className="h-5 w-5 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+      {/* Enhanced background with animated gradient and subtle pattern */}
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+        {/* Animated floating shapes */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 -left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+          <div className="absolute top-10 right-20 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        </div>
+
+        <div className="max-w-2xl mx-auto relative z-10">
+          <div className="bg-white bg-opacity-95 backdrop-filter backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:shadow-blue-500/20">
+            <div className="p-8">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h1 className="text-3xl font-bold text-gray-900 mb-1">Account Settings</h1>
+                  <div className="h-1 w-16 bg-blue-400 rounded"></div>
+                </div>
+                {loading && (
+                  <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-500 border-t-transparent"></div>
                 )}
-                <div className="flex-1">
-                  <p>{message.text}</p>
-                  {message.type === 'error' && (
-                    <button 
-                      onClick={handleRetry}
-                      className="mt-2 text-sm font-medium text-blue-600 hover:text-blue-500"
-                    >
-                      Try Again
-                    </button>
+              </div>
+              
+              {message && (
+                <div className={`p-4 mb-6 rounded-lg flex items-start ${
+                  message.type === 'success' 
+                    ? 'bg-green-100 text-green-800 border border-green-200' 
+                    : 'bg-red-100 text-red-800 border border-red-200'
+                }`}>
+                  {message.type === 'success' ? (
+                    <svg className="h-5 w-5 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg className="h-5 w-5 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
                   )}
-                </div>
-              </div>
-            )}
-
-            {loading ? (
-              <div className="py-12 flex flex-col items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
-                <p className="text-gray-500">Loading your profile...</p>
-              </div>
-            ) : (
-              <form onSubmit={handleUpdateProfile} className="space-y-6">
-                {/* Email (non-editable) */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    disabled
-                    value={profile.email}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-500"
-                  />
-                </div>
-
-                {/* Username */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    value={profile.username}
-                    onChange={(e) => setProfile({...profile, username: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Choose a username"
-                  />
-                  <p className="mt-1 text-sm text-gray-500">
-                    This will be displayed on your drafts and in community features.
-                  </p>
-                </div>
-
-                {/* Favorite Team */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Favorite Team
-                  </label>
-                  <select
-                    value={profile.favorite_team}
-                    onChange={(e) => setProfile({...profile, favorite_team: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="">Select a team</option>
-                    {NFL_TEAMS.map(team => (
-                      <option key={team.value} value={team.value}>
-                        {team.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Notification Preferences */}
-                <div className="border border-gray-200 rounded-md p-4 bg-gray-50">
-                  <h3 className="text-lg font-medium text-gray-900 mb-3">Notification Preferences</h3>
-                  <div className="space-y-3">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={profile.notification_preferences.draft_reminders}
-                        onChange={(e) => setProfile({
-                          ...profile,
-                          notification_preferences: {
-                            ...profile.notification_preferences,
-                            draft_reminders: e.target.checked
-                          }
-                        })}
-                        className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <span className="ml-2 text-gray-700">Draft Reminders</span>
-                    </label>
-                    
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={profile.notification_preferences.draft_results}
-                        onChange={(e) => setProfile({
-                          ...profile,
-                          notification_preferences: {
-                            ...profile.notification_preferences,
-                            draft_results: e.target.checked
-                          }
-                        })}
-                        className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                      <span className="ml-2 text-gray-700">Draft Results</span>
-                    </label>
+                  <div className="flex-1">
+                    <p>{message.text}</p>
+                    {message.type === 'error' && (
+                      <button 
+                        onClick={handleRetry}
+                        className="mt-2 text-sm font-medium text-blue-600 hover:text-blue-500"
+                      >
+                        Try Again
+                      </button>
+                    )}
                   </div>
                 </div>
+              )}
 
-                <div className="pt-4">
-                  <button
-                    type="submit"
-                    disabled={updating}
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-300 disabled:cursor-not-allowed"
-                  >
-                    {updating ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Updating...
-                      </>
-                    ) : 'Save Changes'}
-                  </button>
+              {loading ? (
+                <div className="py-16 flex flex-col items-center justify-center">
+                  <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mb-6"></div>
+                  <p className="text-gray-500 text-lg">Loading your profile...</p>
                 </div>
-              </form>
-            )}
+              ) : (
+                <>
+                  {/* Draft Statistics Cards */}
+                  <div className="grid md:grid-cols-2 gap-6 mb-8">
+                    {/* Total Drafts Card */}
+                    <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg p-6 text-white transform transition-all duration-300 hover:scale-105">
+                      <div className="flex items-center">
+                        <div className="bg-white bg-opacity-20 p-3 rounded-lg mr-4">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h2 className="text-lg font-semibold opacity-90">Total Mock Drafts</h2>
+                          <p className="text-4xl font-bold mt-1">{draftStats.totalDrafts}</p>
+                        </div>
+                      </div>
+                      <div className="mt-4 text-sm opacity-80">
+                        {draftStats.totalDrafts === 0 ? 
+                          "Create your first mock draft to get started!" : 
+                          `You've created ${draftStats.totalDrafts} mock ${draftStats.totalDrafts === 1 ? 'draft' : 'drafts'} so far.`
+                        }
+                      </div>
+                    </div>
+
+                    {/* Highest Draft Grade Card */}
+                    <div className={`bg-gradient-to-br ${getGradeColorClass(draftStats.highestGrade)} rounded-xl shadow-lg p-6 text-white transform transition-all duration-300 hover:scale-105`}>
+                      <div className="flex items-center">
+                        <div className="bg-white bg-opacity-20 p-3 rounded-lg mr-4">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h2 className="text-lg font-semibold opacity-90">Highest Draft Grade</h2>
+                          <div className="flex items-baseline mt-1">
+                            <p className="text-4xl font-bold">
+                              {draftStats.highestGrade || "—"}
+                            </p>
+                            {draftStats.highestScore && (
+                              <span className="ml-2 text-sm opacity-90">
+                                ({draftStats.highestScore}/100)
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-4 text-sm opacity-80">
+                        {!draftStats.highestGrade ? 
+                          "Complete a draft to receive a grade!" : 
+                          `Your highest graded draft received ${draftStats.highestGrade}.`
+                        }
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Account Settings Form */}
+                  <form onSubmit={handleUpdateProfile} className="bg-white rounded-xl p-6 shadow-md space-y-6">
+                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Profile Information</h2>
+                    
+                    {/* Email (non-editable) */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Email
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          disabled
+                          value={profile.email}
+                          className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm text-gray-500"
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Username */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Username
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={profile.username}
+                          onChange={(e) => setProfile({...profile, username: e.target.value})}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                          placeholder="Choose a username"
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <p className="mt-2 text-sm text-gray-500">
+                        This will be displayed on your drafts and in community features.
+                      </p>
+                    </div>
+
+                    {/* Favorite Team */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Favorite Team
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={profile.favorite_team}
+                          onChange={(e) => setProfile({...profile, favorite_team: e.target.value})}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none transition-all duration-200"
+                        >
+                          <option value="">Select a team</option>
+                          {NFL_TEAMS.map(team => (
+                            <option key={team.value} value={team.value}>
+                              {team.label}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Password Reset Button */}
+                    <div className="border-t border-gray-200 pt-6">
+                      <button
+                        type="button"
+                        onClick={handleSendPasswordReset}
+                        disabled={resetPasswordSent}
+                        className="flex items-center text-blue-600 hover:text-blue-800 focus:outline-none focus:underline disabled:text-gray-400 transition-colors duration-200"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                        </svg>
+                        {resetPasswordSent ? 'Password reset email sent' : 'Reset Password'}
+                      </button>
+                      <p className="mt-1 text-xs text-gray-500">
+                        We'll send a password reset link to your email address.
+                      </p>
+                    </div>
+
+                    <div className="pt-4">
+                      <button
+                        type="submit"
+                        disabled={updating}
+                        className="w-full flex justify-center items-center py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+                      >
+                        {updating ? (
+                          <>
+                            <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Updating...
+                          </>
+                        ) : (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Save Changes
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
+            </div>
           </div>
         </div>
+        
+        {/* Custom styling for animations */}
+        <style jsx>{`
+          @keyframes blob {
+            0% {
+              transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+              transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+              transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+              transform: translate(0px, 0px) scale(1);
+            }
+          }
+          .animate-blob {
+            animation: blob 7s infinite;
+          }
+          .animation-delay-2000 {
+            animation-delay: 2s;
+          }
+          .animation-delay-4000 {
+            animation-delay: 4s;
+          }
+          .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+          }
+        `}</style>
       </div>
     </PageTransition>
   );

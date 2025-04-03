@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import PageTransition from '../Common/PageTransition';
 import Auth from '../Auth/Auth';
-import { signUp } from '../../services/api';
+import { signUp, supabase } from '../../services/api';
+
+import confetti from 'canvas-confetti';
 
 const AboutPage = () => {
   const { 
@@ -19,70 +21,198 @@ const AboutPage = () => {
   const navigate = useNavigate();
   
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
+  const [userProfileLoading, setUserProfileLoading] = useState(false);
+
+  // Reference to the confetti canvas element
+  const confettiCanvasRef = useRef(null);
+
+  // Fetch user profile data when user is authenticated
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (user && !userProfile) {
+        try {
+          setUserProfileLoading(true);
+          
+          // Attempt to get the profile data from the auth session first (if available)
+          // Some auth providers might include profile data with the session
+          const username = user.user_metadata?.username;
+          if (username) {
+            setUserProfile({ username });
+            setUserProfileLoading(false);
+            return;
+          }
+          
+          // Otherwise fetch from the database
+          const { data, error } = await supabase
+            .from('user_profiles')
+            .select('username')
+            .eq('user_id', user.id)
+            .single();
+          
+          if (error) {
+            console.error('Error fetching user profile:', error);
+          } else if (data) {
+            setUserProfile(data);
+          }
+          
+        } catch (err) {
+          console.error('Failed to fetch user profile:', err);
+        } finally {
+          setUserProfileLoading(false);
+        }
+      }
+    };
+  
+    fetchUserProfile();
+  }, [user, userProfile]);
+
+  // Function to trigger confetti celebration
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#4F46E5', '#10B981', '#8B5CF6']
+    });
+  };
 
   const handleGoogleSignIn = async () => {
     try {
       const { error } = await signInWithGoogle();
       if (error) throw error;
+      
+      // If sign in successful, trigger confetti
+      if (!error) triggerConfetti();
     } catch (err) {
       setError(err.message);
     }
   };
 
+  // Validate password function
+  const validatePassword = (password) => {
+    // At least 8 characters, with at least one letter and one number
+    return password.length >= 8 && 
+           /[A-Za-z]/.test(password) && 
+           /[0-9]/.test(password);
+  };
+
+  // Email validation function
+  const validateEmail = (email) => {
+    // Basic format validation
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      setEmailError('Please enter a valid email address');
+      return false;
+    }
+    
+    setEmailError('');
+    return true;
+  };
+
+  // Username validation function
+  const validateUsername = (username) => {
+    // Check if username is empty
+    if (!username || username.trim() === '') {
+      setUsernameError('Username is required');
+      return false;
+    }
+
+    // Check length (3-20 characters)
+    if (username.length < 3 || username.length > 20) {
+      setUsernameError('Username must be between 3 and 20 characters');
+      return false;
+    }
+
+    // Check characters (letters, numbers, underscores only)
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      setUsernameError('Username can only contain letters, numbers, and underscores');
+      return false;
+    }
+
+    setUsernameError('');
+    return true;
+  };
+
   // Handle direct signup form submission
   const handleDirectSignup = async (e) => {
     e.preventDefault();
+    
+    // Reset error messages
     setError('');
+    setUsernameError('');
+    setEmailError('');
+    setSuccess(false);
+    
+    // Validate inputs
+    if (!email || !username || !password || !confirmPassword) {
+      setError('Please fill in all fields');
+      return;
+    }
+    
+    // Validate username
+    if (!validateUsername(username)) {
+      return;
+    }
+    
+    // Validate email format
+    if (!validateEmail(email)) {
+      return;
+    }
+    
+    // Check password strength
+    if (!validatePassword(password)) {
+      setError('Password must be at least 8 characters long and contain at least one letter and one number');
+      return;
+    }
+    
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    
     setLoading(true);
     
-    // Validate email
-    if (!email || !email.includes('@')) {
-      setError('Please enter a valid email address');
-      setLoading(false);
-      return;
-    }
-    
-    // Validate password
-    if (!password || password.length < 8) {
-      setError('Password must be at least 8 characters long');
-      setLoading(false);
-      return;
-    }
-    
-    // Check if password has at least one number and one letter
-    const hasNumber = /\d/.test(password);
-    const hasLetter = /[a-zA-Z]/.test(password);
-    
-    if (!hasNumber || !hasLetter) {
-      setError('Password must contain at least one letter and one number');
-      setLoading(false);
-      return;
-    }
-    
     try {
-      // Generate a default username from email
-      const username = email.split('@')[0];
+      // Attempt signup
+      const { error, data } = await signUp(email, password, username);
       
-      // Call the signUp function directly
-      const { error } = await signUp(email, password, username);
+      if (error) {
+        // Check for specific error messages
+        if (error.message && error.message.toLowerCase().includes('email already registered')) {
+          setEmailError('This email is already registered. Please login instead.');
+        } else if (error.message && error.message.toLowerCase().includes('username is already taken')) {
+          setUsernameError(error.message);
+        } else {
+          setError(error.message || 'Failed to create account');
+        }
+        setLoading(false);
+        return;
+      }
       
-      if (error) throw error;
-      
-      // Show success message
-      setSuccess(true);
+      // Clear the form
       setEmail('');
+      setUsername('');
       setPassword('');
+      setConfirmPassword('');
       
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSuccess(false);
-      }, 5000);
+      // Set success and trigger confetti celebration
+      setSuccess(true);
+      triggerConfetti();
+      
+      // User is now signed in - just navigate to dashboard or update UI
+      // This will happen automatically via the useAuth context
       
     } catch (err) {
+      console.error("Signup error:", err);
       setError(err.message || 'Failed to create account');
     } finally {
       setLoading(false);
@@ -113,59 +243,109 @@ const AboutPage = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
             <div className="lg:w-1/2">
               <div className="relative mb-6">
-                <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
-                  Welcome to <span className="relative">
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
+                {user ? (
+                  <>Welcome to <span className="relative">
                     <span className="relative z-10">Draft Vision AI</span>
                     <span className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-r from-blue-400 to-purple-500 opacity-75 z-0"></span>
                   </span>
-                </h1>
+                  {userProfileLoading ? (
+                    <span className="text-green-400 inline-block min-w-[80px]">
+                      <span className="animate-pulse">...</span>
+                    </span>
+                  ) : (
+                    <span className="text-green-400">, {userProfile?.username || 'player'}</span>
+                  )}
+                  </>
+                ) : (
+                  // For non-authenticated users
+                  <>Welcome to <span className="relative">
+                    <span className="relative z-10">Draft Vision AI</span>
+                    <span className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-r from-blue-400 to-purple-500 opacity-75 z-0"></span>
+                  </span>
+                  </>
+                )}
+              </h1>
                 <div className="h-1 w-16 bg-blue-400 rounded mt-4"></div>
               </div>
-              <p className="text-xl text-gray-200 mb-8 leading-relaxed">
-                Your go-to platform for insightful and data-driven predictions in the world of sports. 
-                Our mission is to revolutionize the way scouting and drafting decisions are made using 
-                advanced AI models.
-              </p>
+              
+              {/* Different descriptions for logged in vs logged out users */}
+              {user ? (
+                <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+                  Ready to craft your next mock draft? Your personalized draft board and 
+                  predictions are waiting. Take advantage of all our premium features to 
+                  create your best mock draft yet.
+                </p>
+              ) : (
+                <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+                  Your go-to platform for insightful and data-driven predictions in the world of sports. 
+                  Our mission is to revolutionize the way scouting and drafting decisions are made using 
+                  advanced AI models.
+                </p>
+              )}
+              
               <div className="flex flex-wrap gap-4">
-                <a href="#features" 
-                  className="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition-all transform hover:scale-105">
-                  Explore Features
-                </a>
-                
                 {user ? (
-                  // Show for authenticated users
-                  <button
-                    onClick={handleStartMockDraft}
-                    className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-medium rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 transition-all transform hover:scale-105"
-                  >
-                    Start a Mock Draft
-                  </button>
+                  // Show different buttons for authenticated users
+                  <>
+                    <button
+                      onClick={handleStartMockDraft}
+                      className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-medium rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 transition-all transform hover:scale-105"
+                    >
+                      Start a Mock Draft
+                    </button>
+                    <button
+                      onClick={() => navigate('/saved-drafts')}
+                      className="px-8 py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-medium rounded-lg shadow-lg hover:from-purple-600 hover:to-violet-700 focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 transition-all transform hover:scale-105"
+                    >
+                      View Saved Drafts
+                    </button>
+                  </>
                 ) : (
                   // Show for unauthenticated users
-                  <button
-                    onClick={openSignupModal}
-                    className="px-8 py-3 bg-white text-blue-700 font-medium rounded-lg shadow-lg hover:bg-gray-100 focus:ring-4 focus:ring-white focus:ring-opacity-50 transition-all transform hover:scale-105"
-                  >
-                    Sign Up Now
-                  </button>
+                  <>
+                    <a href="#features" 
+                      className="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition-all transform hover:scale-105">
+                      Explore Features
+                    </a>
+                    <button
+                      onClick={openSignupModal}
+                      className="px-8 py-3 bg-white text-blue-700 font-medium rounded-lg shadow-lg hover:bg-gray-100 focus:ring-4 focus:ring-white focus:ring-opacity-50 transition-all transform hover:scale-105"
+                    >
+                      Sign Up Now
+                    </button>
+                  </>
                 )}
               </div>
             </div>
             
             {/* Conditional Rendering: Sign Up Box or Feature Highlight */}
             {!user ? (
-              // Show Sign Up Box for unauthenticated users
+              // Show Sign Up Box for unauthenticated users - Updated to match the modal design
               <div id="signup" className="lg:w-2/5 bg-white bg-opacity-95 backdrop-filter backdrop-blur-sm p-8 rounded-xl shadow-2xl transform transition-all duration-500 hover:shadow-blue-500/20">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">Join Draft Vision AI</h2>
                 
+                {/* Error message display */}
                 {error && (
-                  <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4">
+                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                     {error}
                   </div>
                 )}
                 
+                {emailError && (
+                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    {emailError}
+                  </div>
+                )}
+                
+                {usernameError && (
+                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    {usernameError}
+                  </div>
+                )}
+                
                 {success && (
-                  <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg mb-4">
+                  <div className="bg-green-100 border border-green-200 text-green-600 px-4 py-3 rounded mb-4">
                     Account created! Please check your email for verification.
                   </div>
                 )}
@@ -191,33 +371,78 @@ const AboutPage = () => {
                   </div>
                 </div>
                 
-                {/* Direct signup form fields */}
+                {/* Direct signup form fields - Updated to match modal */}
                 <form onSubmit={handleDirectSignup}>
+                  {/* Email field */}
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                      Email
+                    </label>
                     <input
                       type="email"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                      className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${emailError ? 'border-red-500' : ''}`}
                       placeholder="Enter your email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (emailError) setEmailError('');
+                      }}
                       required
                     />
                   </div>
                   
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                  {/* Username field */}
+                  <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${usernameError ? 'border-red-500' : ''}`}
+                      placeholder="Choose a username"
+                      value={username}
+                      onChange={(e) => {
+                        setUsername(e.target.value);
+                        if (usernameError) validateUsername(e.target.value);
+                      }}
+                      required
+                    />
+                    <p className="text-gray-500 text-xs mt-1">
+                      3-20 characters, letters, numbers, and underscores only
+                    </p>
+                  </div>
+                  
+                  {/* Password field */}
+                  <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                      Password
+                    </label>
                     <input
                       type="password"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       placeholder="Create a password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
                     />
-                    <p className="mt-1 text-xs text-gray-500">
-                      Must be at least 8 characters with numbers and letters.
+                    <p className="text-gray-500 text-xs mt-1">
+                      Must be at least 8 characters with letters and numbers
                     </p>
+                  </div>
+                  
+                  {/* Confirm Password field */}
+                  <div className="mb-6">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                      Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="Confirm your password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                    />
                   </div>
                   
                   <button
@@ -250,31 +475,105 @@ const AboutPage = () => {
                 </p>
               </div>
             ) : (
-              // Show a welcome message for authenticated users
-              <div className="lg:w-2/5 bg-white bg-opacity-95 backdrop-filter backdrop-blur-sm p-8 rounded-xl shadow-2xl transform transition-all duration-500 hover:shadow-blue-500/20">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800">Welcome Back!</h2>
-                <p className="text-gray-600 mb-6">
-                  Ready to create your next mock draft? Access all the premium features of Draft Vision AI.
-                </p>
-                <div className="space-y-4">
-                  <button 
-                    onClick={() => navigate('/mockdraft')}
-                    className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:translate-y-[-2px]"
-                  >
-                    Create New Mock Draft
-                  </button>
-                  <button 
-                    onClick={() => navigate('/saved-drafts')}
-                    className="w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:translate-y-[-2px]"
-                  >
-                    View Saved Drafts
-                  </button>
-                  <button 
-                    onClick={() => navigate('/playercompare')}
-                    className="w-full py-3 px-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-lg shadow-lg hover:from-purple-600 hover:to-violet-700 transition-all duration-300 transform hover:translate-y-[-2px]"
-                  >
-                    Compare Players
-                  </button>
+              // Enhanced dashboard-like UI for authenticated users - matching the screenshot
+              <div className="lg:w-2/5">
+                <div className="bg-white bg-opacity-95 backdrop-filter backdrop-blur-sm p-8 rounded-xl shadow-2xl transform transition-all duration-500 hover:shadow-blue-500/20">
+                  <div className="flex items-center mb-6">
+                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                      {userProfile?.username ? userProfile.username.charAt(0).toUpperCase() : 'U'}
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-800">Draft Central</h2>
+                      <p className="text-gray-500">Your personalized command center</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 mb-6">
+                    <div className="flex justify-between items-center mb-2">
+                      <h3 className="font-semibold text-blue-800">Activity Overview</h3>
+                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Last 30 days</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-3 text-center">
+                      <div className="p-2">
+                        <div className="text-2xl font-bold text-blue-600">0</div>
+                        <div className="text-xs text-gray-500">Drafts Created</div>
+                      </div>
+                      <div className="p-2">
+                        <div className="text-2xl font-bold text-purple-600">0</div>
+                        <div className="text-xs text-gray-500">Comparisons</div>
+                      </div>
+                      <div className="p-2">
+                        <div className="text-2xl font-bold text-green-600">0</div>
+                        <div className="text-xs text-gray-500">Predictions</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <button 
+                      onClick={() => navigate('/mockdraft')}
+                      className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:translate-y-[-2px] flex items-center justify-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                      </svg>
+                      Create New Mock Draft
+                    </button>
+                    <button 
+                      onClick={() => navigate('/saved-drafts')}
+                      className="w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-300 transform hover:translate-y-[-2px] flex items-center justify-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
+                        <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z" />
+                      </svg>
+                      View Saved Drafts
+                    </button>
+                    <button 
+                      onClick={() => navigate('/playercompare')}
+                      className="w-full py-3 px-4 bg-gradient-to-r from-purple-500 to-violet-600 text-white rounded-lg shadow-lg hover:from-purple-600 hover:to-violet-700 transition-all duration-300 transform hover:translate-y-[-2px] flex items-center justify-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                      </svg>
+                      Compare Players
+                    </button>
+                  </div>
+                  
+                  {/* Updated Quick Actions section with tools from the dropdown menu */}
+                  <div className="mt-6 pt-4 border-t border-gray-200">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold text-gray-700">Quick Actions</h3>
+                      <a href="/account-settings" className="text-blue-600 text-sm hover:underline">Settings</a>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 mt-3">
+                      <button
+                        onClick={() => navigate('/playerlist')}
+                        className="p-2 bg-gray-100 rounded hover:bg-gray-200 transition-colors text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto mb-1 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                          <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-xs">Player List</span>
+                      </button>
+                      <button
+                        onClick={() => navigate('/largelist')}
+                        className="p-2 bg-gray-100 rounded hover:bg-gray-200 transition-colors text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto mb-1 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                        <span className="text-xs">Big Board</span>
+                      </button>
+                      <button
+                        onClick={() => navigate('/playerinput')}
+                        className="p-2 bg-gray-100 rounded hover:bg-gray-200 transition-colors text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto mb-1 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-xs">Prediction</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -344,7 +643,7 @@ const AboutPage = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Add Auth modal component */}
         {showAuthModal && (
           <Auth 
@@ -353,7 +652,7 @@ const AboutPage = () => {
             closeModals={closeAuthModals}
           />
         )}
-        
+
         {/* Add custom styling for animations */}
         <style jsx>{`
           @keyframes blob {
@@ -385,9 +684,9 @@ const AboutPage = () => {
             background-size: 40px 40px;
           }
         `}</style>
-      </div>
-    </PageTransition>
-  );
-};
+              </div>
+            </PageTransition>
+          );
+        };
 
 export default AboutPage;
