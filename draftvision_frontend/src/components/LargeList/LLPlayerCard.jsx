@@ -351,7 +351,7 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
       <div className="h-full">
         <h3 className="text-2xl font-bold mb-4 text-white">Impact Analysis</h3>
         <p className="text-gray-400 mb-4">
-          This graph shows the projected impact of all {player.position} players in relation to their draft position.
+          This graph shows the projected impact of all {player.position}'s in relation to their draft position.
         </p>
         <div className="bg-gray-800 bg-opacity-50 rounded-lg p-4 h-64">
           <ResponsiveContainer width="100%" height="100%">

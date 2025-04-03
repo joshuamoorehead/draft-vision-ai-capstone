@@ -1,4 +1,3 @@
-// components/PlayerList.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchPlayers, fetchPlayerStats, generatePlayerBio } from '../../services/api';
@@ -418,6 +417,7 @@ const PlayerList = () => {
                   player={selectedPlayer}
                   stats={selectedPlayerStats}
                   onBioGenerated={handleBioGenerated}
+                  players={players}
                 />
               )}
             </div>
