@@ -377,7 +377,7 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
 
                 // Extract just the IDs
                 const playerIds = playerProfiles.map(profile => profile.id);
-                console.log('Player IDs:', playerIds);
+                // console.log('Player IDs:', playerIds);
 
                 // Create a map of player IDs to names for later use
                 const playerNameMap = playerProfiles.reduce((acc, profile) => {
@@ -412,8 +412,8 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
                 const xData = await fetchTableData(xTable, xColumn);
                 const yData = await fetchTableData(yTable, yColumn);
 
-                console.log('X Data:', xData);
-                console.log('Y Data:', yData);
+                // console.log('X Data:', xData);
+                // console.log('Y Data:', yData);
 
                 // Combine the data
                 const formattedData = playerIds.map(playerId => {
@@ -435,7 +435,7 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
                   return null;
                 }).filter(Boolean); // Remove null entries
                 
-                console.log('Formatted data:', formattedData);
+                // console.log('Formatted data:', formattedData);
                 setGraphData(formattedData);
               } catch (error) {
                 console.error("Error fetching players:", error);
