@@ -280,7 +280,7 @@ const PlayerList = () => {
                     <select
                       value={position}
                       onChange={(e) => setPosition(e.target.value)}
-                      className="w-full p-2 bg-white bg-opacity-20 border border-white border-opacity-30 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                      className="w-full p-2 bg-white bg-opacity-20 border border-white border-opacity-30 text-black placeholder-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
                     >
                       <option value="">All Positions</option>
                       <option value="QB">Quarterback (QB)</option>
@@ -300,7 +300,7 @@ const PlayerList = () => {
                       type="text"
                       value={team}
                       onChange={(e) => setTeam(e.target.value)}
-                      className="w-full p-2 bg-white bg-opacity-20 border border-white border-opacity-30 text-white rounded-lg placeholder-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                      className="w-full p-2 bg-white bg-opacity-20 border border-white border-opacity-30 text-black rounded-lg placeholder-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
                       placeholder="Enter team name"
                     />
                   </div>
