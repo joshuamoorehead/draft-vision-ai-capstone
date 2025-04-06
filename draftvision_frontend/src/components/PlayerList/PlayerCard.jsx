@@ -89,6 +89,8 @@ const positionTables = {
   'default': ['db_playerprofile', 'db_defensivepositionalstats', 'db_combine']
 };
 
+//player card component
+
 const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
   const [activeView, setActiveView] = useState('profile');
   const [bio, setBio] = useState(player.bio || '');
