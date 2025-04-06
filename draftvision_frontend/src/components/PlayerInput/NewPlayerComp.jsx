@@ -5,6 +5,7 @@ import { dvailogo } from '../Logos';
 import PageTransition from '../Common/PageTransition';
 import { createClient } from "@supabase/supabase-js";
 import { fetchPlayers } from '../../services/api';
+import { useAuth } from "../../context/AuthContext"; // Import Auth Context
 
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
@@ -12,92 +13,141 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const NewPlayerComp = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  // Retrieve player data from location state
   const playerName = location.state?.name || 'Unknown Player';
   const playerPosition = location.state?.position || "Unknown Position";
   const playerYear = location.state?.year || "Unknown Year";
   const draftRound = location.state?.draftRound || "Unknown Round";
-  //const proCompName = location.state?.proCompName;
-  //const proCompTeam = location.state?.proCompTeam || "Unkown Pro Comp Team";
-  const navigate = useNavigate();
+  
+  // Get current user id (uuid) from AuthContext
+  const { uuid } = useAuth();
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [proCompName, setProCompName] = useState("");
   const [proCompTeam, setProCompTeam] = useState("");
   const [players, setPlayers] = useState([]);
 
-  
   const returnToPage = () => {
     navigate("/playerinput");
   };
 
-  
-
+  // Fetch basic player data that match the player's position and draft round
   useEffect(() => {
-      const fetchData = async () => {
-          try {
-              setLoading(true);
-              setError(null);
-              
-              // Fetch just the basic player data first
-              const { data: playerData, error: playerErr } = await supabase
-                  .from("db_playerprofile")
-                  .select('name, position, nfl_team')
-                  .eq("position", playerPosition)
-                  .eq("draft_round", draftRound);
-                  
-                  
-              if (playerErr) {
-                  console.error("Player fetch error:", playerErr);
-                  throw new Error("Failed to load player data");
-              }
-              
-              setPlayers(playerData);
-              console.log("Loaded", playerData.length, "players successfully");
-              console.log("Fetched Players:", players);
-          } catch (err) {
-              setError(err.message || "An error occurred");
-          } finally {
-              setLoading(false);
-          }
-      };
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const { data: playerData, error: playerErr } = await supabase
+          .from("db_playerprofile")
+          .select('name, position, nfl_team, draft_round')
+          .eq("position", playerPosition)
+          .eq("draft_round", draftRound);
+          
+        if (playerErr) {
+          console.error("Player fetch error:", playerErr);
+          throw new Error("Failed to load player data");
+        }
+        
+        setPlayers(playerData);
+        console.log("Loaded", playerData.length, "players successfully");
+      } catch (err) {
+        setError(err.message || "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      const getProComparison = () => {
-        let bestMatch = null;
-        let bestScore = Infinity;
-        let score = 0;
-        players.forEach(player => {
-              switch(playerPosition) {
-                default:
-                  score = 10;
-                  let proDefRound = player.draft_round || 0;
-                  //console.log("New Player Name: ", player.name);
-                  if(proDefRound === draftRound) {
-                    score = 0;
-                  }
-              }
-  
-              if (score < bestScore) {
-                  bestScore = score;
-                  bestMatch = player;
-                  setProCompName(bestMatch.name);
-                  setProCompTeam(bestMatch.nfl_team);
-                  console.log("ProComped: ", proCompName);
-              }
-              
-          }
-        );
-          //setProCompName(bestMatch.name);
-          //setProCompTeam(bestMatch.nfl_team);
-          return bestMatch;
-      };
+    fetchData();
+  }, [draftRound, playerPosition]);
+
+  // Compute the best match for pro comparison from the fetched players
+  useEffect(() => {
+    const getProComparison = () => {
+      let bestMatch = null;
+      let bestScore = Infinity;
+      let score = 0;
       
-      fetchData();
+      players.forEach(player => {
+        // For now we use a simple scoring system
+        // You can extend this switch if you have more positions or criteria.
+        switch(playerPosition) {
+          default:
+            score = 10;
+            const proDefRound = player.draft_round || 0;
+            if(proDefRound === draftRound) {
+              score = 0;
+            }
+        }
+
+        if (score < bestScore) {
+          bestScore = score;
+          bestMatch = player;
+        }
+      });
+      
+      if(bestMatch) {
+        setProCompName(bestMatch.name);
+        setProCompTeam(bestMatch.nfl_team);
+        console.log("ProComped:", bestMatch.name);
+      }
+      
+      return bestMatch;
+    };
+    
+    // Run the pro comparison only if players data is available
+    if(players.length > 0) {
       getProComparison();
-      // Cleanup function
-  }, [draftRound, playerPosition, players, proCompName]);
-  
+    }
+  }, [players, draftRound, playerPosition]);
+
+  // New function: Increment the predictions column in user_stats table
+  const incrementPredictionCount = async () => {
+    if (!uuid) return;
+    try {
+      // Fetch current predictions count, using maybeSingle to handle missing rows
+      const { data: stats, error: statsError } = await supabase
+        .from("user_stats")
+        .select("predictions")
+        .eq("user_id", uuid)
+        .maybeSingle();
+      
+      if (statsError) {
+        console.error("Error fetching user stats for predictions increment:", statsError);
+        return;
+      }
+      
+      // If a row exists, increment; otherwise start with 1
+      const newPredictions = stats && stats.predictions !== undefined && stats.predictions !== null
+        ? stats.predictions + 1
+        : 1;
+      
+      // Upsert the new value. Ensure the table has a unique constraint on user_id.
+      const { error } = await supabase
+        .from("user_stats")
+        .upsert({ user_id: uuid, predictions: newPredictions }, { onConflict: 'user_id' });
+      
+      if (error) {
+        console.error("Error upserting predictions:", error);
+      } else {
+        console.log("User predictions incremented successfully");
+      }
+    } catch (err) {
+      console.error("Error in incrementPredictionCount:", err);
+    }
+  };
+
+  // Call incrementPredictionCount once when a valid player is created
+  useEffect(() => {
+    if (playerName !== "Unknown Player") {
+      incrementPredictionCount();
+    }
+  }, [playerName, uuid]);
+
+  // Helper function for draft round suffix
   const getRoundSuffix = (round) => {
-    //if (round >= 11 && round <= 13) return `${round}th`;
     const lastDigit = round % 10;
     switch (lastDigit) {
       case 1:
@@ -110,36 +160,6 @@ const NewPlayerComp = () => {
         return `${round}th`;
     }
   };
-
-  /*const getProComparison = () => {
-      let bestMatch = null;
-      let bestScore = Infinity;
-      let score = 0;
-      players.forEach(player => {
-            switch(playerPosition) {
-              default:
-                score = 10;
-                let proDefRound = player.draft_round || 0;
-                //console.log("New Player Name: ", player.name);
-                if(proDefRound === draftRound) {
-                  score = 0;
-                }
-            }
-
-            if (score < bestScore) {
-                bestScore = score;
-                bestMatch = player;
-                setProCompName(bestMatch.name);
-                setProCompTeam(bestMatch.nfl_team);
-                console.log("ProComped: ", proCompName);
-            }
-            
-        }
-      );
-        //setProCompName(bestMatch.name);
-        //setProCompTeam(bestMatch.nfl_team);
-        return bestMatch;
-    };*/
 
   // Get position color
   const getPositionColor = (pos) => {
@@ -168,8 +188,54 @@ const NewPlayerComp = () => {
     if (round === 6) return 'from-orange-400 to-orange-600';
     return 'from-gray-400 to-gray-600';
   };
-  
-  return(
+
+  if (loading) {
+    return (
+      <PageTransition>
+        <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 flex items-center justify-center">
+          <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-8 rounded-xl shadow-2xl border border-white border-opacity-20 text-center">
+            <div className="flex justify-center mb-4">
+              <svg className="animate-spin h-12 w-12 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2">Loading Players</h2>
+            <p className="text-gray-300">Please wait while we fetch player data.</p>
+            <div className="w-full bg-gray-800 rounded-full h-1.5 mt-4 overflow-hidden">
+              <div className="bg-blue-500 h-1.5 rounded-full w-3/4 animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </PageTransition>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageTransition>
+        <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 flex items-center justify-center">
+          <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-8 rounded-xl shadow-2xl border border-white border-opacity-20 text-center max-w-md">
+            <div className="w-16 h-16 bg-red-500 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-3">Error Loading Data</h2>
+            <p className="text-gray-300 mb-6">{error}</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </PageTransition>
+    );
+  }
+
+  return (
     <PageTransition>
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 relative overflow-hidden">
         {/* Animated floating shapes */}
@@ -228,8 +294,7 @@ const NewPlayerComp = () => {
                 Based on the player's stats and our prediction model, {playerName} shows the qualities of a {getRoundSuffix(draftRound)} round prospect. 
                 {draftRound <= 3 ? 
                   ` As an early-round talent, they demonstrate exceptional ability at the ${playerPosition} position and could make an immediate impact in the NFL.` :
-                  ` While not projected as an early pick, they show promising potential and could develop into a valuable contributor with the right coaching and system fit.`
-                }
+                  ` While not projected as an early pick, they show promising potential and could develop into a valuable contributor with the right coaching and system fit.`}
               </p>
               <h3 className="text-xl font-bold text-white mb-3">Pro Comp: {proCompName}, {proCompTeam}</h3>
             </div>

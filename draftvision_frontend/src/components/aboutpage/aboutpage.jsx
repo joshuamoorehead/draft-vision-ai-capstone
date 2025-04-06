@@ -4,7 +4,6 @@ import { useAuth } from '../../context/AuthContext';
 import PageTransition from '../Common/PageTransition';
 import Auth from '../Auth/Auth';
 import { signUp, supabase } from '../../services/api';
-
 import confetti from 'canvas-confetti';
 
 const AboutPage = () => {
@@ -32,6 +31,14 @@ const AboutPage = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [userProfileLoading, setUserProfileLoading] = useState(false);
 
+  // NEW: State for user stats (comparisons and predictions) from user_stats table
+  const [userStats, setUserStats] = useState(null);
+  const [userStatsLoading, setUserStatsLoading] = useState(false);
+
+  // NEW: State for drafts count from user_drafts table
+  const [draftsCount, setDraftsCount] = useState(0);
+  const [draftsCountLoading, setDraftsCountLoading] = useState(false);
+
   // Reference to the confetti canvas element
   const confettiCanvasRef = useRef(null);
 
@@ -41,16 +48,13 @@ const AboutPage = () => {
       if (user && !userProfile) {
         try {
           setUserProfileLoading(true);
-          
-          // Attempt to get the profile data from the auth session first (if available)
-          // Some auth providers might include profile data with the session
+          // Try to use session metadata first
           const username = user.user_metadata?.username;
           if (username) {
             setUserProfile({ username });
             setUserProfileLoading(false);
             return;
           }
-          
           // Otherwise fetch from the database
           const { data, error } = await supabase
             .from('user_profiles')
@@ -63,7 +67,6 @@ const AboutPage = () => {
           } else if (data) {
             setUserProfile(data);
           }
-          
         } catch (err) {
           console.error('Failed to fetch user profile:', err);
         } finally {
@@ -71,11 +74,62 @@ const AboutPage = () => {
         }
       }
     };
-  
     fetchUserProfile();
   }, [user, userProfile]);
 
-  // Function to trigger confetti celebration
+  // Fetch user stats (comparisons and predictions) from the user_stats table
+  useEffect(() => {
+    const fetchUserStats = async () => {
+      if (user) {
+        try {
+          setUserStatsLoading(true);
+          const { data, error } = await supabase
+            .from('user_stats')
+            .select('comparisons, predictions')
+            .eq('user_id', user.id)
+            .single();
+          
+          if (error) {
+            console.error('Error fetching user stats:', error);
+          } else if (data) {
+            setUserStats(data);
+          }
+        } catch (err) {
+          console.error('Failed to fetch user stats:', err);
+        } finally {
+          setUserStatsLoading(false);
+        }
+      }
+    };
+    fetchUserStats();
+  }, [user]);
+
+  // NEW: Fetch count of drafts created from the user_drafts table
+  useEffect(() => {
+    const fetchDraftsCount = async () => {
+      if (user) {
+        try {
+          setDraftsCountLoading(true);
+          const { count, error } = await supabase
+            .from('user_drafts')
+            .select('id', { count: 'exact', head: true })
+            .eq('user_id', user.id);
+          if (error) {
+            console.error('Error fetching drafts count:', error);
+          } else {
+            setDraftsCount(count);
+          }
+        } catch (err) {
+          console.error('Error in fetchDraftsCount:', err);
+        } finally {
+          setDraftsCountLoading(false);
+        }
+      }
+    };
+    fetchDraftsCount();
+  }, [user]);
+
+  // Trigger confetti celebration
   const triggerConfetti = () => {
     confetti({
       particleCount: 150,
@@ -89,104 +143,75 @@ const AboutPage = () => {
     try {
       const { error } = await signInWithGoogle();
       if (error) throw error;
-      
-      // If sign in successful, trigger confetti
-      if (!error) triggerConfetti();
+      // Trigger confetti on successful sign in
+      triggerConfetti();
     } catch (err) {
       setError(err.message);
     }
   };
 
-  // Validate password function
+  // Validate password
   const validatePassword = (password) => {
-    // At least 8 characters, with at least one letter and one number
     return password.length >= 8 && 
            /[A-Za-z]/.test(password) && 
            /[0-9]/.test(password);
   };
 
-  // Email validation function
+  // Validate email format
   const validateEmail = (email) => {
-    // Basic format validation
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       setEmailError('Please enter a valid email address');
       return false;
     }
-    
     setEmailError('');
     return true;
   };
 
-  // Username validation function
+  // Validate username
   const validateUsername = (username) => {
-    // Check if username is empty
     if (!username || username.trim() === '') {
       setUsernameError('Username is required');
       return false;
     }
-
-    // Check length (3-20 characters)
     if (username.length < 3 || username.length > 20) {
       setUsernameError('Username must be between 3 and 20 characters');
       return false;
     }
-
-    // Check characters (letters, numbers, underscores only)
     if (!/^[a-zA-Z0-9_]+$/.test(username)) {
       setUsernameError('Username can only contain letters, numbers, and underscores');
       return false;
     }
-
     setUsernameError('');
     return true;
   };
 
-  // Handle direct signup form submission
+  // Handle direct signup
   const handleDirectSignup = async (e) => {
     e.preventDefault();
-    
-    // Reset error messages
     setError('');
     setUsernameError('');
     setEmailError('');
     setSuccess(false);
     
-    // Validate inputs
     if (!email || !username || !password || !confirmPassword) {
       setError('Please fill in all fields');
       return;
     }
-    
-    // Validate username
-    if (!validateUsername(username)) {
-      return;
-    }
-    
-    // Validate email format
-    if (!validateEmail(email)) {
-      return;
-    }
-    
-    // Check password strength
+    if (!validateUsername(username)) return;
+    if (!validateEmail(email)) return;
     if (!validatePassword(password)) {
       setError('Password must be at least 8 characters long and contain at least one letter and one number');
       return;
     }
-    
-    // Check if passwords match
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
     
     setLoading(true);
-    
     try {
-      // Attempt signup
       const { error, data } = await signUp(email, password, username);
-      
       if (error) {
-        // Check for specific error messages
         if (error.message && error.message.toLowerCase().includes('email already registered')) {
           setEmailError('This email is already registered. Please login instead.');
         } else if (error.message && error.message.toLowerCase().includes('username is already taken')) {
@@ -198,19 +223,12 @@ const AboutPage = () => {
         return;
       }
       
-      // Clear the form
       setEmail('');
       setUsername('');
       setPassword('');
       setConfirmPassword('');
-      
-      // Set success and trigger confetti celebration
       setSuccess(true);
       triggerConfetti();
-      
-      // User is now signed in - just navigate to dashboard or update UI
-      // This will happen automatically via the useAuth context
-      
     } catch (err) {
       console.error("Signup error:", err);
       setError(err.message || 'Failed to create account');
@@ -219,22 +237,20 @@ const AboutPage = () => {
     }
   };
 
-  // Navigate to mock draft page when authenticated user wants to start
+  // Navigate to mock draft page
   const handleStartMockDraft = () => {
     navigate('/mockdraft');
   };
 
   return (
     <PageTransition>
-      {/* Enhanced background with animated gradient and subtle pattern */}
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 relative overflow-hidden">
-        {/* Animated floating shapes */}
+        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 -left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
           <div className="absolute top-10 right-20 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
           <div className="absolute bottom-20 left-20 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
           <div className="absolute bottom-40 right-0 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
-          {/* Grid pattern overlay */}
           <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
         </div>
 
@@ -243,50 +259,43 @@ const AboutPage = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
             <div className="lg:w-1/2">
               <div className="relative mb-6">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
-                {user ? (
-                  <>Welcome to <span className="relative">
-                    <span className="relative z-10">Draft Vision AI</span>
-                    <span className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-r from-blue-400 to-purple-500 opacity-75 z-0"></span>
-                  </span>
-                  {userProfileLoading ? (
-                    <span className="text-green-400 inline-block min-w-[80px]">
-                      <span className="animate-pulse">...</span>
-                    </span>
+                <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
+                  {user ? (
+                    <>
+                      Welcome to <span className="relative">
+                        <span className="relative z-10">Draft Vision AI</span>
+                        <span className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-r from-blue-400 to-purple-500 opacity-75 z-0"></span>
+                      </span>
+                      {userProfileLoading ? (
+                        <span className="text-green-400 inline-block min-w-[80px]">
+                          <span className="animate-pulse">...</span>
+                        </span>
+                      ) : (
+                        <span className="text-green-400">, {userProfile?.username || 'player'}</span>
+                      )}
+                    </>
                   ) : (
-                    <span className="text-green-400">, {userProfile?.username || 'player'}</span>
+                    <>Welcome to <span className="relative">
+                      <span className="relative z-10">Draft Vision AI</span>
+                      <span className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-r from-blue-400 to-purple-500 opacity-75 z-0"></span>
+                    </span></>
                   )}
-                  </>
-                ) : (
-                  // For non-authenticated users
-                  <>Welcome to <span className="relative">
-                    <span className="relative z-10">Draft Vision AI</span>
-                    <span className="absolute bottom-0 left-0 w-full h-3 bg-gradient-to-r from-blue-400 to-purple-500 opacity-75 z-0"></span>
-                  </span>
-                  </>
-                )}
-              </h1>
+                </h1>
                 <div className="h-1 w-16 bg-blue-400 rounded mt-4"></div>
               </div>
               
-              {/* Different descriptions for logged in vs logged out users */}
               {user ? (
                 <p className="text-xl text-gray-200 mb-8 leading-relaxed">
-                  Ready to craft your next mock draft? Your personalized draft board and 
-                  predictions are waiting. Take advantage of all our premium features to 
-                  create your best mock draft yet.
+                  Ready to craft your next mock draft? Your personalized draft board and predictions are waiting.
                 </p>
               ) : (
                 <p className="text-xl text-gray-200 mb-8 leading-relaxed">
-                  Your go-to platform for insightful and data-driven predictions in the world of sports. 
-                  Our mission is to revolutionize the way scouting and drafting decisions are made using 
-                  advanced AI models.
+                  Your go-to platform for data-driven predictions in the world of sports.
                 </p>
               )}
               
               <div className="flex flex-wrap gap-4">
                 {user ? (
-                  // Show different buttons for authenticated users
                   <>
                     <button
                       onClick={handleStartMockDraft}
@@ -302,7 +311,6 @@ const AboutPage = () => {
                     </button>
                   </>
                 ) : (
-                  // Show for unauthenticated users
                   <>
                     <a href="#features" 
                       className="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition-all transform hover:scale-105">
@@ -319,37 +327,29 @@ const AboutPage = () => {
               </div>
             </div>
             
-            {/* Conditional Rendering: Sign Up Box or Feature Highlight */}
             {!user ? (
-              // Show Sign Up Box for unauthenticated users - Updated to match the modal design
               <div id="signup" className="lg:w-2/5 bg-white bg-opacity-95 backdrop-filter backdrop-blur-sm p-8 rounded-xl shadow-2xl transform transition-all duration-500 hover:shadow-blue-500/20">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">Join Draft Vision AI</h2>
-                
-                {/* Error message display */}
                 {error && (
                   <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                     {error}
                   </div>
                 )}
-                
                 {emailError && (
                   <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                     {emailError}
                   </div>
                 )}
-                
                 {usernameError && (
                   <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                     {usernameError}
                   </div>
                 )}
-                
                 {success && (
                   <div className="bg-green-100 border border-green-200 text-green-600 px-4 py-3 rounded mb-4">
                     Account created! Please check your email for verification.
                   </div>
                 )}
-                
                 <button
                   onClick={handleGoogleSignIn}
                   className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 mb-4"
@@ -361,7 +361,6 @@ const AboutPage = () => {
                   />
                   Continue with Google
                 </button>
-                
                 <div className="relative my-4">
                   <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t border-gray-300" />
@@ -370,10 +369,7 @@ const AboutPage = () => {
                     <span className="px-2 bg-white text-gray-500">Or sign up with email</span>
                   </div>
                 </div>
-                
-                {/* Direct signup form fields - Updated to match modal */}
                 <form onSubmit={handleDirectSignup}>
-                  {/* Email field */}
                   <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                       Email
@@ -390,8 +386,6 @@ const AboutPage = () => {
                       required
                     />
                   </div>
-                  
-                  {/* Username field */}
                   <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                       Username
@@ -411,8 +405,6 @@ const AboutPage = () => {
                       3-20 characters, letters, numbers, and underscores only
                     </p>
                   </div>
-                  
-                  {/* Password field */}
                   <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                       Password
@@ -429,8 +421,6 @@ const AboutPage = () => {
                       Must be at least 8 characters with letters and numbers
                     </p>
                   </div>
-                  
-                  {/* Confirm Password field */}
                   <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                       Confirm Password
@@ -444,7 +434,6 @@ const AboutPage = () => {
                       required
                     />
                   </div>
-                  
                   <button
                     type="submit"
                     disabled={loading}
@@ -463,7 +452,6 @@ const AboutPage = () => {
                     )}
                   </button>
                 </form>
-                
                 <p className="mt-4 text-sm text-center text-gray-600">
                   Already have an account?{' '}
                   <button
@@ -475,7 +463,6 @@ const AboutPage = () => {
                 </p>
               </div>
             ) : (
-              // Enhanced dashboard-like UI for authenticated users - matching the screenshot
               <div className="lg:w-2/5">
                 <div className="bg-white bg-opacity-95 backdrop-filter backdrop-blur-sm p-8 rounded-xl shadow-2xl transform transition-all duration-500 hover:shadow-blue-500/20">
                   <div className="flex items-center mb-6">
@@ -495,15 +482,21 @@ const AboutPage = () => {
                     </div>
                     <div className="grid grid-cols-3 gap-3 text-center">
                       <div className="p-2">
-                        <div className="text-2xl font-bold text-blue-600">0</div>
+                        <div className="text-2xl font-bold text-blue-600">
+                          {draftsCountLoading ? <span className="animate-pulse">...</span> : draftsCount}
+                        </div>
                         <div className="text-xs text-gray-500">Drafts Created</div>
                       </div>
                       <div className="p-2">
-                        <div className="text-2xl font-bold text-purple-600">0</div>
+                        <div className="text-2xl font-bold text-purple-600">
+                          {userStatsLoading ? <span className="animate-pulse">...</span> : userStats?.comparisons || 0}
+                        </div>
                         <div className="text-xs text-gray-500">Comparisons</div>
                       </div>
                       <div className="p-2">
-                        <div className="text-2xl font-bold text-green-600">0</div>
+                        <div className="text-2xl font-bold text-green-600">
+                          {userStatsLoading ? <span className="animate-pulse">...</span> : userStats?.predictions || 0}
+                        </div>
                         <div className="text-xs text-gray-500">Predictions</div>
                       </div>
                     </div>
@@ -540,7 +533,6 @@ const AboutPage = () => {
                     </button>
                   </div>
                   
-                  {/* Updated Quick Actions section with tools from the dropdown menu */}
                   <div className="mt-6 pt-4 border-t border-gray-200">
                     <div className="flex justify-between items-center">
                       <h3 className="font-semibold text-gray-700">Quick Actions</h3>
@@ -568,7 +560,7 @@ const AboutPage = () => {
                         onClick={() => navigate('/playerinput')}
                         className="p-2 bg-gray-100 rounded hover:bg-gray-200 transition-colors text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto mb-1 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
                         <span className="text-xs">Prediction</span>
                       </button>
@@ -580,14 +572,13 @@ const AboutPage = () => {
           </div>
         </div>
         
-        {/* Features Section with glass morphism effect */}
+        {/* Features and Vision Sections */}
         <div id="features" className="py-16 relative z-10">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-white mb-4">Our Features</h2>
               <div className="h-1 w-24 bg-blue-400 mx-auto rounded"></div>
             </div>
-            
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-8 rounded-xl shadow-lg border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300 transform hover:scale-105">
                 <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-16 h-16 flex items-center justify-center rounded-full mb-6 shadow-lg">
@@ -600,11 +591,10 @@ const AboutPage = () => {
                   Leverage advanced machine learning models to forecast draft positions and player performance potential with unparalleled accuracy.
                 </p>
               </div>
-              
               <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-8 rounded-xl shadow-lg border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300 transform hover:scale-105">
                 <div className="bg-gradient-to-br from-green-500 to-emerald-600 w-16 h-16 flex items-center justify-center rounded-full mb-6 shadow-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">Custom Mock Drafts</h3>
@@ -612,7 +602,6 @@ const AboutPage = () => {
                   Create, save, and share your own mock drafts with precision team needs analysis and detailed player comparisons.
                 </p>
               </div>
-              
               <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-8 rounded-xl shadow-lg border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300 transform hover:scale-105">
                 <div className="bg-gradient-to-br from-purple-500 to-violet-600 w-16 h-16 flex items-center justify-center rounded-full mb-6 shadow-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -628,7 +617,6 @@ const AboutPage = () => {
           </div>
         </div>
         
-        {/* Our Vision Section with parallax effect */}
         <div className="py-20 relative z-10 overflow-hidden">
           <div className="container mx-auto px-4 relative">
             <div className="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-10 rounded-2xl shadow-2xl border border-white border-opacity-20">
@@ -644,7 +632,6 @@ const AboutPage = () => {
           </div>
         </div>
 
-        {/* Add Auth modal component */}
         {showAuthModal && (
           <Auth 
             isLoginOpen={isLoginModal}
@@ -653,40 +640,25 @@ const AboutPage = () => {
           />
         )}
 
-        {/* Add custom styling for animations */}
         <style jsx>{`
           @keyframes blob {
-            0% {
-              transform: translate(0px, 0px) scale(1);
-            }
-            33% {
-              transform: translate(30px, -50px) scale(1.1);
-            }
-            66% {
-              transform: translate(-20px, 20px) scale(0.9);
-            }
-            100% {
-              transform: translate(0px, 0px) scale(1);
-            }
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
           }
-          .animate-blob {
-            animation: blob 7s infinite;
-          }
-          .animation-delay-2000 {
-            animation-delay: 2s;
-          }
-          .animation-delay-4000 {
-            animation-delay: 4s;
-          }
+          .animate-blob { animation: blob 7s infinite; }
+          .animation-delay-2000 { animation-delay: 2s; }
+          .animation-delay-4000 { animation-delay: 4s; }
           .bg-grid-pattern {
             background-image: linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
                               linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
             background-size: 40px 40px;
           }
         `}</style>
-              </div>
-            </PageTransition>
-          );
-        };
+      </div>
+    </PageTransition>
+  );
+};
 
 export default AboutPage;
