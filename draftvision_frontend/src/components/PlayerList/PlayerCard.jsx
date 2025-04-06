@@ -16,7 +16,7 @@ const tables = {
   'db_passingleaders': ['yds','yds_g', 'td', 'int', 'ratings'],
   'db_recstats': ['yds', 'rec', 'td', 'ypc', 'ypg'],
   'db_rbstats': ['yds', 'rush_td', 'rush_ypg', 'yds_att'],
-  'db_defensivepositionalstats': ['TFL', 'sacks', 'qb_hits', 'pass_def', 'int', 'td', 'solo', 'pd'],
+  'db_defensivepositionalstats': ['TFL', 'sacks', 'hur', 'td', 'solo', 'pd'],
   'db_combine': ['forty', 'bench', 'vertical', 'broadjump', 'threecone', 'shuttle'],
 };
 
@@ -39,7 +39,7 @@ const columnLabels = {
   'draft_av': 'Draft AV',
   
   // Passing Stats
-  'yds': 'Passing Yards',
+  'yds': 'Yards',
   'yds_g': 'Yards per Game',
   'td': 'Touchdowns',
   'int': 'Interceptions',
@@ -58,8 +58,7 @@ const columnLabels = {
   // Defensive Stats
   'TFL': 'Tackles for Loss',
   'sacks': 'Sacks',
-  'qb_hits': 'QB Hits',
-  'pass_def': 'Passes Defended',
+  'hur': 'QB Hurries',
   'solo': 'Solo Tackles',
   'pd': 'Passes Defended',
   
