@@ -515,22 +515,54 @@ const LargeList = () => {
                   </div>
                 </div>
                 
-                {/* Filtering for NFL Team */}
+                {/* Filtering for NFL Team as a dropdown */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-300">NFL Team</label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                      </svg>
-                    </div>
-                    <input
-                      type="text"
+                    <select
                       value={nflteam}
                       onChange={(e) => setNflTeam(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-800 bg-opacity-50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
-                      placeholder="Enter NFL team name"
-                    />
+                      className="w-full appearance-none bg-gray-800 bg-opacity-50 border border-gray-600 text-white py-3 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    >
+                      <option value="">All NFL Teams</option>
+                      <option value="ARI">ARI</option>
+                      <option value="ATL">ATL</option>
+                      <option value="BAL">BAL</option>
+                      <option value="BUF">BUF</option>
+                      <option value="CAR">CAR</option>
+                      <option value="CHI">CHI</option>
+                      <option value="CIN">CIN</option>
+                      <option value="CLE">CLE</option>
+                      <option value="DAL">DAL</option>
+                      <option value="DEN">DEN</option>
+                      <option value="DET">DET</option>
+                      <option value="GNB">GB</option>
+                      <option value="HOU">HOU</option>
+                      <option value="IND">IND</option>
+                      <option value="JAX">JAX</option>
+                      <option value="KAN">KAN</option>
+                      <option value="LAC">LAC</option>
+                      <option value="LAR">LAR</option>
+                      <option value="LVR">LVR</option>
+                      <option value="MIA">MIA</option>
+                      <option value="MIN">MIN</option>
+                      <option value="NWE">NWE</option>
+                      <option value="NOR">NOR</option>
+                      <option value="NYG">NYG</option>
+                      <option value="NYJ">NYJ</option>
+                      <option value="PHI">PHI</option>
+                      <option value="PIT">PIT</option>
+                      <option value="SFO">SF</option>
+                      <option value="SEA">SEA</option>
+                      <option value="TAM">TB</option>
+                      <option value="TEN">TEN</option>
+                      <option value="WAS">WAS</option>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
                 
@@ -559,8 +591,8 @@ const LargeList = () => {
                         </div>
                         <div>
                           <h3 className="text-xl font-bold text-white">{player.name}</h3>
-                          {/* Wrap the FlipCard in a container with margin-bottom for separation */}
-                          {index < 10 && (
+                          {/* Conditionally render FlipCard only if no filters are applied */}
+                          {!position && !team && !nflteam && index < 10 && (
                             <div className="mb-4">
                               <FlipCard
                                 front={
