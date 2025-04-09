@@ -1,20 +1,70 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+// Custom notification component
+const Notification = ({ message, type, onClose }) => {
+  const getBackgroundColor = () => {
+    switch (type) {
+      case 'success': return 'bg-green-500';
+      case 'error': return 'bg-red-500';
+      default: return 'bg-blue-500';
+    }
+  };
+  
+  return (
+    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 animate-fadeIn">
+      <div className={`flex items-center p-4 rounded-lg shadow-lg ${getBackgroundColor()} text-white max-w-md`}>
+        <div className="flex-1">
+          <p className="text-sm font-medium">{message}</p>
+        </div>
+        <div className="ml-4 flex-shrink-0 flex">
+          <button
+            className="inline-flex text-white focus:outline-none"
+            onClick={onClose}
+          >
+            <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // LoginModal component - Renders a modal dialog for user login
-const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
+const LoginModal = ({ isOpen, onClose, switchToSignup, onLoginSuccess }) => {
   // State for form fields
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [notification, setNotification] = useState(null);
+  // Local error state for this modal
+  const [localError, setLocalError] = useState('');
   
   // Get auth functions and state from context
-  const { signIn, resetPassword, signInWithGoogle, error, setError } = useAuth();
+  const { signIn, resetPassword, signInWithGoogle, setError } = useAuth();
   
   // Refs for form elements (for potential focus management)
   const emailRef = useRef();
   const passwordRef = useRef();
+  
+  // Use navigate for redirection
+  const navigate = useNavigate();
+
+  // Clear local error when modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      setLocalError('');
+      setError(''); // Also clear global error
+    }
+  }, [isOpen, setError]);
 
   // Don't render anything if modal is not open
   if (!isOpen) return null;
@@ -23,6 +73,12 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
   const handleModalClick = (e) => {
     e.stopPropagation();
   };
+  
+  // Helper to show notifications
+  const showNotification = (message, type = 'info') => {
+    setNotification({ message, type });
+    setTimeout(() => setNotification(null), 5000);
+  };
 
   // Handler for login form submission
   const handleLogin = async (e) => {
@@ -30,7 +86,7 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
     
     // Validate form
     if (!email || !password) {
-      setError('Please enter both email and password');
+      setLocalError('Please enter both email and password');
       return;
     }
 
@@ -38,12 +94,19 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
     setIsLoggingIn(true);
     try {
       const { error } = await signIn(email, password);
-      if (!error) {
-        // If successful, clear form and close modal
-        setEmail('');
-        setPassword('');
-        onClose();
+      if (error) {
+        setLocalError(error.message || 'Login failed');
+        return;
       }
+      
+      // If successful, clear form and close modal
+      setEmail('');
+      setPassword('');
+      setLocalError('');
+      if (onLoginSuccess) onLoginSuccess();
+      onClose();
+    } catch (err) {
+      setLocalError(err.message || 'An unexpected error occurred');
     } finally {
       // Always reset loading state
       setIsLoggingIn(false);
@@ -53,10 +116,13 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
   // Handler for Google sign in
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      const { error } = await signInWithGoogle();
+      if (error) {
+        setLocalError('Failed to sign in with Google');
+      }
       // The redirect will happen automatically
     } catch (err) {
-      setError('Failed to sign in with Google');
+      setLocalError('Failed to sign in with Google');
     }
   };
 
@@ -66,26 +132,45 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
     
     // Validate email
     if (!email) {
-      setError('Please enter your email address');
+      setLocalError('Please enter your email address');
       return;
     }
 
     try {
       // Send password reset email
       const { error } = await resetPassword(email);
-      if (!error) {
-        setError('');
-        alert('Password reset email sent. Check your inbox.');
-        setShowForgotPassword(false);
+      if (error) {
+        setLocalError(error.message || 'Failed to send reset email');
+        return;
       }
+      
+      setLocalError('');
+      showNotification('Password reset email sent. Check your inbox.', 'success');
+      setShowForgotPassword(false);
     } catch (error) {
       console.error('Error sending reset email:', error);
+      showNotification(error.message || 'Failed to send reset email', 'error');
     }
+  };
+  
+  // Handler to navigate to the dedicated forgot password page
+  const goToForgotPassword = () => {
+    onClose(); // Close the modal
+    navigate('/forgot-password'); // Navigate to the forgot password page
   };
 
   return (
     // Modal backdrop - clicking here closes the modal
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={onClose}>
+      {/* Custom notification */}
+      {notification && (
+        <Notification 
+          message={notification.message} 
+          type={notification.type} 
+          onClose={() => setNotification(null)} 
+        />
+      )}
+      
       {/* Modal container - clicking here doesn't close the modal */}
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md" onClick={handleModalClick}>
         {/* Modal title */}
@@ -93,8 +178,8 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
           {showForgotPassword ? 'Reset Password' : 'Login to DraftVision AI'}
         </h2>
         
-        {/* Error message display */}
-        {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">{error}</div>}
+        {/* Error message display - now using localError */}
+        {localError && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">{localError}</div>}
         
         {/* Google Sign In Button - Show only on login screen, not password reset */}
         {!showForgotPassword && (
@@ -205,7 +290,7 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
               </button>
               <button
                 className="text-blue-500 hover:text-blue-800 text-sm"
-                onClick={() => setShowForgotPassword(true)}
+                onClick={goToForgotPassword}
                 type="button"
               >
                 Forgot Password?
@@ -218,7 +303,11 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
                 Don't have an account?{' '}
                 <button
                   className="text-blue-500 hover:text-blue-800"
-                  onClick={switchToSignup}
+                  onClick={() => {
+                    setLocalError(''); // Clear local error when switching
+                    setError(''); // Also clear global error
+                    switchToSignup();
+                  }}
                   type="button"
                 >
                   Sign Up
@@ -237,6 +326,18 @@ const LoginModal = ({ isOpen, onClose, switchToSignup }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
+        
+        {/* Add animation styles */}
+        <style jsx>{`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+          }
+          
+          .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+          }
+        `}</style>
       </div>
     </div>
   );

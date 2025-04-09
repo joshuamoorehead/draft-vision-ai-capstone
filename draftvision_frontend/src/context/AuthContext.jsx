@@ -8,13 +8,21 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 // Provider component
-export const AuthProvider = ({ children, signupStateHandler }) => {
+export const AuthProvider = ({ children, signupStateHandler, loginStateHandler }) => {
+  // State to track the current authenticated user
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(true);
+  // State to track if we're in a signup or login process
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  // Clear error when modal state changes
+  useEffect(() => {
+    setError('');
+  }, [isLoginModal, showAuthModal]);
 
   useEffect(() => {
     console.log("AuthProvider initializing");
@@ -90,7 +98,8 @@ export const AuthProvider = ({ children, signupStateHandler }) => {
       return { data, error: null };
     } catch (err) {
       console.error("Signup error:", err);
-      setError(err.message);
+      // Note: We're not setting global error here, we'll rely on local error in the component
+      // setError(err.message);
       return { data: null, error: err };
     } finally {
       setIsSigningUp(false);
@@ -100,8 +109,14 @@ export const AuthProvider = ({ children, signupStateHandler }) => {
 
   const handleSignIn = async (email, password) => {
     try {
+      // Track login state locally
+      setIsLoggingIn(true);
+      
+      // Also update parent component if handler exists
+      if (loginStateHandler) loginStateHandler(true);
+      
+      // Clear any previous errors
       setError('');
-      setLoading(true);
       console.log("Signing in:", email);
       const { data, error } = await signIn(email, password);
       if (error) throw error;
@@ -110,34 +125,51 @@ export const AuthProvider = ({ children, signupStateHandler }) => {
       return { data, error: null };
     } catch (err) {
       console.error("Signin error:", err);
-      setError(err.message);
+      // Note: We're not setting global error here, we'll rely on local error in the component
+      // setError(err.message);
       return { data: null, error: err };
     } finally {
-      setLoading(false);
+      // Reset login tracking
+      setIsLoggingIn(false);
+      if (loginStateHandler) loginStateHandler(false);
     }
   };
 
   const handleSignInWithGoogle = async () => {
     try {
+      // Track login state locally
+      setIsLoggingIn(true);
+      
+      // Also update parent component if handler exists
+      if (loginStateHandler) loginStateHandler(true);
+      
+      // Clear any previous errors
       setError('');
-      setLoading(true);
       console.log("Signing in with Google");
       const { data, error } = await signInWithGoogle();
       if (error) throw error;
       return { data, error: null };
     } catch (err) {
       console.error("Google signin error:", err);
-      setError(err.message);
+      // Note: We're not setting global error here, we'll rely on local error in the component
+      // setError(err.message);
       return { data: null, error: err };
     } finally {
-      setLoading(false);
+      // Reset login tracking
+      setIsLoggingIn(false);
+      if (loginStateHandler) loginStateHandler(false);
     }
   };
 
   const handleSignOut = async () => {
     try {
       setError('');
-      setLoading(true);
+      
+      // Only set loading if not in an auth process
+      if (!isSigningUp && !isLoggingIn) {
+        setLoading(true);
+      }
+      
       console.log("Signing out user");
       await supabase.auth.signOut();
       localStorage.removeItem('supabase.auth.token');
@@ -147,14 +179,22 @@ export const AuthProvider = ({ children, signupStateHandler }) => {
       console.error("Sign out error:", err);
       setError(err.message);
     } finally {
-      setLoading(false);
+      // Only reset loading if we set it earlier
+      if (!isSigningUp && !isLoggingIn) {
+        setLoading(false);
+      }
     }
   };
   
   const handleResetPassword = async (email) => {
     try {
       setError('');
-      setLoading(true);
+      
+      // Only set loading if not in an auth process
+      if (!isSigningUp && !isLoggingIn) {
+        setLoading(true);
+      }
+      
       console.log("Resetting password for:", email);
       const { error } = await resetPassword(email);
       if (error) throw error;
@@ -162,16 +202,20 @@ export const AuthProvider = ({ children, signupStateHandler }) => {
       return { error: null };
     } catch (err) {
       console.error("Password reset error:", err);
-      setError(err.message);
+      // Return the error but don't set global error state
       return { error: err };
     } finally {
-      setLoading(false);
+      // Only reset loading if we set it earlier
+      if (!isSigningUp && !isLoggingIn) {
+        setLoading(false);
+      }
     }
   };
 
   const refreshSession = async () => {
     try {
-      if (!isSigningUp) {
+      // Don't set loading state if we're in an auth process
+      if (!isSigningUp && !isLoggingIn) {
         setLoading(true);
       }
       const { data, error } = await supabase.auth.getSession();
@@ -182,7 +226,8 @@ export const AuthProvider = ({ children, signupStateHandler }) => {
       console.error("Session refresh error:", err);
       return { data: null, error: err };
     } finally {
-      if (!isSigningUp) {
+      // Only reset loading if we set it earlier
+      if (!isSigningUp && !isLoggingIn) {
         setLoading(false);
       }
     }
@@ -191,37 +236,41 @@ export const AuthProvider = ({ children, signupStateHandler }) => {
   const openLoginModal = () => {
     setIsLoginModal(true);
     setShowAuthModal(true);
+    setError(''); // Clear error when opening modal
   };
 
   const openSignupModal = () => {
     setIsLoginModal(false);
     setShowAuthModal(true);
+    setError(''); // Clear error when opening modal
   };
 
   const closeAuthModals = () => {
     setShowAuthModal(false);
+    setError(''); // Clear error when closing modal
   };
 
   // Include the user's UUID (using user.id) in the context value
   const value = {
-    user,
-    uuid: user?.id,
+    user,                   // Current authenticated user
     setUser,
-    signUp: handleSignUp,
-    signIn: handleSignIn,
-    signInWithGoogle: handleSignInWithGoogle,
-    signOut: handleSignOut,
-    resetPassword: handleResetPassword,
-    refreshSession,
-    error,
-    setError,
-    loading,
-    isSigningUp,
-    showAuthModal,
-    isLoginModal,
-    openLoginModal,
-    openSignupModal,
-    closeAuthModals
+    signUp: handleSignUp,   // Function to register new users
+    signIn: handleSignIn,   // Function to login existing users
+    signInWithGoogle: handleSignInWithGoogle, // Function to login with Google
+    signOut: handleSignOut, // Function to logout
+    resetPassword: handleResetPassword, // Function to reset password
+    refreshSession,         // Function to refresh session data
+    error,                  // Any auth errors
+    setError,               // Function to set/clear errors
+    loading,                // Loading state
+    isSigningUp,            // Whether signup is in progress
+    isLoggingIn,            // Whether login is in progress
+    // Modal control
+    showAuthModal,          // Whether auth modal is showing
+    isLoginModal,           // Whether in login or signup mode
+    openLoginModal,         // Function to open login modal
+    openSignupModal,        // Function to open signup modal
+    closeAuthModals         // Function to close auth modals
   };
 
   return (
