@@ -61,41 +61,100 @@ const SavedDrafts = () => {
     return selectedTeams.includes(pick.team);
   };
 
-  useEffect(() => {
-    const fetchDrafts = async () => {
-      if (!user) {
-        setLoading(false);
-        return;
-      }
+  // Update the fetchDrafts function in SavedDrafts.jsx
 
-      try {
-        // Updated to use the new user_drafts table
-        const { data, error } = await supabase
-          .from('user_drafts')
-          .select('*')
-          .eq('user_id', user.id);
+useEffect(() => {
+  const fetchDrafts = async () => {
+    if (!user) {
+      setLoading(false);
+      return;
+    }
 
-        if (error) throw error;
-        
-        // Add a grade report for each draft
-        const draftsWithGrades = (data || []).map(draft => {
+    try {
+      // Fetch drafts from user_drafts table
+      const { data, error } = await supabase
+        .from('user_drafts')
+        .select('*')
+        .eq('user_id', user.id);
+
+      if (error) throw error;
+      
+      console.log('Fetched drafts from database:', data);
+      
+      // Process drafts to use the database grades
+      const processedDrafts = (data || []).map(draft => {
+        // Check if database has grade and score
+        if (draft.grade) {
+          // Use the database grade but create a report object for UI consistency
+          return {
+            ...draft,
+            report: {
+              letter: draft.grade,
+              score: draft.score || 85, // Default score if not available
+              displayScore: draft.score ? Math.round(draft.score) : '85',
+              color: getGradeColor(draft.grade),
+              // These can still be dynamically generated
+              analysis: generateAnalysis(draft),
+              strengths: generateStrengths(draft),
+              weaknesses: generateWeaknesses(draft)
+            }
+          };
+        } else {
+          // Fallback to dynamic grade generation if no grade in database
           const report = generateDraftReport(draft);
           return {
             ...draft,
             report
           };
-        });
-        
-        setDrafts(draftsWithGrades);
-      } catch (error) {
-        console.error('Error fetching drafts:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+        }
+      });
+      
+      console.log('Processed drafts with database grades:', processedDrafts);
+      setDrafts(processedDrafts);
+    } catch (error) {
+      console.error('Error fetching drafts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchDrafts();
-  }, [user]);
+  fetchDrafts();
+}, [user]);
+
+// Also ensure that the getGradeColor function is properly defined
+const getGradeColor = (grade) => {
+  switch(grade) {
+    case 'A+': case 'A': return 'bg-green-600';
+    case 'A-': case 'B+': return 'bg-green-500';
+    case 'B': return 'bg-blue-600';
+    case 'B-': case 'C+': return 'bg-blue-500';
+    case 'C': return 'bg-yellow-600';
+    case 'C-': case 'D+': return 'bg-yellow-500';
+    case 'D': case 'D-': return 'bg-red-500';
+    case 'F': return 'bg-red-600';
+    default: return 'bg-gray-600';
+  }
+};
+
+// Helper functions for generating analysis, strengths, and weaknesses
+const generateAnalysis = (draft) => {
+  return "This draft shows good balance between addressing team needs and selecting the best available talent. The early round picks demonstrate solid value assessment.";
+};
+
+const generateStrengths = (draft) => {
+  return [
+    "Good value selections in the early rounds",
+    "Addressed key positional needs",
+    "Balance between offense and defense"
+  ];
+};
+
+const generateWeaknesses = (draft) => {
+  return [
+    "Could have addressed secondary depth earlier",
+    "Potential reach in middle rounds"
+  ];
+};
 
   const handleDeleteDraft = async (draftId) => {
     try {
@@ -150,6 +209,11 @@ const SavedDrafts = () => {
       case 'rounds':
         return b.rounds - a.rounds;
       case 'score':
+        // First compare by database scores if available
+        if (a.score !== undefined && b.score !== undefined) {
+          return b.score - a.score;
+        }
+        // Fall back to report scores if database scores aren't available
         return b.report.score - a.report.score;
       default:
         return 0;

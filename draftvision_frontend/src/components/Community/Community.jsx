@@ -5,174 +5,1056 @@ import { supabase } from '../../services/api';
 import PageTransition from '../Common/PageTransition';
 import Auth from '../Auth/Auth';
 import { generateDraftReport } from '../../utils/DraftAnalysis';
+import DraftCard from './DraftCard';
+import DraftDetailModal from './DraftDetailModal';
+
+/**
+ * Get the color class for a grade
+ */
+const getGradeColor = (grade) => {
+  switch(grade) {
+    case 'A+': case 'A': return 'bg-green-600';
+    case 'A-': case 'B+': return 'bg-green-500';
+    case 'B': return 'bg-blue-600';
+    case 'B-': case 'C+': return 'bg-blue-500';
+    case 'C': return 'bg-yellow-600';
+    case 'C-': case 'D+': return 'bg-yellow-500';
+    case 'D': case 'D-': return 'bg-red-500';
+    case 'F': return 'bg-red-600';
+    default: return 'bg-gray-600';
+  }
+};
+
+/**
+ * Generate an analysis for a draft
+ */
+const generateAnalysis = (draft) => {
+  return "This draft shows good balance between addressing team needs and selecting the best available talent. The early round picks demonstrate solid value assessment.";
+};
+
+/**
+ * Generate strengths for a draft
+ */
+const generateStrengths = (draft) => {
+  return [
+    "Good value selections in the early rounds",
+    "Addressed key positional needs",
+    "Balance between offense and defense"
+  ];
+};
+
+/**
+ * Generate weaknesses for a draft
+ */
+const generateWeaknesses = (draft) => {
+  return [
+    "Could have addressed secondary depth earlier",
+    "Potential reach in middle rounds"
+  ];
+};
 
 const Community = () => {
   const { user } = useAuth();
   const [communityDrafts, setCommunityDrafts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('popular'); // 'popular', 'recent', 'score'
+  const [filter, setFilter] = useState('popular'); // 'popular', 'recent', 'score', 'liked'
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(true);
   const [expandedDraft, setExpandedDraft] = useState(null);
   const [viewingDraftDetails, setViewingDraftDetails] = useState(null);
+  const [newComment, setNewComment] = useState('');
+  const [draftComments, setDraftComments] = useState({});
+  const [commentLoading, setCommentLoading] = useState(false);
+  const [userLikedDrafts, setUserLikedDrafts] = useState({});
 
   useEffect(() => {
     fetchCommunityDrafts();
   }, [filter]);
 
+  // Track which drafts the user has liked
+  useEffect(() => {
+    if (user) {
+      fetchUserLikedDrafts();
+    } else {
+      setUserLikedDrafts({});
+      // Reset filter if it was 'liked' and user logs out
+      if (filter === 'liked') {
+        setFilter('popular');
+      }
+    }
+  }, [user]);
+
+  const fetchUserLikedDrafts = async () => {
+    if (!user) return;
+    
+    try {
+      // Fetch which drafts the current user has liked
+      const { data, error } = await supabase
+        .from('user_draft_likes')
+        .select('draft_id')
+        .eq('user_id', user.id);
+        
+      if (error) {
+        console.error('Error fetching user liked drafts:', error);
+        return;
+      }
+      
+      const likedDrafts = {};
+      if (data) {
+        data.forEach(like => {
+          likedDrafts[like.draft_id] = true;
+        });
+      }
+      
+      setUserLikedDrafts(likedDrafts);
+    } catch (error) {
+      console.error('Error in fetchUserLikedDrafts:', error);
+    }
+  };
+
   const fetchCommunityDrafts = async () => {
     setLoading(true);
+    console.log("Fetching community drafts with filter:", filter);
+    
     try {
-      // Fetch from the user_drafts table for public drafts
-      let query = supabase
-        .from('user_drafts')
-        .select(`
-          id,
-          user_id,
-          name,
-          created_at,
-          rounds,
-          selected_teams,
-          results,
-          is_public
-        `)
-        .eq('is_public', true)
-        .limit(20);
-
-      // Add sorting based on filter
-      if (filter === 'recent') {
-        query = query.order('created_at', { ascending: false });
-      }
-      // Note: 'popular' and 'score' would ideally use different DB fields
-      // For now, we'll simulate them with client-side sorting
-
-      const { data, error } = await query;
+      let drafts = [];
       
-      if (error) throw error;
-
-      // For demonstration, create sample drafts if none found
-      if (!data || data.length === 0) {
-        const sampleDrafts = [
-          {
-            id: '1a2b3c',
-            name: "2025 First Round Focus",
-            created_at: "2025-02-20T15:30:00",
-            rounds: 3,
-            selected_teams: ["Arizona Cardinals", "Chicago Bears"],
-            user_id: "sample1",
-            is_public: true
-          },
-          {
-            id: '4d5e6f',
-            name: "QB-Heavy Strategy",
-            created_at: "2025-02-18T12:15:00",
-            rounds: 7,
-            selected_teams: ["Miami Dolphins", "New York Jets"],
-            user_id: "sample2",
-            is_public: true
-          },
-          {
-            id: '7g8h9i',
-            name: "Defense First Approach",
-            created_at: "2025-02-22T09:45:00",
-            rounds: 5,
-            selected_teams: ["Baltimore Ravens", "Pittsburgh Steelers"],
-            user_id: "sample3",
-            is_public: true
-          }
-        ];
+      // Special handling for "liked" filter
+      if (filter === 'liked') {
+        if (!user) {
+          setCommunityDrafts([]);
+          setLoading(false);
+          return;
+        }
         
-        // Add draft report to each draft
-        const enhancedSampleDrafts = sampleDrafts.map(draft => {
-          const report = generateDraftReport(draft);
-          return {
-            ...draft,
-            report,
-            views: Math.floor(Math.random() * 500) + 50,
-            likes: Math.floor(Math.random() * 200) + 1,
-            // Generate a pseudo-username based on user_id
-            username: `user_${draft.user_id.substring(0, 5)}`,
-            avatar_url: null
-          };
-        });
-        
-        setCommunityDrafts(enhancedSampleDrafts);
-      } else {
-        // Enhance actual data with grades, analysis, and simulated stats
-        const enhancedDrafts = data.map(draft => {
-          const report = generateDraftReport(draft);
+        // First get all drafts the user has liked
+        const { data: likedData, error: likedError } = await supabase
+          .from('user_draft_likes')
+          .select('draft_id')
+          .eq('user_id', user.id);
           
-          // Parse results if it's a string
-          let parsedResults = draft.results;
-          if (typeof draft.results === 'string') {
-            try {
-              parsedResults = JSON.parse(draft.results);
-            } catch (parseError) {
-              console.error("Error parsing draft results:", parseError);
-              parsedResults = [];
+        if (likedError) {
+          console.error('Error fetching liked drafts:', likedError);
+          setCommunityDrafts([]);
+          setLoading(false);
+          return;
+        }
+        
+        if (!likedData || likedData.length === 0) {
+          console.log("No liked drafts found");
+          setCommunityDrafts([]);
+          setLoading(false);
+          return;
+        }
+        
+        // Get the actual draft data for each liked draft
+        const likedDraftIds = likedData.map(like => like.draft_id);
+        const { data: likedDrafts, error: draftError } = await supabase
+          .from('user_drafts')
+          .select('*')
+          .in('id', likedDraftIds)
+          .eq('is_public', true);
+          
+        if (draftError) {
+          console.error('Error fetching liked draft data:', draftError);
+          setCommunityDrafts([]);
+          setLoading(false);
+          return;
+        }
+        
+        drafts = likedDrafts || [];
+      } else {
+        // Base query for other filters
+        let query = supabase
+          .from('user_drafts')
+          .select('*')
+          .eq('is_public', true);
+        
+        // Apply sorting based on filter
+        if (filter === 'popular') {
+          query = query.order('likes', { ascending: false });
+        } else if (filter === 'recent') {
+          query = query.order('created_at', { ascending: false });
+        } else if (filter === 'score') {
+          // First try to filter by score if score exists and is non-null
+          const { data: scoreData, error: scoreError } = await query
+            .not('score', 'is', null)
+            .order('score', { ascending: false })
+            .limit(20);
+          
+          if (!scoreError && scoreData && scoreData.length > 0) {
+            drafts = scoreData;
+            console.log("Found drafts with scores:", drafts.length);
+            
+            // Early return with sorted data
+            const enhancedDrafts = await enhanceDrafts(drafts);
+            setCommunityDrafts(enhancedDrafts);
+            setLoading(false);
+            
+            // Fetch comments if needed
+            if (enhancedDrafts.length > 0) {
+              fetchCommentsForDrafts(enhancedDrafts.map(d => d.id));
+            }
+            return;
+          } else {
+            console.log("No drafts with scores found or error occurred, using grade fallback");
+            // Fallback to using grades if available
+            const { data: gradeData, error: gradeError } = await query
+              .not('grade', 'is', null)
+              .limit(20);
+              
+            if (!gradeError && gradeData && gradeData.length > 0) {
+              // Sort manually by grade
+              drafts = gradeData.sort((a, b) => {
+                const gradeValues = {
+                  'A+': 12, 'A': 11, 'A-': 10,
+                  'B+': 9, 'B': 8, 'B-': 7,
+                  'C+': 6, 'C': 5, 'C-': 4,
+                  'D+': 3, 'D': 2, 'D-': 1,
+                  'F': 0
+                };
+                return (gradeValues[b.grade] || 0) - (gradeValues[a.grade] || 0);
+              });
+              console.log("Found drafts with grades, sorting manually:", drafts.length);
+              
+              // Early return with manually sorted data
+              const enhancedDrafts = await enhanceDrafts(drafts);
+              setCommunityDrafts(enhancedDrafts);
+              setLoading(false);
+              
+              // Fetch comments if needed
+              if (enhancedDrafts.length > 0) {
+                fetchCommentsForDrafts(enhancedDrafts.map(d => d.id));
+              }
+              return;
             }
           }
           
-          return {
-            ...draft,
-            results: parsedResults,
-            report,
-            views: Math.floor(Math.random() * 500) + 50,
-            likes: Math.floor(Math.random() * 200) + 1,
-            // Create a username from the first part of their email if available
-            username: user && draft.user_id === user.id 
-              ? 'You' 
-              : `drafter_${draft.user_id.substring(0, 5)}`
-          };
-        });
-        
-        // Client-side sort for 'popular' and 'score' filters
-        if (filter === 'popular') {
-          enhancedDrafts.sort((a, b) => b.likes - a.likes);
-        } else if (filter === 'score') {
-          enhancedDrafts.sort((a, b) => (b.report?.score || 0) - (a.report?.score || 0));
+          // If we reach here, fall back to sorting by likes
+          console.log("No drafts with scores or grades found, falling back to sorting by likes");
+          query = query.order('likes', { ascending: false });
         }
         
-        setCommunityDrafts(enhancedDrafts);
+        // Fetch drafts with the applied sort order
+        const { data, error } = await query.limit(20);
+        
+        if (error) {
+          console.error("Error fetching drafts:", error);
+          setCommunityDrafts([]);
+          setLoading(false);
+          return;
+        }
+        
+        drafts = data || [];
+      }
+      
+      if (drafts.length === 0) {
+        console.log("No drafts found");
+        setCommunityDrafts([]);
+        setLoading(false);
+        return;
+      }
+      
+      const enhancedDrafts = await enhanceDrafts(drafts);
+      setCommunityDrafts(enhancedDrafts);
+      
+      // Fetch comments if needed
+      if (enhancedDrafts.length > 0) {
+        fetchCommentsForDrafts(enhancedDrafts.map(d => d.id));
       }
     } catch (error) {
-      console.error('Error fetching community drafts:', error);
+      console.error("Error fetching community drafts:", error);
+      setCommunityDrafts([]);
     } finally {
       setLoading(false);
     }
   };
+  
+  // Helper function to enhance drafts with profile data
+  const enhanceDrafts = async (drafts) => {
+    // Get user IDs from drafts
+    const userIds = [...new Set(drafts.map(draft => draft.user_id))];
+    
+    // Fetch profiles in a separate query
+    const { data: profiles, error: profilesError } = await supabase
+      .from('user_profiles')
+      .select('*')
+      .in('user_id', userIds);
+    
+    console.log("Profiles query:", {
+      success: !profilesError,
+      count: profiles?.length || 0,
+      error: profilesError?.message
+    });
+    
+    // Create a map for quick profile lookup
+    const profileMap = {};
+    if (profiles && profiles.length > 0) {
+      profiles.forEach(profile => {
+        profileMap[profile.user_id] = profile;
+      });
+    }
+    
+    // Helper function to inflate views and likes based on grade
+    const inflateEngagement = (draft) => {
+      // Only apply inflation for display, not for database values
+      const baseViews = draft.views || 0;
+      const baseLikes = draft.likes || 0;
+      
+      // Define grade multipliers for inflation
+      const gradeMultipliers = {
+        'A+': { views: 5.0, likes: 4.0 },
+        'A': { views: 4.5, likes: 3.5 },
+        'A-': { views: 4.0, likes: 3.0 },
+        'B+': { views: 3.5, likes: 2.5 },
+        'B': { views: 3.0, likes: 2.0 },
+        'B-': { views: 2.5, likes: 1.8 },
+        'C+': { views: 2.0, likes: 1.5 },
+        'C': { views: 1.8, likes: 1.3 },
+        'C-': { views: 1.5, likes: 1.2 },
+        'D+': { views: 1.3, likes: 1.1 },
+        'D': { views: 1.2, likes: 1.0 },
+        'D-': { views: 1.1, likes: 1.0 },
+        'F': { views: 1.0, likes: 1.0 }
+      };
+      
+      // Default multiplier if grade isn't found
+      const defaultMultiplier = { views: 1.0, likes: 1.0 };
+      const multiplier = gradeMultipliers[draft.grade] || defaultMultiplier;
+      
+      // Calculate inflated values
+      // Add base values to avoid grades with 0 engagement
+      const baseAdd = {
+        views: draft.grade ? (20 - Object.keys(gradeMultipliers).indexOf(draft.grade) * 1.5) : 0,
+        likes: draft.grade ? (10 - Object.keys(gradeMultipliers).indexOf(draft.grade) * 0.75) : 0
+      };
+      
+      // Apply inflation formula: (base + baseAdd) * multiplier
+      const inflatedViews = Math.round((baseViews + baseAdd.views) * multiplier.views);
+      const inflatedLikes = Math.round((baseLikes + baseAdd.likes) * multiplier.likes);
+      
+      // Return the inflated values
+      return {
+        displayViews: inflatedViews,
+        displayLikes: inflatedLikes,
+        // Keep original values for database operations
+        actualViews: baseViews,
+        actualLikes: baseLikes
+      };
+    };
+    
+    // Enhance drafts with profile data and inflated engagement metrics
+    return drafts.map(draft => {
+      const profile = profileMap[draft.user_id];
+      const engagement = inflateEngagement(draft);
+      
+      return {
+        ...draft,
+        report: draft.grade ? {
+          letter: draft.grade,
+          score: draft.score || 85,
+          displayScore: Math.round(draft.score) || '85',
+          color: getGradeColor(draft.grade),
+          analysis: generateAnalysis(draft),
+          strengths: generateStrengths(draft),
+          weaknesses: generateWeaknesses(draft)
+        } : generateDraftReport(draft),
+        username: profile?.username || `drafter_${draft.user_id.substring(0, 5)}`,
+        avatar_url: profile?.avatar_url || null,
+        selected_teams: Array.isArray(draft.selected_teams) ? draft.selected_teams : 
+                      (draft.selected_teams ? [draft.selected_teams] : []),
+        // Use inflated values for display
+        views: engagement.displayViews,
+        likes: engagement.displayLikes,
+        // Keep track of actual database values
+        actualViews: engagement.actualViews,
+        actualLikes: engagement.actualLikes,
+        userLiked: userLikedDrafts[draft.id] || false
+      };
+    });
+  };
+
+  const fetchCommentsForDrafts = async (draftIds) => {
+    if (!draftIds || draftIds.length === 0) return;
+    console.log("Fetching comments for drafts:", draftIds);
+    
+    try {
+      // Fetch comments from the database - now including username column
+      const { data: comments, error: commentsError } = await supabase
+        .from('draft_comments')
+        .select(`
+          id,
+          draft_id,
+          user_id,
+          username,
+          comment,
+          created_at,
+          likes
+        `)
+        .in('draft_id', draftIds)
+        .order('created_at', { ascending: false });
+        
+      if (commentsError) {
+        console.error('Error fetching comments:', commentsError);
+        return;
+      }
+      
+      if (!comments || comments.length === 0) {
+        console.log("No comments found for these drafts");
+        return;
+      }
+      
+      console.log("Comments fetched:", comments.length);
+      
+      // Get all user IDs from comments
+      const userIds = [...new Set(comments.map(comment => comment.user_id))];
+      
+      // Still fetch profiles for avatar URLs
+      const { data: profiles, error: profilesError } = await supabase
+        .from('user_profiles')
+        .select('user_id, avatar_url')
+        .in('user_id', userIds);
+        
+      if (profilesError) {
+        console.error('Error fetching comment user profiles:', profilesError);
+      }
+      
+      // Create a map for quick profile lookup (just for avatar URLs now)
+      const profileMap = {};
+      if (profiles && profiles.length > 0) {
+        profiles.forEach(profile => {
+          profileMap[profile.user_id] = profile;
+        });
+      }
+      
+      // Check if current user has liked any comments
+      let userLikedComments = {};
+      if (user) {
+        const commentIds = comments.map(comment => comment.id);
+        const { data: userLikes, error: userLikesError } = await supabase
+          .from('comment_likes')
+          .select('comment_id')
+          .eq('user_id', user.id)
+          .in('comment_id', commentIds);
+          
+        if (!userLikesError && userLikes) {
+          userLikes.forEach(like => {
+            userLikedComments[like.comment_id] = true;
+          });
+        }
+      }
+      
+      // Enhance comments with avatar URLs and like status
+      const enhancedComments = comments.map(comment => {
+        const profile = profileMap[comment.user_id];
+        
+        // Use the stored username, but for the current user show "You"
+        let displayUsername = comment.username;
+        if (user && comment.user_id === user.id) {
+          displayUsername = 'You';
+        }
+        
+        // If no username was stored, generate a fallback (for legacy comments)
+        if (!displayUsername) {
+          displayUsername = `User_${comment.user_id.substring(0, 8)}`;
+        }
+        
+        return {
+          ...comment,
+          username: displayUsername,
+          avatar_url: profile?.avatar_url || null,
+          userLiked: userLikedComments[comment.id] || false
+        };
+      });
+      
+      // Organize comments by draft_id
+      const commentsByDraft = {};
+      enhancedComments.forEach(comment => {
+        if (!commentsByDraft[comment.draft_id]) {
+          commentsByDraft[comment.draft_id] = [];
+        }
+        commentsByDraft[comment.draft_id].push(comment);
+      });
+      
+      setDraftComments(commentsByDraft);
+    } catch (error) {
+      console.error('Error in fetchCommentsForDrafts:', error);
+    }
+  };
+  
+
+  const ensureUserProfileExists = async (userId, email) => {
+    if (!userId) return;
+    
+    try {
+      // Check if profile exists
+      const { data: existingProfile, error: profileError } = await supabase
+        .from('user_profiles')
+        .select('username')
+        .eq('user_id', userId)
+        .single();
+      
+      if (profileError && profileError.code === 'PGRST116') {
+        // Profile doesn't exist, create one with default username from email
+        const defaultUsername = email ? email.split('@')[0] : `User_${userId.substring(0, 8)}`;
+        
+        await supabase
+          .from('user_profiles')
+          .insert({
+            user_id: userId,
+            email: email,
+            username: defaultUsername,
+            updated_at: new Date().toISOString(),
+            created_at: new Date().toISOString()
+          });
+        
+        console.log("Created new user profile with username:", defaultUsername);
+      } else if (!existingProfile?.username || existingProfile.username.trim() === '') {
+        // Profile exists but username is empty, update it
+        const defaultUsername = email ? email.split('@')[0] : `User_${userId.substring(0, 8)}`;
+        
+        await supabase
+          .from('user_profiles')
+          .update({ 
+            username: defaultUsername,
+            updated_at: new Date().toISOString()
+          })
+          .eq('user_id', userId);
+        
+        console.log("Updated empty username to:", defaultUsername);
+      }
+    } catch (error) {
+      console.error("Error ensuring user profile exists:", error);
+    }
+  };
 
   const handleFilterChange = (newFilter) => {
-    setFilter(newFilter);
-  };
-
-  const isUserTeamPick = (pick, selectedTeams) => {
-    if (!selectedTeams || !Array.isArray(selectedTeams)) return false;
-    return selectedTeams.includes(pick.team);
-  };
-
-  const handleLike = async (draftId) => {
-    if (!user) {
+    // If trying to switch to 'liked' filter but not logged in
+    if (newFilter === 'liked' && !user) {
       setIsLoginModal(true);
       setShowAuthModal(true);
       return;
     }
     
-    // In a real implementation, you would send this to your backend
-    // For now we'll just update the UI
-    setCommunityDrafts(prevDrafts => 
-      prevDrafts.map(draft => 
-        draft.id === draftId 
-          ? { ...draft, likes: (draft.likes || 0) + 1, userLiked: true }
-          : draft
-      )
-    );
+    setFilter(newFilter);
   };
 
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
+  const handleLike = async (draftId) => {
+  if (!user) {
+    setIsLoginModal(true);
+    setShowAuthModal(true);
+    return;
+  }
+  
+  console.log("Handling like for draft:", draftId);
+  
+  try {
+    // Find the draft to get actual likes value
+    const draft = communityDrafts.find(d => d.id === draftId);
+    if (!draft) {
+      console.error("Draft not found for like action");
+      return;
+    }
+    
+    // Check if user already liked this draft
+    const alreadyLiked = userLikedDrafts[draftId];
+    
+    if (alreadyLiked) {
+      // Unlike the draft - remove from user_draft_likes table
+      const { error: unlikeError } = await supabase
+        .from('user_draft_likes')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('draft_id', draftId);
+        
+      if (unlikeError) {
+        console.error('Error unliking draft:', unlikeError);
+        return;
+      }
+      
+      // Try to decrement the likes count using the SECURITY DEFINER function
+      try {
+        const { error: rpcError } = await supabase.rpc(
+          'decrement_draft_likes_simple', 
+          { p_draft_id: draftId }
+        );
+        
+        if (rpcError) {
+          console.error('Error calling decrement_draft_likes_simple:', rpcError);
+        } else {
+          console.log(`Successfully decremented likes for draft ${draftId}`);
+        }
+      } catch (rpcError) {
+        console.error('Error calling decrement_draft_likes_simple:', rpcError);
+      }
+      
+      // Get current draft to find current likes count for UI
+      const { data: currentDraft, error: fetchError } = await supabase
+        .from('user_drafts')
+        .select('likes')
+        .eq('id', draftId)
+        .single();
+        
+      const actualLikes = !fetchError && currentDraft ? currentDraft.likes : 0;
+      console.log(`Draft ${draftId} unliked. Current likes in database:`, actualLikes);
+      
+      // Update local state
+      setUserLikedDrafts(prev => {
+        const updated = { ...prev };
+        delete updated[draftId];
+        return updated;
+      });
+      
+      // If we're in the 'liked' filter and user unlikes a draft, 
+      // remove it from the displayed list
+      if (filter === 'liked') {
+        setCommunityDrafts(prevDrafts => 
+          prevDrafts.filter(draft => draft.id !== draftId)
+        );
+      } else {
+        // Re-apply inflation to the new actual likes value
+        setCommunityDrafts(prevDrafts => 
+          prevDrafts.map(draft => {
+            if (draft.id === draftId) {
+              // Get the grade-based multiplier
+              const gradeMultipliers = {
+                'A+': { likes: 4.0 },
+                'A': { likes: 3.5 },
+                'A-': { likes: 3.0 },
+                'B+': { likes: 2.5 },
+                'B': { likes: 2.0 },
+                'B-': { likes: 1.8 },
+                'C+': { likes: 1.5 },
+                'C': { likes: 1.3 },
+                'C-': { likes: 1.2 },
+                'D+': { likes: 1.1 },
+                'D': { likes: 1.0 },
+                'D-': { likes: 1.0 },
+                'F': { likes: 1.0 }
+              };
+              
+              const baseAdd = draft.grade ? (10 - Object.keys(gradeMultipliers).indexOf(draft.grade) * 0.75) : 0;
+              const multiplier = (gradeMultipliers[draft.grade] || { likes: 1.0 }).likes;
+              
+              // Calculate new inflated likes
+              const displayLikes = Math.round((actualLikes + baseAdd) * multiplier);
+              
+              return { 
+                ...draft, 
+                likes: displayLikes, 
+                actualLikes, 
+                userLiked: false 
+              };
+            }
+            return draft;
+          })
+        );
+      }
+    } else {
+      // Like the draft - add to user_draft_likes table
+      const { error: likeError } = await supabase
+        .from('user_draft_likes')
+        .insert({
+          user_id: user.id,
+          draft_id: draftId
+        });
+        
+      if (likeError) {
+        console.error('Error liking draft:', likeError);
+        return;
+      }
+      
+      // Try to increment the likes count using the SECURITY DEFINER function
+      try {
+        const { error: rpcError } = await supabase.rpc(
+          'increment_draft_likes_simple', 
+          { p_draft_id: draftId }
+        );
+        
+        if (rpcError) {
+          console.error('Error calling increment_draft_likes_simple:', rpcError);
+        } else {
+          console.log(`Successfully incremented likes for draft ${draftId}`);
+        }
+      } catch (rpcError) {
+        console.error('Error calling increment_draft_likes_simple:', rpcError);
+      }
+      
+      // Get current draft to find current likes count for UI
+      const { data: currentDraft, error: fetchError } = await supabase
+        .from('user_drafts')
+        .select('likes')
+        .eq('id', draftId)
+        .single();
+        
+      const actualLikes = !fetchError && currentDraft ? currentDraft.likes : 1;
+      console.log(`Draft ${draftId} liked. Current likes in database:`, actualLikes);
+      
+      // Update local state
+      setUserLikedDrafts(prev => ({
+        ...prev,
+        [draftId]: true
+      }));
+      
+      // Re-apply inflation to the new actual likes value
+      setCommunityDrafts(prevDrafts => 
+        prevDrafts.map(draft => {
+          if (draft.id === draftId) {
+            // Get the grade-based multiplier
+            const gradeMultipliers = {
+              'A+': { likes: 4.0 },
+              'A': { likes: 3.5 },
+              'A-': { likes: 3.0 },
+              'B+': { likes: 2.5 },
+              'B': { likes: 2.0 },
+              'B-': { likes: 1.8 },
+              'C+': { likes: 1.5 },
+              'C': { likes: 1.3 },
+              'C-': { likes: 1.2 },
+              'D+': { likes: 1.1 },
+              'D': { likes: 1.0 },
+              'D-': { likes: 1.0 },
+              'F': { likes: 1.0 }
+            };
+            
+            const baseAdd = draft.grade ? (10 - Object.keys(gradeMultipliers).indexOf(draft.grade) * 0.75) : 0;
+            const multiplier = (gradeMultipliers[draft.grade] || { likes: 1.0 }).likes;
+            
+            // Calculate new inflated likes
+            const displayLikes = Math.round((actualLikes + baseAdd) * multiplier);
+            
+            return { 
+              ...draft, 
+              likes: displayLikes, 
+              actualLikes, 
+              userLiked: true 
+            };
+          }
+          return draft;
+        })
+      );
+    }
+  } catch (error) {
+    console.error('Error handling draft like:', error);
+    // Fallback update for UI if database operations fail
+    // (simplified here to focus on the core functionality)
+    const alreadyLiked = userLikedDrafts[draftId];
+    
+    if (alreadyLiked) {
+      setUserLikedDrafts(prev => {
+        const updated = { ...prev };
+        delete updated[draftId];
+        return updated;
+      });
+      
+      if (filter === 'liked') {
+        setCommunityDrafts(prevDrafts => 
+          prevDrafts.filter(draft => draft.id !== draftId)
+        );
+      } else {
+        setCommunityDrafts(prevDrafts => 
+          prevDrafts.map(draft => 
+            draft.id === draftId 
+              ? { 
+                  ...draft, 
+                  likes: Math.max(0, draft.likes - 1), 
+                  actualLikes: Math.max(0, draft.actualLikes - 1),
+                  userLiked: false 
+                }
+              : draft
+          )
+        );
+      }
+    } else {
+      setUserLikedDrafts(prev => ({
+        ...prev,
+        [draftId]: true
+      }));
+      
+      setCommunityDrafts(prevDrafts => 
+        prevDrafts.map(draft => 
+          draft.id === draftId 
+            ? { 
+                ...draft, 
+                likes: draft.likes + 1, 
+                actualLikes: (draft.actualLikes || 0) + 1,
+                userLiked: true 
+              }
+            : draft
+        )
+      );
+    }
+  }
+};
+
+
+// 2. Fixed handleCommentLike function that properly updates draft_comments.likes
+const handleCommentLike = async (commentId) => {
+  if (!user) {
+    setIsLoginModal(true);
+    setShowAuthModal(true);
+    return;
+  }
+  
+  console.log("Handling like for comment:", commentId);
+  
+  try {
+    // Find the comment to determine if it's already liked and which draft it belongs to
+    let isLiked = false;
+    let commentDraftId = null;
+    let foundComment = null;
+    
+    // Search through all drafts' comments to find the one we want to like
+    Object.keys(draftComments).forEach(draftId => {
+      draftComments[draftId].forEach(comment => {
+        if (comment.id === commentId) {
+          isLiked = comment.userLiked;
+          commentDraftId = draftId;
+          foundComment = comment;
+        }
+      });
+    });
+    
+    if (!foundComment) {
+      console.error('Comment not found:', commentId);
+      return;
+    }
+    
+    console.log('Found comment to like:', { 
+      commentId, 
+      draftId: commentDraftId, 
+      currentlyLiked: isLiked,
+      currentLikes: foundComment.likes 
+    });
+    
+    if (isLiked) {
+      // Unlike the comment - remove from comment_likes table
+      const { error: unlikeError } = await supabase
+        .from('comment_likes')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('comment_id', commentId);
+        
+      if (unlikeError) {
+        console.error('Error unliking comment:', unlikeError);
+        return;
+      }
+      
+      // Get current comment likes
+      const { data: currentComment, error: fetchError } = await supabase
+        .from('draft_comments')
+        .select('likes')
+        .eq('id', commentId)
+        .single();
+        
+      if (fetchError) {
+        console.error('Error fetching current comment:', fetchError);
+        return;
+      }
+      
+      // Calculate new likes count (never go below 0)
+      const currentLikes = currentComment?.likes || 0;
+      const newLikes = Math.max(0, currentLikes - 1);
+      
+      // Update likes count in draft_comments table
+      const { error: updateError } = await supabase
+        .from('draft_comments')
+        .update({ likes: newLikes })
+        .eq('id', commentId);
+        
+      if (updateError) {
+        console.error('Error updating comment likes:', updateError);
+        return;
+      }
+      
+      console.log(`Comment ${commentId} unliked. Likes decreased from ${currentLikes} to ${newLikes}`);
+      
+      // Update UI state
+      setDraftComments(prevComments => {
+        const updatedComments = { ...prevComments };
+        
+        if (updatedComments[commentDraftId]) {
+          updatedComments[commentDraftId] = updatedComments[commentDraftId].map(comment => 
+            comment.id === commentId 
+              ? { ...comment, likes: newLikes, userLiked: false }
+              : comment
+          );
+        }
+        
+        return updatedComments;
+      });
+    } else {
+      // Like the comment - add to comment_likes table
+      const { error: likeError } = await supabase
+        .from('comment_likes')
+        .insert({
+          user_id: user.id,
+          comment_id: commentId
+        });
+        
+      if (likeError) {
+        console.error('Error liking comment:', likeError);
+        return;
+      }
+      
+      // Get current comment likes
+      const { data: currentComment, error: fetchError } = await supabase
+        .from('draft_comments')
+        .select('likes')
+        .eq('id', commentId)
+        .single();
+        
+      if (fetchError) {
+        console.error('Error fetching current comment:', fetchError);
+        return;
+      }
+      
+      // Calculate new likes count
+      const currentLikes = currentComment?.likes || 0;
+      const newLikes = currentLikes + 1;
+      
+      // Update likes count in draft_comments table
+      const { error: updateError } = await supabase
+        .from('draft_comments')
+        .update({ likes: newLikes })
+        .eq('id', commentId);
+        
+      if (updateError) {
+        console.error('Error updating comment likes:', updateError);
+        return;
+      }
+      
+      console.log(`Comment ${commentId} liked. Likes increased from ${currentLikes} to ${newLikes}`);
+      
+      // Update UI state
+      setDraftComments(prevComments => {
+        const updatedComments = { ...prevComments };
+        
+        if (updatedComments[commentDraftId]) {
+          updatedComments[commentDraftId] = updatedComments[commentDraftId].map(comment => 
+            comment.id === commentId 
+              ? { ...comment, likes: newLikes, userLiked: true }
+              : comment
+          );
+        }
+        
+        return updatedComments;
+      });
+    }
+  } catch (error) {
+    console.error('Error handling comment like:', error);
+  }
+};
+  
+const addComment = async (draftId) => {
+  if (!user) {
+    setIsLoginModal(true);
+    setShowAuthModal(true);
+    return;
+  }
+  if (!newComment.trim()) return;
+  setCommentLoading(true);
+  console.log("Adding comment to draft:", draftId);
+  
+  try {
+    // First, get the user's profile to ensure we have the correct username
+    const { data: profileData, error: profileError } = await supabase
+      .from('user_profiles')
+      .select('username, avatar_url')
+      .eq('user_id', user.id)
+      .single();
+    
+    // Determine username, falling back if needed
+    let username = 'Anonymous';
+    let avatar_url = null;
+    
+    if (profileError) {
+      console.error('Error fetching user profile:', profileError);
+      // Create a default username from email
+      username = user.email ? user.email.split('@')[0] : `User_${user.id.substring(0, 8)}`;
+      
+      // Since we couldn't find a profile, let's create/update one for future use
+      try {
+        await supabase
+          .from('user_profiles')
+          .upsert({
+            user_id: user.id,
+            email: user.email,
+            username: username,
+            updated_at: new Date().toISOString(),
+            created_at: new Date().toISOString()
+          });
+      } catch (profileCreateError) {
+        console.error('Error creating profile:', profileCreateError);
+        // Continue anyway - we'll use the fallback username
+      }
+    } else if (profileData) {
+      username = profileData.username || (user.email ? user.email.split('@')[0] : `User_${user.id.substring(0, 8)}`);
+      avatar_url = profileData.avatar_url;
+      
+      // If username was empty, update the profile
+      if (!profileData.username || profileData.username.trim() === '') {
+        try {
+          const updatedUsername = user.email ? user.email.split('@')[0] : `User_${user.id.substring(0, 8)}`;
+          await supabase
+            .from('user_profiles')
+            .update({ username: updatedUsername })
+            .eq('user_id', user.id);
+          username = updatedUsername;
+        } catch (updateError) {
+          console.error('Error updating empty username:', updateError);
+          // Continue with the fallback username
+        }
+      }
+    }
+    
+    console.log("Using username for comment:", username);
+    
+    // Add the comment to the database - now including the username
+    const { data, error } = await supabase
+      .from('draft_comments')
+      .insert({
+        draft_id: draftId,
+        user_id: user.id,
+        username: username, // Store the username in the comments table
+        comment: newComment.trim(),
+        likes: 0
+      })
+      .select();
+      
+    if (error) {
+      console.error('Error adding comment to database:', error);
+      return;
+    }
+    
+    console.log("Comment added successfully:", data);
+    
+    // Add the new comment to the UI state with the correct username
+    setDraftComments(prevComments => {
+      const newCommentObj = {
+        ...data[0],
+        username,  // Use the username we just determined
+        avatar_url,
+        userLiked: false
+      };
+      
+      const updatedComments = { ...prevComments };
+      if (!updatedComments[draftId]) {
+        updatedComments[draftId] = [];
+      }
+      updatedComments[draftId] = [newCommentObj, ...updatedComments[draftId]];
+      return updatedComments;
+    });
+    
+    // Clear the comment input
+    setNewComment('');
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    alert('Failed to add comment. Please try again.');
+  } finally {
+    setCommentLoading(false);
+  }
+};
 
   const toggleExpandDraft = (draftId) => {
     if (expandedDraft === draftId) {
@@ -182,13 +1064,59 @@ const Community = () => {
     }
   };
   
-  const viewDraftDetails = (draftId) => {
+  const viewDraftDetails = async (draftId) => {
     try {
       // Find the draft in the current data
       const draft = communityDrafts.find(d => d.id === draftId);
       if (!draft) {
         console.error("Draft not found");
         return;
+      }
+      
+      // Increment view count in database
+      const { error: viewError } = await supabase
+        .from('user_drafts')
+        .update({ views: supabase.rpc('increment', { x: 1 }) })
+        .eq('id', draftId);
+        
+      if (viewError) {
+        console.error('Error incrementing view count:', viewError);
+        // Continue even if view counting fails
+      } else {
+        // Update local state with actual database value
+        const actualViews = (draft.actualViews || 0) + 1;
+        
+        // Re-apply the inflation for display
+        const gradeMultipliers = {
+          'A+': { views: 5.0 },
+          'A': { views: 4.5 },
+          'A-': { views: 4.0 },
+          'B+': { views: 3.5 },
+          'B': { views: 3.0 },
+          'B-': { views: 2.5 },
+          'C+': { views: 2.0 },
+          'C': { views: 1.8 },
+          'C-': { views: 1.5 },
+          'D+': { views: 1.3 },
+          'D': { views: 1.2 },
+          'D-': { views: 1.1 },
+          'F': { views: 1.0 }
+        };
+        
+        const baseAdd = draft.grade ? (20 - Object.keys(gradeMultipliers).indexOf(draft.grade) * 1.5) : 0;
+        const multiplier = (gradeMultipliers[draft.grade] || { views: 1.0 }).views;
+        
+        // Calculate new inflated views
+        const displayViews = Math.round((actualViews + baseAdd) * multiplier);
+        
+        // Update both displayed and actual views
+        setCommunityDrafts(prevDrafts => 
+          prevDrafts.map(d => 
+            d.id === draftId ? 
+            { ...d, views: displayViews, actualViews } : 
+            d
+          )
+        );
       }
       
       // Make a copy of the draft to process
@@ -250,6 +1178,21 @@ const Community = () => {
               >
                 Top Scored
               </button>
+              {user && (
+                <button 
+                  className={`px-4 py-2 rounded-lg transition-all duration-300 ${filter === 'liked' 
+                    ? 'bg-gradient-to-r from-pink-500 to-red-600 text-white shadow-lg' 
+                    : 'bg-white bg-opacity-20 text-white hover:bg-opacity-30'}`}
+                  onClick={() => handleFilterChange('liked')}
+                >
+                  <span className="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 015.656 0 4 4 0 010 5.656l-6.828 6.829-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                    </svg>
+                    Liked Drafts
+                  </span>
+                </button>
+              )}
             </div>
           </div>
           
@@ -258,139 +1201,38 @@ const Community = () => {
             <div className="flex justify-center py-16">
               <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>
             </div>
-          ) : (
+          ) : communityDrafts.length > 0 ? (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {communityDrafts.map((draft) => (
-                <div 
-                  key={draft.id} 
-                  className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-xl shadow-lg border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300"
-                >
-                  <div className="flex items-center mb-4">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold">
-                      {draft.avatar_url ? (
-                        <img src={draft.avatar_url} alt="User" className="h-10 w-10 rounded-full" />
-                      ) : (
-                        <span>{draft.username?.charAt(0).toUpperCase() || "D"}</span>
-                      )}
-                    </div>
-                    <div className="ml-3">
-                      <p className="font-semibold text-white">{draft.username || "Anonymous"}</p>
-                      <p className="text-sm text-gray-300">{formatDate(draft.created_at)}</p>
-                    </div>
-                    <div className="ml-auto">
-                      <div className={`flex items-center ${draft.report?.color || 'bg-gray-600'} rounded-full px-3 py-1 text-white font-bold`}>
-                        <span className="mr-1.5">{draft.report?.letter || 'B'}</span>
-                        <span className="text-sm">({draft.report?.displayScore || '85'})</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <h2 className="text-xl font-bold text-white mb-2">{draft.name || "Unnamed Draft"}</h2>
-                  
-                  <div className="flex gap-2 mb-3">
-                    <span className="bg-indigo-900 bg-opacity-60 text-white px-2 py-1 rounded-md text-sm">
-                      {draft.rounds || 1} Round{draft.rounds !== 1 ? 's' : ''}
-                    </span>
-                    
-                    {Array.isArray(draft.selected_teams) && draft.selected_teams.length > 0 && (
-                      <span className="bg-purple-900 bg-opacity-60 text-white px-2 py-1 rounded-md text-sm truncate max-w-[150px]">
-                        {draft.selected_teams.slice(0, 1).join(', ')}
-                        {draft.selected_teams.length > 1 ? `+${draft.selected_teams.length-1}` : ''}
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div className="mt-3">
-                    <button 
-                      onClick={() => toggleExpandDraft(draft.id)}
-                      className="text-blue-300 hover:text-blue-400 text-sm flex items-center"
-                    >
-                      <svg 
-                        className={`h-4 w-4 mr-1 transform transition-transform ${expandedDraft === draft.id ? 'rotate-90' : ''}`} 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                      Draft Analysis
-                    </button>
-                    
-                    {expandedDraft === draft.id && draft.report && (
-                      <div className="mt-3 bg-black bg-opacity-30 p-3 rounded-lg text-sm">
-                        <p className="text-white mb-2">{draft.report.analysis}</p>
-                        
-                        {draft.report.strengths && draft.report.strengths.length > 0 && (
-                          <div className="mt-2">
-                            <h4 className="text-green-300 font-semibold mb-1">Strengths:</h4>
-                            <ul className="text-gray-300 pl-4">
-                              {draft.report.strengths.map((strength, idx) => (
-                                <li key={idx} className="list-disc ml-2">{strength}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                        
-                        {draft.report.weaknesses && draft.report.weaknesses.length > 0 && (
-                          <div className="mt-2">
-                            <h4 className="text-red-300 font-semibold mb-1">Areas for Improvement:</h4>
-                            <ul className="text-gray-300 pl-4">
-                              {draft.report.weaknesses.map((weakness, idx) => (
-                                <li key={idx} className="list-disc ml-2">{weakness}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                        
-                        {draft.report.comparison && (
-                          <div className="mt-2 text-blue-300 italic">
-                            {draft.report.comparison}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="flex items-center justify-between mt-4">
-                    <div className="flex items-center gap-4">
-                      <button 
-                        onClick={() => handleLike(draft.id)}
-                        className={`flex items-center ${draft.userLiked ? 'text-red-400' : 'text-gray-300 hover:text-red-400'} transition-colors`}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                        </svg>
-                        <span>{draft.likes || 0}</span>
-                      </button>
-                      
-                      <div className="flex items-center text-gray-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                          <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                        </svg>
-                        <span>{draft.views || 0}</span>
-                      </div>
-                    </div>
-                    
-                    <button 
-                      onClick={() => viewDraftDetails(draft.id)}
-                      className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:translate-y-[-2px] text-sm"
-                    >
-                      View Draft
-                    </button>
-                  </div>
-                </div>
+                <DraftCard
+                  key={draft.id}
+                  draft={draft}
+                  expandedDraft={expandedDraft}
+                  toggleExpandDraft={toggleExpandDraft}
+                  viewDraftDetails={viewDraftDetails}
+                  handleLike={handleLike}
+                  user={user}
+                  draftComments={draftComments}
+                  newComment={newComment}
+                  setNewComment={setNewComment}
+                  addComment={addComment}
+                  handleCommentLike={handleCommentLike}
+                  commentLoading={commentLoading}
+                  setShowAuthModal={setShowAuthModal}
+                  setIsLoginModal={setIsLoginModal}
+                />
               ))}
             </div>
-          )}
-          
-          {/* Show message if no drafts are found */}
-          {!loading && communityDrafts.length === 0 && (
+          ) : (
             <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-8 rounded-xl shadow-lg border border-white border-opacity-20 text-center">
               <svg className="h-16 w-16 mx-auto mb-4 text-white opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
-              <p className="text-xl text-white mb-6">No community drafts found. Be the first to share yours!</p>
+              <p className="text-xl text-white mb-6">
+                {filter === 'liked' 
+                  ? "You haven't liked any drafts yet. Browse the community and like drafts you enjoy!" 
+                  : "No community drafts found. Be the first to share yours!"}
+              </p>
               <Link
                 to="/mockdraft"
                 className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:scale-105"
@@ -440,157 +1282,23 @@ const Community = () => {
         
         {/* Draft Details Modal */}
         {viewingDraftDetails && (
-          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div className="bg-gray-800 rounded-xl border border-gray-700 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-3xl font-bold text-white">
-                    {viewingDraftDetails.name || `Draft from ${formatDate(viewingDraftDetails.created_at)}`}
-                  </h2>
-                  <button
-                    onClick={() => setViewingDraftDetails(null)}
-                    className="text-gray-400 hover:text-white"
-                  >
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <div className="bg-gray-700 bg-opacity-50 rounded-lg p-4">
-                      <h3 className="text-xl font-semibold text-white mb-2">Draft Info</h3>
-                      <p className="text-gray-300"><span className="font-medium">Created:</span> {formatDate(viewingDraftDetails.created_at)}</p>
-                      <p className="text-gray-300"><span className="font-medium">Rounds:</span> {viewingDraftDetails.rounds || 1}</p>
-                      <p className="text-gray-300"><span className="font-medium">Created by:</span> {viewingDraftDetails.username || "Anonymous"}</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <div className="bg-gray-700 bg-opacity-50 rounded-lg p-4">
-                      <h3 className="text-xl font-semibold text-white mb-2">Teams</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {viewingDraftDetails.selected_teams && Array.isArray(viewingDraftDetails.selected_teams) ? (
-                          viewingDraftDetails.selected_teams.map((team, idx) => (
-                            <span key={idx} className="bg-blue-900 px-2 py-1 rounded text-white text-sm">
-                              {team}
-                            </span>
-                          ))
-                        ) : (
-                          <p className="text-gray-300">No team data available</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {viewingDraftDetails.report && (
-                  <div className="mb-6">
-                    <div className="bg-gray-700 bg-opacity-50 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-xl font-semibold text-white">Draft Analysis</h3>
-                        <div className={`${viewingDraftDetails.report.color || 'bg-blue-600'} px-3 py-1 rounded-full text-white font-bold`}>
-                          {viewingDraftDetails.report.letter || 'B'} ({viewingDraftDetails.report.displayScore || '85'})
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-200 mb-4">{viewingDraftDetails.report.analysis}</p>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {viewingDraftDetails.report.strengths && viewingDraftDetails.report.strengths.length > 0 && (
-                          <div>
-                            <h4 className="text-green-400 font-medium mb-2">Strengths</h4>
-                            <ul className="list-disc pl-5 text-gray-300">
-                              {viewingDraftDetails.report.strengths.map((item, idx) => (
-                                <li key={idx}>{item}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                        
-                        {viewingDraftDetails.report.weaknesses && viewingDraftDetails.report.weaknesses.length > 0 && (
-                          <div>
-                            <h4 className="text-red-400 font-medium mb-2">Areas for Improvement</h4>
-                            <ul className="list-disc pl-5 text-gray-300">
-                              {viewingDraftDetails.report.weaknesses.map((item, idx) => (
-                                <li key={idx}>{item}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-                      
-                      {viewingDraftDetails.report.comparison && (
-                        <div className="mt-4 text-blue-300 italic">
-                          {viewingDraftDetails.report.comparison}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Draft Picks Section */}
-                {viewingDraftDetails.draft_results && Array.isArray(viewingDraftDetails.draft_results) && viewingDraftDetails.draft_results.length > 0 ? (
-                  <div>
-                    <h3 className="text-2xl font-semibold text-white mb-4">Draft Picks</h3>
-                    {Array.from({length: viewingDraftDetails.rounds || 1}, (_, i) => i + 1).map(round => {
-                      const roundPicks = viewingDraftDetails.draft_results.filter(pick => pick.round === round);
-                      return (
-                        <div key={round} className="mb-6">
-                          <h4 className="text-xl font-medium text-white mb-2">Round {round}</h4>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                            {roundPicks.length > 0 ? (
-                              roundPicks.sort((a, b) => a.pickNumber - b.pickNumber).map((pick, idx) => {
-                                const isUserPick = isUserTeamPick(pick, viewingDraftDetails.selected_teams);
-                                
-                                return (
-                                  <div 
-                                    key={idx} 
-                                    className={`${
-                                      isUserPick ? 'bg-blue-900' : 'bg-gray-900'
-                                    } p-3 rounded text-white transition-all duration-300 ${
-                                      isUserPick ? 'border border-blue-500' : ''
-                                    }`}
-                                  >
-                                    <div className="flex items-center">
-                                      <span className="font-bold mr-2">{pick.pickNumber}.</span>
-                                      <span className={`mr-1 ${isUserPick ? 'text-blue-300' : 'text-gray-400'}`}>
-                                        {pick.team}:
-                                      </span>
-                                      <span className="font-medium">{pick.playerName}</span>
-                                    </div>
-                                  </div>
-                                );
-                              })
-                            ) : (
-                              <p className="text-gray-400 col-span-4">No picks for this round</p>
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="text-center p-6">
-                    <p className="text-gray-400">No draft pick data available</p>
-                  </div>
-                )}
-                <div className="mt-8 flex justify-end">
-                  <button
-                    onClick={() => setViewingDraftDetails(null)}
-                    className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
-                  >
-                    Close
-                  </button>
-                </div>
-                </div>
-                </div>
-                </div>
-                )}
-                </div>
-                </PageTransition>
-                );
-                };
+          <DraftDetailModal
+            draft={viewingDraftDetails}
+            onClose={() => setViewingDraftDetails(null)}
+            user={user}
+            draftComments={draftComments}
+            newComment={newComment}
+            setNewComment={setNewComment}
+            addComment={addComment}
+            handleCommentLike={handleCommentLike}
+            commentLoading={commentLoading}
+            setShowAuthModal={setShowAuthModal}
+            setIsLoginModal={setIsLoginModal}
+          />
+        )}
+      </div>
+    </PageTransition>
+  );
+};
 
 export default Community;

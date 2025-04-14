@@ -16,13 +16,15 @@ import AuthCallback from './components/Auth/AuthCallback';
 import SavedDrafts from './components/SavedDrafts/SavedDrafts';
 import AccountSettings from './components/Account/AccountSettings';
 import Community from './components/Community/Community';
+import ResetPassword from './components/Auth/ResetPassword';
+import ResetPasswordRequest from './components/Auth/ResetPasswordRequest';
 import { reconnectRealtimeClient } from './services/api';
 
 /**
- * Context to track when a user is in the signup process.
- * This prevents the loading screen from showing during registration.
+ * Context to track when a user is in the signup or login process.
+ * This prevents the loading screen from showing during authentication.
  */
-const SignupContext = React.createContext(false);
+const AuthStateContext = React.createContext({ isSigningUp: false, isLoggingIn: false });
 
 /**
  * Recovery button component that allows users to manually reconnect
@@ -30,13 +32,13 @@ const SignupContext = React.createContext(false);
  */
 const RecoveryButton = () => {
   const [isRecovering, setIsRecovering] = useState(false);
-  
+
   const handleRecover = async () => {
     setIsRecovering(true);
     await reconnectRealtimeClient();
     setIsRecovering(false);
   };
-  
+
   return (
     <button
       onClick={handleRecover}
@@ -73,25 +75,22 @@ const AppContent = () => {
   const { loading, setUser } = useAuth();
   const [showRecoveryButton, setShowRecoveryButton] = useState(false);
   const [loadingTimeout, setLoadingTimeout] = useState(false);
-  
-  // Access the signup context to avoid showing loading screen during registration
-  const isSigningUp = React.useContext(SignupContext);
-  
-  // Routes where the NavBar should be hidden
+
+  // Use the unified auth state context for both signup and login processes.
+  const { isSigningUp, isLoggingIn } = React.useContext(AuthStateContext);
+
+  // Routes where the NavBar should be hidden.
   const hideNavbarRoutes = ['/draftroom', '/auth/callback'];
-  
-  // Check if current path should hide the navbar
   const shouldHideNavbar = hideNavbarRoutes.some(route =>
     location.pathname.startsWith(route)
   );
 
-  // Refresh authentication when tab becomes visible again
+  // Refresh authentication when the tab becomes visible again.
   useEffect(() => {
     const handleVisibilityChange = async () => {
       if (document.visibilityState === 'visible') {
         console.log("Tab became visible, refreshing connection");
-  
-        // Force session refresh when tab is reactivated
+
         const { data, error } = await supabase.auth.refreshSession();
         if (error) {
           console.warn("Session refresh error:", error);
@@ -103,56 +102,55 @@ const AppContent = () => {
           setUser(data.session.user);
           localStorage.setItem("supabase.auth.token", JSON.stringify(data.session));
         }
-  
+
         await reconnectRealtimeClient();
       }
     };
-  
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [setUser]);
-  
-  // Show recovery button after extended loading time
+
+  // Show the recovery button after extended loading time.
   useEffect(() => {
     let timer;
-    
+
     if (loading) {
-      // Show recovery button after 5 seconds of loading
       timer = setTimeout(() => {
         setLoadingTimeout(true);
         setShowRecoveryButton(true);
       }, 5000);
     } else {
       setLoadingTimeout(false);
-      // Hide recovery button after 10 seconds when not loading
       timer = setTimeout(() => {
         setShowRecoveryButton(false);
       }, 10000);
     }
-    
+
     return () => clearTimeout(timer);
   }, [loading]);
 
-  // Only show loading screen if not in the middle of signing up
-  if (loading && !isSigningUp) {
+  // Only show the loading screen if not in the middle of an auth process.
+  if (loading && !isSigningUp && !isLoggingIn) {
     return (
       <div className="min-h-screen bg-indigo-900 flex flex-col items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white mb-4"></div>
         <div className="text-white text-center">
-          <p className="mb-2">{loadingTimeout ? "Loading is taking longer than expected..." : "Loading..."}</p>
-          
+          <p className="mb-2">
+            {loadingTimeout ? "Loading is taking longer than expected..." : "Loading..."}
+          </p>
           {loadingTimeout && (
             <div className="mt-4">
-              <button 
-                onClick={() => window.location.reload()} 
+              <button
+                onClick={() => window.location.reload()}
                 className="px-4 py-2 bg-white text-indigo-900 rounded hover:bg-gray-100 mr-2"
               >
                 Reload Page
               </button>
-              <button 
-                onClick={() => reconnectRealtimeClient()} 
+              <button
+                onClick={() => reconnectRealtimeClient()}
                 className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
               >
                 Fix Connection
@@ -160,7 +158,6 @@ const AppContent = () => {
             </div>
           )}
         </div>
-        
         {showRecoveryButton && <RecoveryButton />}
       </div>
     );
@@ -168,16 +165,10 @@ const AppContent = () => {
 
   return (
     <div className="min-h-screen bg-[#5A6BB0]">
-      {/* Conditionally render NavBar */}
       {!shouldHideNavbar && <NavBar />}
-      
-      {/* Main content area with conditional padding for fixed navbar */}
       <div className={!shouldHideNavbar ? "pt-20" : ""}>
         <Routes>
-          {/* Redirect root to about page */}
           <Route path="/" element={<Navigate to="/about" />} />
-          
-          {/* Public Routes */}
           <Route path="/about" element={<AboutPage />} />
           <Route path="/playerlist" element={<PlayerList />} />
           <Route path="/mockdraft" element={<MockDraft />} />
@@ -187,38 +178,37 @@ const AppContent = () => {
           <Route path="/playerinput" element={<PlayerInput />} />
           <Route path="/newplayercomp" element={<NewPlayerComp />} />
           <Route path="/community" element={<Community />} />
-          
-          {/* Auth Routes */}
+          <Route path="/forgot-password" element={<ResetPasswordRequest />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
-          
-          {/* Protected Routes */}
           <Route path="/saved-drafts" element={<SavedDrafts />} />
           <Route path="/mockdraft/:draftId" element={<DraftRoom />} />
           <Route path="/account-settings" element={<AccountSettings />} />
         </Routes>
       </div>
-      
-      {/* Show the recovery button conditionally */}
       {showRecoveryButton && <RecoveryButton />}
     </div>
   );
 };
 
 /**
- * Main App component that sets up the authentication context and routing
+ * Main App component that sets up the authentication context and routing.
  */
 function App() {
-  // State to track if user is currently in signup process
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   return (
-    <SignupContext.Provider value={isSigningUp}>
-      <AuthProvider signupStateHandler={setIsSigningUp}>
+    <AuthStateContext.Provider value={{ isSigningUp, isLoggingIn }}>
+      <AuthProvider 
+        signupStateHandler={setIsSigningUp}
+        loginStateHandler={setIsLoggingIn}
+      >
         <Router>
           <AppContent />
         </Router>
       </AuthProvider>
-    </SignupContext.Provider>
+    </AuthStateContext.Provider>
   );
 }
 

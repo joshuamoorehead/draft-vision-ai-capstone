@@ -22,13 +22,14 @@ const SignupModal = ({
   const [isRegistering, setIsRegistering] = useState(false);
   const [usernameError, setUsernameError] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [localError, setLocalError] = useState(''); // Local general error state
   const [successMessage, setSuccessMessage] = useState('');
   
   // State for success animation
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   
   // Get auth functions and state from context
-  const { signUp, signInWithGoogle, error, setError } = useAuth();
+  const { signUp, signInWithGoogle, setError } = useAuth();
   const navigate = useNavigate();
   
   // Refs for form elements
@@ -37,6 +38,16 @@ const SignupModal = ({
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const modalRef = useRef(null);
+
+  // Clear errors when modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      setLocalError('');
+      setEmailError('');
+      setUsernameError('');
+      setError(''); // Also clear global error
+    }
+  }, [isOpen, setError]);
 
   // Effect to prevent navigation during registration
   useEffect(() => {
@@ -142,10 +153,13 @@ const SignupModal = ({
   // Handler for Google sign in
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      const { error } = await signInWithGoogle();
+      if (error) {
+        setLocalError('Failed to sign in with Google');
+      }
       // The redirect will happen automatically
     } catch (err) {
-      setError('Failed to sign in with Google');
+      setLocalError('Failed to sign in with Google');
     }
   };
 
@@ -198,14 +212,14 @@ const SignupModal = ({
     e.preventDefault();
     
     // Reset messages
-    setError('');
+    setLocalError('');
     setUsernameError('');
     setEmailError('');
     setSuccessMessage('');
     
     // Validate inputs
     if (!email || !username || !password || !confirmPassword) {
-      setError('Please fill in all fields');
+      setLocalError('Please fill in all fields');
       return;
     }
     
@@ -221,13 +235,13 @@ const SignupModal = ({
     
     // Check password strength
     if (!validatePassword(password)) {
-      setError('Password must be at least 8 characters long and contain at least one letter and one number');
+      setLocalError('Password must be at least 8 characters long and contain at least one letter and one number');
       return;
     }
     
     // Check if passwords match
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setLocalError('Passwords do not match');
       return;
     }
     
@@ -246,7 +260,7 @@ const SignupModal = ({
         } else if (error.message && error.message.toLowerCase().includes('username is already taken')) {
           setUsernameError(error.message);
         } else {
-          setError(error.message || 'Failed to create account');
+          setLocalError(error.message || 'Failed to create account');
         }
         return;
       }
@@ -266,10 +280,10 @@ const SignupModal = ({
       } else {
         // If we don't have user data but also don't have an error,
         // something unusual happened - notify the user
-        setError('Signup completed but login failed. Please try logging in manually.');
+        setLocalError('Signup completed but login failed. Please try logging in manually.');
       }
     } catch (err) {
-      setError(err.message || 'An unexpected error occurred. Please try again.');
+      setLocalError(err.message || 'An unexpected error occurred. Please try again.');
     } finally {
       setIsRegistering(false);
     }
@@ -298,8 +312,8 @@ const SignupModal = ({
               {/* Modal title */}
               <h2 className="text-2xl font-bold mb-6 text-center">Create an Account</h2>
               
-              {/* Error message display */}
-              {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">{error}</div>}
+              {/* Error message displays - now using local error states */}
+              {localError && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">{localError}</div>}
               {emailError && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">{emailError}</div>}
               {usernameError && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">{usernameError}</div>}
 
@@ -446,6 +460,8 @@ const SignupModal = ({
                       className="text-blue-500 hover:text-blue-800"
                       onClick={(event) => {
                         event.preventDefault();
+                        setLocalError(''); // Clear local error when switching
+                        setError(''); // Also clear global error
                         switchToLogin();
                       }}
                       type="button"
