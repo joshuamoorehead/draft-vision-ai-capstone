@@ -110,7 +110,7 @@ const NavBar = () => {
         <img
   src={dvailogo}
   alt="Draft Vision AI Logo"
-  className="h-48 w-auto mr-4"  // Changed from h-16 to h-24 for a larger logo
+  className="h-20 w-auto mr-4"  // Changed from h-16 to h-24 for a larger logo
 />
         </Link>
 
