@@ -226,7 +226,7 @@ const UserPickModal = ({
           </div>
           
           <div className="relative">
-            <label className="text-gray-300 mr-2">Position:</label>
+            <label className="text-gray-300 mr-2">Filter by position:</label>
             <div className="inline-block relative">
               <select
                 className="appearance-none bg-gray-700 bg-opacity-50 border border-gray-600 text-white py-3 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
@@ -249,12 +249,13 @@ const UserPickModal = ({
         </div>
         
         {/* Player list */}
-        <div className="player-list mb-6 max-h-72 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-50 border border-gray-700 shadow-inner">
+        <div className="player-list mb-6 max-h-72 overflow-y-auto overflow-x-hidden rounded-lg bg-gray-800 bg-opacity-50 border border-gray-700 shadow-inner">
           {filteredPlayers.length > 0 ? (
             filteredPlayers.map((player) => (
               <div
                 key={player.id}
-                className="player-item p-3 border-b border-gray-700 flex justify-between items-center"
+                className="player-item p-3 border-b border-gray-700 flex justify-between items-center overflow-hidden bg-transparent hover:bg-gray-700/30 hover:bg-opacity-40 transition-all duration-300 transform hover:scale-[1.01]" // Past hover is new change
+                onClick={() => handlePlayerCardOpen(player)}
               >
                 <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center mr-3 text-xs font-bold">
@@ -264,19 +265,19 @@ const UserPickModal = ({
                 </div>
                 <div className="flex space-x-2">
                   <button
-                    onClick={() => onPick(player)}
+                    onClick={(e) => {e.stopPropagation(); onPick(player);}}
                     className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition"
                   >
                     Draft
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => handlePlayerCardOpen(player)}
-                    className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+                    className="flex px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    Player Stats <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))
