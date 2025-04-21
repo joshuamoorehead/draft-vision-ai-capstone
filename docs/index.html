@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MyApp – Make Your Life Easier</title>
+  <title>Draft Vision AI – Make Your Life Easier</title>
   <style>
     body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 0; }
     header, footer { background: #333; color: #fff; padding: 1rem; text-align: center; }
     nav a { color: #fff; margin: 0 1rem; text-decoration: none; }
-    .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
     h1, h2 { margin-top: 1.5rem; }
     .screenshots img, .stock img { max-width: 100%; border: 1px solid #ccc; margin-top: 1rem; }
     .flex { display: flex; flex-wrap: wrap; gap: 1rem; }
     .flex > div { flex: 1 1 45%; }
-    a.button { display: inline-block; background: #007bff; color: #fff; padding: .5rem 1rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; }
+    a.button { display: inline-block; background: #007bff; color: #fff; padding: .75rem 1.5rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; }
   </style>
 </head>
 <body>
@@ -22,79 +22,82 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <a href="https://github.com/you/your-repo" target="_blank">GitHub Repo</a>
+      <a href="https://github.com/SCCapstone/draft-vision-ai" target="_blank" rel="noopener">GitHub Repo</a>
     </nav>
   </header>
 
   <div class="container">
-    <h1>Welcome to MyApp</h1>
+    <h1>Welcome to Draft Vision AI</h1>
 
-    <!-- 1) Embedded demo video (or placeholder) -->
+    <!-- Embedded demo video or placeholder -->
     <section id="demo-video">
-      <h2>Watch the Final Demo</h2>
-      <!-- if your video URL is ready, swap in the iframe below -->
-      <iframe width="100%" height="400"
-        src="https://www.youtube.com/embed/VIDEO_ID"
-        title="MyApp Demo"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
-      <!-- otherwise use this placeholder:
-      <img src="assets/demo-placeholder.jpg" alt="Demo coming soon" />
-      -->
+      <h2>Watch the Demo</h2>
+      <iframe width="100%" height="450" src="https://www.youtube.com/embed/DEMO_VIDEO_ID" title="Draft Vision AI Demo" frameborder="0" allowfullscreen></iframe>
     </section>
 
-    <!-- 2) Text explaining how & why to use the app -->
+    <!-- Explanation of app and features -->
     <section id="why-use">
-      <h2>Why MyApp?</h2>
-      <p>MyApp harnesses AI to streamline your workflow—no more manual grunt work. Simply answer a few questions, and let the app generate polished, actionable outputs in seconds.</p>
-      <p>Whether you’re a student, freelancer, or small business owner, MyApp saves you time so you can focus on what really matters.</p>
+      <h2>Why Use Draft Vision AI?</h2>
+      <p>Draft Vision AI combines advanced machine learning models with an intuitive interface to help football enthusiasts, analysts, and coaches make smarter draft decisions. Simply upload player data or game footage, and our algorithms will analyze player metrics, highlight potential draft picks, and provide actionable insights—all within seconds.</p>
+      <p>Whether you're preparing for a mock draft, scouting new talent, or refining your strategy, Draft Vision AI streamlines the process so you can focus on winning. Key features include:</p>
+      <ul>
+        <li>AI-Powered Player Comparison and Similarity Scoring</li>
+        <li>Real-Time Draft Simulation with User & CPU Picks</li>
+        <li>Interactive Trade Manager and What-If Analysis</li>
+        <li>Advanced Filtering, Sorting, and Search by Metrics</li>
+        <li>Secure User Authentication and Role-Based Access</li>
+        <li>Responsive Dashboard with Dynamic Visualizations</li>
+        <li>Exportable Reports and PDF Summaries</li>
+        <li>SMS Notifications via Twilio for Reminders</li>
+      </ul>
     </section>
 
-    <!-- 3) Screenshots of your app -->
+    <!-- Screenshots of your app -->
     <section id="screenshots">
       <h2>See It In Action</h2>
       <div class="flex screenshots">
         <div>
-          <img src="assets/screenshot1.png" alt="Dashboard screenshot" />
-          <p>Dashboard overview</p>
+          <img src="assets/dashboard.png" alt="Dashboard screenshot" />
+          <p>Overview Dashboard with Key Metrics</p>
         </div>
         <div>
-          <img src="assets/screenshot2.png" alt="Settings screenshot" />
-          <p>Custom settings panel</p>
+          <img src="assets/player-comparison.png" alt="Player comparison screenshot" />
+          <p>AI-Powered Player Comparison</p>
         </div>
         <div>
-          <img src="assets/screenshot3.png" alt="Results screenshot" />
-          <p>AI-generated results</p>
+          <img src="assets/trade-manager.png" alt="Trade manager screenshot" />
+          <p>Interactive Trade & What-If Analysis</p>
+        </div>
+        <div>
+          <img src="assets/settings-panel.png" alt="Settings screenshot" />
+          <p>Customize Simulation Parameters</p>
         </div>
       </div>
     </section>
 
-    <!-- 4) Optional free stock images to spice up the page -->
+    <!-- Free stock images to spice up the page -->
     <section id="stock-images">
       <h2>Our Inspiration</h2>
       <div class="flex stock">
         <div>
-          <img src="assets/stock1.jpg" alt="Team collaboration" />
-          <p>Collaboration at its best</p>
+          <img src="https://cdn.pixabay.com/photo/2017/09/05/21/46/football-2722801_1280.jpg" alt="Team collaboration" />
+          <p>Collaboration at its Best</p>
         </div>
         <div>
-          <img src="assets/stock2.jpg" alt="Focused work" />
-          <p>Stay focused on what matters</p>
+          <img src="https://www.vecteezy.com/free-photos" alt="Focused work" />
+          <p>Stay Focused on Strategy</p>
         </div>
       </div>
     </section>
 
-    <!-- 5) Call to action -->
+    <!-- Call to action -->
     <section id="cta">
-      <a class="button" href="https://github.com/SCCapstone/draft-vision-ai" target="_blank">
-        View the Code on GitHub
-      </a>
+      <a class="button" href="https://github.com/SCCapstone/draft-vision-ai" target="_blank" rel="noopener">Explore the Code on GitHub</a>
     </section>
   </div>
 
   <footer>
-    &copy; 2025 MyApp Team
+    &copy; 2025 Draft Vision AI Team
   </footer>
 
 </body>
