@@ -35,8 +35,7 @@ jobs:
       # 3) Install your gems (including GitHub Pages gem)
       - name: Install dependencies
         run: |
-          gem install bundler
-          bundle install
+          gem install github-pages jekyll
 
       # 4) Build your Jekyll site into the “_site” folder
       - name: Build Jekyll site
