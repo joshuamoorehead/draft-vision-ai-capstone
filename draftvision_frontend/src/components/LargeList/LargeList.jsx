@@ -16,6 +16,19 @@ import jclatham from '../Logos/JCLatham.png';
 import michaelpenix from '../Logos/MichaelPenix.png';
 import romeodunze from '../Logos/RomeOdunze.png';
 import jjmccarthy from '../Logos/JJMcCarthy.png';
+// Map player names to their logo imports
+const logoMap = {
+  'Caleb Williams': calebwilliams,
+  'Drake Maye': drakemaye,
+  'Joe Alt': joealt,
+  'Jayden Daniels': jadendaniels,
+  'Marvin Harrison Jr.': marvinharrison,
+  'Malik Nabers': maliknabers,
+  'JC Latham': jclatham,
+  'Michael Penix': michaelpenix,
+  'Rome Odunze': romeodunze,
+  'J.J. McCarthy': jjmccarthy,
+};
 
 // FlipCard Component
 const FlipCard = ({ front, back }) => {
@@ -177,18 +190,7 @@ const LargeList = () => {
 
   // Array of logos corresponding to the first ten players
   // Order: CalebWilliams, JaydenDaniels, DrakeMaye, MarvinHarrison, JoeAlt, MalikNabers, JCLatham, MichaelPenix, RomeOdunze, JJMcCarthy
-  const playerLogos = [
-    calebwilliams,
-    jadendaniels,
-    drakemaye,
-    marvinharrison,
-    joealt,
-    maliknabers,
-    jclatham,
-    michaelpenix,
-    romeodunze,
-    jjmccarthy,
-  ];
+  
 
   // Load players on component mount
   useEffect(() => {
@@ -592,24 +594,24 @@ const LargeList = () => {
                         <div>
                           <h3 className="text-xl font-bold text-white">{player.name}</h3>
                           {/* Conditionally render FlipCard only if no filters are applied */}
-                          {!position && !team && !nflteam && index < 10 && (
-                            <div className="mb-4">
-                              <FlipCard
-                                front={
-                                  <img
-                                    src={playerLogos[index]}
-                                    alt={`${player.name} logo`}
-                                    className="w-48 h-64 my-2"
-                                  />
-                                }
-                                back={
-                                  <div className="p-4">
-                                    <p className="text-sm">{player.description}</p>
-                                  </div>
-                                }
-                              />
-                            </div>
-                          )}
+                          {logoMap[player.name] && (
+    <div className="mb-4">
+      <FlipCard
+        front={
+          <img
+            src={logoMap[player.name]}
+            alt={`${player.name} logo`}
+            className="w-48 h-64 my-2"
+          />
+        }
+        back={
+          <div className="p-4">
+            <p className="text-sm">{player.description}</p>
+          </div>
+        }
+      />
+    </div>
+  )}
                           <div className="flex flex-wrap gap-2 mt-1">
                             <span className="text-sm bg-gray-700 bg-opacity-70 px-2 py-1 rounded-lg text-gray-200">
                               {player.school}
