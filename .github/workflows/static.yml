@@ -30,7 +30,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7.6'
+          ruby-version: '3.2.8'
 
       # 3) Install your gems (including GitHub Pages gem)
       - name: Install dependencies
