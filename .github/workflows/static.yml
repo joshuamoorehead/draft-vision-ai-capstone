@@ -1,4 +1,4 @@
-name: Deploy Jekyll site to GitHub Pages
+name: Deploy marketing page to GitHub Pages
 
 on:
   push:
@@ -15,34 +15,23 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2.8'
-
-      - name: Install GitHub Pages gem
-        run: gem install github-pages
-
-      - name: Build Jekyll site
-        run: jekyll build --future --destination _site --exclude draftvision_env
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
+      # Upload the docs/ folder as the Pages artifact:
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: docs
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Deploy to GitHub Pages
         id: deployment
