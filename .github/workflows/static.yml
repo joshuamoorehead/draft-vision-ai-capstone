@@ -22,36 +22,28 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      # 1) Grab your source
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2) Set up Ruby (so we can run Jekyll)
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.8'
 
-      # 3) Install your gems (including GitHub Pages gem)
-      - name: Install dependencies
-        run: |
-          gem install github-pages jekyll
+      - name: Install GitHub Pages gem
+        run: gem install github-pages
 
-      # 4) Build your Jekyll site into the “_site” folder
       - name: Build Jekyll site
-        run: bundle exec jekyll build --future --destination _site
+        run: jekyll build --future --destination _site
 
-      # 5) Prepare Pages deployment
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      # 6) Upload _site as the Pages artifact
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
-      # 7) Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
