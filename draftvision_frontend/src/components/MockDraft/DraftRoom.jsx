@@ -42,6 +42,7 @@ const DraftRoom = () => {
   const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
+  const [showExitWarning, setShowExitWarning] = useState(false);
   const { draftId } = useParams();
   const [isViewingDetails, setIsViewingDetails] = useState(false);
   const [hasPendingDraft, setHasPendingDraft] = useState(false);
@@ -566,11 +567,11 @@ const DraftRoom = () => {
                 </button>
               )}
               <button
-                onClick={() => navigate("/mockdraft")}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all"
-              >
-                Exit Draft
-              </button>
+   onClick={() => setShowExitWarning(true)}
+   className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all"
+ >
+   Exit Draft
+ </button>
             </div>
           </div>
           
@@ -719,6 +720,31 @@ const DraftRoom = () => {
             rounds={draftConfig.rounds}
           />
         )}
+        {showExitWarning && (
+  <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+    <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-white max-w-sm">
+      <h3 className="text-xl font-bold mb-4">Discard Draft?</h3>
+      <p className="mb-6">Your draft progress will not be saved. Continue?</p>
+      <div className="flex justify-end space-x-4">
+        <button
+          onClick={() => setShowExitWarning(false)}
+          className="px-4 py-2 bg-gray-600 rounded hover:bg-gray-500"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={() => {
+            localStorage.removeItem('pendingDraftData');
+            navigate("/mockdraft");
+          }}
+          className="px-4 py-2 bg-red-600 rounded hover:bg-red-500"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       </div>
     </div>
   );

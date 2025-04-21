@@ -10,6 +10,7 @@ const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTe
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showWarning, setShowWarning]   = useState(false);
   const { user } = useAuth();
 
   // Store draft data when component mounts
@@ -287,7 +288,7 @@ const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTe
           
           <button
             className="px-6 py-3 bg-gradient-to-r from-purple-500 to-violet-600 text-white font-medium rounded-lg shadow-lg hover:from-purple-600 hover:to-violet-700 transition-all duration-200 transform hover:scale-105 flex items-center"
-            onClick={onReturnHome}
+            onClick={() => setShowWarning(true)}   // open warning instead
             disabled={saving}
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -358,6 +359,31 @@ const DraftCompletedModal = ({ onReturnDraft, onReturnHome, draftedPicks, userTe
           animation: confetti-fall 5s ease-in-out forwards;
         }
       `}</style>
+      {showWarning && (
+   <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+     <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-white max-w-sm">
+       <h3 className="text-xl font-bold mb-4">Discard Draft?</h3>
+       <p className="mb-6">Your draft data will not be saved. Are you sure you want to continue?</p>
+       <div className="flex justify-end space-x-4">
+         <button
+           onClick={() => setShowWarning(false)}
+           className="px-4 py-2 bg-gray-600 rounded hover:bg-gray-500"
+         >
+           Cancel
+         </button>
+         <button
+           onClick={() => {
+             localStorage.removeItem('pendingDraftData');  // clear draft info
+             onReturnHome();                               // actually go home
+           }}
+           className="px-4 py-2 bg-red-600 rounded hover:bg-red-500"
+         >
+           Continue
+         </button>
+       </div>
+     </div>
+   </div>
+ )}
     </div>
   );
 };
