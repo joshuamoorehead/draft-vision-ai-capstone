@@ -34,7 +34,7 @@ jobs:
         run: gem install github-pages
 
       - name: Build Jekyll site
-        run: jekyll build --future --destination _site
+        run: jekyll build --future --destination _site --exclude draftvision_env
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
