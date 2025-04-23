@@ -13,10 +13,9 @@ const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const PlayerComparison = () => {
+    //All of the use stats and variables
     const { uuid } = useAuth(); // Get current user's UUID from auth context
     const [players, setPlayers] = useState([]);
-    const [rbstats, setRBs] = useState([]);
-    const [rb1, setRB1] = useState(null);
     const [player1, setPlayer1] = useState(null);
     const [player2, setPlayer2] = useState(null);
     const [search1, setSearch1] = useState("");
@@ -34,6 +33,7 @@ const PlayerComparison = () => {
     const [dropdown1, setDropdown1] = useState(false);
     const [dropdown2, setDropdown2] = useState(false);
     
+    //Mapping of different possible names of data for ease of use
     const statKeyMap = {
         QB: { td: "td", yards: "yds" },
         default: { td: "tot_td", yards: "tot_yds" }
@@ -68,6 +68,7 @@ const PlayerComparison = () => {
         fetchData();
     }, []);
 
+    //In case of timeout print error message
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             if (loading) {
@@ -207,11 +208,13 @@ const PlayerComparison = () => {
         }
     };
 
+    //Resolving differently named stats across tables
     const resolveStatKey = (key, position) => {
         const mapping = statKeyMap[position] || statKeyMap.default;
         return mapping[key] || key;
     };
 
+    //Getting player stats once player is selected
     const getPlayerStat = (player, key) => {
         if (!player) return "N/A";
         
@@ -264,14 +267,17 @@ const PlayerComparison = () => {
         return 'from-gray-500 to-gray-600';
     };
 
+    //Filtered player list, updates as user types in names
     const filteredPlayers1 = players.filter(p => 
         p.name && p.name.toLowerCase().includes(search1.toLowerCase())
     ).slice(0, maxVisiblePlayers);
     
+    //Filtered player list, updates as user types in names
     const filteredPlayers2 = players.filter(p => 
         p.name && p.name.toLowerCase().includes(search2.toLowerCase())
     ).slice(0, maxVisiblePlayers);
-
+    
+    //Loading screen
     if (loading) {
         return (
             <PageTransition>
@@ -294,6 +300,7 @@ const PlayerComparison = () => {
         );
     }
 
+    //Error screen
     if (error) {
         return (
             <PageTransition>
@@ -318,6 +325,7 @@ const PlayerComparison = () => {
         );
     }
 
+    //Normal beginning screen
     return (
         <PageTransition>
             <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 relative overflow-hidden">
@@ -365,7 +373,7 @@ const PlayerComparison = () => {
                                             }}
                                         />
                                     </div>
-                                    
+                                    {/*Once player 1 has been selected, show the players card on the screen*/}
                                     {search1 && dropdown1 && (
                                         <ul className="absolute z-10 mt-2 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-60 overflow-y-auto">
                                             {filteredPlayers1.length > 0 ? (
@@ -437,7 +445,7 @@ const PlayerComparison = () => {
                                             }}
                                         />
                                     </div>
-                                    
+                                    {/*Once player 2 has been selected, show his player card on the screen*/}
                                     {search2 && dropdown2 && (
                                         <ul className="absolute z-10 mt-2 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-60 overflow-y-auto">
                                             {filteredPlayers2.length > 0 ? (
@@ -497,6 +505,7 @@ const PlayerComparison = () => {
                         </div>
                     )}
                     
+                    {/*Showcasing stats after both players are selected*/}
                     {player1 && player2 && !loadingStats && (
                         <div className="bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-indigo-500 border-opacity-30 max-w-5xl mx-auto">
                             <div className="relative mb-10">
@@ -546,6 +555,7 @@ const PlayerComparison = () => {
                                 </div>
                             </div>
                             
+                            {/*Actual stats mapped to their keys and displayed*/}
                             <div className="space-y-4">
                                 {[
                                     { label: "Position", key: "position" },
@@ -556,11 +566,13 @@ const PlayerComparison = () => {
                                     { label: "Total Yards", key: "yds" },
                                     { label: "Total Touchdowns", key: "td" },
                                 ].map(({ label, key }) => {
+                                    //Different variables that are set from the keys above
                                     const stat1 = getPlayerStat(player1, key);
                                     const stat2 = getPlayerStat(player2, key);
                                     const isNumeric = !isNaN(parseFloat(stat1)) && !isNaN(parseFloat(stat2));
                                     const stat1Value = isNumeric ? parseFloat(stat1) : stat1;
                                     const stat2Value = isNumeric ? parseFloat(stat2) : stat2;
+                                    //Checks for which stat is larger in order to print it in green
                                     const isStat1Better = isNumeric || label.toLowerCase().includes("height") ? stat1Value > stat2Value : false;
                                     const isStat2Better = isNumeric || label.toLowerCase().includes("height") ? stat2Value > stat1Value : false;
                     
@@ -604,6 +616,7 @@ const PlayerComparison = () => {
                                 })}
                             </div>
                             
+                            {/*Reset button to clear screen*/}
                             <div className="mt-10 text-center">
                                 <button
                                     onClick={() => {
@@ -621,7 +634,8 @@ const PlayerComparison = () => {
                         </div>
                     )}
                 </div>
-                
+
+                {/*Styling*/}
                 <style jsx>{`
                     @keyframes blob {
                         0% { transform: translate(0px, 0px) scale(1); }

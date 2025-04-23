@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.conf import settings
+
+# TODO Mock Draft and mock draft serializer are gone?
 from .models import PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders, MockDraft
 from .serializers import (
     PlayerProfileSerializer, 

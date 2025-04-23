@@ -15,6 +15,7 @@ import time
 # Create your tests here.
 
 class PlayerAPITest(APITestCase):
+    # Set up a new player
     def setUp(self):
         print("\nSetting up test database and creating test player...")
         self.player = PlayerProfile.objects.create(
@@ -24,6 +25,7 @@ class PlayerAPITest(APITestCase):
         )
         print("Test player created successfully.\n")
 
+    # Make sure player is in dummy database
     def test_player_creation(self):
         print("Testing player creation: Ensuring that 'Joe Football' is in the database with correct attributes.")
         player = PlayerProfile.objects.get(name="Joe Football")
@@ -31,6 +33,7 @@ class PlayerAPITest(APITestCase):
         self.assertEqual(player.position, "QB")
         print("✅ Player creation test passed!\n")
 
+    # Make sure filtered position list has player
     def test_filter_position(self):
         print("Testing position filter: Retrieving all quarterbacks and ensuring 'Joe Football' exists.")
         quarterbacks = PlayerProfile.objects.filter(position="QB")
@@ -38,12 +41,63 @@ class PlayerAPITest(APITestCase):
         self.assertEqual(quarterbacks.first().name, "Joe Football")
         print("✅ Position filter test passed!\n")
 
+    # Make sure filtered team list has player
     def test_filter_team(self):
         print("Testing team filter: Retrieving all players from LSU and ensuring 'Joe Football' exists.")
         lsu_team = PlayerProfile.objects.filter(school="LSU")
         self.assertEqual(lsu_team.count(), 1)
         self.assertEqual(lsu_team.first().name, "Joe Football")
         print("✅ Team filter test passed!\n")
+
+    # Make sure player's unset fields are none
+    def test_nullable_fields(self):
+        print("Testing default null fields: Ensuring unset fields are None.")
+        player = PlayerProfile.objects.get(name="Joe Football")
+        self.assertIsNone(player.nfl_team)
+        self.assertIsNone(player.age_drafted)
+        self.assertIsNone(player.years_ncaa)
+        self.assertIsNone(player.year_drafted)
+        self.assertIsNone(player.draft_round)
+        self.assertIsNone(player.draft_pick)
+        self.assertIsNone(player.career_av)
+        self.assertIsNone(player.draft_av)
+        print("✅ Null fields test passed!\n")
+
+    # Adding another player to the same school and making sure filtered list still works
+    def test_multiple_players_same_team(self):
+        print("Testing team filter: Creating a second player from LSU and ensuring count is 2.")
+        PlayerProfile.objects.create(name="Joe WideReceiver", school="LSU", position="WR")
+        lsu_team = PlayerProfile.objects.filter(school="LSU")
+        self.assertEqual(lsu_team.count(), 2)
+        print("✅ Team filter with multiple players test passed!\n")
+
+    # Adding another player to the same position and making sure filtered list still works
+    def test_multiple_players_same_position(self):
+        print("Testing position filter: Creating a second quarterback and ensuring count is 2.")
+        PlayerProfile.objects.create(name="Joe Quarterback", school="USC", position="QB")
+        quarterbacks = PlayerProfile.objects.filter(position="QB")
+        self.assertEqual(quarterbacks.count(), 2)
+        print("✅ Position filter with multiple players test passed!\n")
+
+    # Adding a player with nfl draft fields set and making sure the fields match.
+    def test_drafted_player(self):
+        print("Testing player creation: Creating a drafted player to test nfl draft data fields.")
+        drafted_player = PlayerProfile.objects.create(
+            name="Joe Draft",
+            position="QB",
+            school="MSU",
+            age_drafted=22,
+            year_drafted=2023,
+            draft_round=1,
+            draft_pick=5,
+            career_av=45.6,
+            draft_av=12.3
+        )
+        self.assertEqual(drafted_player.draft_round, 1)
+        self.assertEqual(drafted_player.draft_pick, 5)
+        self.assertAlmostEqual(drafted_player.career_av, 45.6)
+        self.assertAlmostEqual(drafted_player.draft_av, 12.3)
+        print("✅ Draft data fields test passed!\n")
 
     def test_mock_draft_with_selenium(self):
         print("🚀 Running Selenium Mock Draft Test: Navigating through the draft process.")
