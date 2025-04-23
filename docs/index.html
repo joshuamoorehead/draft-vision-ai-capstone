@@ -10,9 +10,9 @@
     nav a { color: #fff; margin: 0 1rem; text-decoration: none; }
     .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
     h1, h2 { margin-top: 1.5rem; }
-    .screenshots img, .stock img { max-width: 100%; border: 1px solid #ccc; margin-top: 1rem; }
     .flex { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .flex > div { flex: 1 1 45%; }
+    .flex > div { flex: 1 1 30%; }
+    .screenshots img, .stock img { width: 100%; border: 1px solid #ccc; margin-top: 0.5rem; }
     a.button { display: inline-block; background: #007bff; color: #fff; padding: .75rem 1.5rem; border-radius: 4px; text-decoration: none; margin-top: 1rem; }
   </style>
 </head>
@@ -29,47 +29,95 @@
   <div class="container">
     <h1>Welcome to Draft Vision AI</h1>
 
-    <!-- Embedded demo video or placeholder -->
+    <!-- Embedded demo video -->
     <section id="demo-video">
       <h2>Watch the Demo</h2>
-      <iframe width="100%" height="450" src="https://www.youtube.com/embed/DEMO_VIDEO_ID" title="Draft Vision AI Demo" frameborder="0" allowfullscreen></iframe>
+      <iframe width="100%" height="450"
+              src="https://www.youtube.com/embed/DEMO_VIDEO_ID"
+              title="Draft Vision AI Demo"
+              frameborder="0"
+              allowfullscreen>
+      </iframe>
     </section>
 
     <!-- Explanation of app and features -->
     <section id="why-use">
-      <h2>Why Use Draft Vision AI?</h2>
-      <p>Draft Vision AI combines advanced machine learning models with an intuitive interface to help football enthusiasts, analysts, and coaches make smarter draft decisions. Simply upload player data or game footage, and our algorithms will analyze player metrics, highlight potential draft picks, and provide actionable insights—all within seconds.</p>
-      <p>Whether you're preparing for a mock draft, scouting new talent, or refining your strategy, Draft Vision AI streamlines the process so you can focus on winning. Key features include:</p>
+      <h2>Why Draft Vision AI?</h2>
+      <p>Draft Vision AI blends cutting-edge machine learning with a rich, interactive web experience to revolutionize how you analyze and simulate the NFL draft. Whether you’re a fan, analyst, or team scout, our platform delivers data-driven predictions, hands-on mock drafts, and a vibrant community—all in one place.</p>
+      <p>Unlock every stage of the draft process:</p>
       <ul>
-        <li>AI-Powered Player Comparison</li>
-        <li>Real-Time Draft Simulation with User & CPU Picks</li>
-        <li>Interactive Created Player Analysis</li>
-        <li>Advanced Filtering, Sorting, and Search by Metrics</li>
-        <li>Secure User Authentication and Role-Based Access</li>
-        <li>Responsive Dashboard with Dynamic Visualizations</li>
-        <li>Interactive Community Page with User Created Mock Drafts</li>
+        <li><strong>Ensemble &amp; Neural Network Predictions</strong>  
+          — Multiple models trained on decades of draft data forecast each prospect’s likely draft slot.</li>
+        <li><strong>Custom Mock Draft Simulator</strong>  
+          — Choose your draft year, number of rounds, and participating teams, then pick in real time (with trade proposals!).</li>
+        <li><strong>Dual Analytics Dashboards</strong>  
+          — The <em>Player List</em> shows current NFL stars; the <em>Big Board</em> previews next year’s class, both filterable by team, position, and more.</li>
+        <li><strong>Head-to-Head Comparison</strong>  
+          — Compare any two players side by side across stats, physical measurables, and performance metrics.</li>
+        <li><strong>Create-a-Player &amp; Pro Comparison</strong>  
+          — Input custom stats to see your player’s predicted draft position and their closest professional analog.</li>
+        <li><strong>Interactive Community Hub</strong>  
+          — Publish, browse, and comment on public mock drafts; view draft grades and receive in-depth AI-generated analysis.</li>
+        <li><strong>Secure &amp; Responsive</strong>  
+          — User authentication, role-based access, and dynamic visualizations ensure a seamless experience on any device.</li>
       </ul>
     </section>
 
     <!-- Screenshots of your app -->
     <section id="screenshots">
-      <h2>See It In Action</h2>
+      <h2>App Screenshots</h2>
       <div class="flex screenshots">
         <div>
-          <img src="assets/dashboard.png" alt="Dashboard screenshot" />
-          <p>Overview Dashboard with Key Metrics</p>
+          <img src="assets/home.png" alt="Home page screenshot" />
+          <p>Home page (landing view)</p>
         </div>
         <div>
-          <img src="assets/player-comparison.png" alt="Player comparison screenshot" />
-          <p>AI-Powered Player Comparison</p>
+          <img src="assets/home-loggedin.png" alt="Home page after login" />
+          <p>Home page after you log in</p>
         </div>
         <div>
-          <img src="assets/trade-manager.png" alt="Trade manager screenshot" />
-          <p>Interactive Trade & What-If Analysis</p>
+          <img src="assets/pick-team.png" alt="Pick a team for mock draft" />
+          <p>Picking a team for a mock draft</p>
         </div>
         <div>
-          <img src="assets/settings-panel.png" alt="Settings screenshot" />
-          <p>Customize Simulation Parameters</p>
+          <img src="assets/draft-settings.png" alt="Mock draft settings" />
+          <p>Setting mock draft settings</p>
+        </div>
+        <div>
+          <img src="assets/draft-room.png" alt="Draft room view" />
+          <p>Draft room</p>
+        </div>
+        <div>
+          <img src="assets/user-pick.png" alt="User pick modal" />
+          <p>User pick</p>
+        </div>
+        <div>
+          <img src="assets/player-directory.png" alt="Player directory" />
+          <p>Player directory</p>
+        </div>
+        <div>
+          <img src="assets/big-board.png" alt="Big board" />
+          <p>Big board</p>
+        </div>
+        <div>
+          <img src="assets/player-comparison.png" alt="Player comparison" />
+          <p>Player comparison</p>
+        </div>
+        <div>
+          <img src="assets/create-player.png" alt="Create a player form" />
+          <p>Create a player</p>
+        </div>
+        <div>
+          <img src="assets/create-player-results.png" alt="Create player results" />
+          <p>Create player results</p>
+        </div>
+        <div>
+          <img src="assets/community-mocks.png" alt="Community mock drafts" />
+          <p>Community mock drafts</p>
+        </div>
+        <div>
+          <img src="assets/saved-drafts.png" alt="My saved drafts" />
+          <p>My saved drafts</p>
         </div>
       </div>
     </section>
