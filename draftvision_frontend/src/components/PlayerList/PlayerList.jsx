@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchPlayers, fetchPlayerStats, generatePlayerBio } from '../../services/api';
 import Papa from 'papaparse';
 import { dvailogo } from '../Logos';
@@ -22,6 +22,7 @@ const PlayerList = () => {
   const [loadingStats, setLoadingStats] = useState(false);
   const [error, setError] = useState(null);
   const timeoutRef = useRef(null);
+  const navigate = useNavigate();
 
   // Fetch players and predictions on mount.
   useEffect(() => {
@@ -159,22 +160,8 @@ const PlayerList = () => {
     };
   }, []);
 
-  const handlePlayerSelect = async (playerId) => {
-    const playerData = allPlayers.find((player) => player.id === playerId);
-    if (playerData) {
-      setSelectedPlayer(playerData);
-      try {
-        setLoadingStats(true);
-        const stats = await fetchPlayerStats(playerId, playerData.position);
-        setSelectedPlayerStats(stats);
-      } catch (err) {
-        console.error('Error fetching player stats:', err.message);
-      } finally {
-        setLoadingStats(false);
-      }
-    } else {
-      console.error('Player not found:', playerId);
-    }
+  const handlePlayerSelect = (playerId) => {
+    navigate(`/playerlist/${playerId}`);
   };
 
   // Callback to update a player's bio when it is generated.

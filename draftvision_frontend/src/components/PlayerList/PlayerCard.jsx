@@ -215,7 +215,11 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
   );
 
   const renderStatsView = () => {
+    console.log('Rendering stats view for player:', player);
+    console.log('Available tables for position:', getAvailableTables(player.position));
+    
     if (!stats || stats.length === 0) {
+      console.log('No stats available for player:', player.name);
       return (
         <div className="flex flex-col items-center justify-center h-full">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -225,6 +229,8 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
         </div>
       );
     }
+
+    console.log('Stats data:', stats);
 
     return (
       <div>
@@ -248,21 +254,106 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
                     <p className="text-white font-medium">{stat.yds_g}</p>
                   </div>
                   <div>
+                    <p className="text-gray-400 text-sm">Passing TDs</p>
+                    <p className="text-white font-medium">{stat.td}</p>
+                  </div>
+                  <div>
                     <p className="text-gray-400 text-sm">Passer Rating</p>
                     <p className="text-white font-medium">{stat.ratings}</p>
                   </div>
                 </div>
               )}
               
-              {['rb', 'wr', 'te'].includes(player.position.toLowerCase()) && (
+              {['rb'].includes(player.position.toLowerCase()) && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-gray-400 text-sm">Conference</p>
-                    <p className="text-white font-medium">{stat.conference_id || 'N/A'}</p>
+                    <p className="text-gray-400 text-sm">Rushing Yards/Game</p>
+                    <p className="text-white font-medium">{stat.rush_ypg}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Team</p>
-                    <p className="text-white font-medium">{stat.team_id || 'N/A'}</p>
+                    <p className="text-gray-400 text-sm">Rushing TDs</p>
+                    <p className="text-white font-medium">{stat.rush_td}</p>
+                  </div>
+                </div>
+              )}
+              
+              {['wr', 'te'].includes(player.position.toLowerCase()) && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-gray-400 text-sm">Yards/Game</p>
+                    <p className="text-white font-medium">{stat.ypg}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Touchdowns</p>
+                    <p className="text-white font-medium">{stat.td}</p>
+                  </div>
+                </div>
+              )}
+              
+              {['ol', 'ot', 'g', 'c', 'og', 't'].includes(player.position.toLowerCase()) && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-gray-400 text-sm">Rushing Yards</p>
+                    <p className="text-white font-medium">{stat.rush_yds}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Rushing First Downs</p>
+                    <p className="text-white font-medium">{stat.rush_first_downs}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Rushing TDs</p>
+                    <p className="text-white font-medium">{stat.rush_td}</p>
+                  </div>
+                </div>
+              )}
+              
+              {['dl', 'de', 'dt', 'nt'].includes(player.position.toLowerCase()) && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-gray-400 text-sm">Tackles For Loss</p>
+                    <p className="text-white font-medium">{stat.TFL}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Sacks</p>
+                    <p className="text-white font-medium">{stat.sacks}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">QB Hurries</p>
+                    <p className="text-white font-medium">{stat.hur}</p>
+                  </div>
+                </div>
+              )}
+              
+              {['lb', 'ilb', 'olb'].includes(player.position.toLowerCase()) && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-gray-400 text-sm">Tackles For Loss</p>
+                    <p className="text-white font-medium">{stat.TFL}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Sacks</p>
+                    <p className="text-white font-medium">{stat.sacks}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Total Tackles</p>
+                    <p className="text-white font-medium">{stat.tot}</p>
+                  </div>
+                </div>
+              )}
+              
+              {['db','cb', 's'].includes(player.position.toLowerCase()) && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-gray-400 text-sm">Pass Deflections</p>
+                    <p className="text-white font-medium">{stat.pd}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Tackles</p>
+                    <p className="text-white font-medium">{stat.tot}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Touchdowns</p>
+                    <p className="text-white font-medium">{stat.td}</p>
                   </div>
                 </div>
               )}

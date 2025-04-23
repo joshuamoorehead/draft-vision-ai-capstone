@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { supabase } from './services/api';
 import PlayerList from './components/PlayerList/PlayerList';
+import PlayerListView from './components/PlayerList/PlayerView';
 import './styles/main.css';
 import AboutPage from './components/aboutpage/aboutpage';
 import MockDraft from './components/MockDraft/MockDraft';
@@ -172,6 +173,7 @@ const AppContent = () => {
           <Route path="/" element={<Navigate to="/about" />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/playerlist" element={<PlayerList />} />
+          <Route path="/playerlist/:playerId" element={<PlayerListView />} />
           <Route path="/mockdraft" element={<MockDraft />} />
           <Route path="/largelist" element={<LargeList />} />
           <Route path="/player/:playerId" element={<PlayerView />} />
