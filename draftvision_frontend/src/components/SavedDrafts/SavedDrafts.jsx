@@ -285,7 +285,7 @@ const generateWeaknesses = (draft) => {
                         <div className="flex items-center">
                           <label className="text-white mr-2">Sort by:</label>
                           <select
-                            className="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
                             value={sortOption}
                             onChange={(e) => setSortOption(e.target.value)}
                           >
