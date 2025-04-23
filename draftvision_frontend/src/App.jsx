@@ -8,6 +8,7 @@ import AboutPage from './components/aboutpage/aboutpage';
 import MockDraft from './components/MockDraft/MockDraft';
 import DraftRoom from './components/MockDraft/DraftRoom';
 import LargeList from './components/LargeList/LargeList';
+import PlayerView from './components/LargeList/PlayerView';
 import PlayerCompare from './components/PlayerCompare/PlayerCompare';
 import PlayerInput from './components/PlayerInput/PlayerInput';
 import NewPlayerComp from './components/PlayerInput/NewPlayerComp';
@@ -173,6 +174,7 @@ const AppContent = () => {
           <Route path="/playerlist" element={<PlayerList />} />
           <Route path="/mockdraft" element={<MockDraft />} />
           <Route path="/largelist" element={<LargeList />} />
+          <Route path="/player/:playerId" element={<PlayerView />} />
           <Route path="/draftroom" element={<DraftRoom />} />
           <Route path="/playercompare" element={<PlayerCompare />} />
           <Route path="/playerinput" element={<PlayerInput />} />

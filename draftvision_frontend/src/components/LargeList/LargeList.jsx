@@ -4,6 +4,7 @@ import { supabase } from '../../services/api';
 import PageTransition from '../Common/PageTransition';
 import { useAuth } from '../../context/AuthContext';
 import PlayerCard from './LLPlayerCard';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 // Import logo images for the first ten players
 import calebwilliams from '../Logos/CalebWilliams.png';
@@ -114,6 +115,9 @@ const FlipCard = ({ front, back }) => {
 
 const LargeList = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { playerId: urlPlayerId } = useParams();
   const [position, setPosition] = useState('');
   const [team, setTeam] = useState('');
   const [nflteam, setNflTeam] = useState('');
@@ -253,6 +257,18 @@ const LargeList = () => {
   
         setAllPlayers(fetchedPlayers);
         setPlayers(fetchedPlayers);
+
+        // Check if we have a player ID in the URL
+        if (urlPlayerId) {
+          console.log('Found player ID in URL:', urlPlayerId);
+          const player = fetchedPlayers.find(p => p.id === parseInt(urlPlayerId));
+          if (player) {
+            console.log('Found player in fetched data:', player.name);
+            handlePlayerSelect(player.id);
+          } else {
+            console.warn('Player not found in fetched data:', urlPlayerId);
+          }
+        }
       } catch (err) {
         console.error('Error loading players:', err);
         setError(err.message || 'Failed to load player data');
@@ -264,7 +280,7 @@ const LargeList = () => {
     };
   
     loadPlayers();
-  }, []);
+  }, [urlPlayerId]);
   
   // Filter players when filters change
   useEffect(() => {
@@ -295,19 +311,8 @@ const LargeList = () => {
   
   // Handle player selection (to open modal)
   const handlePlayerSelect = async (playerId) => {
-    const playerData = allPlayers.find((player) => player.id === playerId);
-    if (playerData) {
-      setSelectedPlayer(playerData);
-      try {
-        const stats = await fetchPlayerStats(playerId, playerData.position);
-        setSelectedPlayerStats(stats);
-      } catch (err) {
-        console.error('Error fetching player stats:', err.message);
-        setSelectedPlayerStats(null);
-      }
-    } else {
-      console.error('Player not found:', playerId);
-    }
+    // Navigate to the player's dedicated page
+    navigate(`/player/${playerId}`);
   };
   
   // Callback to update a player's bio when it is generated
@@ -328,6 +333,8 @@ const LargeList = () => {
   const closePopup = () => {
     setSelectedPlayer(null);
     setSelectedPlayerStats(null);
+    // Navigate back to the main list
+    navigate('/largelist', { replace: true });
   };
   
   // Get position color based on position string
@@ -592,26 +599,36 @@ const LargeList = () => {
                           {index + 1}
                         </div>
                         <div>
-                          <h3 className="text-xl font-bold text-white">{player.name}</h3>
+                          <h3 className="text-xl font-bold text-white">
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handlePlayerSelect(player.id);
+                              }}
+                              className="hover:text-blue-400 transition-colors duration-200"
+                            >
+                              {player.name}
+                            </button>
+                          </h3>
                           {/* Conditionally render FlipCard only if no filters are applied */}
                           {logoMap[player.name] && (
-    <div className="mb-4">
-      <FlipCard
-        front={
-          <img
-            src={logoMap[player.name]}
-            alt={`${player.name} logo`}
-            className="w-48 h-64 my-2"
-          />
-        }
-        back={
-          <div className="p-4">
-            <p className="text-sm">{player.description}</p>
-          </div>
-        }
-      />
-    </div>
-  )}
+                            <div className="mb-4">
+                              <FlipCard
+                                front={
+                                  <img
+                                    src={logoMap[player.name]}
+                                    alt={`${player.name} logo`}
+                                    className="w-48 h-64 my-2"
+                                  />
+                                }
+                                back={
+                                  <div className="p-4">
+                                    <p className="text-sm">{player.description}</p>
+                                  </div>
+                                }
+                              />
+                            </div>
+                          )}
                           <div className="flex flex-wrap gap-2 mt-1">
                             <span className="text-sm bg-gray-700 bg-opacity-70 px-2 py-1 rounded-lg text-gray-200">
                               {player.school}
