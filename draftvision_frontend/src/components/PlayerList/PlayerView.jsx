@@ -6,6 +6,11 @@ import { fetchPlayerStats } from '../../services/api';
 import PageTransition from '../Common/PageTransition';
 import PlayerCard from './PlayerCard';
 
+/**
+ * PlayerView component for displaying a player's profile and stats
+ * allows us to have a page for each player in the Player list, can copy/paste url to share 
+ * calls player card component and passes in player and stats
+ */
 const PlayerView = () => {
   const { playerId } = useParams();
   const navigate = useNavigate();

@@ -2,6 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { generatePlayerBio } from '../../services/api';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from "recharts";
 
+/**
+ * actual player card component for the large list
+ * works within the player view component
+ * the "large list" is the main page that displays all players in a grid
+ * the player view is the page that displays a player's profile and stats
+ * @returns one player card component, passes in player and stats, displays profile, stats, bio, and graph 
+ */
 const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
   const [activeView, setActiveView] = useState('profile');
   // Initialize bio state from player.bio if available.

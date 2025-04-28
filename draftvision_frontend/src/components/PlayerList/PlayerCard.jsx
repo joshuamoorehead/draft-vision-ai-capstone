@@ -11,6 +11,7 @@ const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// tables for the player card component- this is for general organization of displaying data 
 const tables = {
   'db_playerprofile': ['draft_round', 'draft_pick', 'career_av', 'draft_av'],
   'db_passingleaders': ['yds','yds_g', 'td', 'int', 'ratings'],
@@ -20,7 +21,7 @@ const tables = {
   'db_combine': ['forty', 'bench', 'vertical', 'broadjump', 'threecone', 'shuttle'],
 };
 
-// User-friendly labels for tables
+// labels for tables
 const tableLabels = {
   'db_playerprofile': 'Draft Profile',
   'db_passingleaders': 'Passing Stats',
@@ -30,7 +31,7 @@ const tableLabels = {
   'db_combine': 'Combine Results'
 };
 
-// User-friendly labels for columns
+// labels for columns
 const columnLabels = {
   // Player Profile
   'draft_round': 'Draft Round',
@@ -90,7 +91,13 @@ const positionTables = {
 };
 
 //player card component
-
+/**
+ * actual player card component for the player list
+ * works within the player view component
+ * the "Player List" is the main page that displays all players in a grid
+ * the player view is the page that displays a player's profile and stats
+ * @returns one player card component, passes in player and stats, displays profile, stats, bio, and graph 
+ */
 const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
   const [activeView, setActiveView] = useState('profile');
   const [bio, setBio] = useState(player.bio || '');
@@ -215,8 +222,6 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
   );
 
   const renderStatsView = () => {
-    console.log('Rendering stats view for player:', player);
-    console.log('Available tables for position:', getAvailableTables(player.position));
     
     if (!stats || stats.length === 0) {
       console.log('No stats available for player:', player.name);
@@ -230,7 +235,6 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
       );
     }
 
-    console.log('Stats data:', stats);
 
     return (
       <div>
@@ -469,7 +473,6 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
 
                 // Extract just the IDs
                 const playerIds = playerProfiles.map(profile => profile.id);
-                // console.log('Player IDs:', playerIds);
 
                 // Create a map of player IDs to names for later use
                 const playerNameMap = playerProfiles.reduce((acc, profile) => {
@@ -504,9 +507,6 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
                 const xData = await fetchTableData(xTable, xColumn);
                 const yData = await fetchTableData(yTable, yColumn);
 
-                // console.log('X Data:', xData);
-                // console.log('Y Data:', yData);
-
                 // Combine the data
                 const formattedData = playerIds.map(playerId => {
                   const xRecord = xData.find(d => 
@@ -527,7 +527,6 @@ const PlayerCard = ({ player, stats, onBioGenerated, players }) => {
                   return null;
                 }).filter(Boolean); // Remove null entries
                 
-                // console.log('Formatted data:', formattedData);
                 setGraphData(formattedData);
               } catch (error) {
                 console.error("Error fetching players:", error);

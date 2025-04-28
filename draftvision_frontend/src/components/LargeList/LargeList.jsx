@@ -203,13 +203,11 @@ const LargeList = () => {
       setError(null);
       
       try {
-        console.log('Fetching 2024 players...');
         let fetchedPlayers = [];
         try {
           const data = await fetch2024Players();
           if (data && data.length > 0) {
             fetchedPlayers = data;
-            console.log('Players fetched successfully using fetch2024Players');
           } else {
             throw new Error('No data returned from fetch2024Players');
           }
@@ -232,7 +230,6 @@ const LargeList = () => {
                   xAV: parseFloat((11.31 / (player.draft_round + 0.5) + 1.51).toFixed(2))
                 }
               }));
-              console.log('Players fetched successfully using direct Supabase query');
             } else {
               throw new Error('No data returned from Supabase query');
             }
@@ -260,10 +257,8 @@ const LargeList = () => {
 
         // Check if we have a player ID in the URL
         if (urlPlayerId) {
-          console.log('Found player ID in URL:', urlPlayerId);
           const player = fetchedPlayers.find(p => p.id === parseInt(urlPlayerId));
           if (player) {
-            console.log('Found player in fetched data:', player.name);
             handlePlayerSelect(player.id);
           } else {
             console.warn('Player not found in fetched data:', urlPlayerId);
@@ -282,7 +277,9 @@ const LargeList = () => {
     loadPlayers();
   }, [urlPlayerId]);
   
-  // Filter players when filters change
+  /**
+   * Filter players based on position, team, and NFL team
+   */
   useEffect(() => {
     let filteredPlayers = allPlayers;
     

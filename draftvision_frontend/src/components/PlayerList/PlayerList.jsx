@@ -9,6 +9,12 @@ import PlayerCard from './PlayerCard';
 import { supabase } from '../../services/api';
 import PageTransition from '../Common/PageTransition';
 
+/**
+ * Player List component for the player list page
+ * displays all players in a grid
+ * allows us to filter by position, team, and years
+ * calls player card component and passes in player and stats
+ */
 const PlayerList = () => {
   const [position, setPosition] = useState('');
   const [team, setTeam] = useState('');
@@ -41,7 +47,6 @@ const PlayerList = () => {
         
         const data = await fetchPlayers();
         const fetchedPlayers = data.results || data;
-        console.log("Fetched players:", fetchedPlayers);
         
         if (!fetchedPlayers || fetchedPlayers.length === 0) {
           throw new Error("No players found in the database");
@@ -140,7 +145,6 @@ const PlayerList = () => {
           table: 'db_playerprofile',
         },
         (payload) => {
-          console.log('Player updated:', payload);
           setAllPlayers(prev =>
             prev.map((player) =>
               player.id === payload.new.id ? payload.new : player

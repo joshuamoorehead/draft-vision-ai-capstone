@@ -5,6 +5,12 @@ import { supabase } from '../../services/api';
 import PageTransition from '../Common/PageTransition';
 import PlayerCard from './LLPlayerCard';
 
+
+/**
+ * PlayerView component for displaying a player's profile and stats
+ * allows us to have a page for each player in the large list, can copy/paste url to share 
+ * calls player card component and passes in player and stats
+ */
 const PlayerView = () => {
   const { playerId } = useParams();
   const navigate = useNavigate();
@@ -41,11 +47,6 @@ const PlayerView = () => {
             }
           };
         });
-
-        console.log('Processed players with xAV:', processedPlayers.map(p => ({
-          name: p.name,
-          xAV: p.predictions.xAV
-        })));
 
         setAllPlayers(processedPlayers);
 
@@ -123,6 +124,7 @@ const PlayerView = () => {
             Back to List
           </button>
           <div className="bg-gray-800 bg-opacity-70 p-6 rounded-2xl shadow-2xl border border-indigo-500 border-opacity-30">
+            {/* actual player card component */}
             <PlayerCard
               player={player}
               stats={stats}
