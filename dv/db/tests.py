@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import uuid
 
 
 # Create your tests here.
@@ -127,107 +128,419 @@ class PlayerAPITest(APITestCase):
                 EC.url_contains("/mockdraft")
             )
             print("✅ Successfully navigated to the mock draft page.")
-
-            # Click "Select All Teams"
-            print("Waiting for 'Select All Teams' button...")
-            select_all_button = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "button.w-6.h-6.border-2.border-black.rounded-full.bg-gray-300"))
+            print("Waiting for 'Enter Draft Room' button...")
+            enter_button = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                (   By.XPATH, "//button[normalize-space(text())='Enter Draft Room']")
+                )
             )
-            print("✅ 'Select All Teams' button found. Clicking...")
-            select_all_button.click()
-            print("✅ 'Select All Teams' button clicked.")
-
-            # Set the draft rounds to 7
-            print("Waiting for draft rounds dropdown...")
-            rounds_dropdown = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "select.ml-2.px-2.py-1.bg-gray-200.rounded"))
-            )
-            print("✅ Draft rounds dropdown found. Setting to 2 rounds...")
-            select = Select(rounds_dropdown)
-            select.select_by_visible_text("2")
-            print("✅ Draft rounds set to 2.")
-
-            # Set the timer to 600 seconds
-            print("Waiting for timer dropdown...")
-            timer_dropdown = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "select.ml-2.px-2.py-1.bg-gray-200.rounded"))
-            )
-            print("✅ Timer dropdown found. Verifying options...")
-
-            # Debug: Print available options
-            print("Available options:")
-            for option in Select(timer_dropdown).options:
-                print(f" - {option.text}")
-
-            print("Setting timer to 600 seconds...")
-            try:
-                timer_select = Select(timer_dropdown)
-                timer_select.select_by_value("600")
-            except Exception:
-                print("⚠️ Select failed, trying direct option click...")
-                option = timer_dropdown.find_element(By.XPATH, "//option[@value='600']")
-                option.click()
-
-            print("✅ Timer set to 600 seconds.")
-
-            # Enter the draft
-            print("Waiting for 'Enter Draft' button...")
-            enter_draft_button = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "button.mt-8.px-6.py-2.bg-white.text-black.text-lg.font-semibold.rounded.hover\\:bg-gray-200"))
-            )
-            print("✅ 'Enter Draft' button found. Clicking...")
-            enter_draft_button.click()
-            print("✅ 'Enter Draft' button clicked.")
-
-            # Start the draft
+            print("✅ 'Enter Draft Room' button found. Clicking...")
+            enter_button.click()
+            print("✅ Enter Draft Room button clicked.")
             print("Waiting for 'Start Draft' button...")
-            start_draft_button = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "button.mt-8.mb-8.px-6.py-2.bg-white.text-black.text-lg.font-semibold.rounded.hover\\:bg-gray-200"))
+            start_button = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Start Draft']")
+                )
             )
             print("✅ 'Start Draft' button found. Clicking...")
-            start_draft_button.click()
-            print("✅ 'Start Draft' button clicked.")
-
-            print("✅ Draft setup completed successfully!")
-
-            for pick_number in range(1, 60):  # Adjust based on the actual number of picks
-                print(f"Making pick {pick_number}...")
-                pick_button = WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, "button.ml-4.px-4.py-2.bg-blue-500.text-white.rounded"))
+            start_button.click()
+            print("✅ Start Draft button clicked.")    
+            print("Waiting for 'Return Home' button (up to 40s)...")
+            return_home_btn = WebDriverWait(driver, 40).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Return Home']")
                 )
-                pick_button.click()
-                time.sleep(1)
-
-            print("✅ Draft completed successfully!")
-
-            # Verify draft completion message
-            print("Waiting for the draft to complete...")
-            time.sleep(5)
-
-            draft_complete_message = WebDriverWait(driver, 15).until(
-                EC.presence_of_element_located((By.XPATH, "//h2[text()='Draft Complete!']"))
             )
-            print("✅ 'Draft Complete' message found.")
-
-            # Click "Return to Mock Draft Home" button
-            print("Waiting for 'Return to Mock Draft Home' button...")
-            return_home_button = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "//button[text()='Return to Mock Draft Home']"))
-            )
-            return_home_button.click()
-            print("✅ 'Return to Mock Draft Home' button clicked.")
-
-            # Verify navigation back to the mock draft home
-            print("Verifying navigation back to mock draft home...")
-            enter_draft_button = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "button.mt-8.px-6.py-2.bg-white.text-black.text-lg.font-semibold.rounded.hover\\:bg-gray-200"))
-            )
-            print("✅ Navigation successful. 'Enter Draft' button is visible.")
-
+            print("✅ 'Return Home' button found. Clicking...")
+            return_home_btn.click()
+            print("✅ Return Home button clicked.")
         except Exception as e:
             print("❌ Error occurred:", e)
 
         finally:
             print("Closing the browser...")
             driver.quit()
-            print("✅ Browser closed. Selenium script finished.\n")
+            print("✅ Browser closed. Mock draft Selenium script finished.\n")
+    def test_player_list(self):
+        print("🚀 Running Selenium Player List Test: Opening the home page and navigating through Player List.")
+        driver = webdriver.Chrome()
+        try:
+            # 1) Open the web app
+            print("Opening the web app...")
+            driver.get("https://draftvision-ai-cfd79.web.app/")
+            print("✅ Web app opened successfully.")
+
+            # 2) Click the "Draft Tools" dropdown
+            print("Waiting for 'Draft Tools' dropdown...")
+            draft_tools_btn = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Draft Tools']")
+                )
+            )
+            draft_tools_btn.click()
+            print("✅ 'Draft Tools' dropdown clicked.")
+
+            # 3) Click the "Player List" option
+            print("Waiting for 'Player List' link...")
+            player_list_link = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.LINK_TEXT, "Player List"))
+            )
+            player_list_link.click()
+            print("✅ 'Player List' clicked.")
+
+            # 4) Click the first arrow SVG to expand details
+            print("Waiting for first arrow icon...")
+            arrows = WebDriverWait(driver, 10).until(
+                EC.presence_of_all_elements_located(
+                    (By.CSS_SELECTOR, "svg.h-6.w-6.text-white")
+                )
+            )
+            arrows[0].click()
+            print("✅ First arrow icon clicked.")
+
+            # 5) Click the "Stats" button
+            print("Waiting for 'Stats' button...")
+            stats_btn = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Stats']")
+                )
+            )
+            stats_btn.click()
+            print("✅ 'Stats' button clicked.")
+
+            # 6) Click the "Back to List" button
+            print("Waiting for 'Back to List' button...")
+            back_btn = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Back to List']")
+                )
+            )
+            back_btn.click()
+            print("✅ 'Back to List' button clicked.")
+
+        except Exception as e:
+            print("❌ Error occurred:", e)
+            self.fail(f"Selenium Player List test failed: {e}")
+
+        finally:
+            print("Closing the browser for Player List test...")
+            driver.quit()
+            print("✅ Browser closed. Player List test finished.\n")
+    def test_big_board_flow(self):
+        """Selenium test: open home, navigate to Big Board, drill into Impact, then return."""
+        print("🚀 Running Selenium Big Board Test.")
+        driver = webdriver.Chrome()
+        try:
+            # 1) Open the web app
+            print("Opening the web app...")
+            driver.get("https://draftvision-ai-cfd79.web.app/")
+            print("✅ Web app opened successfully.")
+
+            # 2) Click the "Draft Tools" dropdown
+            print("Waiting for 'Draft Tools' dropdown...")
+            draft_tools_btn = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Draft Tools']")
+                )
+            )
+            draft_tools_btn.click()
+            print("✅ 'Draft Tools' dropdown clicked.")
+
+            # 3) Click the "Big Board" option
+            print("Waiting for 'Big Board' link...")
+            big_board_link = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.LINK_TEXT, "Big Board"))
+            )
+            big_board_link.click()
+            print("✅ 'Big Board' clicked.")
+
+            # 4) Click the first arrow icon to expand
+            print("Waiting for first arrow icon...")
+            arrows = WebDriverWait(driver, 10).until(
+                EC.presence_of_all_elements_located(
+                    (By.CSS_SELECTOR, "svg.h-6.w-6.text-white")
+                )
+            )
+            arrows[0].click()
+            print("✅ First arrow icon clicked.")
+
+            # 5) Click the "Impact" button
+            print("Waiting for 'Impact' button...")
+            impact_btn = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Impact']")
+                )
+            )
+            impact_btn.click()
+            print("✅ 'Impact' button clicked.")
+
+            # 6) Click the "Back to List" button
+            print("Waiting for 'Back to List' button...")
+            back_btn = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Back to List']")
+                )
+            )
+            back_btn.click()
+            print("✅ 'Back to List' button clicked.")
+
+        except Exception as e:
+            print("❌ Error in Big Board test:", e)
+            self.fail(f"Selenium Big Board test failed: {e}")
+        finally:
+            print("Closing the browser for Big Board test...")
+            driver.quit()
+            print("✅ Browser closed. Big Board test finished.\n")
+    def test_player_comparison_flow(self):
+        print("🚀 Running Selenium Player Comparison Test.")
+        driver = webdriver.Chrome()
+        try:
+            # 1) Open the web app and open the Draft Tools menu
+            driver.get("https://draftvision-ai-cfd79.web.app/")
+            WebDriverWait(driver, 15).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(text())='Draft Tools']"))
+            ).click()
+
+            # 2) Navigate to Player Comparison
+            WebDriverWait(driver, 15).until(
+                EC.element_to_be_clickable((By.LINK_TEXT, "Player Comparison"))
+            ).click()
+
+            # 3) First search: type 'a' and click “Richie James”
+            first_input = WebDriverWait(driver, 15).until(
+                EC.presence_of_all_elements_located(
+                    (By.CSS_SELECTOR, 'input[placeholder="Search for a player..."]')
+                )
+            )[0]
+            first_input.send_keys("a")
+            WebDriverWait(driver, 15).until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    "//div[@class='text-white font-medium' and normalize-space(.)='Richie James']"
+                ))
+            ).click()
+            print("✅ Selected Richie James")
+
+            # 4) Second search: type 'b' and click “Arizona State”
+            second_input = WebDriverWait(driver, 15).until(
+                EC.presence_of_all_elements_located(
+                    (By.CSS_SELECTOR, 'input[placeholder="Search for a player..."]')
+                )
+            )[1]
+            second_input.send_keys("b")
+            WebDriverWait(driver, 15).until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    "//div[@class='text-gray-400 text-sm' and normalize-space(.)='Arizona State']"
+                ))
+            ).click()
+            print("✅ Selected Eno Benjamin")
+
+            # 5) Finally click Compare Different Players
+            WebDriverWait(driver, 30).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Compare Different Players')]"))
+            ).click()
+            print("✅ Player Comparison flow succeeded.")
+
+        except Exception as e:
+            print("❌ Error in Player Comparison test:", e)
+            self.fail(f"Player Comparison test failed: {e}")
+        finally:
+            driver.quit()
+            print("✅ Browser closed for Player Comparison.\n")
+
+    def test_player_prediction_flow(self):
+        print("🚀 Running Selenium Player Prediction Test.")
+        driver = webdriver.Chrome()
+        try:
+            print("Opening the web app...")
+            driver.get("https://draftvision-ai-cfd79.web.app/")
+            print("✅ Web app opened successfully.")
+
+            print("Opening 'Draft Tools'...")
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(text())='Draft Tools']"))
+            ).click()
+
+            print("Selecting 'Player Prediction'...")
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.LINK_TEXT, "Player Prediction"))
+            ).click()
+
+            print("Entering player name 'test'...")
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, 'input[placeholder="Enter player name"]'))
+            ).send_keys("test")
+
+            print("Selecting position QB...")
+            Select(WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, "select"))
+            )).select_by_value("QB")
+
+            print("Entering passing yards…")
+            passing_fields = WebDriverWait(driver, 10).until(
+                EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'input[placeholder="Enter passing yards"]'))
+            )
+            if len(passing_fields) == 1:
+                # if only one field rendered, use it twice
+                passing_fields[0].send_keys("100")
+                passing_fields[0].send_keys("100")
+            else:
+                passing_fields[0].send_keys("100")
+                passing_fields[1].send_keys("100")
+            print("✅ Passing yards entered.")
+
+            print("Entering touchdowns and interceptions…")
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, 'input[placeholder="Enter touchdowns"]'))
+            ).send_keys("100")
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, 'input[placeholder="Enter interceptions"]'))
+            ).send_keys("100")
+            print("✅ TDs and INTs entered.")
+
+            print("Clicking 'Create Player'…")
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(text())='Create Player']"))
+            ).click()
+
+            print("Clicking 'Create Another Player'…")
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(text())='Create Another Player']"))
+            ).click()
+
+        except Exception as e:
+            print("❌ Error in Player Prediction test:", e)
+            self.fail(f"Player Prediction test failed: {e}")
+        finally:
+            driver.quit()
+            print("✅ Browser closed for Player Prediction.\n")
+    def test_community_flow(self):
+        print("🚀 Running Selenium Community Test.")
+        driver = webdriver.Chrome()
+        try:
+            # 1) Open the web app
+            driver.get("https://draftvision-ai-cfd79.web.app/")
+            print("✅ Home page opened.")
+
+            # 2) Click the top‐nav "Community" link
+            WebDriverWait(driver, 15).until(
+                EC.element_to_be_clickable((By.LINK_TEXT, "Community"))
+            ).click()
+            print("✅ Navigated to Community page.")
+
+            # 3) Click the first "View Draft" button
+            WebDriverWait(driver, 15).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='View Draft']")
+                )
+            ).click()
+            print("✅ Clicked first 'View Draft' button.")
+
+        except Exception as e:
+            print("❌ Error in Community test:", e)
+            self.fail(f"Community test failed: {e}")
+        finally:
+            driver.quit()
+            print("✅ Browser closed for Community test.\n")
+    def test_login_flow(self):
+        print("🚀 Running Selenium Login Test.")
+        driver = webdriver.Chrome()
+        try:
+            # 1) Open the web app
+            driver.get("https://draftvision-ai-cfd79.web.app/")
+            print("✅ Home page opened.")
+
+            # 2) Click the "Log In" button
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Log In']")
+                )
+            ).click()
+            print("✅ 'Log In' clicked.")
+
+            # 3) Enter email
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, "email"))
+            ).send_keys("draftvisionAI@test.com")
+            print("✅ Entered email.")
+
+            # 4) Enter password
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, "password"))
+            ).send_keys("DraftVision123")
+            print("✅ Entered password.")
+
+            # 5) Click the form's "Sign In" submit button
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    "//div[contains(@class,'flex items-center justify-between')]/button[@type='submit' and normalize-space(text())='Sign In']"
+                ))
+            ).click()
+            print("✅ Submitted login form (Sign In).")
+
+        except Exception as e:
+            print("❌ Error in Login test:", e)
+            self.fail(f"Login test failed: {e}")
+        finally:
+            driver.quit()
+            print("✅ Browser closed for Login test.\n")
+    def test_signup_flow(self):
+        print("🚀 Running Selenium Sign Up Test.")
+        driver = webdriver.Chrome()
+        try:
+            # 1) Open the web app
+            driver.get("https://draftvision-ai-cfd79.web.app/")
+            print("✅ Home page opened.")
+
+            # 2) Click the "Sign Up" button in the top nav
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, "//button[normalize-space(text())='Sign Up']")
+                )
+            ).click()
+            print("✅ 'Sign Up' clicked (nav).")
+
+            # generate a unique email
+            unique_email = f"test+{uuid.uuid4().hex[:8]}@email.com"
+            print(f"ℹ️  Using unique signup email: {unique_email}")
+
+            # 3) Enter sign-up details
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, "signup-email"))
+            ).send_keys(unique_email)
+            print("✅ Entered signup email.")
+
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, "signup-username"))
+            ).send_keys("tester")
+            print("✅ Entered signup username.")
+
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, "signup-password"))
+            ).send_keys("password123")
+            print("✅ Entered signup password.")
+
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, "confirm-password"))
+            ).send_keys("password123")
+            print("✅ Confirmed signup password.")
+
+            # 4) Click the form's "Sign Up" submit button
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    "//div[contains(@class,'flex items-center justify-center')]/button[@type='submit' and normalize-space(text())='Sign Up']"
+                ))
+            ).click()
+            print("✅ Submitted signup form (Sign Up).")
+
+
+        except Exception as e:
+            print("❌ Error in Sign Up test:", e)
+            self.fail(f"Sign Up test failed: {e}")
+        finally:
+            driver.quit()
+            print("✅ Browser closed for Sign Up test.\n")
