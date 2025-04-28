@@ -5,13 +5,13 @@ from rest_framework.response import Response
 from django.conf import settings
 
 # TODO Mock Draft and mock draft serializer are gone?
-from .models import PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders, MockDraft
+from .models import PlayerProfile, NCAATeams, TeamSuccess, PassingLeaders
 from .serializers import (
     PlayerProfileSerializer, 
     NCAATeamsSerializer, 
     TeamSuccessSerializer, 
     PassingLeadersSerializer, 
-    MockDraftSerializer
+    
 )
 
 SUPABASE_AUTH_URL = f"{settings.SUPABASE_URL}/auth/v1"
@@ -118,19 +118,3 @@ class PassingLeadersList(APIView):
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
 
-#  MockDraft API (Restored)
-class MockDraftView(APIView):
-    """
-    Handles MockDraft data
-    """
-    def get(self, request):
-        drafts = MockDraft.objects.all()
-        serializer = MockDraftSerializer(drafts, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    def post(self, request):
-        serializer = MockDraftSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
