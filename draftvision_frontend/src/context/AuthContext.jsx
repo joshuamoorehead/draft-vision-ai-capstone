@@ -98,7 +98,6 @@ export const AuthProvider = ({ children, signupStateHandler, loginStateHandler }
       return { data, error: null };
     } catch (err) {
       console.error("Signup error:", err);
-      // Note: We're not setting global error here, we'll rely on local error in the component
       // setError(err.message);
       return { data: null, error: err };
     } finally {
@@ -125,7 +124,6 @@ export const AuthProvider = ({ children, signupStateHandler, loginStateHandler }
       return { data, error: null };
     } catch (err) {
       console.error("Signin error:", err);
-      // Note: We're not setting global error here, we'll rely on local error in the component
       // setError(err.message);
       return { data: null, error: err };
     } finally {
@@ -151,7 +149,6 @@ export const AuthProvider = ({ children, signupStateHandler, loginStateHandler }
       return { data, error: null };
     } catch (err) {
       console.error("Google signin error:", err);
-      // Note: We're not setting global error here, we'll rely on local error in the component
       // setError(err.message);
       return { data: null, error: err };
     } finally {
